@@ -6,7 +6,10 @@ function* addRequirement(action) {
     console.log('in addRequirement saga', action.payload)
         
     try {
-        yield axios.post('api/requirement', action.payload)
+        yield action.payload.requirements.map(requirement=>{
+            axios.post('api/requirement', {requirement: requirement})
+        })
+        
         
     } catch (error) {
         console.log('error in addRequirement saga', error);
