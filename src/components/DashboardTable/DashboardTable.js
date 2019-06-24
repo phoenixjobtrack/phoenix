@@ -118,20 +118,20 @@ const DashboardTable = withStyles(styles)(MuiVirtualizedTable);
 // ---
 
 const sample = [
-  ['Frozen yoghurt', 159, 6.0, 24, 4.0],
-  ['Ice cream sandwich', 237, 9.0, 37, 4.3],
-  ['Eclair', 262, 16.0, 24, 6.0],
-  ['Cupcake', 305, 3.7, 67, 4.3],
-  ['Gingerbread', 356, 16.0, 49, 3.9],
+  ['Okta', 'Customer Service', 'Phone Screen', '06/05/19', 'Katie is calling at 9:30am'],
+  ['Microsoft', 'System Analyst', 'Final', '06/06/19', 'Jeff will make the decision'],
+  ['Ubisoft', 'Business analyst', 'Computer Engineer', '06/08/19', 'Bring tax documents'],
+  ['Prime Academy', 'Outreach', 'In-person', '06/10/19', 'Meet in Minneapollis'],
+  ['Sezzle', 'Test Analyst', 'HR Interview', '06/15/19', 'Followup with HR'],
 ];
 
-function createData(id, dessert, calories, fat, carbs, protein) {
-  return { id, dessert, calories, fat, carbs, protein };
+function createData(id, company, position, stage, nexttouchpoint, notes) {
+  return { id, company, position, stage, nexttouchpoint, notes};
 }
 
 const rows = [];
 
-for (let i = 0; i < 200; i += 1) {
+for (let i = 0; i < 50; i += 1) {
   const randomSelection = sample[Math.floor(Math.random() * sample.length)];
   rows.push(createData(i, ...randomSelection));
 }
@@ -144,33 +144,33 @@ export default function DasnboardTable() {
         rowGetter={({ index }) => rows[index]}
         columns={[
           {
+            width: 150,
+            label: 'Company',
+            dataKey: 'company',
+          },
+          {
+            width: 120,
+            label: 'Position',
+            dataKey: 'position',
+            //numeric: true,
+          },
+          {
+            width: 120,
+            label: 'Stage',
+            dataKey: 'stage',
+            //numeric: true,
+          },
+          {
+            width: 120,
+            label: 'Next Touch Point',
+            dataKey: 'nexttouchpoint',
+            numeric: true,
+          },
+          {
             width: 200,
-            label: 'Dessert',
-            dataKey: 'dessert',
-          },
-          {
-            width: 120,
-            label: 'Calories\u00A0(g)',
-            dataKey: 'calories',
-            numeric: true,
-          },
-          {
-            width: 120,
-            label: 'Fat\u00A0(g)',
-            dataKey: 'fat',
-            numeric: true,
-          },
-          {
-            width: 120,
-            label: 'Carbs\u00A0(g)',
-            dataKey: 'carbs',
-            numeric: true,
-          },
-          {
-            width: 120,
-            label: 'Protein\u00A0(g)',
-            dataKey: 'protein',
-            numeric: true,
+            label: 'Notes',
+            dataKey: 'notes',
+            //numeric: true,
           },
         ]}
       />
