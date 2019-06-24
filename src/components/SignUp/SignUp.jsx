@@ -79,12 +79,22 @@ function SignUp(props) {
         setNewAttribute(event.target.value)
     }
 
+    //function to handle adding attributes
+    let attributesArray = []
+    const handleAttributeSubmit = (event) => {
+        event.preventDefault()
+        console.log('in handleAttributeSubmit, attribute:',newAttribute)
+        attributesArray = [...attributes, newAttribute];
+        setAttributes(attributesArray)
+        // console.log('in handleAttributeSubmit, attributes:', attributes)
+    }
+
     //function to handle submit
     const handleSubmit = (event) => {
         event.preventDefault()
         console.log('in handleSubmit', firstName, lastName, email, password, newAttribute)
         if (firstName && lastName && email && password) {
-            console.log('in handleSubmit', firstName, lastName, email, password, newAttribute)
+            console.log('in handleSubmit', firstName, lastName, email, password, attributes)
             props.dispatch({
                 type: 'REGISTER',
                 payload: {
@@ -110,7 +120,6 @@ function SignUp(props) {
                 <Typography component="h1" variant="h5">
                     Sign up
                 </Typography>
-                <form onSubmit={handleSubmit} className={classes.form} noValidate>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField
@@ -176,18 +185,31 @@ function SignUp(props) {
                     </Grid>
                     <Grid container>
                         <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                fullWidth
-                                name="attributes"
-                                label="Job Attributes"
-                                placeholder="ex. Unlimited PTO, close to home, Salary $80k"
-                                id="attributes"
-                                onChange={handleAttributeChange}
-                            />
+                            <form onSubmit={handleAttributeSubmit}>
+                                <TextField
+                                    variant="outlined"
+                                    fullWidth
+                                    name="attributes"
+                                    label="Job Attributes"
+                                    placeholder="ex. Unlimited PTO, close to home, Salary $80k"
+                                    id="attributes"
+                                    onChange={handleAttributeChange}
+                                />
+                            </form>
+                            
                         </Grid>
                     </Grid>
-                    <Button                        
+                    <Grid container>
+                        <Grid item>
+                            {attributes.map(attribute=>{
+                                return(
+                                    <p>{attribute}</p>
+                                )                                
+                            })}
+                        </Grid>
+                    </Grid>
+                    <Button
+                        onClick={handleSubmit}                        
                         type="submit"
                         fullWidth
                         variant="contained"
@@ -203,8 +225,6 @@ function SignUp(props) {
                             </Link>
                         </Grid>
                     </Grid>
-                    
-                </form>
             </div>
         </Container>
     );
