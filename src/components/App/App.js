@@ -17,6 +17,7 @@ import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import DashboardPage from '../DashboardPage/DashboardPage';
+import Tasks from '../Tasks/Tasks';
 
 import './App.css';
 
@@ -61,6 +62,12 @@ class App extends Component {
               exact
               path="/dashboard"
               component={DashboardPage}
+            />
+            {/* This is the protected Route for the Dasboard page */}
+            <ProtectedRoute
+              exact
+              path="/tasks"
+              component={Tasks}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
