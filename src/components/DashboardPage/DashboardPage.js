@@ -12,6 +12,7 @@ import DashboardTable from '../DashboardTable/DashboardTable';
 class DashboardPage extends Component {
 render () {
     return (
+      <div>
         <div>
 
         <Grid container>
@@ -42,11 +43,12 @@ render () {
           </Paper>
         </Grid>
       </Grid>
+
       </div>
 
-//         <p>WELCOME TO DASHBOARD</p>
-//         <DashboardTable />
-//         </div>
+        <p>WELCOME TO DASHBOARD</p>
+        <DashboardTable />
+        </div>
 
 
     )
