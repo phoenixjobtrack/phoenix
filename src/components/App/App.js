@@ -16,6 +16,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
+import DashboardPage from '../DashboardPage/DashboardPage';
 
 import './App.css';
 
@@ -55,9 +56,16 @@ class App extends Component {
               path="/info"
               component={InfoPage}
             />
+            {/* This is the protected Route for the Dasboard page */}
+            <ProtectedRoute
+              exact
+              path="/dashboard"
+              component={DashboardPage}
+            />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
+          <DashboardPage />
           <Footer />
         </div>
       </Router>
