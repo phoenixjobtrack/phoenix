@@ -95,8 +95,11 @@ function SignUp(props) {
     }
 
     //function to handle removing chip
-    const handleDelete = (event) => {
-        console.log('in handleDelete')
+    const handleDelete = (attribute) => {
+        console.log('in handleDelete', attribute)
+        attributesArray=[...attributes]
+        attributesArray.splice(attributesArray.indexOf(attribute), 1);
+        setAttributes(attributesArray)
     }
 
     //function to handle submit
@@ -215,7 +218,7 @@ function SignUp(props) {
                                 return(
                                     <Chip
                                         label={attribute}
-                                        onDelete={handleDelete}
+                                        onDelete={()=>{handleDelete(attribute)}}
                                         className={classes.chip}
                                         color="primary"
                                     />
