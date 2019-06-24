@@ -15,7 +15,15 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     console.log('in POST /api/requirement', req.body, req.user)
     const queryText='INSERT INTO "requirements" (requirement, user_id) VALUES ($1,$2)'
-    pool.query
+    pool.query(queryText, [req.body.requirement, req.user])
+        .then(response=>{
+            console.log('in POST /api/requirement', response)
+            res.sendStatus(200)
+        })
+        .catch(err=>{
+            console.log('error in POST /api/requirement', err)
+            res.sendStatus(500)
+        })
 });
 
 module.exports = router;
