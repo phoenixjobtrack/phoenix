@@ -8,6 +8,16 @@ body {
     margin: 50px;
 }
 
+<<<<<<< HEAD
+form {
+    /* background-color: #dbd5d5; */
+    /* width: 30%;
+    height: 250px;
+    margin: 20px auto;
+    padding: 25px;
+    border-radius: 2px; */
+}
+=======
 /* form {
     background-color: #dbd5d5;
     width: 30%;
@@ -16,6 +26,7 @@ body {
     padding: 25px;
     border-radius: 2px;
 } */
+>>>>>>> master
 
 input {
     margin: 5px;
