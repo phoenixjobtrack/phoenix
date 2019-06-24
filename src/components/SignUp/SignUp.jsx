@@ -118,6 +118,7 @@ function SignUp(props) {
                     attributes: attributes
                 },
             });
+            
         } else {
             props.dispatch({ type: 'REGISTRATION_INPUT_ERROR' });
         }
@@ -222,7 +223,6 @@ function SignUp(props) {
                                         className={classes.chip}
                                         color="primary"
                                     />
-                                    // <p>{attribute}</p>
                                 )                                
                             })}
                         </Grid>
@@ -239,7 +239,7 @@ function SignUp(props) {
                     </Button>
                     <Grid container justify="center">
                         <Grid item>
-                            <Link href="#" variant="body2">
+                        <Link href="#" variant="body2" onClick={() => { props.dispatch({ type: 'SET_TO_LOGIN_MODE' }) }}>
                                 Already have an account? Sign in
                             </Link>
                         </Grid>
