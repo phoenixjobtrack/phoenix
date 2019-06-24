@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 //MaterialUI stuff
 import Avatar from '@material-ui/core/Avatar';
@@ -11,7 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { connect } from 'react-redux';
+import { Chip } from '@material-ui/core'
+
 
 const useStyles = makeStyles(theme => ({
     '@global': {
@@ -35,6 +37,9 @@ const useStyles = makeStyles(theme => ({
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
+    },
+    chip: {
+        margin: theme.spacing(1),
     },
 }));
 
@@ -87,6 +92,11 @@ function SignUp(props) {
         attributesArray = [...attributes, newAttribute];
         setAttributes(attributesArray)
         // console.log('in handleAttributeSubmit, attributes:', attributes)
+    }
+
+    //function to handle removing chip
+    const handleDelete = (event) => {
+        console.log('in handleDelete')
     }
 
     //function to handle submit
@@ -203,7 +213,13 @@ function SignUp(props) {
                         <Grid item>
                             {attributes.map(attribute=>{
                                 return(
-                                    <p>{attribute}</p>
+                                    <Chip
+                                        label={attribute}
+                                        onDelete={handleDelete}
+                                        className={classes.chip}
+                                        color="primary"
+                                    />
+                                    // <p>{attribute}</p>
                                 )                                
                             })}
                         </Grid>
