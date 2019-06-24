@@ -11,6 +11,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
     '@global': {
@@ -37,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function SignUp() {
+function SignUp(props) {
     const classes = useStyles();
 
     //set up hooks   
@@ -45,34 +46,58 @@ export default function SignUp() {
     const [lastName, setLastName] = React.useState();
     const [email, setEmail] = React.useState();
     const [password, setPassword] = React.useState();
+    const [attributes, setAttributes] = React.useState([]);
     const [newAttribute, setNewAttribute] = React.useState();
 
     //funcition to handle firstName change
     const handleFirstNameChange = (event) => {
+        //save input in local state
         setFirstName(event.target.value)
     }
 
     //function to handle lastName change
     const handleLastNameChange= (event) => {
+        //save input in local state
         setLastName(event.target.value)
     }
 
     //function to handle email change
     const handleEmailChange = (event) => {
+        //save input in local state
         setEmail(event.target.value)
     }
 
     //function to handle password change
     const handlePasswordChange = (event) => {
+        //save input in local state
         setPassword(event.target.value)
     }
 
     //function to handle job attribute input
     const handleAttributeChange = (event) => {
-        console.log('in handleAttribute change', event.target.value)
-        console.log('state', firstName, lastName, email, password, newAttribute)
         //save input in local state
         setNewAttribute(event.target.value)
+    }
+
+    //function to handle submit
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        console.log('in handleSubmit', firstName, lastName, email, password, newAttribute)
+        if (firstName && lastName && email && password) {
+            console.log('in handleSubmit', firstName, lastName, email, password, newAttribute)
+            props.dispatch({
+                type: 'REGISTER',
+                payload: {
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    password: password,
+                    attributes: attributes
+                },
+            });
+        } else {
+            props.dispatch({ type: 'REGISTRATION_INPUT_ERROR' });
+        }
     }
 
     return (
@@ -85,7 +110,7 @@ export default function SignUp() {
                 <Typography component="h1" variant="h5">
                     Sign up
                 </Typography>
-                <form className={classes.form} noValidate>
+                <form onSubmit={handleSubmit} className={classes.form} noValidate>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6}>
                             <TextField
@@ -139,26 +164,12 @@ export default function SignUp() {
                         </Grid>
                         
                     </Grid>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        Sign Up
-                    </Button>
                     <Grid container justify="center">
                         <Grid item>
-                            <Link href="#" variant="body2">
-                                Already have an account? Sign in
-                            </Link>
-                        </Grid>
-                    </Grid>
-                    <Grid container justify="center">
-                        <Grid item>
-                            <p> Tell us a bit about what you're looking for. 
-                                This will help you measure how well your job opportunities match the attributes of your ideal job.  
+                            <p> Tell us a bit about what you're looking for.
+                                This will help you measure how well your job opportunities match the attributes of your ideal job.
+                            </p>
+                            <p>
                                 (You can skip this step now and edit this section later from your profile page).
                             </p>
                         </Grid>
@@ -176,8 +187,27 @@ export default function SignUp() {
                             />
                         </Grid>
                     </Grid>
+                    <Button                        
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                    >
+                        Sign Up
+                    </Button>
+                    <Grid container justify="center">
+                        <Grid item>
+                            <Link href="#" variant="body2">
+                                Already have an account? Sign in
+                            </Link>
+                        </Grid>
+                    </Grid>
+                    
                 </form>
             </div>
         </Container>
     );
 }
+
+export default connect()(SignUp)
