@@ -1,3 +1,4 @@
+// ========== REACT ========== //
 import React, {Component} from 'react';
 import {
   HashRouter as Router,
@@ -5,23 +6,23 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-
 import {connect} from 'react-redux';
 
-import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
-
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-
+// ========== COMPONENTS ========== //
 import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
-import DashboardPage from '../DashboardPage/DashboardPage';
-import Profile from '../Profile/Profile';
-import Tasks from '../Tasks/Tasks';
-
-import './App.css';
 import ContactBookPage from '../ContactbookPage/ContactBookPage';
+import DashboardPage from '../DashboardPage/DashboardPage';
+import Footer from '../Footer/Footer';
+import InfoPage from '../InfoPage/InfoPage';
+import Nav from '../Nav/Nav';
+import Profile from '../Profile/Profile';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import Tasks from '../Tasks/Tasks';
+import UserPage from '../UserPage/UserPage';
+
+// ========== STYLE ========== //
+import './App.css';
+
 
 class App extends Component {
   componentDidMount () {
