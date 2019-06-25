@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import DashboardPage from '../DashboardPage/DashboardPage';
 import Profile from '../Profile/Profile';
 import Tasks from '../Tasks/Tasks';
+import JobPipelinePage from '../JobPipelinePage/JobPipelinePage';
 
 import './App.css';
 import ContactBookPage from '../ContactbookPage/ContactBookPage';
@@ -80,6 +81,11 @@ class App extends Component {
               exact
               path="/contact"
               component={ContactBookPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/jobpipeline"
+              component={JobPipelinePage}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
