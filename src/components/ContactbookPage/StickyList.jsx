@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import {connect} from 'react-redux'
 
 import ContactCard from './ContactCard'
 
@@ -8,46 +9,46 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 
 
 let contacts = [
-    {
-        first: 'Andrew',
-        last: 'Christianson',
-        company: 'Target'
-    },
-    {
-        first: 'Andrew',
-        last: 'Christianson',
-        company: 'Target'
-    },
-    {
-        first: 'Andrew',
-        last: 'Christianson',
-        company: 'Target'
-    },
-    {
-        first: 'Andrew',
-        last: 'Christianson',
-        company: 'Target'
-    },
-    {
-        first: 'Bella',
-        last: 'Anderson',
-        company: 'Best Buy'  
-    },
-    {
-        first: 'Christian',
-        last: 'Davenport',
-        company: '3M'
-    },
-    {
-        first: 'Daria',
-        last: 'Edgerton',
-        company: 'Amazon'
-    },
-    {
-        first: 'Ethan',
-        last: 'Brown',
-        company: 'Comcast'
-    }
+    // {
+    //     first: 'Andrew',
+    //     last: 'Christianson',
+    //     company: 'Target'
+    // },
+    // {
+    //     first: 'Andrew',
+    //     last: 'Christianson',
+    //     company: 'Target'
+    // },
+    // {
+    //     first: 'Andrew',
+    //     last: 'Christianson',
+    //     company: 'Target'
+    // },
+    // {
+    //     first: 'Andrew',
+    //     last: 'Christianson',
+    //     company: 'Target'
+    // },
+    // {
+    //     first: 'Bella',
+    //     last: 'Anderson',
+    //     company: 'Best Buy'  
+    // },
+    // {
+    //     first: 'Christian',
+    //     last: 'Davenport',
+    //     company: '3M'
+    // },
+    // {
+    //     first: 'Daria',
+    //     last: 'Edgerton',
+    //     company: 'Amazon'
+    // },
+    // {
+    //     first: 'Ethan',
+    //     last: 'Brown',
+    //     company: 'Comcast'
+    // }
 ]
 const useStyles = makeStyles(theme => ({
     root: {
@@ -81,8 +82,11 @@ const useStyles = makeStyles(theme => ({
     
 }));
 
-export default function PinnedSubheaderList() {
+function PinnedSubheaderList(props) {
     const classes = useStyles();
+    useEffect(()=>{
+        console.log('props', props)
+    })
 
     //define 'key' in local state.  default sort is by last name
     const [key, setKey] = React.useState('last');
@@ -129,7 +133,7 @@ export default function PinnedSubheaderList() {
                                 </a>
                             
                             </ListSubheader>
-                            {contacts.map(contact => {
+                            {props.reduxState.contacts.map(contact => {
                                 let word
                                 if (key==='first'){
                                     word = contact.first
@@ -157,3 +161,7 @@ export default function PinnedSubheaderList() {
         
     );
 }
+const mapStateToProps = reduxState => ({
+    reduxState
+});
+export default connect(mapStateToProps)(PinnedSubheaderList)

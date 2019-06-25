@@ -58,7 +58,7 @@ export default function RecipeReviewCard(props) {
             <CardContent>
                 <Grid container spacing={2}>
                     <Grid item sm={4}>
-                        <Typography >Position: Hiring Manager</Typography>
+                        <Typography >Position: {contact.position}</Typography>
                     </Grid>
                     <Grid item sm={4}>
                         <Typography>

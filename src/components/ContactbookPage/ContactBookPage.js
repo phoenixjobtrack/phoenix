@@ -6,8 +6,8 @@ import {connect} from 'react-redux'
 
 class ContactBookPage extends Component {
     componentDidMount() {
-        // this.props.dispatch({ type: 'FETCH_CONTACTS'})
-        this.props.dispatch({type: 'FETCH_REQUIREMENTS'})
+        this.props.dispatch({ type: 'FETCH_CONTACTS'})
+        this.props.dispatch({type: 'SHOW_CONTACTS'})
     }
     
     render () {
