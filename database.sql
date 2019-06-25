@@ -9,7 +9,7 @@ CREATE TABLE "users" (
     "last_name" VARCHAR (255) NOT NULL,
     "email" VARCHAR (255) NOT NULL,
     "password" VARCHAR (255) NOT NULL,
-    "disabled" BOOLEAN
+    "disabled" BOOLEAN DEFAULT 'false'
 );
 
 INSERT INTO "users" ("first_name", "last_name", "email", "password") 
@@ -27,7 +27,7 @@ CREATE TABLE "jobs" (
     "compensation" VARCHAR (255),
     "benefits" VARCHAR (500),
     "travel" VARCHAR (500),
-    "closed" BOOLEAN
+    "closed" BOOLEAN DEFAULT 'false'
 );
 
 INSERT INTO "jobs" ("user_id", "position", "company_name", "notes", "posting_url", "deadline", "compensation", "benefits", "travel", "closed")
@@ -49,7 +49,7 @@ CREATE TABLE "contacts" (
     "cell" VARCHAR (30),
     "phone" VARCHAR (30),
     "notes" VARCHAR (255),
-    "disabled" BOOLEAN
+    "disabled" BOOLEAN DEFAULT 'false'
 );
 
 INSERT INTO "contacts" ("user_id", "first_name", "last_name", "company", "postion", "email", "linkedin_url", 
@@ -75,7 +75,7 @@ CREATE TABLE "requirements" (
     "id" SERIAL PRIMARY KEY,
     "requirement" VARCHAR (255) NOT NULL,
     "user_id" INTEGER REFERENCES "users" ON DELETE CASCADE,
-    "disabled" BOOLEAN
+    "disabled" BOOLEAN DEFAULT 'false'
 );
 
 INSERT INTO "requirements" ("requirement", "user_id", "disabled")
@@ -99,10 +99,10 @@ CREATE TABLE "tasks" (
     "user_id" INTEGER REFERENCES "users" ON DELETE CASCADE,
     "task_name" VARCHAR (255) NOT NULL,
     "due_date" DATE,
-    "complete" BOOLEAN,
+    "complete" BOOLEAN DEFAULT 'false',
     "contact_id" INTEGER REFERENCES "contacts" ON DELETE CASCADE,
     "job_id" INTEGER REFERENCES "jobs" ON DELETE CASCADE,
-    "disabled" BOOLEAN
+    "disabled" BOOLEAN DEFAULT 'false'
 );
 
 INSERT INTO "tasks" ("user_id", "task_name", "due_date", "complete", "contact_id", "job_id", "disabled")

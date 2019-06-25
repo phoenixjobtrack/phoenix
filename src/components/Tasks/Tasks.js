@@ -81,13 +81,17 @@ const SortableItem = sortableElement(({ value }) =>
             <ListItemText>
                 {value}
             </ListItemText>
-            <DatePlaceholder />
+            <Tooltip title="Date Due">
+                <DatePlaceholder />
+            </Tooltip>
             <Tooltip title="Delete">
                 <IconButton
                     onClick={() => handleClickRemove()}
                     size="small"
                 >
-                    <ClearIcon />
+                    <ClearIcon
+                        onClick={() => handleClickRemove()} 
+                    />
                 </IconButton>
             </Tooltip>
         </ ListItem>
@@ -129,15 +133,13 @@ class Tasks extends Component {
             'Storn 05',
             'Florn 06',
             'Meorn 07',
-            'Sorn 08',
-            'Jorn 09',
-            'Scorn 10',
         ],
     };
 
     // Click Handlers For Add Task
     handleClickAddTask = (event) => {
         console.log('clickAddTask');
+        this.props.dispatch({ type: 'ADD_TASK', payload: 'test' });
     } // end handleClickAddTask
 
     handleDateSelect = (event) => {
@@ -146,6 +148,7 @@ class Tasks extends Component {
 
     handleTaskChange = (event) => {
         console.log('taskChange', event.target.value);
+        
     }; // end handleTaskChange
 
     // ----- LIST REORDER & ANIMATION ----- //
@@ -205,15 +208,6 @@ class Tasks extends Component {
                     </span>
                     <Divider />
                     <OverdueTasks />
-                    <Divider />
-                    <TodayTasks />
-                    <Divider />
-                    <TomorrowTasks />
-                    <Divider />
-                    <FutureTasks />
-                    <Divider />
-                    <HistoryTasks />
-                    <Divider />
                     <SortableContainer onSortEnd={this.onSortEnd}>
 
                         {items.map((value, index) => (
@@ -221,6 +215,43 @@ class Tasks extends Component {
                         ))}
 
                     </SortableContainer>
+                    <Divider />
+                    <TodayTasks />
+                    <SortableContainer onSortEnd={this.onSortEnd}>
+
+                        {items.map((value, index) => (
+                            <SortableItem key={`item-${index}`} index={index} value={value} />
+                        ))}
+
+                    </SortableContainer>
+                    <Divider />
+                    <TomorrowTasks />
+                    <SortableContainer onSortEnd={this.onSortEnd}>
+
+                        {items.map((value, index) => (
+                            <SortableItem key={`item-${index}`} index={index} value={value} />
+                        ))}
+
+                    </SortableContainer>
+                    <Divider />
+                    <FutureTasks />
+                    <SortableContainer onSortEnd={this.onSortEnd}>
+
+                        {items.map((value, index) => (
+                            <SortableItem key={`item-${index}`} index={index} value={value} />
+                        ))}
+
+                    </SortableContainer>
+                    <Divider />
+                    <HistoryTasks />
+                    <SortableContainer onSortEnd={this.onSortEnd}>
+
+                        {items.map((value, index) => (
+                            <SortableItem key={`item-${index}`} index={index} value={value} />
+                        ))}
+
+                    </SortableContainer>
+                    <Divider />
                 </ThemeProvider>
             </div>
         );
