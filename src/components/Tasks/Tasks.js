@@ -81,13 +81,17 @@ const SortableItem = sortableElement(({ value }) =>
             <ListItemText>
                 {value}
             </ListItemText>
-            <DatePlaceholder />
+            <Tooltip title="Date Due">
+                <DatePlaceholder />
+            </Tooltip>
             <Tooltip title="Delete">
                 <IconButton
                     onClick={() => handleClickRemove()}
                     size="small"
                 >
-                    <ClearIcon />
+                    <ClearIcon
+                        onClick={() => handleClickRemove()} 
+                    />
                 </IconButton>
             </Tooltip>
         </ ListItem>
