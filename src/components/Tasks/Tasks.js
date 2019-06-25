@@ -17,34 +17,47 @@ import arrayMove from 'array-move';
 
 
 // ----- MATERIAL UI ----- // 
+import AddIcon from '@material-ui/icons/Add';
 import AppBar from '@material-ui/core/AppBar';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
 
+// const AddNewTask = addNewTask => <TextField
+//     id="outlined-name"
+//     label="Name"
+//     className={classes.textField}
+//     value={values.name}
+//     onChange={handleChange('name')}
+//     margin="normal"
+//     variant="outlined"
+//     >
 const OverdueTasks = overdueTasks => <Paper><Toolbar ><div>Overdue Tasks Go Here (Past Today's Date - Not Yet Marked As Complete)</div></Toolbar></Paper>
-
 const TodayTasks = todayTasks => <Paper><Toolbar ><div>Today's Tasks Go Here</div></Toolbar></Paper>
-
 const TomorrowTasks = tomorrowTasks => <Paper><Toolbar ><div>Tomorrow's Tasks Go Here</div></Toolbar></Paper>
-
 const FutureTasks = tomorrowTasks => <Paper><Toolbar ><div>Future Tasks Go Here (Beyond Tomorrow)</div></Toolbar></Paper>
-
 const HistoryTasks = historyTasks => <Paper><Toolbar ><div>Task History Goes Here (Past Today's Date - Marked As Complete)</div></Toolbar></Paper>
 
-const SortableItem = sortableElement(({ value }) => <ListItem > {value}</ ListItem>);
+
+// ----- LIST REORDER & ANIMATION ----- //
+const SortableItem = sortableElement(({ value }) => <Paper><ListItem > {value}</ ListItem></Paper>);
 
 const SortableContainer = sortableContainer(({ children }) => {
     return <List >{children}</ List>;
 });
 
+// ----- MUI THEME ----- //
 const theme = createMuiTheme({
+    spacing: 8,
     palette: {
         primary: { main: '#e61610' },
     },
@@ -63,7 +76,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-
+// ----- CLASS ----- //
 class Tasks extends Component {
     state = {
         items: [
@@ -96,6 +109,46 @@ class Tasks extends Component {
 
             <div>
                 <ThemeProvider theme={theme}>
+                    <Paper><Toolbar >
+                    <TextField
+                        id="add-new-task"
+                        label="Add New Task"
+                        placeholder="Send Email To CJ"
+                        position="Relative"
+                        // className={classes.textField}
+                        // value={values.name}
+                        // onChange={handleChange('name')}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        margin="normal"
+                        variant="outlined"
+                    />
+                    <TextField
+                        id="date"
+                        label="Due Date"
+                        type="date"
+                        position="Relative"
+                        // defaultValue="2017-05-24"
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        margin="normal"
+                        variant="outlined"
+                    />
+                        <IconButton
+                            label="Submit"
+                            type="submit"
+                            size="Large"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            margin="normal"
+                            variant="outlined"
+                            
+                        ><AddIcon /></IconButton>
+                    
+                    </Toolbar ></Paper>
                     <OverdueTasks />
                     <TodayTasks />
                     <TomorrowTasks />
