@@ -8,8 +8,7 @@ function* addRequirement(action) {
     try {
         yield action.payload.requirements.map(requirement=>{
             axios.post('api/requirement', {requirement: requirement})
-        })
-        
+        })       
         
     } catch (error) {
         console.log('error in addRequirement saga', error);
