@@ -10,10 +10,11 @@ class DashboardPage extends Component {
 render () {
     return (
       <div>
+        <h1>DashBoard</h1>
         <Grid container>
         <Grid item sm>
           <Paper style={{ padding: 40, marginTop: 20}}>
-            <h1>Today's Task</h1>
+            <h2>Today's Task</h2>
               <div className="todayBox">
                     <ul className="boxText">
                         <li>Call Karen</li>
@@ -32,22 +33,21 @@ render () {
         </Grid>
         <Grid item sm>
           <Paper style={{ padding: 40, marginTop: 20 }}>
-          <FaceIcon className="profileIcon" />
-            <h1>Job Requirements</h1>
+          <FaceIcon className="dashIcon" />
+            <h2>Job Requirements</h2>
             <div className="requireBox">
                 <ul className="boxText">
                     <li>6 weeks vacation</li>
                     <li>Work from home</li>
-                    <li>75k anually</li>
+                    <li>75k annually</li>
                 </ul>
             </div>
           </Paper>
         </Grid>
       </Grid>
+      <h2>Job Pipeline</h2>
       <DashboardTable />
     </div>
-
-
     )
 }
 }
