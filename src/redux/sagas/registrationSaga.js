@@ -1,4 +1,4 @@
-import { put, takeEvery } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 // worker Saga: will be fired on "REGISTER" actions
@@ -12,7 +12,11 @@ function* registerUser(action) {
     yield axios.post('/api/user/register', action.payload);
 
     // automatically log a user in after registration
+    console.log('registered, dispatch LOGIN')
     yield put({ type: 'LOGIN', payload: action.payload });
+
+    //save requirements for new user
+    yield put({ type: 'ADD_REQUIREMENTS', payload: action.payload });
     
     // set to 'login' mode so they see the login screen
     // after registration or after they log out
@@ -24,7 +28,7 @@ function* registerUser(action) {
 }
 
 function* registrationSaga() {
-  yield takeEvery('REGISTER', registerUser);
+  yield takeLatest('REGISTER', registerUser);
 }
 
 export default registrationSaga;

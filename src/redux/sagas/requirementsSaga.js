@@ -17,7 +17,7 @@ function* addRequirement(action) {
 }
 
 function* requirementsSaga() {
-    yield takeEvery('REGISTER', addRequirement);
+    yield takeEvery('ADD_REQUIREMENTS', addRequirement);
 }
 
 export default requirementsSaga;
