@@ -150,6 +150,7 @@ class Tasks extends Component {
 
     handleTaskChange = (event) => {
         console.log('taskChange', event.target.value);
+        this.props.dispatch{type: 'ADD_TASK', payload: 'test'}
     }; // end handleTaskChange
 
     // ----- LIST REORDER & ANIMATION ----- //
@@ -209,15 +210,6 @@ class Tasks extends Component {
                     </span>
                     <Divider />
                     <OverdueTasks />
-                    <Divider />
-                    <TodayTasks />
-                    <Divider />
-                    <TomorrowTasks />
-                    <Divider />
-                    <FutureTasks />
-                    <Divider />
-                    <HistoryTasks />
-                    <Divider />
                     <SortableContainer onSortEnd={this.onSortEnd}>
 
                         {items.map((value, index) => (
@@ -225,6 +217,43 @@ class Tasks extends Component {
                         ))}
 
                     </SortableContainer>
+                    <Divider />
+                    <TodayTasks />
+                    <SortableContainer onSortEnd={this.onSortEnd}>
+
+                        {items.map((value, index) => (
+                            <SortableItem key={`item-${index}`} index={index} value={value} />
+                        ))}
+
+                    </SortableContainer>
+                    <Divider />
+                    <TomorrowTasks />
+                    <SortableContainer onSortEnd={this.onSortEnd}>
+
+                        {items.map((value, index) => (
+                            <SortableItem key={`item-${index}`} index={index} value={value} />
+                        ))}
+
+                    </SortableContainer>
+                    <Divider />
+                    <FutureTasks />
+                    <SortableContainer onSortEnd={this.onSortEnd}>
+
+                        {items.map((value, index) => (
+                            <SortableItem key={`item-${index}`} index={index} value={value} />
+                        ))}
+
+                    </SortableContainer>
+                    <Divider />
+                    <HistoryTasks />
+                    <SortableContainer onSortEnd={this.onSortEnd}>
+
+                        {items.map((value, index) => (
+                            <SortableItem key={`item-${index}`} index={index} value={value} />
+                        ))}
+
+                    </SortableContainer>
+                    <Divider />
                 </ThemeProvider>
             </div>
         );
