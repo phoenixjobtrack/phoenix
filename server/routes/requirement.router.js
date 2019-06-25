@@ -3,8 +3,9 @@ const pool = require('../modules/pool');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const router = express.Router();
 
-// GET route
 //rejectUnauthenticated verifies user is logged in before displaying data
+
+// GET route
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('in GET /api/requirement. user:', req.user.id)
     const queryText = 'SELECT * FROM "requirements" WHERE "user_id"=$1'
@@ -47,8 +48,22 @@ router.put('/', rejectUnauthenticated, (req,res)=>{
         .catch(err=>{
             console.log('error in PUT /api/requirement', err)
             res.sendStatus(500)
+        })    
+})
+
+//DELETE route
+router.delete('/', rejectUnauthenticated, (req,res)=>{
+    console.log('in DELETE /api/requirement', req.body, req.user.id)
+    const queryText='DELETE FROM "requirements" WHERE "user_id"=$1 AND "id"=$2'
+    pool.query(queryText,[req.user.id,req.query.id])
+        .then(response=>{
+            console.log('in DELETE /api/requirement', response)
+            res.sendStatus(200)
         })
-    
+        .catch(err=>{
+            console.log('error in DELETE /api/requirement', err)
+            res.sendStatus(500)
+        })
 })
 
 
