@@ -133,15 +133,13 @@ class Tasks extends Component {
             'Storn 05',
             'Florn 06',
             'Meorn 07',
-            'Sorn 08',
-            'Jorn 09',
-            'Scorn 10',
         ],
     };
 
     // Click Handlers For Add Task
     handleClickAddTask = (event) => {
         console.log('clickAddTask');
+        this.props.dispatch({ type: 'ADD_TASK', payload: 'test' });
     } // end handleClickAddTask
 
     handleDateSelect = (event) => {
@@ -150,7 +148,7 @@ class Tasks extends Component {
 
     handleTaskChange = (event) => {
         console.log('taskChange', event.target.value);
-        this.props.dispatch{type: 'ADD_TASK', payload: 'test'}
+        
     }; // end handleTaskChange
 
     // ----- LIST REORDER & ANIMATION ----- //
