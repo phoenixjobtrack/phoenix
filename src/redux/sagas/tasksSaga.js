@@ -5,13 +5,10 @@ function* addTask(action) {
     console.log('in addTask Saga', action.payload)
 
     try {
-        yield action.payload.requirements.map(requirement => {
-            axios.post('api/requirement', { requirement: requirement })
-        })
-
+        yield axios.post('api/tasks')
 
     } catch (error) {
-        console.log('error in addRequirement saga', error);
+        console.log('error in addTask saga', error);
     }
 }
 
