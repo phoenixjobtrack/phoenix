@@ -46,8 +46,6 @@ render () {
       </Grid>
       <DashboardTable />
     </div>
-
-
     )
 }
 }

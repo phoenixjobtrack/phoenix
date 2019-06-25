@@ -63,6 +63,7 @@ class App extends Component {
               path="/dashboard"
               component={DashboardPage}
             />
+
             {/* This is the protected Route for the Dasboard page */}
             <ProtectedRoute
               exact
