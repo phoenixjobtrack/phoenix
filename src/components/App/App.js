@@ -17,7 +17,9 @@ import InfoPage from '../InfoPage/InfoPage';
 import Nav from '../Nav/Nav';
 import Profile from '../Profile/Profile';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import SideMenu from '../SideMenu/SideMenu';
 import Tasks from '../Tasks/Tasks';
+import TopBar from '../TopBar/TopBar';
 import UserPage from '../UserPage/UserPage';
 
 // ========== STYLE ========== //
@@ -32,7 +34,9 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div className="app">
+          <TopBar />
+          <SideMenu />
           <Nav />
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
