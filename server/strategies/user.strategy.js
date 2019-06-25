@@ -32,8 +32,13 @@ passport.deserializeUser((id, done) => {
 });
 
 // Does actual work of logging in
-passport.use('local', new LocalStrategy((email, password, done) => {
-    console.log('user.strategy', email, password )
+passport.use('local', new LocalStrategy(
+  {
+    usernameField: 'email',
+    passwordField: 'password'
+  },
+  (email, password, done) => {
+    console.log('user strategy', email, password )
     pool.query('SELECT * FROM "users" WHERE email = $1', [email])
       .then((result) => {
         const user = result && result.rows && result.rows[0];

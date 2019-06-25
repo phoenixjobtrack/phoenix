@@ -83,7 +83,7 @@ function SignIn(props) {
       props.dispatch({
         type: 'LOGIN',
         payload: {
-          username: email,
+          email: email,
           password: password
         }
       })

@@ -9,6 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import {Add} from '@material-ui/icons'
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -91,6 +92,8 @@ function SignUp(props) {
     console.log('in handleRequirementSubmit, requirement:', newRequirement)
     requirementsArray = [...requirements, newRequirement];
     setRequirements(requirementsArray)
+    //reset state to clear input
+    setNewRequirement([]);
 
   }
 
@@ -198,19 +201,38 @@ function SignUp(props) {
         </Grid>
         <Grid container>
           <Grid item xs={12}>
-            <form onSubmit={handleRequirementSubmit}>
-              <TextField
-                variant="outlined"
-                fullWidth
-                name="requirements"
-                label="Job Requirements"
-                placeholder="ex. Unlimited PTO, close to home, Salary $80k"
-                id="requirements"
-                onChange={handleRequirementChange}
-              />
-            </form>
+            
+              <form onSubmit={handleRequirementSubmit}>
 
+                <Grid item xs={2}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    type="submit"
+                  >
+                    <Add />
+                  </Button>
+                </Grid>
+                <Grid item xs={10}>
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    name="requirements"
+                    label="Job Requirements"
+                    value={newRequirement}
+                    placeholder="ex. Unlimited PTO, close to home, Salary $80k"
+                    id="requirements"
+                    onChange={handleRequirementChange}
+                  />
+                </Grid>
+
+
+
+              </form>
+            
+            
           </Grid>
+          
         </Grid>
         <Grid container>
           <Grid item>
