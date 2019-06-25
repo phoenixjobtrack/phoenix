@@ -17,10 +17,10 @@ function* addRequirement(action) {
 
 //SAGA to GET requirements from database (send user id as a query in URL)
 function* fetchRequirements(action) {
-    console.log('in fetchRequirements saga payload:', action.payload, 'user_id:', req.user.id)
+    console.log('in fetchRequirements saga payload:', action.payload, 'user_id:', action.payload.user.id)
     try {
     
-        const url = `/api/requirement?user_id=${req.user.id}`
+        const url = `/api/requirement?user_id=${action.payload.user.id}`
         const requirements = yield axios.get('api/requirement')
         yield put({type:'STORE_REQUIREMENTS', payload: requirements.data})
     }
