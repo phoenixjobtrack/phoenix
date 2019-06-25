@@ -13,9 +13,9 @@ router.get('/', (req, res) => {
  * POST route template
  */
 router.post('/', (req, res) => {
-    console.log('in POST /api/requirement', req.body, req.user)
+    console.log('in POST /api/requirement', req.body, req.user.id)
     const queryText='INSERT INTO "requirements" (requirement, user_id) VALUES ($1,$2)'
-    pool.query(queryText, [req.body.requirement, req.user])
+    pool.query(queryText, [req.body.requirement, req.user.id])
         .then(response=>{
             console.log('in POST /api/requirement', response)
             res.sendStatus(200)
