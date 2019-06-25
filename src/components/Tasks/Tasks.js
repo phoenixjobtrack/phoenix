@@ -125,6 +125,10 @@ const useStyles = makeStyles(theme => ({
 // ----- CLASS ----- //
 class Tasks extends Component {
     state = {
+        task_name: '',
+        due_date: null,
+        contact_id: null,
+        job_id: null,
         items: [
             'Corn 01',
             'Horn 02',
@@ -139,16 +143,23 @@ class Tasks extends Component {
     // Click Handlers For Add Task
     handleClickAddTask = (event) => {
         console.log('clickAddTask');
-        this.props.dispatch({ type: 'ADD_TASK', payload: 'test' });
+        this.props.dispatch({ type: 'ADD_TASK', payload: this.state });
     } // end handleClickAddTask
 
     handleDateSelect = (event) => {
         console.log('dateChange', event.target.value);
+        this.setState({
+            ...this.state,
+            due_date: event.target.value,
+        })
     }; // end handleDateSelect
 
     handleTaskChange = (event) => {
         console.log('taskChange', event.target.value);
-        
+        this.setState({
+            ...this.state,
+            task_name: event.target.value,
+        })
     }; // end handleTaskChange
 
     // ----- LIST REORDER & ANIMATION ----- //
@@ -161,6 +172,7 @@ class Tasks extends Component {
     // ----- RENDER ----- //
     render() {
         const { items } = this.state;
+        console.log('state', this.state);
 
         // ----- RETURN ----- //
         return (
