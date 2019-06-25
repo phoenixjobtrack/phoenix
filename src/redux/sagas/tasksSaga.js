@@ -5,7 +5,7 @@ function* addTask(action) {
     console.log('in addTask Saga', action.payload)
 
     try {
-        yield axios.post('api/tasks')
+        yield axios.post('api/tasks', action.payload)
 
     } catch (error) {
         console.log('error in addTask saga', error);

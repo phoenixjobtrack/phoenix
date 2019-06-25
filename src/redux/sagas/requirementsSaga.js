@@ -15,7 +15,7 @@ function* addRequirement(action) {
     }
 };
 
-//SAGA to GET requirements from database (send user id as a query in URL)
+//SAGA to GET requirements from database
 function* fetchRequirements(action) {
     
     try {
