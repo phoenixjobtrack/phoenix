@@ -17,6 +17,7 @@ import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import DashboardPage from '../DashboardPage/DashboardPage';
+import Profile from '../Profile/Profile';
 import Tasks from '../Tasks/Tasks';
 
 import './App.css';
@@ -62,6 +63,11 @@ class App extends Component {
               exact
               path="/dashboard"
               component={DashboardPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/profile"
+              component={Profile}
             />
             {/* This is the protected Route for the Dasboard page */}
             <ProtectedRoute

@@ -1,0 +1,16 @@
+.profileIcon{
+    transform: scale(15);
+    margin-left: 190px;
+    margin-top: 290px;
+    padding-bottom: 20px
+  }
+
+.profileBox{
+    display: flex;
+    justify-content: center
+}
+
+.profileForm{
+    margin-top: 300px;
+}
+  
