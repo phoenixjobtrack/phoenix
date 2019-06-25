@@ -12,7 +12,9 @@ const InfoPage = () => (
       Info Page
       </p>
       <JobPipelinePage />
+      {}
   </div>
 );
+
 
 export default InfoPage;

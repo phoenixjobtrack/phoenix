@@ -6,11 +6,12 @@ function* fetchContacts(action) {
     console.log('in fetchContacts saga', action.payload)
 
     try {
+        let allContacts = yield axios.get('/api/contact')
+        console.log('in fetchContacts saga', allContacts)
+        yield ({type: 'STORE_CONTACTS', payload: allContacts.data})
         
-
-
     } catch (error) {
-        console.log('error in addRequirement saga', error);
+        console.log('error in fetchContacts saga', error);
     }
 }
 
