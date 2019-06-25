@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Grid';
 import './DashboardPage.css';
 import FaceIcon from '@material-ui/icons/Face';
+import AddIcon from '@material-ui/icons/Add';
 import DashboardTable from '../DashboardTable/DashboardTable';
 
 class DashboardPage extends Component {
@@ -14,7 +15,7 @@ render () {
         <Grid container>
         <Grid item sm>
           <Paper style={{ padding: 40, marginTop: 20}}>
-            <h2>Today's Task</h2>
+            <h2>Today's Task<AddIcon className="dashAddIcon" /></h2>
               <div className="todayBox">
                     <ul className="boxText">
                         <li>Call Karen</li>
@@ -34,7 +35,7 @@ render () {
         <Grid item sm>
           <Paper style={{ padding: 40, marginTop: 20 }}>
           <FaceIcon className="dashIcon" />
-            <h2>Job Requirements</h2>
+            <h2>Job Requirements<AddIcon className="dashAddIcon" /></h2>
             <div className="requireBox">
                 <ul className="boxText">
                     <li>6 weeks vacation</li>
@@ -45,7 +46,7 @@ render () {
           </Paper>
         </Grid>
       </Grid>
-      <h2>Job Pipeline</h2>
+      <h2>Job Pipeline<AddIcon className="dashAddIcon" /></h2>
       <DashboardTable />
     </div>
     )

@@ -17,6 +17,11 @@
   padding-bottom: 20px
 }
 
+.dashAddIcon{
+  transform: scale(1.5);
+  padding-left: 4px
+}
+
 .boxText{
   font-size: 20px;
   height: auto
