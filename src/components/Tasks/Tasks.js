@@ -17,17 +17,31 @@ import arrayMove from 'array-move';
 
 
 // ----- MATERIAL UI ----- // 
+import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 import Paper from '@material-ui/core/Paper';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
 
+const OverdueTasks = overdueTasks => <Paper><Toolbar ><div>Overdue Tasks Go Here (Past Today's Date - Not Yet Marked As Complete)</div></Toolbar></Paper>
 
-const SortableItem = sortableElement(({ value }) => <Toolbar ><Paper> <li>{value}</li></Paper></Toolbar>);
+const TodayTasks = todayTasks => <Paper><Toolbar ><div>Today's Tasks Go Here</div></Toolbar></Paper>
+
+const TomorrowTasks = tomorrowTasks => <Paper><Toolbar ><div>Tomorrow's Tasks Go Here</div></Toolbar></Paper>
+
+const FutureTasks = tomorrowTasks => <Paper><Toolbar ><div>Future Tasks Go Here (Beyond Tomorrow)</div></Toolbar></Paper>
+
+const HistoryTasks = historyTasks => <Paper><Toolbar ><div>Task History Goes Here (Past Today's Date - Marked As Complete)</div></Toolbar></Paper>
+
+const SortableItem = sortableElement(({ value }) => <ListItem > {value}</ ListItem>);
 
 const SortableContainer = sortableContainer(({ children }) => {
-    return <ul>{children}</ul>;
+    return <List >{children}</ List>;
 });
 
 const theme = createMuiTheme({
@@ -77,11 +91,16 @@ class Tasks extends Component {
     render() {
         const { items } = this.state;
 
+
         return (
 
             <div>
-                <ThemeProvider >
-                    
+                <ThemeProvider theme={theme}>
+                    <OverdueTasks />
+                    <TodayTasks />
+                    <TomorrowTasks />
+                    <FutureTasks />
+                    <HistoryTasks />
                     <SortableContainer onSortEnd={this.onSortEnd}>
 
                         {items.map((value, index) => (

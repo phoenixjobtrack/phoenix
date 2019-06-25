@@ -9,8 +9,7 @@ import DashboardTable from '../DashboardTable/DashboardTable';
 class DashboardPage extends Component {
 render () {
     return (
-        <div>
-
+      <div>
         <Grid container>
         <Grid item sm>
           <Paper style={{ padding: 40, marginTop: 20}}>
@@ -46,11 +45,7 @@ render () {
         </Grid>
       </Grid>
       <DashboardTable />
-      </div>
-
-//         <p>WELCOME TO DASHBOARD</p>
-//         
-//         </div>
+    </div>
 
 
     )
