@@ -21,6 +21,7 @@ import Profile from '../Profile/Profile';
 import Tasks from '../Tasks/Tasks';
 
 import './App.css';
+import ContactBookPage from '../ContactbookPage/ContactBookPage';
 
 class App extends Component {
   componentDidMount () {
@@ -69,11 +70,16 @@ class App extends Component {
               path="/profile"
               component={Profile}
             />
-            {/* This is the protected Route for the Dasboard page */}
+            {/* This is the protected Route for the Task page */}
             <ProtectedRoute
               exact
               path="/tasks"
               component={Tasks}
+            />
+            <ProtectedRoute
+              exact
+              path="/contact"
+              component={ContactBookPage}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
