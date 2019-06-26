@@ -108,6 +108,7 @@ function PinnedSubheaderList(props) {
     const scrollToLetter = (letter) => {
         document.getElementById(letter).scrollIntoView(false);
     }
+
     return (
         <div >
             <div className={classes.sorting}>
@@ -136,10 +137,10 @@ function PinnedSubheaderList(props) {
                             {props.reduxState.contacts.map(contact => {
                                 let word
                                 if (key==='first'){
-                                    word = contact.first
+                                    word = contact.first_name
                                 }
                                 else if (key==='last'){
-                                    word=contact.last
+                                    word=contact.last_name
                                 }
                                 else {
                                     word=contact.company
