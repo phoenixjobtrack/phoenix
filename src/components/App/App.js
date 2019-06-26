@@ -19,6 +19,8 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import SideMenu from '../SideMenu/SideMenu';
 import Tasks from '../Tasks/Tasks';
 import JobPipelinePage from '../JobPipelinePage/JobPipelinePage';
+import UserPage from '../UserPage/UserPage';
+import TopBar from '../TopBar/TopBar';
 
 // ========== STYLE ========== //
 import './App.css';
