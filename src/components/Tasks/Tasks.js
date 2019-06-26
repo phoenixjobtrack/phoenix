@@ -36,8 +36,8 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 // ----- TASKS SECTIONS ----- //
 const OverdueTasks = overdueTasks => <Paper><Toolbar ><Typography>Overdue Tasks Go Here (Past Today's Date - Not Yet Marked As Complete)</Typography></Toolbar></Paper>
-const TodayTasks = todayTasks => <Paper><Toolbar ><Typography>Today's Tasks Go Here</Typography></Toolbar></Paper>
-const TomorrowTasks = tomorrowTasks => <Paper><Toolbar ><Typography>Tomorrow's Tasks Go Here</Typography></Toolbar></Paper>
+const TodayTasks = todayTasks => <Paper><Toolbar ><Typography>Today</Typography></Toolbar></Paper>
+const TomorrowTasks = tomorrowTasks => <Paper><Toolbar ><Typography>Tomorrow</Typography></Toolbar></Paper>
 const FutureTasks = tomorrowTasks => <Paper><Toolbar ><Typography>Future Tasks Go Here (Beyond Tomorrow)</Typography></Toolbar></Paper>
 const HistoryTasks = historyTasks => <Paper><Toolbar ><Typography>Task History Goes Here (Past Today's Date - Marked As Complete)</Typography></Toolbar></Paper>
 
@@ -59,7 +59,7 @@ const handleClickRemove = () => {
 } // end handleClickRemove
 
 // ----- LIST REORDER & ANIMATION ----- //
-const SortableItem = sortableElement(({ value }) =>
+const SortableItem = sortableElement(({ taskName }) =>
     <Paper>
         <ListItem >
             <Tooltip title="More">
@@ -79,7 +79,7 @@ const SortableItem = sortableElement(({ value }) =>
                 </IconButton>
             </Tooltip>
             <ListItemText>
-                {value}
+                {taskName}
             </ListItemText>
             <Tooltip title="Date Due">
                 <DatePlaceholder />
@@ -140,8 +140,13 @@ class Tasks extends Component {
         ],
     };
 
+
     // Click Handlers For Add Task
     handleClickAddTask = (event) => {
+        // if (this.state.task_name !== '' && this.state.due_date !== null) {
+        //     (alert= "Yo";)
+        // }
+        // else 
         console.log('clickAddTask');
         this.props.dispatch({ type: 'ADD_TASK', payload: this.state });
     } // end handleClickAddTask
@@ -154,6 +159,7 @@ class Tasks extends Component {
         })
     }; // end handleDateSelect
 
+    // Change of Add Task Input Text Field
     handleTaskChange = (event) => {
         console.log('taskChange', event.target.value);
         this.setState({
@@ -162,7 +168,25 @@ class Tasks extends Component {
         })
     }; // end handleTaskChange
 
+    
+
     // ----- LIST REORDER & ANIMATION ----- //
+    onSortStart = ({node}) => {
+        console.log('onSortStart node', {node});
+        if (!this.props.reduxState.tasks) {
+            let taskList = this.props.reduxState.tasks;
+            console.log('onSortStart taskList', taskList);
+            let newItemsArray = []
+            taskList.map((task, i) => {
+                newItemsArray = [...this.state.items, task.task_name]
+                this.setState({
+                    ...this.state,
+                    items: newItemsArray,
+                })
+            });
+        }
+    }; // end onSortStart
+
     onSortEnd = ({ oldIndex, newIndex }) => {
         this.setState(({ items }) => ({
             items: arrayMove(items, oldIndex, newIndex),
@@ -171,8 +195,9 @@ class Tasks extends Component {
 
     // ----- RENDER ----- //
     render() {
-        const { items } = this.state;
+        const items = this.props.reduxState.tasks || [];
         console.log('state', this.state);
+        console.log('render items', items);
 
         // ----- RETURN ----- //
         return (
@@ -222,47 +247,47 @@ class Tasks extends Component {
                     <OverdueTasks />
                     <SortableContainer onSortEnd={this.onSortEnd}>
 
-                        {items.map((value, index) => (
-                            <SortableItem key={`item-${index}`} index={index} value={value} />
+                        {items.map((task, index) => (
+                            <SortableItem key={`item-${index}`} index={index} taskName={task.task_name} />
                         ))}
 
                     </SortableContainer>
                     <Divider />
                     <TodayTasks />
-                    <SortableContainer onSortEnd={this.onSortEnd}>
+                    {/* <SortableContainer onSortEnd={this.onSortEnd}>
 
                         {items.map((value, index) => (
                             <SortableItem key={`item-${index}`} index={index} value={value} />
                         ))}
 
-                    </SortableContainer>
+                    </SortableContainer> */}
                     <Divider />
                     <TomorrowTasks />
-                    <SortableContainer onSortEnd={this.onSortEnd}>
+                    {/* <SortableContainer onSortEnd={this.onSortEnd}>
 
                         {items.map((value, index) => (
                             <SortableItem key={`item-${index}`} index={index} value={value} />
                         ))}
 
-                    </SortableContainer>
+                    </SortableContainer> */}
                     <Divider />
                     <FutureTasks />
-                    <SortableContainer onSortEnd={this.onSortEnd}>
+                    {/* <SortableContainer onSortEnd={this.onSortEnd}>
 
                         {items.map((value, index) => (
                             <SortableItem key={`item-${index}`} index={index} value={value} />
                         ))}
 
-                    </SortableContainer>
+                    </SortableContainer> */}
                     <Divider />
                     <HistoryTasks />
-                    <SortableContainer onSortEnd={this.onSortEnd}>
+                    {/* <SortableContainer onSortEnd={this.onSortEnd}>
 
                         {items.map((value, index) => (
                             <SortableItem key={`item-${index}`} index={index} value={value} />
                         ))}
 
-                    </SortableContainer>
+                    </SortableContainer> */}
                     <Divider />
                 </ThemeProvider>
             </div>
@@ -273,6 +298,7 @@ class Tasks extends Component {
 
 const mapStateToProps = (reduxState) => {
     return {
+        tasks: reduxState.tasksReducer,
         reduxState
     }
 }
