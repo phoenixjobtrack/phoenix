@@ -2,7 +2,13 @@
 const tasksReducer = (state = [], action) => {
     console.log('in tasksReducer - state:', state);
     console.log('in tasksReducer - action:', action);
-    return state;
+    if (action.type ==='STORE_TASKS'){
+        return action.payload
+    }
+    else {
+        return state;
+    }
+    
 };
 
 
