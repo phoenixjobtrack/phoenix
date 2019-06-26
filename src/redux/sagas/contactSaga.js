@@ -8,7 +8,7 @@ function* fetchContacts() {
     try {
         let allContacts = yield axios.get('/api/contact')
         console.log('in fetchContacts saga', allContacts)
-        yield ({type: 'STORE_CONTACTS', payload: allContacts.data})
+        yield put({type: 'STORE_CONTACTS', payload: allContacts.data})
         
     } catch (error) {
         console.log('error in fetchContacts saga', error);

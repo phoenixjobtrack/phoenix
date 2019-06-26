@@ -63,11 +63,11 @@ function ContactCard(props) {
         <Card className={classes.card}>
             <CardHeader
                 avatar={
-                    <Avatar aria-label="Recipe" className={classes.avatar}>
-                        {contact.first[0]}{contact.last[0]}
+                    <Avatar aria-label="Contact" className={classes.avatar}>
+                        {contact.first_name[0]}{contact.last_name[0]}
                     </Avatar>
                 }
-                title={`${contact.first} ${contact.last}`}
+                title={`${contact.first_name} ${contact.last_name}`}
                 subheader={contact.company}
                 action={
                     <IconButton aria-label="View More and Edit" onClick={handleOpenContact}>
