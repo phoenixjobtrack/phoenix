@@ -15,7 +15,7 @@ class AddTask extends Component {
         newTask: {
             task_name: '',
             due_date: '',
-            due_time: '',
+            // due_time: '',
             contact_id: ''
         }
     }
@@ -87,7 +87,7 @@ class AddTask extends Component {
                     }}
 
                 />
-                <TextField
+                {/* <TextField
                     id="time"
                     label="Time (optional)"
                     type="time"
@@ -95,7 +95,7 @@ class AddTask extends Component {
                         shrink: true,
                     }}
                     onChange={ this.handleChangeFor('due_time') }
-                />
+                /> */}
                 <IconButton
                     type="submit"
                     color="secondary"
