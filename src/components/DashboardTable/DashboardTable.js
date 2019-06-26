@@ -136,6 +136,7 @@ for (let i = 0; i < 50; i += 1) {
   rows.push(createData(i, ...randomSelection));
 }
 
+
 export default function DasnboardTable() {
   return (
     <Paper style={{ height: 335, width: '100%' }}>
