@@ -1,11 +1,13 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom'
+import {connect} from 'react-redux'
 
+//Material UI
 import {Grid} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
@@ -14,6 +16,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import EditIcon from '@material-ui/icons/Edit'
+import OpenInNewIcon from '@material-ui/icons/OpenInNew'
 
 
 const useStyles = makeStyles(theme => ({
@@ -35,14 +39,25 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function RecipeReviewCard(props) {
+function ContactCard(props) {
     const classes = useStyles();
+    //received props from parent component
+    const contact = props.contact
+
+    //local state hooks
     const [expanded, setExpanded] = React.useState(false);
 
     function handleExpandClick() {
         setExpanded(!expanded);
     }
-    const contact = props.contact
+
+    function handleOpenContact(){
+        console.log('in handleContactSelect', contact)
+        props.history.push(`/contact/view/${contact.id}`)
+
+    }
+
+    
 
     return (
         <Card className={classes.card}>
@@ -54,6 +69,13 @@ export default function RecipeReviewCard(props) {
                 }
                 title={`${contact.first} ${contact.last}`}
                 subheader={contact.company}
+                action={
+                    <IconButton aria-label="View More and Edit" onClick={handleOpenContact}>
+                        <OpenInNewIcon />
+                        <EditIcon />                        
+                    </IconButton>
+                }
+                
             />
             <CardContent>
                 <Grid container spacing={2}>
@@ -131,3 +153,9 @@ export default function RecipeReviewCard(props) {
         </Card>
     );
 }
+
+const mapStateToProps = reduxState => ({
+    reduxState
+});
+
+export default withRouter(connect(mapStateToProps)(ContactCard));

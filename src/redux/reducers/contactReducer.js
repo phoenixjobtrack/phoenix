@@ -1,5 +1,6 @@
 const sampleContactData=[
     {
+        id: 1,
         first: 'Andrew',
         last: 'Christianson',
         company: 'Target',
@@ -11,6 +12,7 @@ const sampleContactData=[
         notes: 'went to college with Pete'
     },
     {
+        id: 2,
         first: 'Andrew',
         last: 'Christianson',
         company: 'Target',
@@ -22,6 +24,7 @@ const sampleContactData=[
         notes: 'went to college with Pete'
     },
     {
+        id: 3,
         first: 'Andrew',
         last: 'Christianson',
         company: 'Target',
@@ -33,6 +36,7 @@ const sampleContactData=[
         notes: 'went to college with Pete'
     },
     {
+        id: 4,
         first: 'Andrew',
         last: 'Christianson',
         company: 'Target',
@@ -44,6 +48,7 @@ const sampleContactData=[
         notes: 'went to college with Pete'
     },
     {
+        id: 5,
         first: 'Bella',
         last: 'Anderson',
         company: 'Best Buy',
@@ -55,6 +60,7 @@ const sampleContactData=[
         notes: 'went to college with Pete'
     },
     {
+        id: 6,
         first: 'Christian',
         last: 'Davenport',
         company: '3M',
@@ -65,6 +71,7 @@ const sampleContactData=[
         notes: 'went to college with Pete'
     },
     {
+        id: 7,
         first: 'Daria',
         last: 'Edgerton',
         company: 'Amazon',
@@ -75,6 +82,7 @@ const sampleContactData=[
         notes: 'went to college with Pete'
     },
     {
+        id: 8,
         first: 'Ethan',
         last: 'Brown',
         company: 'Comcast',

@@ -78,7 +78,9 @@ class MuiVirtualizedTable extends React.PureComponent {
   render() {
     const { classes, columns, ...tableProps } = this.props;
     return (
-      <AutoSizer>
+      <>
+      
+      <AutoSizer>        
         {({ height, width }) => (
           <Table height={height} width={width} {...tableProps} rowClassName={this.getRowClassName}>
             {columns.map(({ dataKey, ...other }, index) => {
@@ -101,6 +103,7 @@ class MuiVirtualizedTable extends React.PureComponent {
           </Table>
         )}
       </AutoSizer>
+      </>
     );
   }
 }
@@ -138,7 +141,9 @@ for (let i = 0; i < 50; i += 1) {
 
 export default function ReactJobPipelinePage() {
   return (
+
     <Paper style={{ height: 400, width: '100%' }}>
+      
       <JobPipelinePage
         rowCount={rows.length}
         rowGetter={({ index }) => rows[index]}
@@ -181,6 +186,7 @@ export default function ReactJobPipelinePage() {
         ]}
       />
     </Paper>
+
   );
 }
 
