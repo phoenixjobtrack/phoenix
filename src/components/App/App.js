@@ -21,6 +21,7 @@ import Tasks from '../Tasks/Tasks';
 import JobPipelinePage from '../JobPipelinePage/JobPipelinePage';
 import UserPage from '../UserPage/UserPage';
 import TopBar from '../TopBar/TopBar';
+import ContactPage from '../ContactPage/ContactPage'
 
 // ========== STYLE ========== //
 import './App.css';
@@ -84,6 +85,11 @@ class App extends Component {
               exact
               path="/contact"
               component={ContactBookPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/contact/view/:id"
+              component={ContactPage}
             />
             <ProtectedRoute
               exact
