@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
-import {Card, CardContent, Input, Typography} from '@material-ui/core'
+import {Card, CardContent, Input, Typography, Button} from '@material-ui/core'
 
 class ContactPage extends Component {
     //retrieve contactId from URL params
