@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 class ContactPage extends Component {
+    //retrieve userId from URL params
+    userId = this.props.match.params.id
+    
+
     render(){
         return(
-            <p>contact here</p>
+            <p>contact here {this.userId}</p>
         )
     }
 }
 
-export default connect()(ContactPage)
+export default withRouter(connect()(ContactPage))

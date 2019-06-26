@@ -88,7 +88,7 @@ class App extends Component {
             />
             <ProtectedRoute
               exact
-              path="/contact/view"
+              path="/contact/view/:id"
               component={ContactPage}
             />
             <ProtectedRoute

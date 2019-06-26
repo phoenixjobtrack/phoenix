@@ -2,8 +2,8 @@ import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_USER" actions
-function* fetchContacts(action) {
-    console.log('in fetchContacts saga', action.payload)
+function* fetchContacts() {
+    // console.log('in fetchContacts saga', action.payload)
 
     try {
         let allContacts = yield axios.get('/api/contact')
