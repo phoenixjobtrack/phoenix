@@ -4,33 +4,28 @@ import { withRouter } from 'react-router-dom';
 
 import AddTask from './AddTask'
 
-import { makeStyles } from '@material-ui/core/styles';
-import {Card, CardContent, Input, Typography, Button, TextField, List, ListItem} from '@material-ui/core'
-import IconButton from '@material-ui/core/IconButton';
-import AddIcon from '@material-ui/icons/Add'
+
+import {Card, CardContent, Typography, Button, TextField, List, ListItem} from '@material-ui/core'
+
 
 class ContactPage extends Component {
     //retrieve contactId from URL params
     contactId = this.props.match.params.id
-
     currentContact = {}
 
     state={
         contact:{
-            firstName: '',
-            lastName: '',
+            first_name: '',
+            last_name: '',
             company: '',
             position:'',
             email:'',
-            linkedInUrl: '',
+            linkedin_url: '',
             phone: '',
             cell: '',
             notes: ''
         }
     }
-
-    
-    
 
     //match contactId from URL to contact from reducer
     retrieveContactData = () => {        
@@ -49,23 +44,35 @@ class ContactPage extends Component {
         })
     }
 
+    handleChangeFor = key => event =>{
+        console.log('in handleChangeFor', key, event)
+        this.setState({
+            contact: {
+                ...this.state.contact,
+                [key]:event.target.value
+            }
+        })
+    }
+
+    handleSubmit = () =>{
+        console.log('in handleSubmit')
+        this.props.dispatch({type:'SUBMIT_CONTACT', payload:this.state.contact})
+    }
+
 
     componentDidMount(){
         this.props.dispatch({ type: 'FETCH_CONTACTS' })
-        
-        
-
     }
 
 
     render(){
-        console.log('today', this.state.today)
+        console.log('this.state', this.state)
         this.retrieveContactData()
         return(
             // <p>contact here {this.userId}</p>
             <Card>
                 <CardContent>
-                    <Button variant="contained" color="primary">Save</Button>
+                    
                         <AddTask currentContact={this.currentContact}/>
                         <Typography>Upcoming Tasks:</Typography>        
                             <List>
@@ -74,45 +81,58 @@ class ContactPage extends Component {
                                 <ListItem>task1</ListItem>
                                 <ListItem>task1</ListItem>
                             </List>
-                    <TextField
-                        label="First Name" 
-                        defaultValue={this.currentContact.first_name}  
-                    />
-                    <TextField
-                        label="Last Name"
-                        defaultValue={this.currentContact.last_name}
-                    />
-                    <TextField
-                        label="Company"
-                        defaultValue={this.currentContact.company}
-                    />
-                    <TextField
-                        label="Position"
-                        defaultValue={this.currentContact.position}
-                    />
-                    <TextField
-                        label="Email"
-                        defaultValue={this.currentContact.email}
-                    />
-                    <TextField
-                        label="LinkedIn"
-                        defaultValue={this.currentContact.linkedin_url}
-                    />
-                    <TextField
-                        label="Phone"
-                        defaultValue={this.currentContact.phone}
-                    />
-                    <TextField
-                        label="Cell"
-                        defaultValue={this.currentContact.cell}
-                    />
-                    <TextField
-                        id="notes"
-                        label="Notes"
-                        multiline
-                        rows="4"
-                        margin="normal"
-                    />
+                    <form onSubmit={this.handleSubmit}>
+                        <TextField
+                            label="First Name"
+                            defaultValue={this.currentContact.first_name}
+                            onChange={this.handleChangeFor('first_name')}
+                        />
+                        <TextField
+                            label="Last Name"
+                            defaultValue={this.currentContact.last_name}
+                            onChange={this.handleChangeFor('last_name')}
+                        />
+                        <TextField
+                            label="Company"
+                            defaultValue={this.currentContact.company}
+                            onChange={this.handleChangeFor('company')}
+                        />
+                        <TextField
+                            label="Position"
+                            defaultValue={this.currentContact.position}
+                            onChange={this.handleChangeFor('position')}
+                        />
+                        <TextField
+                            label="Email"
+                            defaultValue={this.currentContact.email}
+                            onChange={this.handleChangeFor('email')}
+                        />
+                        <TextField
+                            label="LinkedIn"
+                            defaultValue={this.currentContact.linkedin_url}
+                            onChange={this.handleChangeFor('linkedin_url')}
+                        />
+                        <TextField
+                            label="Phone"
+                            defaultValue={this.currentContact.phone}
+                            onChange={this.handleChangeFor('phone')}
+                        />
+                        <TextField
+                            label="Cell"
+                            defaultValue={this.currentContact.cell}
+                            onChange={this.handleChangeFor('cell')}
+                        />
+                        <TextField
+                            id="notes"
+                            label="Notes"
+                            multiline
+                            rows="4"
+                            margin="normal"
+                            onChange={this.handleChangeFor('notes')}
+                        />
+                        <Button variant="contained" color="primary" type="submit">Save</Button>
+                    </form>
+                    
                     <Typography>History:</Typography>
                     <List>
                         <ListItem>task1</ListItem>
