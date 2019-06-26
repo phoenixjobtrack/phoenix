@@ -87,8 +87,8 @@
 // ]
 
 const contactReducer = (state = [], action) => {
-    console.log('in contactReducer - state:', state);
-    console.log('in contactReducer - action:', action.payload);
+    // console.log('in contactReducer - state:', state);
+    // console.log('in contactReducer - action:', action.payload);
     if (action.type ==='STORE_CONTACTS'){
         return action.payload
     }

@@ -1,6 +1,6 @@
 const requirementReducer = (state = [], action) => {
-    console.log('in requirementReducer - state:', state);
-    console.log('in requirementReducer - action:', action);
+    // console.log('in requirementReducer - state:', state);
+    // console.log('in requirementReducer - action:', action);
     if (action.type ==='STORE_REQUIREMENTS'){
         return action.payload
     }
