@@ -13,13 +13,14 @@ function* addRequirement(action) {
     } catch (error) {
         console.log('error in addRequirement saga', error);
     }
-}
+};
 
 //SAGA to GET requirements from database
 function* fetchRequirements(action) {
-    console.log('in fetchRequirements saga payload:', action.payload)
+    
     try {
-        const requirements = yield axios.get('/api/requirement');
+        const requirements = yield axios.get('/api/requirement')
+        console.log('in fetchRequirements saga', requirements)
         yield put({type:'STORE_REQUIREMENTS', payload: requirements.data})
     }
     catch (error){
