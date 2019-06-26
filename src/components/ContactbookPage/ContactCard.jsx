@@ -62,12 +62,12 @@ export default function RecipeReviewCard(props) {
                     </Grid>
                     <Grid item sm={4}>
                         <Typography>
-                            email: canderson@gmail.com
+                            email: {contact.email}
                         </Typography>
                     </Grid>
                     <Grid item sm={4}>
                         <Typography>
-                            Phone:
+                            Phone: {contact.phone}
                         </Typography>
                     </Grid>
                     <Grid item sm={4}>
@@ -75,12 +75,12 @@ export default function RecipeReviewCard(props) {
                     </Grid>
                     <Grid item sm={4}>
                         <Typography >
-                            LinkedIn: www.linkedIn.com
+                            LinkedIn: {contact.linkedInUrl}
                         </Typography>
                     </Grid>
                     <Grid item sm={4}>
                         <Typography>
-                            Cell:555-5555
+                            Cell: {contact.cell}
                         </Typography>
                     </Grid>
                     <Grid item sm={6}>
@@ -88,15 +88,16 @@ export default function RecipeReviewCard(props) {
                             Notes: 
                         </Typography>
                         <Typography>
-                            Prefers to talk after 6pm.  Worked at Target with Andrea.  Also went to college with Jason Bigman.
+                            {contact.notes}
                         </Typography>
                     </Grid>  
                     <Grid item sm={6}>
                         <Typography >
                             Tasks:
+                            {/* insert tasks here */}
                             <ul>
-                                <li>Call back 7/24/19</li>
-                                <li>send updated resume 7/26/19</li>
+                                <li>Task Here</li>
+                                
                             </ul>
                         </Typography>
                     </Grid>  
@@ -120,10 +121,9 @@ export default function RecipeReviewCard(props) {
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
                     <Typography paragraph>
+                        {/* insert task history here */}
                         <ul>
-                            <li>Met at React Meetup 3/24/18</li>
-                            <li>Coffee 4/12/18</li>
-                            <li>Resume Review 5/16/18</li>
+                            <li>Task History Here</li>
                         </ul>                       
                     </Typography>                    
                 </CardContent>
