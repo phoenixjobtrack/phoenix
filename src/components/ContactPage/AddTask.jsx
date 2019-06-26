@@ -48,7 +48,7 @@ class AddTask extends Component {
             ...this.state,
             newTask:{
                 ...this.state.newTask,
-                contactId: this.props.currentContact.id,
+                contact_id: this.props.currentContact.id,
                 [key]: event.target.value
 
             }
@@ -74,12 +74,12 @@ class AddTask extends Component {
                 <TextField
                     id="task"
                     label="task"
-                    onChange={this.handleChangeFor('taskName')}
+                    onChange={this.handleChangeFor('task_name')}
                 />
                 <TextField
                     id="date"
                     label="Date (required)"
-                    onChange={ this.handleChangeFor('dueDate') }
+                    onChange={ this.handleChangeFor('due_date') }
                     type="date"
                     defaultValue={this.state.today}
                     InputLabelProps={{
@@ -94,7 +94,7 @@ class AddTask extends Component {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    onChange={ this.handleChangeFor('dueTime') }
+                    onChange={ this.handleChangeFor('due_time') }
                 />
                 <IconButton
                     type="submit"
