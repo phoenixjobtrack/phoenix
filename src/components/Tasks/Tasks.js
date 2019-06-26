@@ -59,7 +59,7 @@ const handleClickRemove = () => {
 } // end handleClickRemove
 
 // ----- LIST REORDER & ANIMATION ----- //
-const SortableItem = sortableElement(({ taskName }) =>
+const SortableItem = sortableElement(({ taskName, dueDate }) =>
     <Paper>
         <ListItem >
             <Tooltip title="More">
@@ -81,9 +81,7 @@ const SortableItem = sortableElement(({ taskName }) =>
             <ListItemText>
                 {taskName}
             </ListItemText>
-            <Tooltip title="Date Due">
-                <DatePlaceholder />
-            </Tooltip>
+                {dueDate}
             <Tooltip title="Delete">
                 <IconButton
                     onClick={() => handleClickRemove()}
@@ -248,7 +246,12 @@ class Tasks extends Component {
                     <SortableContainer onSortEnd={this.onSortEnd}>
 
                         {items.map((task, index) => (
-                            <SortableItem key={`item-${index}`} index={index} taskName={task.task_name} />
+                            <SortableItem 
+                                key={`item-${index}`} 
+                                index={index} 
+                                taskName={task.task_name} 
+                                dueDate={task.due_date} 
+                            />
                         ))}
 
                     </SortableContainer>
