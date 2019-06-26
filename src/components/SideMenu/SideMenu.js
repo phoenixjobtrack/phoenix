@@ -83,7 +83,7 @@ function SideMenu(props) {
                     <List>
                         <ListItem component={Link} to="/dashboard" button><HomeIcon className="icon" /> Home</ListItem>
                         <ListItem component={Link} to="/tasks" button><FolderIcon className="icon" /> Tasks</ListItem>
-                        <ListItem component={Link} to="/info" button><DashboardIcon className="icon" /> Job Pipeline</ListItem>
+                        <ListItem component={Link} to="/jobpipeline" button><DashboardIcon className="icon" /> Job Pipeline</ListItem>
                         <ListItem component={Link} to="/contact" button><InfoIcon className="icon" /> Contacts</ListItem>
                         <ListItem component={Link} to="/profile" button><InfoIcon className="icon" /> Profile</ListItem>
                     </List>
