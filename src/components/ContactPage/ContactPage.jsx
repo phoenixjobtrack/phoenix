@@ -2,16 +2,35 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import AddTask from './AddTask'
+
 import { makeStyles } from '@material-ui/core/styles';
-import {Card, CardContent, Input, Typography, Button} from '@material-ui/core'
+import {Card, CardContent, Input, Typography, Button, TextField, List, ListItem} from '@material-ui/core'
+import IconButton from '@material-ui/core/IconButton';
+import AddIcon from '@material-ui/icons/Add'
 
 class ContactPage extends Component {
     //retrieve contactId from URL params
     contactId = this.props.match.params.id
 
     currentContact = {}
-    
 
+    state={
+        contact:{
+            firstName: '',
+            lastName: '',
+            company: '',
+            position:'',
+            email:'',
+            linkedInUrl: '',
+            phone: '',
+            cell: '',
+            notes: ''
+        }
+    }
+
+    
+    
 
     //match contactId from URL to contact from reducer
     retrieveContactData = () => {        
@@ -34,65 +53,73 @@ class ContactPage extends Component {
     componentDidMount(){
         this.props.dispatch({ type: 'FETCH_CONTACTS' })
         
+        
 
     }
 
 
     render(){
+        console.log('today', this.state.today)
         this.retrieveContactData()
         return(
             // <p>contact here {this.userId}</p>
             <Card>
                 <CardContent>
-                    <Button variant="contained" color="primary"></Button>
-                    <Typography>
-                        First Name
-                    </Typography>
-                    <Input
-                      defaultValue={this.currentContact.first_name}  
+                    <Button variant="contained" color="primary">Save</Button>
+                        <AddTask currentContact={this.currentContact}/>
+                        <Typography>Upcoming Tasks:</Typography>        
+                            <List>
+                                <ListItem>task1</ListItem>
+                                <ListItem>task1</ListItem>
+                                <ListItem>task1</ListItem>
+                                <ListItem>task1</ListItem>
+                            </List>
+                    <TextField
+                        label="First Name" 
+                        defaultValue={this.currentContact.first_name}  
                     />
-                    <Typography>
-                        Last Name
-                    </Typography>
-                    <Input
+                    <TextField
+                        label="Last Name"
                         defaultValue={this.currentContact.last_name}
                     />
-                    <Typography>
-                        Company
-                    </Typography>
-                    <Input
+                    <TextField
+                        label="Company"
                         defaultValue={this.currentContact.company}
                     />
-                    <Typography>
-                        Position
-                    </Typography>
-                    <Input
+                    <TextField
+                        label="Position"
                         defaultValue={this.currentContact.position}
                     />
-                    <Typography>
-                        email
-                    </Typography>
-                    <Input
+                    <TextField
+                        label="Email"
                         defaultValue={this.currentContact.email}
                     />
-                    <Typography>
-                        LinkedIn
-                    </Typography>
-                    <Input
+                    <TextField
+                        label="LinkedIn"
                         defaultValue={this.currentContact.linkedin_url}
                     />
-                    <Typography>
-                        Phone
-                    </Typography>
-                    <Input
+                    <TextField
+                        label="Phone"
                         defaultValue={this.currentContact.phone}
                     />
-                    <Typography>
-                        Cell
-                    </Typography>
-                    <Input
+                    <TextField
+                        label="Cell"
                         defaultValue={this.currentContact.cell}
                     />
+                    <TextField
+                        id="notes"
+                        label="Notes"
+                        multiline
+                        rows="4"
+                        margin="normal"
+                    />
+                    <Typography>History:</Typography>
+                    <List>
+                        <ListItem>task1</ListItem>
+                        <ListItem>task1</ListItem>
+                        <ListItem>task1</ListItem>
+                        <ListItem>task1</ListItem>
+                    </List>
                 </CardContent>
             </Card>
         )
