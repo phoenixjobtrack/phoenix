@@ -1,126 +1,35 @@
-// // ========== REACT ========== //
-// import React from 'react';
-// import { Link } from 'react-router-dom';
+// ========== REACT ========== //
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-// // ========== MATERIAL UI ========== //
-// import Drawer from '@material-ui/core/Drawer';
-// import List from '@material-ui/core/List';
-// import Divider from '@material-ui/core/Divider';
-// import ListItem from '@material-ui/core/ListItem';
-// import ListItemText from '@material-ui/core/ListItemText';
-// import Button from '@material-ui/core/Button';
-
-
-
-// // ========== STYLE ========== //
-// import { makeStyles } from '@material-ui/core/styles';
-
-// // ========== ICONS ========== //
-// import IconButton from '@material-ui/core/IconButton';
-// import ListItemIcon from '@material-ui/core/ListItemIcon';
-// import MenuIcon from '@material-ui/icons/Menu';
-// import HomeIcon from '@material-ui/icons/Home';
-// import FolderIcon from '@material-ui/icons/Folder';
-// import DashboardIcon from '@material-ui/icons/Dashboard';
-// import InfoIcon from '@material-ui/icons/Info';
-// import AccountIcon from '@material-ui/icons/AccountCircle';
-// import InboxIcon from '@material-ui/icons/MoveToInbox';
-// import MailIcon from '@material-ui/icons/Mail';
-
-
-
-// const useStyles = makeStyles({
-//     list: {
-//         width: 240,
-//     },
-
-//     fullList: {
-//         width: 'auto',
-
-//     },
-// });
-
-// function SideMenu(props) {
-//     const classes = useStyles();
-//     const [state, setState] = React.useState({
-//         left: true,
-//     });
-
-//     const toggleDrawer = (side, open) => event => {
-//         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-//             return;
-//         }
-
-//         setState({ ...state, [side]: open });
-//     };
-
-//     const sideList = side => (
-//         <div
-//             className={classes.list}
-//             role="presentation"
-//             onClick={toggleDrawer(side, false)}
-//             onKeyDown={toggleDrawer(side, false)}
-//         >
-//             <List>
-//                 {['Phoenix'].map((text, index) => (
-//                     <ListItem button key={text}>
-//                         <ListItemIcon>
-//                             <MenuIcon />
-//                         </ListItemIcon>
-//                         <ListItemText primary={text} />
-//                     </ListItem>
-//                 ))}
-//             </List>
-
-//             <Divider />
-//             <List>
-//                 <ListItem component={Link} to="/home" button><HomeIcon className="icon" /> Home</ListItem>
-//                 <ListItem component={Link} to="/names" button><FolderIcon className="icon" /> Saved Names</ListItem>
-//                 <ListItem component={Link} to="/project" button><DashboardIcon className="icon" /> My Project</ListItem>
-//                 <ListItem component={Link} to="/about" button><InfoIcon className="icon" /> About</ListItem>
-//             </List>
-
-//             <Divider />
-//             <List>
-//                 <ListItem component={Link} to="/home" button><AccountIcon className="icon" /> Logout</ListItem>
-//             </List>
-//         </div>
-//     );
-
-
-//     return (
-//         <div>
-//             <IconButton onClick={toggleDrawer('left', true)}><MenuIcon /></IconButton>
-//             <Drawer 
-//                 open={state.left} 
-//                 onClose={toggleDrawer('left', false)}>
-//                 {sideList('left')}
-//             </Drawer>
-//         </div>
-//     );
-// }
-
-// const mapStateToProps = state => ({
-//     user: state.user,
-// });
-
-// export default connect(mapStateToProps)(SideMenu);
-
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
+// ========== MATERIAL UI CORE ========== //
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+
+// ========== STYLE ========== //
+import { makeStyles } from '@material-ui/core/styles';
+import './SideMenu.css';
+
+// ========== MUI ICONS ========== //
+import AccountIcon from '@material-ui/icons/AccountCircle';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import FolderIcon from '@material-ui/icons/Folder';
+import HomeIcon from '@material-ui/icons/Home';
+import IconButton from '@material-ui/core/IconButton';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
+import InfoIcon from '@material-ui/icons/Info';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import LogOutButton from '../LogOutButton/LogOutButton';
 import MailIcon from '@material-ui/icons/Mail';
+import MenuIcon from '@material-ui/icons/Menu';
 
 const drawerWidth = 240;
 
@@ -147,7 +56,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function SideMenu() {
+function SideMenu(props) {
     const classes = useStyles();
 
     return (
@@ -156,8 +65,8 @@ function SideMenu() {
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
                     <Typography variant="h6" noWrap>
-                        Permanent drawer
-          </Typography>
+                        Phoenix
+                    </Typography>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -169,23 +78,28 @@ function SideMenu() {
                 anchor="left"
             >
                 <div className={classes.toolbar} />
+
+                <Divider />                    
+                    <List>
+                        <ListItem component={Link} to="/dashboard" button><HomeIcon className="icon" /> Home</ListItem>
+                        <ListItem component={Link} to="/tasks" button><FolderIcon className="icon" /> Tasks</ListItem>
+                        <ListItem component={Link} to="/info" button><DashboardIcon className="icon" /> Job Pipeline</ListItem>
+                        <ListItem component={Link} to="/contact" button><InfoIcon className="icon" /> Contacts</ListItem>
+                        <ListItem component={Link} to="/profile" button><InfoIcon className="icon" /> Profile</ListItem>
+                    </List>
                 <Divider />
                 <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
+                    <ListItem
+                        onClick={() => props.dispatch({ type: 'LOGOUT' })}
+                        button
+                        >
+                        <InfoIcon className="icon" />
+                        Logout
+                    </ListItem>
                 </List>
                 <Divider />
                 <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
+                    <ListItem component={Link} to="/about" button><InfoIcon className="icon" /> About</ListItem>
                 </List>
             </Drawer>
             {/* <main className={classes.content}>

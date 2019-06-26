@@ -14,7 +14,6 @@ import ContactBookPage from '../ContactbookPage/ContactBookPage';
 import DashboardPage from '../DashboardPage/DashboardPage';
 import Footer from '../Footer/Footer';
 import InfoPage from '../InfoPage/InfoPage';
-import Nav from '../Nav/Nav';
 import Profile from '../Profile/Profile';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import SideMenu from '../SideMenu/SideMenu';
@@ -37,7 +36,6 @@ class App extends Component {
         <div className="app">
           <TopBar />
           <SideMenu />
-          <Nav />
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />

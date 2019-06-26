@@ -3,9 +3,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 
-// ========== COMPONENTS ========== //
-// import SideMenu from '../SideMenu/SideMenu';
-
 // ========== MATERIAL UI CORE ========== //
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -44,7 +41,7 @@ function TopBar(props) {
                     <Toolbar>
                         <Typography variant="h1" className={classes.title}>
                             Welcome {props.user.first_name}
-                    </Typography>
+                        </Typography>
                         <Button color="inherit">Logout</Button>
                     </Toolbar>
                 </AppBar>
