@@ -2,11 +2,11 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-router.get('/:id', (req,res) => {
-    console.log(req.params.id);
+router.get('/', (req,res) => {
+    console.log(req.user.id);
     let query = `SELECT * FROM "contacts"
-    WHERE id = $1 `;
-    pool.query(query,[req.params.id])
+    WHERE "user_id" = $1 `;
+    pool.query(query,[req.user.id])
         .then( (result) => {
             res.send(result.rows);
         })
