@@ -1,3 +1,4 @@
+// ========== REACT ========== //
 import React, {Component} from 'react';
 import {
   HashRouter as Router,
@@ -5,23 +6,25 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-
 import {connect} from 'react-redux';
 
-import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
-
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-
+// ========== COMPONENTS ========== //
 import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
-import DashboardPage from '../DashboardPage/DashboardPage';
-import Profile from '../Profile/Profile';
-import Tasks from '../Tasks/Tasks';
-
-import './App.css';
 import ContactBookPage from '../ContactbookPage/ContactBookPage';
+import DashboardPage from '../DashboardPage/DashboardPage';
+import Footer from '../Footer/Footer';
+import InfoPage from '../InfoPage/InfoPage';
+import Profile from '../Profile/Profile';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import SideMenu from '../SideMenu/SideMenu';
+import Tasks from '../Tasks/Tasks';
+import JobPipelinePage from '../JobPipelinePage/JobPipelinePage';
+import UserPage from '../UserPage/UserPage';
+import TopBar from '../TopBar/TopBar';
+
+// ========== STYLE ========== //
+import './App.css';
+
 
 class App extends Component {
   componentDidMount () {
@@ -31,8 +34,9 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
-          <Nav />
+        <div className="app">
+          <TopBar />
+          <SideMenu />
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
@@ -80,6 +84,11 @@ class App extends Component {
               exact
               path="/contact"
               component={ContactBookPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/jobpipeline"
+              component={JobPipelinePage}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
