@@ -1,19 +1,34 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
+// Adds a task to the database "tasks" table
 function* addTask(action) {
-    console.log('in addTask Saga', action.payload)
-
+    console.log('in addTask Saga', action.payload);
+    // Do or Do Not. There is no
     try {
         yield axios.post('api/tasks', action.payload)
+        yield put({ type: 'FETCH_TASKS'})
 
     } catch (error) {
         console.log('error in addTask saga', error);
     }
 }
 
+// Fetch all tasks from the database in the "tasks" table
+function* fetchTasks(action) {
+    console.log('in fetchTasks Saga', action.payload);
+    // Do or Do Not. There is no
+    try {
+        const tasks = yield axios.get('api/tasks', action.payload)
+        yield put({type: 'STORE_TASKS', payload: tasks.data})
+    } catch (error) {
+        console.log('error in fetchTasks saga', error);
+    }
+}
+
 function* tasksSaga() {
     yield takeEvery('ADD_TASK', addTask);
+    yield takeEvery('FETCH_TASKS', fetchTasks)
 }
 
 export default tasksSaga;
