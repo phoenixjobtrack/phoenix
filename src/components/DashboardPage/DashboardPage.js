@@ -46,8 +46,10 @@ render () {
           </Paper>
         </Grid>
       </Grid>
-      <h2>Job Pipeline<AddIcon className="dashAddIcon" /></h2>
-      <DashboardTable />
+      <div className ="piplineBox">
+        <h2>Job Pipeline<AddIcon className="dashAddIcon" /></h2>
+        <DashboardTable />
+      </div>
     </div>
     )
 }

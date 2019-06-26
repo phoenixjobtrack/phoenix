@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
+ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import Paper from '@material-ui/core/Paper';
 import { AutoSizer, Column, Table } from 'react-virtualized';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 const styles = theme => ({
   flexContainer: {
@@ -61,7 +64,6 @@ class MuiVirtualizedTable extends React.PureComponent {
 
   headerRenderer = ({ label, columnIndex }) => {
     const { headerHeight, columns, classes } = this.props;
-
     return (
       <TableCell
         component="div"
@@ -138,49 +140,68 @@ for (let i = 0; i < 50; i += 1) {
 
 export default function ReactJobPipelinePage() {
   return (
-    <Paper style={{ height: 400, width: '100%' }}>
-      <JobPipelinePage
-        rowCount={rows.length}
-        rowGetter={({ index }) => rows[index]}
-        columns={[
-          {
-            width: 150,
-            label: 'Company',
-            dataKey: 'company',
-          },
-          {
-            width: 120,
-            label: 'Position',
-            dataKey: 'position',
-            //numeric: true,
-          },
-          {
-            width: 120,
-            label: 'Stage',
-            dataKey: 'stage',
-            //numeric: true,
-          },
-          {
-            width: 120,
-            label: 'Next Touch Point',
-            dataKey: 'nexttouchpoint',
-            numeric: true,
-          },
-          {
-            width: 200,
-            label: 'Notes',
-            dataKey: 'notes',
-            //numeric: true,
-          },
-          {
-            width: 200,
-            label: 'Next Stage',
-            dataKey: 'nextstage',
-            //numeric: true,
-          },
-        ]}
-      />
-    </Paper>
+    <div>
+      <h1>Job Pipeline</h1>
+      <Grid container spacing={3}>
+        <Grid item sm={9}>
+          <ButtonGroup
+              variant="contained"
+              color="primary"
+              aria-label="Full-width contained primary button group"
+            >
+              <Button>ACTIVE</Button>
+              <Button>CLOSED</Button>
+              <Button>SHOW ALL</Button>
+          </ButtonGroup>
+        </Grid>
+        <Grid item sm>
+        <Button variant="contained" color="primary">NEW OPPORTUNITY</Button>
+        </Grid>
+      </Grid>
+      <Paper style={{ marginLeft: 30, marginTop: 20, paddingTop: 15, height: 543, width: '95%' }}>
+        <JobPipelinePage
+          rowCount={rows.length}
+          rowGetter={({ index }) => rows[index]}
+          columns={[
+            {
+              width: 200,
+              label: 'Company',
+              dataKey: 'company',
+            },
+            {
+              width: 200,
+              label: 'Position',
+              dataKey: 'position',
+              //numeric: true,
+            },
+            {
+              width: 300,
+              label: 'Stage',
+              dataKey: 'stage',
+              //numeric: true,
+            },
+            {
+              width: 200,
+              label: 'Next Activity Date',
+              dataKey: 'nexttouchpoint',
+              numeric: true,
+            },
+            {
+              width: 400,
+              label: 'Notes',
+              dataKey: 'notes',
+              //numeric: true,
+            },
+            {
+              width: 300,
+              label: 'Next Stage',
+              dataKey: 'nextstage',
+              //numeric: true,
+            },
+          ]}
+        />
+      </Paper>
+    </div>
   );
 }
 
