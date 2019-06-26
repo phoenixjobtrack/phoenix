@@ -13,10 +13,10 @@ class AddTask extends Component {
     state = {
         today: '',
         newTask: {
-            taskName: '',
-            dueDate: '',
-            dueTime: '',
-            contactId: ''
+            task_name: '',
+            due_date: '',
+            due_time: '',
+            contact_id: ''
         }
     }
 
