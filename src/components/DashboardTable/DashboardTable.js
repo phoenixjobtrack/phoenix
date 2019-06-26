@@ -138,36 +138,36 @@ for (let i = 0; i < 50; i += 1) {
 
 export default function DasnboardTable() {
   return (
-    <Paper style={{ height: 400, width: '100%' }}>
+    <Paper style={{ height: 335, width: '100%' }}>
       <DashboardTable
         rowCount={rows.length}
         rowGetter={({ index }) => rows[index]}
         columns={[
           {
-            width: 150,
+            width: 300,
             label: 'Company',
             dataKey: 'company',
           },
           {
-            width: 120,
+            width: 300,
             label: 'Position',
             dataKey: 'position',
             //numeric: true,
           },
           {
-            width: 120,
+            width: 300,
             label: 'Stage',
             dataKey: 'stage',
             //numeric: true,
           },
           {
-            width: 120,
-            label: 'Next Touch Point',
+            width: 150,
+            label: 'Next Activity Date',
             dataKey: 'nexttouchpoint',
             numeric: true,
           },
           {
-            width: 200,
+            width: 600,
             label: 'Notes',
             dataKey: 'notes',
             //numeric: true,

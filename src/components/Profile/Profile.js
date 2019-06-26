@@ -49,14 +49,16 @@ class Profile extends Component {
                             label="First Name"
                             className="profileInput"
                             margin="dense" 
-                            onChange={this.handleChange('first_name')} />
+                            onChange={this.handleChange('first_name')} 
+                        />
                             <br />
                         <TextField
                             id="standard-dense"
                             label="Last Name"
                             className="profileInput"
                             margin="dense" 
-                            onChange={this.handleChange('last_name')} />
+                            onChange={this.handleChange('last_name')} 
+                        />
                             <br />
                         <TextField
                             id="filled-email-input"
@@ -67,7 +69,7 @@ class Profile extends Component {
                             autoComplete="email"
                             margin="dense" 
                             onChange={this.handleChange('email')}/>
-                           
+                        
                         {
                             this.state.requireList.map((requirement, index) =>{
                                 return(
@@ -76,7 +78,8 @@ class Profile extends Component {
                                         label="Requirement"
                                         className="profileInput"
                                         margin="dense" 
-                                        onChange={this.handleChange('requirement')} />
+                                        // onChange={this.handleChange('requirement')} 
+                                    />
                                 )
                             })
                         }
