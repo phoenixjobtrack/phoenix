@@ -9,7 +9,9 @@ body {
 }
 
 .app {
+    /* margin-top: 20px; */
     margin-left: 250px;
+    margin-right: 12px;
 }
 
 /* form {
