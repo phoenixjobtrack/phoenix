@@ -22,6 +22,7 @@ import JobPipelinePage from '../JobPipelinePage/JobPipelinePage';
 import JobOpportunity from '../JobOpportunity/JobOpportunity';
 import UserPage from '../UserPage/UserPage';
 import TopBar from '../TopBar/TopBar';
+import ContactPage from '../ContactPage/ContactPage'
 
 // ========== STYLE ========== //
 import './App.css';
@@ -30,6 +31,7 @@ import './App.css';
 class App extends Component {
   componentDidMount () {
     this.props.dispatch({type: 'FETCH_USER'})
+    this.props.dispatch({type: 'FETCH_TASKS'})
   }
 
   render() {
@@ -85,6 +87,11 @@ class App extends Component {
               exact
               path="/contact"
               component={ContactBookPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/contact/view/:id"
+              component={ContactPage}
             />
             <ProtectedRoute
               exact

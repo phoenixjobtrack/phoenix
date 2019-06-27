@@ -42,7 +42,6 @@ function TopBar(props) {
                         <Typography variant="h1" className={classes.title}>
                             Welcome {props.user.first_name}
                         </Typography>
-                        <Button color="inherit">Logout</Button>
                     </Toolbar>
                 </AppBar>
             </ThemeProvider>
