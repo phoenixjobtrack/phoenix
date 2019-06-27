@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import AddTask from './AddTask'
+import TaskList from './TaskList'
 
 
 import { Card, CardContent, Typography, Button, TextField, List, ListItem, Grid } from '@material-ui/core'
@@ -100,22 +101,7 @@ class ContactPage extends Component {
                         </Grid>
                         <Grid item xs={6}>
                             <AddTask currentContact={this.currentContact} />
-                            <Typography>Upcoming Tasks:</Typography>
-                            <List>
-                                <ListItem>task1</ListItem>
-                                <ListItem>task1</ListItem>
-                                <ListItem>task1</ListItem>
-                                <ListItem>task1</ListItem>
-                            </List>
-
-
-                            <Typography>History:</Typography>
-                            <List>
-                                <ListItem>task1</ListItem>
-                                <ListItem>task1</ListItem>
-                                <ListItem>task1</ListItem>
-                                <ListItem>task1</ListItem>
-                            </List>
+                            <TaskList contactId={this.currentContact.id}/>
                         </Grid>
                     </Grid>
 
