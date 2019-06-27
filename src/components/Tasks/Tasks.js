@@ -47,25 +47,19 @@ const TomorrowTasks = tomorrowTasks => <Paper className="tomorrowTasks"><Toolbar
 const FutureTasks = futureTasks => <Paper className="futureTasks"><Toolbar ><Typography>Future Tasks Go Here (Beyond Tomorrow)</Typography></Toolbar></Paper>
 const HistoryTasks = historyTasks => <Paper className="historyTasks"><Toolbar ><Typography>Task History Goes Here (Past Today's Date - Marked As Complete)</Typography></Toolbar></Paper>
 
-// const [anchorEl, setAnchorEl] = React.useState(null);
-
 // Click Handlers For List Items
 const handleClickCheckBox = () => {
     console.log('clickCheckBox');
 } // end handleClickCheckBox
 
-const handleClickMore = (event) => {
-    console.log('clickMore');
+// const handleClickMore = (event) => {
+//     console.log('clickMore');
 
-} // end handleClickMore
+// } // end handleClickMore
 
 const handleClickRemove = () => {
     console.log('clickRemove');
 } // end handleClickRemove
-
-// const handleClose = () => {
-//     setAnchorEl(null);
-// }
 
 // ----- LIST REORDER & ANIMATION ----- //
 const SortableItem = sortableElement(({ taskName, dueDate }) =>
@@ -202,8 +196,6 @@ class Tasks extends Component {
     // ----- RENDER ----- //
     render() {
         const items = this.props.reduxState.tasks || [];
-        console.log('state', this.state);
-        console.log('render items', items);
 
         // ----- RETURN ----- //
         return (
@@ -252,7 +244,7 @@ class Tasks extends Component {
                         </Toolbar ></Paper>
                     </span>
                     <Divider />
-                    <Divider />
+                    
                     {/* // ----- Task Displays ----- // */}
                     <OverdueTasks className="overdueTasks" />
                     <SortableContainer onSortEnd={this.onSortEnd}>
