@@ -141,6 +141,10 @@ for (let i = 0; i < 50; i += 1) {
 }
 
 class DashboardTable extends Component {
+
+componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_JOBS'})
+}
   render(){
   return (
     <Paper style={{ height: 335, width: '100%' }}>
