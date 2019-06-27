@@ -136,15 +136,17 @@ function PinnedSubheaderList(props) {
                             </ListSubheader>
                             {props.reduxState.contacts.map(contact => {
                                 let word
-                                if (key==='first'){
+                                if (key==='first'&&contact.first_name){
                                     word = contact.first_name
                                 }
-                                else if (key==='last'){
+                                else if (key==='last'&&contact.last_name){
                                     word=contact.last_name
                                 }
-                                else {
+                                else if (contact.company){
                                     word=contact.company
                                 }
+                                else
+                                    word='a'
                                 
                                 let firstLetter = word[0]
                                 if (firstLetter.toLowerCase() === sectionId) {
