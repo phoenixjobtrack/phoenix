@@ -158,7 +158,7 @@ export default function ReactJobPipelinePage() {
         <Button variant="contained" color="primary">NEW OPPORTUNITY</Button>
         </Grid>
       </Grid>
-      <Paper style={{ marginLeft: 30, marginTop: 20, paddingTop: 15, height: 543, width: '95%' }}>
+      <Paper style={{ marginLeft: 30, marginTop: 20, paddingTop: 15, height: 493, width: '95%' }}>
         <JobPipelinePage
           rowCount={rows.length}
           rowGetter={({ index }) => rows[index]}

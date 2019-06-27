@@ -19,6 +19,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import SideMenu from '../SideMenu/SideMenu';
 import Tasks from '../Tasks/Tasks';
 import JobPipelinePage from '../JobPipelinePage/JobPipelinePage';
+import JobOpportunity from '../JobOpportunity/JobOpportunity';
 import UserPage from '../UserPage/UserPage';
 import TopBar from '../TopBar/TopBar';
 
@@ -89,6 +90,11 @@ class App extends Component {
               exact
               path="/jobpipeline"
               component={JobPipelinePage}
+            />
+            <ProtectedRoute
+              exact
+              path="/jobOpportunity"
+              component={JobOpportunity}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
