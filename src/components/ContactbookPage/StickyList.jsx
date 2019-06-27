@@ -72,7 +72,7 @@ function PinnedSubheaderList(props) {
     const addNewContact = () => {
         console.log('in addNewContact')
         props.dispatch({ type:'SET_TO_CREATE_MODE'})
-        props.history.push('/contact/view/:id')
+        props.history.push('/contact/add')
     }
 
     return (

@@ -17,6 +17,20 @@ router.get('/', (req,res) => {
 }
 )
 
+//route to get selected contact only
+router.get('/current/:id', (req,res)=>{
+    console.log('in GET /api/contact/current', req.params.id)
+    let query = `SELECT * FROM "contacts" WHERE "user_id" = $1 AND "id"=$2`
+    pool.query(query,[req.user.id,req.params.id])
+        .then(result=>{
+            res.send(result.rows)
+        })
+        .catch(err=>{
+            console.log('error in GET /api/contact/current', err)
+            res.sendStatus(500)
+        })
+})
+
 router.post('/', (req, res) => {
     console.log('in POST /api/contact', req.user.id, req.body)
     const queryText = `INSERT INTO "contacts" (user_id, first_name, last_name, company, position, email, linkedin_url, cell, phone, notes ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`;
@@ -33,7 +47,7 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req,res)=>{
-    console.log('in PUT /api/contact', req.params.id)
+    console.log('in PUT /api/contact', req.params.id, req.body)
     const queryText = 
         `
             UPDATE "contacts" 

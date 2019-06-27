@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
-// worker Saga: will be fired on "FETCH_USER" actions
+
 function* fetchContacts(action) {
     console.log('in fetchContacts saga', action.payload)
     
@@ -12,6 +12,18 @@ function* fetchContacts(action) {
         
     } catch (error) {
         console.log('error in fetchContacts saga', error);
+    }
+}
+
+//retrieve info for selected contact
+function* fetchCurrentContact(action) {
+    console.log('in fetchCurrentContact saga')
+    try {
+        let currentContact = yield axios.get(`/api/contact/current/${action.payload}`)
+        yield put({type: 'STORE_CURRENT_CONTACT', payload: currentContact.data})
+    }
+    catch(err){
+        console.log('error in fetchCurrentContact saga', err)
     }
 }
 
@@ -38,7 +50,8 @@ function* updateContact(action){
 function* contactSaga() {
     yield takeEvery('FETCH_CONTACTS', fetchContacts);
     yield takeEvery('SUBMIT_CONTACT', submitContact);
-    yield takeEvery('UPDATE_CONTACT', updateContact)
+    yield takeEvery('FETCH_CURRENT_CONTACT', fetchCurrentContact)
+    yield takeEvery('UPDATE_CONTACT', updateContact);
 }
 
 export default contactSaga;

@@ -67,32 +67,13 @@ class ContactPage extends Component {
             this.props.dispatch({ type: 'SUBMIT_CONTACT', payload: this.state.contact })
         }
         else {
-            let firstName = ()=> {
-                if(!this.state.contact.first_name){
-                    console.log('firstName', this.currentContact.first_name)
-                    return this.currentContact.first_name
-                }
-                else{
-                    console.log('firstName', this.state.contact.first_name)
-                    return this.state.contact.first_name
-                    
-                }}
-            let lastName = () => {
-                if(!this.state.contact.last_name){
-                    console.log('lastName', this.currentContact.last_name)
-                    return this.currentContact.last_name
-                }
-                else {
-                    console.log('firstName', this.state.contact.last_name)
-                    return this.state.contact.last_name
-                }
-            }
             this.props.dispatch({ 
                 type: 'UPDATE_CONTACT', 
-                payload: {
+                payload: 
+                {
                     contact_id: this.contactId,
-                    first_name: firstName,
-                    last_name: lastName,
+                    first_name: '',
+                    last_name: '',
                     company: '',
                     position: '',
                     email: '',
