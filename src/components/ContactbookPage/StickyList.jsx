@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {Button} from '@material-ui/core'
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import {Button} from '@material-ui/core'
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -54,11 +54,6 @@ function PinnedSubheaderList(props) {
 
     const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-    //handles add new contact
-    const addNewContact = () => {
-        console.log('in addNewContact')
-        props.history.push('/contact/view/:id')
-    }
     //function defines what word to sort by, sets local state 'key' to that word
     const setSorting = (param) =>{
         setKey(param)
