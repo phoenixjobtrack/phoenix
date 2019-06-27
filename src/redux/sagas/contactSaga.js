@@ -15,8 +15,18 @@ function* fetchContacts(action) {
     }
 }
 
+function* submitContact(action){
+    console.log('in submitContact', action.payload)
+    try{
+        yield axios.post('/api/contact', action.payload)
+    } catch(err) {
+        console.log('error in submitContact saga', err)
+    }
+}
+
 function* contactSaga() {
     yield takeEvery('FETCH_CONTACTS', fetchContacts);
+    yield takeEvery('SUBMIT_CONTACT', submitContact)
 }
 
 export default contactSaga;
