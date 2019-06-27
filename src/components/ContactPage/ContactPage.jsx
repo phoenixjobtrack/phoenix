@@ -56,7 +56,13 @@ class ContactPage extends Component {
 
     handleSubmit = () =>{
         console.log('in handleSubmit')
-        this.props.dispatch({type:'SUBMIT_CONTACT', payload:this.state.contact})
+        if (this.props.reduxState.contactEditMode==='create') {
+            this.props.dispatch({ type: 'SUBMIT_CONTACT', payload: this.state.contact })
+        }
+        else {
+            this.props.dispatch({ type: 'UPDATE_CONTACT', payload: this.state.contact })
+        }
+        
     }
 
 
@@ -69,7 +75,6 @@ class ContactPage extends Component {
         console.log('this.state', this.state)
         this.retrieveContactData()
         return(
-            // <p>contact here {this.userId}</p>
             <Card>
                 <CardContent>
                     <Grid container>

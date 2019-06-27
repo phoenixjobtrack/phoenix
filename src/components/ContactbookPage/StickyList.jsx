@@ -85,13 +85,11 @@ function PinnedSubheaderList(props) {
                     <Button variant="contained" color="primary" onClick={() => { setSorting('last') }}>Last Name</Button>
                     <Button variant="contained" color="primary" onClick={() => { setSorting('company') }}>Company</Button>
                     <Button variant="contained" color="primary" onClick={addNewContact} >Add New Contact</Button>
-                </h3>
-                
+                </h3>                
                 {alphabet.map(letter => (
                     <button onClick={() => { scrollToLetter(letter) }}>{letter}</button>
                 ))}
             </div>
-            
             <List id="containerDiv" className={classes.root} subheader={<li />}>
                 {alphabet.map(sectionId => (
                     <li key={`section-${sectionId}`} className={classes.listSection}>

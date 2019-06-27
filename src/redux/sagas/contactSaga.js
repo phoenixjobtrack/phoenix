@@ -24,9 +24,14 @@ function* submitContact(action){
     }
 }
 
+function* updateContact(action){
+    console.log('in updateContact saga', action.payload)
+}
+
 function* contactSaga() {
     yield takeEvery('FETCH_CONTACTS', fetchContacts);
-    yield takeEvery('SUBMIT_CONTACT', submitContact)
+    yield takeEvery('SUBMIT_CONTACT', submitContact);
+    yield takeEvery('UPDATE_CONTACT', updateContact)
 }
 
 export default contactSaga;
