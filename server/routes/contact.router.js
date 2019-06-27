@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 router.get('/', (req,res) => {
-    console.log(req.user.id);
+    console.log('in GET /api/contact',req.user.id);
     let query = `SELECT * FROM "contacts"
     WHERE "user_id" = $1 `;
     pool.query(query,[req.user.id])
