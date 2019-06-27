@@ -6,7 +6,7 @@ function* fetchJobs(action) {
     console.log('in fetchjobss saga', action.payload)
     
     try {
-        let allJobs = yield axios.get('/api/job')
+        let allJobs = yield axios.get('/api/jobs')
         console.log('in fetchJobs saga', allJobs.data)
         yield put({type: 'STORE_JOBS', payload: allJobs.data})
         
