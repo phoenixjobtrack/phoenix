@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import AddTask from './AddTask'
+import TaskList from './TaskList'
 
 
 import {Card, CardContent, Typography, Button, TextField, List, ListItem, Grid} from '@material-ui/core'
@@ -100,25 +101,11 @@ class ContactPage extends Component {
                                 <Button variant="contained" color="primary" type="submit">Save</Button>
                             </form>
                         </Grid>
-                        <Grid item xs={6}>
+                        {/* <Grid item xs={6}>
                             <AddTask currentContact={this.currentContact} />
-                            <Typography>Upcoming Tasks:</Typography>
-                            <List>
-                                <ListItem>task1</ListItem>
-                                <ListItem>task1</ListItem>
-                                <ListItem>task1</ListItem>
-                                <ListItem>task1</ListItem>
-                            </List>
-
-
-                            <Typography>History:</Typography>
-                            <List>
-                                <ListItem>task1</ListItem>
-                                <ListItem>task1</ListItem>
-                                <ListItem>task1</ListItem>
-                                <ListItem>task1</ListItem>
-                            </List>
-                        </Grid>
+                            <TaskList/>
+                            
+                        </Grid> */}
                     </Grid>
                         
                 </CardContent>
