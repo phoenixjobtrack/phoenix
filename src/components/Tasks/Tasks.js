@@ -6,6 +6,8 @@ import React, { Component } from 'react';
 import { sortableContainer, sortableElement } from 'react-sortable-hoc';
 import { connect } from 'react-redux';
 
+// ----- COMPONENTS ----- //
+import TasksCheckBox from '../TasksCheckBox/TasksCheckBox';
 
 // ----- STYLES ----- //
 import { makeStyles } from '@material-ui/core/styles';
@@ -36,20 +38,22 @@ import Typography from '@material-ui/core/Typography';
 // ----- MATERIAL UI ICONS ----- //
 import AddIcon from '@material-ui/icons/Add';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import CheckBoxOutlineBlank from '@material-ui/icons/CheckBoxOutlineBlank';
 import ClearIcon from '@material-ui/icons/Clear';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 
 // ----- TASKS SECTIONS ----- //
-const OverdueTasks = overdueTasks => <Paper className="overdueTasks"><Toolbar ><Typography>Overdue Tasks Go Here (Past Today's Date - Not Yet Marked As Complete)</Typography></Toolbar></Paper>
-const TodayTasks = todayTasks => <Paper className="todayTasks"><Toolbar ><Typography>Today</Typography></Toolbar></Paper>
-const TomorrowTasks = tomorrowTasks => <Paper className="tomorrowTasks"><Toolbar ><Typography>Tomorrow</Typography></Toolbar></Paper>
-const FutureTasks = futureTasks => <Paper className="futureTasks"><Toolbar ><Typography>Future Tasks Go Here (Beyond Tomorrow)</Typography></Toolbar></Paper>
-const HistoryTasks = historyTasks => <Paper className="historyTasks"><Toolbar ><Typography>Task History Goes Here (Past Today's Date - Marked As Complete)</Typography></Toolbar></Paper>
+const OverdueTasks = () => <Paper className="overdueTasks"><Toolbar ><Typography>Overdue Tasks Go Here (Past Today's Date - Not Yet Marked As Complete)</Typography></Toolbar></Paper>
+const TodayTasks = () => <Paper className="todayTasks"><Toolbar ><Typography>Today</Typography></Toolbar></Paper>
+const TomorrowTasks = () => <Paper className="tomorrowTasks"><Toolbar ><Typography>Tomorrow</Typography></Toolbar></Paper>
+const FutureTasks = () => <Paper className="futureTasks"><Toolbar ><Typography>Future Tasks Go Here (Beyond Tomorrow)</Typography></Toolbar></Paper>
+const HistoryTasks = () => <Paper className="historyTasks"><Toolbar ><Typography>Task History Goes Here (Past Today's Date - Marked As Complete)</Typography></Toolbar></Paper>
 
 // Click Handlers For List Items
-const handleClickCheckBox = () => {
-    console.log('clickCheckBox');
+const handleClickCheckBox = (id) => {
+    console.log('clickCheckBox', id);
+
 } // end handleClickCheckBox
 
 // const handleClickMore = (event) => {
@@ -61,10 +65,10 @@ const handleClickRemove = () => {
     console.log('clickRemove');
 } // end handleClickRemove
 
-// ----- LIST REORDER & ANIMATION ----- //
-const SortableItem = sortableElement(({ taskName, dueDate }) =>
+// ----- LIST & CONTAINER ----- //
+const SortableItem = sortableElement(({ taskName, dueDate, id, index, completeStatus }) =>
     <Paper>
-        <ListItem >
+        <ListItem id={id} index={index}>
             <div className="moreMenu">
                 <PopupState variant="popover" popupId="popup-menu">
                     {popupState => (
@@ -87,10 +91,10 @@ const SortableItem = sortableElement(({ taskName, dueDate }) =>
             </div>
             <Tooltip title="Mark Complete">
                 <IconButton
-                    onClick={() => handleClickCheckBox()}
+                    onClick={() => handleClickCheckBox(id)}
                     size="small"
                 >
-                    <CheckBoxIcon />
+                    <TasksCheckBox completeStatus={completeStatus}/>
                 </IconButton>
             </Tooltip>
             <ListItemText>
@@ -139,6 +143,11 @@ const useStyles = makeStyles(theme => ({
 
 // ----- CLASS ----- //
 class Tasks extends Component {
+
+    componentDidMount() {
+        this.props.dispatch({ type: 'FETCH_TASKS' })
+    }
+
     state = {
         task_name: '',
         due_date: null,
@@ -245,16 +254,19 @@ class Tasks extends Component {
                     </span>
                     <Divider />
                     
-                    {/* // ----- Task Displays ----- // */}
+                    {/* // ----- TASK DISPLAYS ----- // */}
                     <OverdueTasks className="overdueTasks" />
                     <SortableContainer onSortEnd={this.onSortEnd}>
 
+                        {/* // ----- ITEMS MAPPED HERE ----- // */}
                         {items.map((task, index) => (
                             <SortableItem
                                 key={`item-${index}`}
                                 index={index}
+                                id={task.id}
                                 taskName={task.task_name}
                                 dueDate={task.due_date}
+                                completeStatus={task.complete}
                             />
                         ))}
 
