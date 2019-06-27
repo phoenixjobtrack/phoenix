@@ -65,7 +65,7 @@ class JobOpportunity extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log('jobOpps' this.state);
+        console.log('jobOpps', this.state);
         this.props.dispatch({ type: '', payload: this.state.jobs });
         this.props.dispatch({ type: '', payload: this.state.stages });
         this.props.dispatch({ type: '', payload: this.state.tasks });
