@@ -9,13 +9,9 @@ import {Card, CardContent, Typography, Button, TextField, List, ListItem, Grid} 
 
 
 class ContactPage extends Component {
-    //retrieve contactId from URL params
-    contactId = this.props.match.params.id
-    currentContact = {}
 
     state={
         contact:{
-            contact_id: null,
             first_name: '',
             last_name: '',
             company: '',
@@ -28,28 +24,6 @@ class ContactPage extends Component {
         }
     }
 
-    //match contactId from URL to contact from reducer
-    retrieveContactData = () => {        
-        
-        let allContacts = this.props.reduxState.contacts
-        console.log('in retrieveContactData', allContacts, this.contactId)
-        allContacts.map(contact=>{
-            if (this.contactId == contact.id) {
-                
-                this.currentContact=contact
-                console.log('its a match', this.currentContact)
-                // this.setState({
-                //     contact:{
-                //         ...this.state.contact,
-                //         contact_id:this.contactId
-                //     }
-                // })
-            }
-            else {
-                console.log('not a match')
-            }
-        })
-    }
 
     handleChangeFor = key => event =>{
         console.log('in handleChangeFor', key, event)
@@ -63,28 +37,8 @@ class ContactPage extends Component {
 
     handleSubmit = () =>{
         console.log('in handleSubmit')
-        if (this.props.reduxState.contactEditMode==='create') {
             this.props.dispatch({ type: 'SUBMIT_CONTACT', payload: this.state.contact })
-        }
-        else {
-            this.props.dispatch({ 
-                type: 'UPDATE_CONTACT', 
-                payload: 
-                {
-                    contact_id: this.contactId,
-                    first_name: '',
-                    last_name: '',
-                    company: '',
-                    position: '',
-                    email: '',
-                    linkedin_url: '',
-                    phone: '',
-                    cell: '',
-                    notes: ''
-                }
-            })
-        }
-        
+ 
     }
 
 
@@ -95,7 +49,6 @@ class ContactPage extends Component {
 
 
     render(){
-        this.retrieveContactData()
         console.log('this.state', this.state)
         
         return(
@@ -106,42 +59,34 @@ class ContactPage extends Component {
                             <form onSubmit={this.handleSubmit}>
                                 <TextField
                                     label="First Name"
-                                    defaultValue={this.currentContact.first_name}
                                     onChange={this.handleChangeFor('first_name')}
                                 />
                                 <TextField
                                     label="Last Name"
-                                    defaultValue={this.currentContact.last_name}
                                     onChange={this.handleChangeFor('last_name')}
                                 />
                                 <TextField
                                     label="Company"
-                                    defaultValue={this.currentContact.company}
                                     onChange={this.handleChangeFor('company')}
                                 />
                                 <TextField
                                     label="Position"
-                                    defaultValue={this.currentContact.position}
                                     onChange={this.handleChangeFor('position')}
                                 />
                                 <TextField
                                     label="Email"
-                                    defaultValue={this.currentContact.email}
                                     onChange={this.handleChangeFor('email')}
                                 />
                                 <TextField
                                     label="LinkedIn"
-                                    defaultValue={this.currentContact.linkedin_url}
                                     onChange={this.handleChangeFor('linkedin_url')}
                                 />
                                 <TextField
                                     label="Phone"
-                                    defaultValue={this.currentContact.phone}
                                     onChange={this.handleChangeFor('phone')}
                                 />
                                 <TextField
                                     label="Cell"
-                                    defaultValue={this.currentContact.cell}
                                     onChange={this.handleChangeFor('cell')}
                                 />
                                 <TextField

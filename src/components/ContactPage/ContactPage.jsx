@@ -27,9 +27,6 @@ class ContactPage extends Component {
         }
     }
 
-    
-    
-
     //match contactId from URL to contact from reducer
     retrieveContactData = () => {        
         
