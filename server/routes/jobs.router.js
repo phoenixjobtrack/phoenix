@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 router.get('/', (req,res) => {
-    console.log(req.user.id);
+    console.log('this is for job', req.user.id);
     let query = `SELECT * FROM "jobs"
     WHERE "user_id" = $1 `;
     pool.query(query,[req.user.id])
