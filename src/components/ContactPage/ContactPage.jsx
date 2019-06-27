@@ -4,10 +4,8 @@ import { withRouter } from 'react-router-dom';
 
 import AddTask from './AddTask'
 
-import { makeStyles } from '@material-ui/core/styles';
 import {Card, CardContent, Input, Typography, Button, TextField, List, ListItem} from '@material-ui/core'
-import IconButton from '@material-ui/core/IconButton';
-import AddIcon from '@material-ui/icons/Add'
+
 
 class ContactPage extends Component {
     //retrieve contactId from URL params
@@ -61,58 +59,76 @@ class ContactPage extends Component {
     render(){
         console.log('today', this.state.today)
         this.retrieveContactData()
-        return(
-            // <p>contact here {this.userId}</p>
+        return( 
             <Card>
                 <CardContent>
-                    <Button variant="contained" color="primary">Save</Button>
-                        <AddTask currentContact={this.currentContact}/>
-                        <Typography>Upcoming Tasks:</Typography>        
+                    <Grid container>
+                        <Grid item xs={9}>
+                            <form onSubmit={this.handleSubmit}>
+                                <TextField
+                                    label="First Name"
+                                    defaultValue={this.currentContact.first_name}
+                                    onChange={this.handleChangeFor('first_name')}
+                                />
+                                <TextField
+                                    label="Last Name"
+                                    defaultValue={this.currentContact.last_name}
+                                    onChange={this.handleChangeFor('last_name')}
+                                />
+                                <TextField
+                                    label="Company"
+                                    defaultValue={this.currentContact.company}
+                                    onChange={this.handleChangeFor('company')}
+                                />
+                                <TextField
+                                    label="Position"
+                                    defaultValue={this.currentContact.position}
+                                    onChange={this.handleChangeFor('position')}
+                                />
+                                <TextField
+                                    label="Email"
+                                    defaultValue={this.currentContact.email}
+                                    onChange={this.handleChangeFor('email')}
+                                />
+                                <TextField
+                                    label="LinkedIn"
+                                    defaultValue={this.currentContact.linkedin_url}
+                                    onChange={this.handleChangeFor('linkedin_url')}
+                                />
+                                <TextField
+                                    label="Phone"
+                                    defaultValue={this.currentContact.phone}
+                                    onChange={this.handleChangeFor('phone')}
+                                />
+                                <TextField
+                                    label="Cell"
+                                    defaultValue={this.currentContact.cell}
+                                    onChange={this.handleChangeFor('cell')}
+                                />
+                                <TextField
+                                    id="notes"
+                                    label="Notes"
+                                    multiline
+                                    rows="4"
+                                    margin="normal"
+                                    onChange={this.handleChangeFor('notes')}
+                                />
+                                
+                            </form>     
+                        </Grid>
+                        <Grid item xs={3}>
+                            <AddTask currentContact={this.currentContact} />
+                            <Typography>Upcoming Tasks:</Typography>
                             <List>
                                 <ListItem>task1</ListItem>
                                 <ListItem>task1</ListItem>
                                 <ListItem>task1</ListItem>
                                 <ListItem>task1</ListItem>
                             </List>
-                    <TextField
-                        label="First Name" 
-                        defaultValue={this.currentContact.first_name}  
-                    />
-                    <TextField
-                        label="Last Name"
-                        defaultValue={this.currentContact.last_name}
-                    />
-                    <TextField
-                        label="Company"
-                        defaultValue={this.currentContact.company}
-                    />
-                    <TextField
-                        label="Position"
-                        defaultValue={this.currentContact.position}
-                    />
-                    <TextField
-                        label="Email"
-                        defaultValue={this.currentContact.email}
-                    />
-                    <TextField
-                        label="LinkedIn"
-                        defaultValue={this.currentContact.linkedin_url}
-                    />
-                    <TextField
-                        label="Phone"
-                        defaultValue={this.currentContact.phone}
-                    />
-                    <TextField
-                        label="Cell"
-                        defaultValue={this.currentContact.cell}
-                    />
-                    <TextField
-                        id="notes"
-                        label="Notes"
-                        multiline
-                        rows="4"
-                        margin="normal"
-                    />
+                        </Grid>
+                    </Grid>
+                    
+                                  
                     <Typography>History:</Typography>
                     <List>
                         <ListItem>task1</ListItem>
@@ -120,6 +136,7 @@ class ContactPage extends Component {
                         <ListItem>task1</ListItem>
                         <ListItem>task1</ListItem>
                     </List>
+                    <Button variant="contained" color="primary" type="submit">Save</Button>
                 </CardContent>
             </Card>
         )

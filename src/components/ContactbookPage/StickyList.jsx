@@ -1,55 +1,14 @@
 import React, { useEffect } from 'react';
 import {connect} from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import ContactCard from './ContactCard'
 
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
+import {Button} from '@material-ui/core'
 
-
-let contacts = [
-    // {
-    //     first: 'Andrew',
-    //     last: 'Christianson',
-    //     company: 'Target'
-    // },
-    // {
-    //     first: 'Andrew',
-    //     last: 'Christianson',
-    //     company: 'Target'
-    // },
-    // {
-    //     first: 'Andrew',
-    //     last: 'Christianson',
-    //     company: 'Target'
-    // },
-    // {
-    //     first: 'Andrew',
-    //     last: 'Christianson',
-    //     company: 'Target'
-    // },
-    // {
-    //     first: 'Bella',
-    //     last: 'Anderson',
-    //     company: 'Best Buy'  
-    // },
-    // {
-    //     first: 'Christian',
-    //     last: 'Davenport',
-    //     company: '3M'
-    // },
-    // {
-    //     first: 'Daria',
-    //     last: 'Edgerton',
-    //     company: 'Amazon'
-    // },
-    // {
-    //     first: 'Ethan',
-    //     last: 'Brown',
-    //     company: 'Comcast'
-    // }
-]
 const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
@@ -94,6 +53,11 @@ function PinnedSubheaderList(props) {
 
     const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
+    //handles add new contact
+    const addNewContact = () => {
+        console.log('in addNewContact')
+        props.history.push('/contact/view/:id')
+    }
     //function defines what word to sort by, sets local state 'key' to that word
     const setSorting = (param) =>{
         setKey(param)
@@ -111,6 +75,7 @@ function PinnedSubheaderList(props) {
 
     return (
         <div >
+            
             <div className={classes.sorting}>
                 <h3>Sort Alphabetically By:
                 <button onClick={() => { setSorting('first') }}>
@@ -119,10 +84,12 @@ function PinnedSubheaderList(props) {
                     <button onClick={() => { setSorting('last') }}>Last Name</button>
                     <button onClick={() => { setSorting('company') }}>Company</button>
                 </h3>
+                <Button variant="contained" color="primary" onClick={addNewContact}>Add New Contact</Button>
                 {alphabet.map(letter => (
                     <button onClick={() => { scrollToLetter(letter) }}>{letter}</button>
                 ))}
             </div>
+            
             
             <List id="containerDiv" className={classes.root} subheader={<li />}>
                 {alphabet.map(sectionId => (
@@ -165,4 +132,4 @@ function PinnedSubheaderList(props) {
 const mapStateToProps = reduxState => ({
     reduxState
 });
-export default connect(mapStateToProps)(PinnedSubheaderList)
+export default withRouter(connect(mapStateToProps)(PinnedSubheaderList))
