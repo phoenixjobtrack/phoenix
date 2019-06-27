@@ -14,17 +14,19 @@ class ContactPage extends Component {
     currentContact = {}
 
 
-    retrieveContactData = () => {
-        this.currentContact = this.props.reduxState.currentContact
-    }
+    // retrieveContactData = () => {
+    //     this.currentContact = this.props.reduxState.currentContact
+    // }
 
     handleChangeFor = key => event => {
         console.log('in handleChangeFor', key, event)
+        this.props.dispatch({type:'UPDATE_REDUX_CONTACT', payload: {key:key, value: event.target.value}})
 
     }
 
     handleSubmit = () => {
         console.log('in handleSubmit')
+        this.props.dispatch({type: 'UPDATE_CONTACT', payload: this.props.reduxState.currentContact})
 
     }
 
@@ -36,9 +38,8 @@ class ContactPage extends Component {
 
 
     render() {
-        this.retrieveContactData()
-        console.log('this.state', this.state)
-
+        console.log('currentContact', this.props.reduxState.currentContact)
+        let currentContact = this.props.reduxState.currentContact
         return (
             <Card>
                 <CardContent>
@@ -47,42 +48,42 @@ class ContactPage extends Component {
                             <form onSubmit={this.handleSubmit}>
                                 <TextField
                                     label="First Name"
-                                    defaultValue={this.currentContact.first_name}
+                                    value={currentContact.first_name}
                                     onChange={this.handleChangeFor('first_name')}
                                 />
                                 <TextField
                                     label="Last Name"
-                                    defaultValue={this.currentContact.last_name}
+                                    value={currentContact.last_name}
                                     onChange={this.handleChangeFor('last_name')}
                                 />
                                 <TextField
                                     label="Company"
-                                    defaultValue={this.currentContact.company}
+                                    value={currentContact.company}
                                     onChange={this.handleChangeFor('company')}
                                 />
                                 <TextField
                                     label="Position"
-                                    defaultValue={this.currentContact.position}
+                                    value={currentContact.position}
                                     onChange={this.handleChangeFor('position')}
                                 />
                                 <TextField
                                     label="Email"
-                                    defaultValue={this.currentContact.email}
+                                    value={currentContact.email}
                                     onChange={this.handleChangeFor('email')}
                                 />
                                 <TextField
                                     label="LinkedIn"
-                                    defaultValue={this.currentContact.linkedin_url}
+                                    value={currentContact.linkedin_url}
                                     onChange={this.handleChangeFor('linkedin_url')}
                                 />
                                 <TextField
                                     label="Phone"
-                                    defaultValue={this.currentContact.phone}
+                                    value={currentContact.phone}
                                     onChange={this.handleChangeFor('phone')}
                                 />
                                 <TextField
                                     label="Cell"
-                                    defaultValue={this.currentContact.cell}
+                                    value={currentContact.cell}
                                     onChange={this.handleChangeFor('cell')}
                                 />
                                 <TextField
@@ -91,6 +92,7 @@ class ContactPage extends Component {
                                     multiline
                                     rows="4"
                                     margin="normal"
+                                    value={currentContact.notes}
                                     onChange={this.handleChangeFor('notes')}
                                 />
                                 <Button variant="contained" color="primary" type="submit">Save</Button>

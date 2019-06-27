@@ -39,7 +39,7 @@ function* submitContact(action){
 function* updateContact(action){
     try{
         console.log('in updateContact saga', action.payload)
-        let url = `/api/contact/${action.payload.contact_id}`
+        let url = `/api/contact/${action.payload.id}`
         yield axios.put(url, action.payload)
     }
     catch(err){
