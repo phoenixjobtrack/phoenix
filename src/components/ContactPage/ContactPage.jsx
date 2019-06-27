@@ -38,12 +38,12 @@ class ContactPage extends Component {
                 
                 this.currentContact=contact
                 console.log('its a match', this.currentContact)
-                this.setState({
-                    contact:{
-                        ...this.state.contact,
-                        contact_id:this.contactId
-                    }
-                })
+                // this.setState({
+                //     contact:{
+                //         ...this.state.contact,
+                //         contact_id:this.contactId
+                //     }
+                // })
             }
             else {
                 console.log('not a match')
@@ -67,19 +67,54 @@ class ContactPage extends Component {
             this.props.dispatch({ type: 'SUBMIT_CONTACT', payload: this.state.contact })
         }
         else {
-            this.props.dispatch({ type: 'UPDATE_CONTACT', payload: this.state.contact })
+            let firstName = ()=> {
+                if(!this.state.contact.first_name){
+                    console.log('firstName', this.currentContact.first_name)
+                    return this.currentContact.first_name
+                }
+                else{
+                    console.log('firstName', this.state.contact.first_name)
+                    return this.state.contact.first_name
+                    
+                }}
+            let lastName = () => {
+                if(!this.state.contact.last_name){
+                    console.log('lastName', this.currentContact.last_name)
+                    return this.currentContact.last_name
+                }
+                else {
+                    console.log('firstName', this.state.contact.last_name)
+                    return this.state.contact.last_name
+                }
+            }
+            this.props.dispatch({ 
+                type: 'UPDATE_CONTACT', 
+                payload: {
+                    contact_id: this.contactId,
+                    first_name: firstName,
+                    last_name: lastName,
+                    company: '',
+                    position: '',
+                    email: '',
+                    linkedin_url: '',
+                    phone: '',
+                    cell: '',
+                    notes: ''
+                }
+            })
         }
         
     }
 
 
     componentDidMount(){
-        this.retrieveContactData()
         this.props.dispatch({ type: 'FETCH_CONTACTS' })
+        
     }
 
 
     render(){
+        this.retrieveContactData()
         console.log('this.state', this.state)
         
         return(
