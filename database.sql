@@ -98,14 +98,14 @@ CREATE TABLE "jobs_requirements"
     "id" SERIAL PRIMARY KEY,
     "job_id" INTEGER REFERENCES "jobs" ON DELETE CASCADE,
     "requirement_id" INTEGER REFERENCES "requirements" ON DELETE CASCADE,
+    "requirement_offer" VARCHAR (255),
     "requirement_met" BOOLEAN
 );
 
 INSERT INTO "jobs_requirements"
-    ("job_id", "requirement_id", "requirement_met")
+    ("job_id", "requirement_id", "requirement_offer", "requirement_met")
 VALUES
-    ('1', '1', 'true'),
-    ('1', '1', 'false');
+    ('1', '1', '68k salary', 'false');
 
 CREATE TABLE "tasks"
 (
