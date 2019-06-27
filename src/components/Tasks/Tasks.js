@@ -18,6 +18,7 @@ import './Tasks.css';
 // ----- MATERIAL UI CORE ----- // 
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
+import Fab from '@material-ui/core/Fab';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -46,6 +47,8 @@ const TomorrowTasks = tomorrowTasks => <Paper className="tomorrowTasks"><Toolbar
 const FutureTasks = futureTasks => <Paper className="futureTasks"><Toolbar ><Typography>Future Tasks Go Here (Beyond Tomorrow)</Typography></Toolbar></Paper>
 const HistoryTasks = historyTasks => <Paper className="historyTasks"><Toolbar ><Typography>Task History Goes Here (Past Today's Date - Marked As Complete)</Typography></Toolbar></Paper>
 
+// const [anchorEl, setAnchorEl] = React.useState(null);
+
 // Click Handlers For List Items
 const handleClickCheckBox = () => {
     console.log('clickCheckBox');
@@ -60,6 +63,10 @@ const handleClickRemove = () => {
     console.log('clickRemove');
 } // end handleClickRemove
 
+// const handleClose = () => {
+//     setAnchorEl(null);
+// }
+
 // ----- LIST REORDER & ANIMATION ----- //
 const SortableItem = sortableElement(({ taskName, dueDate }) =>
     <Paper>
@@ -69,11 +76,10 @@ const SortableItem = sortableElement(({ taskName, dueDate }) =>
                     {popupState => (
                         <React.Fragment>
                             <Tooltip title="More">
-                                <IconButton
-                                    variant="contained" {...bindTrigger(popupState)}
-                                    onClick={() => handleClickMore()}
-                                >
-                                    <MoreVertIcon />
+                                <IconButton variant="contained" {...bindTrigger(popupState)} >
+                                        <MoreVertIcon 
+                                            // onClick={() => handleClickMore()}
+                                        />
                                 </ IconButton>
                             </Tooltip>
                             <Menu {...bindMenu(popupState)}>
