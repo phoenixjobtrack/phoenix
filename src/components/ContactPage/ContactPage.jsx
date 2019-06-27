@@ -15,6 +15,7 @@ class ContactPage extends Component {
 
     state={
         contact:{
+            contact_id: null,
             first_name: '',
             last_name: '',
             company: '',
@@ -37,6 +38,12 @@ class ContactPage extends Component {
                 
                 this.currentContact=contact
                 console.log('its a match', this.currentContact)
+                this.setState({
+                    contact:{
+                        ...this.state.contact,
+                        contact_id:this.contactId
+                    }
+                })
             }
             else {
                 console.log('not a match')
@@ -67,13 +74,14 @@ class ContactPage extends Component {
 
 
     componentDidMount(){
+        this.retrieveContactData()
         this.props.dispatch({ type: 'FETCH_CONTACTS' })
     }
 
 
     render(){
         console.log('this.state', this.state)
-        this.retrieveContactData()
+        
         return(
             <Card>
                 <CardContent>

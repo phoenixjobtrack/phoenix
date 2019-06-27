@@ -32,6 +32,45 @@ router.post('/', (req, res) => {
         })
 });
 
+router.put('/:id', (req,res)=>{
+    console.log('in PUT /api/contact', req.params.id)
+    const queryText = 
+        `
+            UPDATE "contacts" 
+            SET first_name = $1, 
+            last_name = $2, 
+            company = $3, 
+            position = $4, 
+            email = $5, 
+            linkedin_url = $6, 
+            cell = $7, 
+            phone = $8, 
+            notes = $9 
+            WHERE id = $10;
+        `
+    pool.query(queryText,
+                [
+                    req.body.first_name, 
+                    req.body.last_name, 
+                    req.body.company, 
+                    req.body.position, 
+                    req.body.email, 
+                    req.body.linkedin_url, 
+                    req.body.cell, 
+                    req.body.phone, 
+                    req.body.notes, 
+                    req.params.id
+                ])
+        .then(response=>{
+            console.log('in PUT /api/contact', response)
+            res.sendStatus(200)
+        })
+        .catch(err=>{
+            console.log('error in PUT /api/contact', err)
+            res.sendStatus(500)
+        })
+})
+
 
 
 

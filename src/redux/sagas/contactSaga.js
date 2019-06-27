@@ -25,7 +25,14 @@ function* submitContact(action){
 }
 
 function* updateContact(action){
-    console.log('in updateContact saga', action.payload)
+    try{
+        console.log('in updateContact saga', action.payload)
+        let url = `/api/contact/${action.payload.contact_id}`
+        yield axios.put(url, action.payload)
+    }
+    catch(err){
+        console.log('error in updateContact saga', err)
+    }
 }
 
 function* contactSaga() {
