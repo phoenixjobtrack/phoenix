@@ -43,12 +43,12 @@ class AddTask extends Component {
 
     // save task inputs to local state 
     handleChangeFor = key => event =>{
-        console.log('key', key, 'contactId', this.props.currentContact.id)
+        console.log('key', key, 'contactId', this.props.reduxState.currentContact.id)
         this.setState({
             ...this.state,
             newTask:{
                 ...this.state.newTask,
-                contact_id: this.props.currentContact.id,
+                contact_id: this.props.reduxState.currentContact.id,
                 [key]: event.target.value
 
             }
@@ -56,7 +56,8 @@ class AddTask extends Component {
     }
 
     //send new task to saga
-    handleSubmit = () =>{
+    handleSubmit = (event) =>{
+        event.preventDefault();
         console.log('in handleSubmit')
         this.props.dispatch({ type:'ADD_TASK',payload:this.state.newTask})
     }
@@ -64,8 +65,10 @@ class AddTask extends Component {
 
     componentDidMount(){
         this.getDate()
+        this.props.dispatch({ type: 'FETCH_CURRENT_CONTACT'})
     }
     render(){
+        // this.props.dispatch({type: 'FETCH_TASKS'})
         console.log('AddTask state', this.state)
         return(
             
