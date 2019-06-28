@@ -167,9 +167,9 @@ class Tasks extends Component {
                     <Divider />
                 </ThemeProvider>
             </div>
-        );
-    }
-}
+        ); // End Return
+    } // End Render
+} // End Class
 
 
 const mapStateToProps = (reduxState) => {

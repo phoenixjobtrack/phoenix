@@ -21,7 +21,33 @@ import Tooltip from '@material-ui/core/Tooltip';
 import ClearIcon from '@material-ui/icons/Clear';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+// ----- STYLES ----- //
+import swal from 'sweetalert';
+
 class TasksLineItems extends Component {
+
+    // Triggers an Alert to Confirm Deletion of a Task
+    removeAlert(id) {
+        console.log('Remove Alert', id);
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this task",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    { this.handleClickRemove(id) };
+                    swal("Your task has been deleted", {
+                        icon: "success",
+
+                    });
+                } else {
+                    swal("Your task is safe!");
+                }
+            });
+    } // End removeAlert
 
     // Click Listeners For Icons on Line Items
     handleClickCheckBox(id) {
@@ -81,7 +107,7 @@ class TasksLineItems extends Component {
                             </ListItemText>
                             <Tooltip title="Delete">
                                 <IconButton
-                                    onClick={() => this.handleClickRemove(id)}
+                                    onClick={() => this.removeAlert(id)}
                                     size="small"
                                 >
                                     <ClearIcon />
@@ -90,19 +116,16 @@ class TasksLineItems extends Component {
                         </ListItem>
                     </ Toolbar>
                 </Paper>
-            )
-
-        })
+            ) // End Return
+        }) // End userTasks
 
         return (
             <List>
                 {userTasks}
             </List>
-
-        )
-
-    }
-}
+        ) // End Return
+    } // End Render
+} // End Class
 
 const mapStateToProps = (reduxState) => {
     return {
