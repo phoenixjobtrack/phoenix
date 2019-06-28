@@ -30,7 +30,7 @@ const styles = theme => ({
 
 class MuiVirtualizedTable extends React.PureComponent {
   static defaultProps = {
-    headerHeight: 48,
+    headerHeight: 60,
     rowHeight: 48,
   };
 
@@ -138,18 +138,18 @@ for (let i = 0; i < 50; i += 1) {
 
 export default function DasnboardTable() {
   return (
-    <Paper style={{ height: 335, width: '100%' }}>
+    <Paper style={{ height: 345, width: '100%' }}>
       <DashboardTable
         rowCount={rows.length}
         rowGetter={({ index }) => rows[index]}
         columns={[
           {
-            width: 300,
+            width: 250,
             label: 'Company',
             dataKey: 'company',
           },
           {
-            width: 300,
+            width: 250,
             label: 'Position',
             dataKey: 'position',
             //numeric: true,
@@ -161,7 +161,7 @@ export default function DasnboardTable() {
             //numeric: true,
           },
           {
-            width: 150,
+            width: 250,
             label: 'Next Activity Date',
             dataKey: 'nexttouchpoint',
             numeric: true,

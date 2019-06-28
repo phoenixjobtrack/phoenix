@@ -53,6 +53,7 @@ function ContactCard(props) {
 
     function handleOpenContact(){
         console.log('in handleContactSelect', contact)
+        props.dispatch({ type: 'SET_TO_EDIT_MODE'})
         props.history.push(`/contact/view/${contact.id}`)
 
     }
