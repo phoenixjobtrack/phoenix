@@ -100,7 +100,7 @@ class ContactPage extends Component {
                             </form>
                         </Grid>
                         <Grid item xs={6}>
-                            <AddTask currentContact={this.currentContact} />
+                            <AddTask />
                             <TaskList contactId={this.currentContact.id}/>
                         </Grid>
                     </Grid>
