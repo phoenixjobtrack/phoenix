@@ -103,7 +103,6 @@ class Tasks extends Component {
 
     // ----- RENDER ----- //
     render() {
-        const items = this.props.reduxState.tasks || [];
 
         // ----- RETURN ----- //
         return (
@@ -167,9 +166,9 @@ class Tasks extends Component {
                     <Divider />
                 </ThemeProvider>
             </div>
-        );
-    }
-}
+        ); // End Return
+    } // End Render
+} // End Class
 
 
 const mapStateToProps = (reduxState) => {
