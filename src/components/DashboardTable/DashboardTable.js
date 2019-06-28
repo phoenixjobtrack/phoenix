@@ -36,12 +36,12 @@ componentDidMount() {
         rowGetter={({ index }) => rows[index]}
         columns={[
           {
-            width: 300,
+            width: 250,
             label: 'Company',
             dataKey: 'company',
           },
           {
-            width: 300,
+            width: 250,
             label: 'Position',
             dataKey: 'position',
             //numeric: true,
@@ -53,7 +53,7 @@ componentDidMount() {
             //numeric: true,
           },
           {
-            width: 150,
+            width: 250,
             label: 'Next Activity Date',
             dataKey: 'nexttouchpoint',
             numeric: true,

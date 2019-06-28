@@ -1,3 +1,4 @@
+// ========== TASKS SAGA ========== //
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
@@ -26,9 +27,34 @@ function* fetchTasks(action) {
     }
 }
 
+// Removes task from the "tasks" table in the database at id of selected task
+function* removeTask(action) {
+    console.log('in removeTask', action.payload);
+    try {
+        yield axios.delete(`api/tasks/${action.payload}`, action.payload)
+        yield put({ type: 'FETCH_TASKS' })
+    } catch (error) {
+        console.log('error in removeTask saga', error);
+    }
+}
+
+// Toggles the "complete" column boolean in the "tasks" table in the database at id of selected task
+function* toggleTaskCheck(action) {
+    console.log('in toggleTaskCheck', action.payload);
+    try {
+        yield axios.put(`api/tasks/${action.payload}`, action.payload)
+        yield put({ type: 'FETCH_TASKS' })
+    } catch (error) {
+        console.log('error in toggleTaskCheck saga', error);
+    }
+}
+
+// Watcher Saga
 function* tasksSaga() {
     yield takeEvery('ADD_TASK', addTask);
-    yield takeEvery('FETCH_TASKS', fetchTasks)
+    yield takeEvery('CHECK_TASK_BOX', toggleTaskCheck);
+    yield takeEvery('FETCH_TASKS', fetchTasks);
+    yield takeEvery('REMOVE_TASK', removeTask);
 }
 
 export default tasksSaga;

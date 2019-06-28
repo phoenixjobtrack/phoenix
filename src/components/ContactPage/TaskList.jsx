@@ -15,11 +15,23 @@ class TaskList extends Component {
     render(){
 
         //load tasks associated with contact
-        let tasks = []
+        let upcomingTasks = []
+        let completedTasks = []
+        let today = new Date()
+        let dueDate = ''
+        
         this.props.reduxState.tasks.map(task=>{
             if(task.contact_id==this.props.match.params.id){
                 //put a line in here to compare current date to due date
-                tasks.push(<ListItem>{task.task_name}</ListItem>)
+                dueDate = new Date(task.due_date)
+                console.log('dates', today, dueDate)
+                if (dueDate>=today){
+                    upcomingTasks.push(<ListItem>{task.task_name}</ListItem>)
+                }
+                else {
+                    completedTasks.push(<ListItem>{task.task_name}</ListItem>)
+                }
+                
                 // console.log('task matcher match!', task.contact_id, this.props.match.params)
             }
             else {
@@ -31,16 +43,13 @@ class TaskList extends Component {
             <>
                 <Typography>Upcoming Tasks:</Typography>
                 <List>
-                    {tasks}
+                    {upcomingTasks}
                 </List>
 
 
                 <Typography>History:</Typography>
                 <List>
-                    <ListItem>task1</ListItem>
-                    <ListItem>task1</ListItem>
-                    <ListItem>task1</ListItem>
-                    <ListItem>task1</ListItem>
+                    {completedTasks}
                 </List>
             </>
         )
