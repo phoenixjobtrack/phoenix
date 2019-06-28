@@ -1,105 +1,90 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import AddTask from './AddTask'
+import TaskList from './TaskList'
 
-import {Card, CardContent, Input, Typography, Button, TextField, List, ListItem} from '@material-ui/core'
+
+import { Card, CardContent, Typography, Button, TextField, List, ListItem, Grid } from '@material-ui/core'
 
 
 class ContactPage extends Component {
     //retrieve contactId from URL params
     contactId = this.props.match.params.id
-
     currentContact = {}
 
-    state={
-        contact:{
-            firstName: '',
-            lastName: '',
-            company: '',
-            position:'',
-            email:'',
-            linkedInUrl: '',
-            phone: '',
-            cell: '',
-            notes: ''
-        }
+
+    // retrieveContactData = () => {
+    //     this.currentContact = this.props.reduxState.currentContact
+    // }
+
+    handleChangeFor = key => event => {
+        console.log('in handleChangeFor', key, event)
+        this.props.dispatch({type:'UPDATE_REDUX_CONTACT', payload: {key:key, value: event.target.value}})
+
     }
 
-    //match contactId from URL to contact from reducer
-    retrieveContactData = () => {        
-        
-        let allContacts = this.props.reduxState.contacts
-        console.log('in retrieveContactData', allContacts, this.contactId)
-        allContacts.map(contact=>{
-            if (this.contactId == contact.id) {
-                
-                this.currentContact=contact
-                console.log('its a match', this.currentContact)
-            }
-            else {
-                console.log('not a match')
-            }
-        })
-    }
-
-
-    componentDidMount(){
-        this.props.dispatch({ type: 'FETCH_CONTACTS' })
-        
-        
+    handleSubmit = () => {
+        console.log('in handleSubmit')
+        this.props.dispatch({type: 'UPDATE_CONTACT', payload: this.props.reduxState.currentContact})
 
     }
 
 
-    render(){
-        console.log('today', this.state.today)
-        this.retrieveContactData()
-        return( 
+    componentDidMount() {
+        this.props.dispatch({ type: 'FETCH_CURRENT_CONTACT', payload: this.contactId})
+
+    }
+
+
+    render() {
+        console.log('currentContact', this.props.reduxState.currentContact)
+        let currentContact = this.props.reduxState.currentContact
+        return (
             <Card>
                 <CardContent>
                     <Grid container>
-                        <Grid item xs={9}>
+                        <Grid item xs={6}>
                             <form onSubmit={this.handleSubmit}>
                                 <TextField
                                     label="First Name"
-                                    defaultValue={this.currentContact.first_name}
+                                    value={currentContact.first_name}
                                     onChange={this.handleChangeFor('first_name')}
                                 />
                                 <TextField
                                     label="Last Name"
-                                    defaultValue={this.currentContact.last_name}
+                                    value={currentContact.last_name}
                                     onChange={this.handleChangeFor('last_name')}
                                 />
                                 <TextField
                                     label="Company"
-                                    defaultValue={this.currentContact.company}
+                                    value={currentContact.company}
                                     onChange={this.handleChangeFor('company')}
                                 />
                                 <TextField
                                     label="Position"
-                                    defaultValue={this.currentContact.position}
+                                    value={currentContact.position}
                                     onChange={this.handleChangeFor('position')}
                                 />
                                 <TextField
                                     label="Email"
-                                    defaultValue={this.currentContact.email}
+                                    value={currentContact.email}
                                     onChange={this.handleChangeFor('email')}
                                 />
                                 <TextField
                                     label="LinkedIn"
-                                    defaultValue={this.currentContact.linkedin_url}
+                                    value={currentContact.linkedin_url}
                                     onChange={this.handleChangeFor('linkedin_url')}
                                 />
                                 <TextField
                                     label="Phone"
-                                    defaultValue={this.currentContact.phone}
+                                    value={currentContact.phone}
                                     onChange={this.handleChangeFor('phone')}
                                 />
                                 <TextField
                                     label="Cell"
-                                    defaultValue={this.currentContact.cell}
+                                    value={currentContact.cell}
                                     onChange={this.handleChangeFor('cell')}
                                 />
                                 <TextField
@@ -108,32 +93,18 @@ class ContactPage extends Component {
                                     multiline
                                     rows="4"
                                     margin="normal"
+                                    value={currentContact.notes}
                                     onChange={this.handleChangeFor('notes')}
                                 />
-                                
-                            </form>     
+                                <Button variant="contained" color="primary" type="submit">Save</Button>
+                            </form>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={6}>
                             <AddTask currentContact={this.currentContact} />
-                            <Typography>Upcoming Tasks:</Typography>
-                            <List>
-                                <ListItem>task1</ListItem>
-                                <ListItem>task1</ListItem>
-                                <ListItem>task1</ListItem>
-                                <ListItem>task1</ListItem>
-                            </List>
+                            <TaskList contactId={this.currentContact.id}/>
                         </Grid>
                     </Grid>
-                    
-                                  
-                    <Typography>History:</Typography>
-                    <List>
-                        <ListItem>task1</ListItem>
-                        <ListItem>task1</ListItem>
-                        <ListItem>task1</ListItem>
-                        <ListItem>task1</ListItem>
-                    </List>
-                    <Button variant="contained" color="primary" type="submit">Save</Button>
+
                 </CardContent>
             </Card>
         )
