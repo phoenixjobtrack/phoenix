@@ -31,6 +31,7 @@ class TasksLineItems extends Component {
 
     handleClickRemove(id) {
         console.log('Remove Clicked', id);
+        this.props.dispatch({ type: 'REMOVE_TASK', payload: id })
     } // end handleClickRemove
 
     render() {
