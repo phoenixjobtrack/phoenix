@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     console.log('in /tasks router.get');
-    let query = `SELECT * FROM "tasks" WHERE "user_id"=$1;`;
+    let query = `SELECT * FROM "tasks" WHERE "user_id"=$1 ORDER BY "task_name";`;
     pool.query(query, [req.user.id])
         .then((result) => {
             res.send(result.rows);
@@ -29,10 +29,10 @@ router.post('/', (req, res) => {
         })
 });
 
-router.put('/', (req, res) => {
-    console.log('in PUT /api/tasks')
-    const queryText = `UPDATE "tasks" SET "complete" =NOT "complete" WHERE "id"=31`;
-    pool.query(queryText)
+router.put('/:id', (req, res) => {
+    console.log('in PUT /api/tasks req.params.id', req.params.id);
+    const queryText = `UPDATE "tasks" SET "complete" =NOT "complete" WHERE "id"=$1`;
+    pool.query(queryText, [req.params.id])
         .then(response => {
             console.log('in PUT /api/tasks', response)
             res.sendStatus(200)

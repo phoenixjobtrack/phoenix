@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import TasksCheckBox from '../TasksCheckBox/TasksCheckBox';
 
 // ----- MATERIAL UI CORE ----- //
-import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -15,17 +14,24 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
-import TextField from '@material-ui/core/TextField';
 import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
 
 // ----- MATERIAL UI ICONS ----- //
-import AddIcon from '@material-ui/icons/Add';
 import ClearIcon from '@material-ui/icons/Clear';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 class TasksLineItems extends Component {
+
+    // Click Listeners For Icons on Line Items
+    handleClickCheckBox(id) {
+        console.log('Checkbox Clicked', id);
+        this.props.dispatch({ type: 'CHECK_TASK_BOX', payload: id })
+    } // end handleClickCheckBox
+
+    handleClickRemove(id) {
+        console.log('Remove Clicked', id);
+    } // end handleClickRemove
 
     render() {
 
@@ -43,9 +49,7 @@ class TasksLineItems extends Component {
                                             <React.Fragment>
                                                 <Tooltip title="More">
                                                     <IconButton variant="contained" {...bindTrigger(popupState)} >
-                                                        <MoreVertIcon
-                                                        // onClick={() => handleClickMore()}
-                                                        />
+                                                        <MoreVertIcon/>
                                                     </ IconButton>
                                                 </Tooltip>
                                                 <Menu {...bindMenu(popupState)}>
@@ -59,7 +63,7 @@ class TasksLineItems extends Component {
                                 </div>
                                 <Tooltip title="Mark Complete">
                                     <IconButton
-                                        // onClick={() => handleClickCheckBox(id)}
+                                        onClick={() => this.handleClickCheckBox(id)}
                                         // onClick={() => props.dispatch({ type: 'CHECK_TASK_BOX' })}
                                         size="small"
                                     >
@@ -76,7 +80,7 @@ class TasksLineItems extends Component {
                             </ListItemText>
                             <Tooltip title="Delete">
                                 <IconButton
-                                    // onClick={() => handleClickRemove(id)}
+                                    onClick={() => this.handleClickRemove(id)}
                                     size="small"
                                 >
                                     <ClearIcon />
