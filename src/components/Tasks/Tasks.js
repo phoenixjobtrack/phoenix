@@ -18,9 +18,7 @@ import './Tasks.css';
 
 
 // ----- MATERIAL UI CORE ----- // 
-import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
-import Fab from '@material-ui/core/Fab';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -37,8 +35,6 @@ import Typography from '@material-ui/core/Typography';
 
 // ----- MATERIAL UI ICONS ----- //
 import AddIcon from '@material-ui/icons/Add';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import CheckBoxOutlineBlank from '@material-ui/icons/CheckBoxOutlineBlank';
 import ClearIcon from '@material-ui/icons/Clear';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
@@ -50,10 +46,11 @@ const TomorrowTasks = () => <Paper className="tomorrowTasks"><Toolbar ><Typograp
 const FutureTasks = () => <Paper className="futureTasks"><Toolbar ><Typography>Future Tasks Go Here (Beyond Tomorrow)</Typography></Toolbar></Paper>
 const HistoryTasks = () => <Paper className="historyTasks"><Toolbar ><Typography>Task History Goes Here (Past Today's Date - Marked As Complete)</Typography></Toolbar></Paper>
 
+
 // Click Handlers For List Items
 const handleClickCheckBox = (id) => {
     console.log('clickCheckBox', id);
-
+    
 } // end handleClickCheckBox
 
 // const handleClickMore = (event) => {
@@ -61,12 +58,12 @@ const handleClickCheckBox = (id) => {
 
 // } // end handleClickMore
 
-const handleClickRemove = () => {
-    console.log('clickRemove');
+const handleClickRemove = (id) => {
+    console.log('clickRemove', id);
 } // end handleClickRemove
 
 // ----- LIST & CONTAINER ----- //
-const SortableItem = sortableElement(({ taskName, dueDate, id, index, completeStatus }) =>
+const SortableItem = sortableElement(({ taskName, dueDate, id, index, completeStatus, props }) =>
     <Paper>
         <ListItem id={id} index={index}>
             <div className="moreMenu">
@@ -92,9 +89,12 @@ const SortableItem = sortableElement(({ taskName, dueDate, id, index, completeSt
             <Tooltip title="Mark Complete">
                 <IconButton
                     onClick={() => handleClickCheckBox(id)}
+                    // onClick={() => props.dispatch({ type: 'CHECK_TASK_BOX' })}
                     size="small"
                 >
-                    <TasksCheckBox completeStatus={completeStatus}/>
+                    <TasksCheckBox 
+                        completeStatus={completeStatus}
+                    />
                 </IconButton>
             </Tooltip>
             <ListItemText>
@@ -105,12 +105,10 @@ const SortableItem = sortableElement(({ taskName, dueDate, id, index, completeSt
             </ListItemText>
             <Tooltip title="Delete">
                 <IconButton
-                    onClick={() => handleClickRemove()}
+                    onClick={() => handleClickRemove(id)}
                     size="small"
                 >
-                    <ClearIcon
-                        onClick={() => handleClickRemove()}
-                    />
+                    <ClearIcon />
                 </IconButton>
             </Tooltip>
         </ ListItem>
@@ -163,7 +161,6 @@ class Tasks extends Component {
             'Task 07',
         ],
     };
-
 
     // Click Handlers For Add Task
     handleClickAddTask = (event) => {

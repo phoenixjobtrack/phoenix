@@ -26,9 +26,14 @@ function* fetchTasks(action) {
     }
 }
 
+function* toggleTaskCheck(action) {
+    console.log('in toggleTaskCheck', action.payload);
+}
+
 function* tasksSaga() {
     yield takeEvery('ADD_TASK', addTask);
-    yield takeEvery('FETCH_TASKS', fetchTasks)
+    yield takeEvery('FETCH_TASKS', fetchTasks);
+    yield takeEvery('CHECK_TASK_BOX', toggleTaskCheck);
 }
 
 export default tasksSaga;

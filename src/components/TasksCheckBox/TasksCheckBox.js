@@ -8,9 +8,11 @@ import CheckBoxOutlineBlank from '@material-ui/icons/CheckBoxOutlineBlank';
 
 class TasksCheckBox extends Component {
 
-    render() {
+    render(props) {
 
         let checkBox;
+
+        
 
         if (this.props.completeStatus == true) {
             checkBox = <CheckBoxIcon />
