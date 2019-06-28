@@ -103,7 +103,6 @@ class Tasks extends Component {
 
     // ----- RENDER ----- //
     render() {
-        const items = this.props.reduxState.tasks || [];
 
         // ----- RETURN ----- //
         return (
