@@ -28,6 +28,12 @@ function* fetchTasks(action) {
 
 function* toggleTaskCheck(action) {
     console.log('in toggleTaskCheck', action.payload);
+    try {
+        yield axios.put(`api/tasks/${action.payload}`, action.payload)
+        yield put({ type: 'FETCH_TASKS' })
+    } catch (error) {
+        console.log('error in toggleTaskCheck saga', error);
+    }
 }
 
 function* tasksSaga() {
