@@ -22,6 +22,7 @@ const ProtectedRoute = (props) => {
     component: ComponentToProtect,
     user,
     loginMode,
+    contactEditMode,
     ...otherProps
   } = props;
 

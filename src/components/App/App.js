@@ -22,7 +22,8 @@ import JobPipelinePage from '../JobPipelinePage/JobPipelinePage';
 import JobOpportunity from '../JobOpportunity/JobOpportunity';
 import UserPage from '../UserPage/UserPage';
 import TopBar from '../TopBar/TopBar';
-import ContactPage from '../ContactPage/ContactPage'
+import AddContactPage from '../ContactPage/AddContactPage'
+import EditContactPage from '../ContactPage/EditContactPage'
 
 // ========== STYLE ========== //
 import './App.css';
@@ -92,7 +93,12 @@ class App extends Component {
             <ProtectedRoute
               exact
               path="/contact/view/:id"
-              component={ContactPage}
+              component={EditContactPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/contact/add"
+              component={AddContactPage}
             />
             <ProtectedRoute
               exact
