@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 
 // ----- COMPONENTS ----- //
 import TasksCheckBox from '../TasksCheckBox/TasksCheckBox';
+import TasksLineItems from '../TasksLineItems/TasksLineItems';
 
 // ----- STYLES ----- //
 import { makeStyles } from '@material-ui/core/styles';
@@ -253,6 +254,7 @@ class Tasks extends Component {
                     
                     {/* // ----- TASK DISPLAYS ----- // */}
                     <OverdueTasks className="overdueTasks" />
+                    <TasksLineItems />
                     <SortableContainer onSortEnd={this.onSortEnd}>
 
                         {/* // ----- ITEMS MAPPED HERE ----- // */}
