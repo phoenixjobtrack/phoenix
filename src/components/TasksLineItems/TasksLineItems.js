@@ -71,6 +71,17 @@ class TasksLineItems extends Component {
                             <ListItemText>
                                 {task_name}
                             </ListItemText>
+                            <ListItemText className="dueDate">
+                                {due_date}
+                            </ListItemText>
+                            <Tooltip title="Delete">
+                                <IconButton
+                                    // onClick={() => handleClickRemove(id)}
+                                    size="small"
+                                >
+                                    <ClearIcon />
+                                </IconButton>
+                            </Tooltip>
                         </ListItem>
                     </ Toolbar>
                 </Paper>
