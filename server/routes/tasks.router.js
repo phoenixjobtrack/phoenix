@@ -4,7 +4,14 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     console.log('in /tasks router.get');
-    let query = `SELECT * FROM "tasks" WHERE "user_id"=$1;`;
+    let query = `SELECT "id", 
+    "user_id",
+    "task_name",
+    to_char("due_date", 'MM/DD/YYYY') AS "due_date", 
+    "complete",
+    "contact_id",
+    "job_id",
+    "disabled" FROM "tasks" WHERE "user_id"=$1;`;
     pool.query(query, [req.user.id])
         .then((result) => {
             res.send(result.rows);

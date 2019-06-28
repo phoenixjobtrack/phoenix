@@ -32,6 +32,7 @@ class App extends Component {
   componentDidMount () {
     this.props.dispatch({type: 'FETCH_USER'})
     this.props.dispatch({type: 'FETCH_TASKS'})
+    this.props.dispatch({type: 'FETCH_REQUIREMENTS'})
   }
 
   render() {
