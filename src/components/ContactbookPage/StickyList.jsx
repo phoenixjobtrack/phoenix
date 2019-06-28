@@ -18,6 +18,7 @@ const useStyles = makeStyles(theme => ({
         // position: 'relative',
         overflow: 'auto',
         maxHeight: 1000,
+        height:'75vh'
     },
     listSection: {
         backgroundColor: 'inherit',
@@ -66,7 +67,7 @@ function PinnedSubheaderList(props) {
     }
 
     const scrollToLetter = (letter) => {
-        document.getElementById(letter).scrollIntoView(false);
+        document.getElementById(letter).scrollIntoView();
     }
 
     const addNewContact = () => {
@@ -76,8 +77,7 @@ function PinnedSubheaderList(props) {
     }
 
     return (
-        <div >
-            
+        <div >            
             <div className={classes.sorting}>
                 <h3>Sort Alphabetically By:
                     <Button variant="contained" color="primary" onClick={() => { setSorting('first') }}>
