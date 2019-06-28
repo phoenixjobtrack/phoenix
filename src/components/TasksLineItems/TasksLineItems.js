@@ -18,9 +18,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from '@material-ui/core/Tooltip';
 
 // ----- MATERIAL UI ICONS ----- //
+import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
+import EditIcon from '@material-ui/icons/Edit';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import PublishIcon from '@material-ui/icons/Publish'
+
 
 // ----- STYLES ----- //
 import swal from 'sweetalert';
@@ -132,7 +134,6 @@ class TasksLineItems extends Component {
                                 </IconButton>
                             </Tooltip>
                             <div className="listItemText">
-
                                 {this.state.taskIsEditable ?
                                     <><ListItemText
                                         onClick={this.saveTask}
@@ -141,14 +142,22 @@ class TasksLineItems extends Component {
                                             text={task_name}
                                             onChange={this.handleChange}
                                         />
-                                        <IconButton onClick={this.saveTask}><PublishIcon/></IconButton></ListItemText></> :
+                                        <IconButton
+                                            onClick={this.saveTask}
+                                        >
+                                            <CheckIcon />
+                                        </IconButton>
+                                    </ListItemText></> :
                                     <><ListItemText
                                         onClick={this.editTask}
                                     >{task_name}
+                                        <IconButton
+                                            onClick={this.editTask}
+                                        >
+                                            <EditIcon />
+                                        </IconButton>
                                     </ListItemText></>
                                 }
-
-
                             </div>
                             <ListItemText className="dueDate">
                                 {due_date}
