@@ -1,0 +1,34 @@
+
+
+.jobOppForm{
+    width: 90%;
+    margin-left: 3%;
+    margin-top: 20px;
+    height: auto;
+    border: 1px solid rgb(207, 207, 207);
+    
+}
+
+.jobOppsBut{
+    display: flex;
+    align-content: flex-end;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-left: 10px;
+}
+
+.jobOppsTitle{
+    font-size: 20px;
+    text-decoration: underline;
+    font-weight: bold;
+    margin-left: 20px
+}
+
+.oppGrid1{
+    margin-left: 80px;
+    font-size: 16px;
+}
+
+.OppsRemoveIcon{
+    margin-left: 40px;
+}

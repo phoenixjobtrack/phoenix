@@ -1,13 +1,13 @@
 .todayBox{
   width: 550px;
-  height: 450px;
+  height: 430px;
   border: 4px solid black;
   background: linear-gradient(to right, rgb(255, 255, 255), rgb(208, 239, 248)), rgb(223, 239, 252);
 }
 
 .requireBox{
   width: 400px;
-  height: 253px;
+  height: 250px;
   border: 4px solid black;
   background: linear-gradient(to right, rgb(255, 255, 255), rgb(208, 248, 231)), rgb(223, 239, 252);
 }
