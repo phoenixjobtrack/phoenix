@@ -1,3 +1,4 @@
+// ========== TASKS ROUTER ========== //
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
@@ -21,7 +22,7 @@ router.get('/', (req, res) => {
             console.log(`Error on query ${error}`);
             res.sendStatus
         })
-})
+}); // End router.get/api/tasks/:id
 
 router.post('/', (req, res) => {
     console.log('in POST /api/tasks', req.user.id, req.body)
@@ -35,7 +36,7 @@ router.post('/', (req, res) => {
             console.log('error in POST /api/tasks', err)
             res.sendStatus(500)
         })
-});
+}); // End router.post/api/tasks/:id
 
 router.put('/:id', (req, res) => {
     console.log('in PUT /api/tasks req.params.id', req.params.id);
@@ -49,7 +50,16 @@ router.put('/:id', (req, res) => {
             console.log('error in POST /api/tasks', err)
             res.sendStatus(500)
         })
-});
+}); // End router.put/api/tasks/:id
 
+router.delete('/:id', (req, res) => {
+    console.log('in DELETE /api/tasks req.params.id', req.params.id);
+    const queryText = `DELETE FROM "tasks" WHERE "id"=$1`;
+    pool.query(queryText, [req.params.id])
+        .then(() => {res.sendStatus(200);})
+        .catch((err) => {
+            console.log('Error completing DELETE task:', err)
+        })
+}); // End router.delete/api/tasks/:id
 
 module.exports = router;
