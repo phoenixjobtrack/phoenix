@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     "contact_id",
     "job_id",
     "disabled" FROM "tasks" WHERE "user_id"=$1
-    ORDER BY "task_name";`;
+    ORDER BY "id" DESC;`;
     pool.query(query, [req.user.id])
         .then((result) => {
             res.send(result.rows);
