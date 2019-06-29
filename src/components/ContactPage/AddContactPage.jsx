@@ -6,8 +6,15 @@ import AddTask from './AddTask'
 import TaskList from './TaskList'
 
 
-import {Card, CardContent, Typography, Button, TextField, List, ListItem, Grid} from '@material-ui/core'
+import {Card, CardContent, Typography, Button, TextField, List, ListItem, Grid, withStyles} from '@material-ui/core'
 
+
+
+const styles = theme => ({
+    inputs: {
+        marginRight: '30px'
+    }
+});
 
 class ContactPage extends Component {
 
@@ -56,39 +63,48 @@ class ContactPage extends Component {
             <Card>
                 <CardContent>
                     <Grid container>
+                        <Typography>Add New Contact</Typography>
                         <Grid item xs={6}>
                             <form onSubmit={this.handleSubmit}>
                                 <TextField
                                     label="First Name"
                                     onChange={this.handleChangeFor('first_name')}
+                                    className={this.props.classes.inputs}
                                 />
                                 <TextField
                                     label="Last Name"
                                     onChange={this.handleChangeFor('last_name')}
+                                    className={this.props.classes.inputs}
                                 />
                                 <TextField
                                     label="Company"
                                     onChange={this.handleChangeFor('company')}
+                                    className={this.props.classes.inputs}
                                 />
                                 <TextField
                                     label="Position"
                                     onChange={this.handleChangeFor('position')}
+                                    className={this.props.classes.inputs}
                                 />
                                 <TextField
                                     label="Email"
                                     onChange={this.handleChangeFor('email')}
+                                    className={this.props.classes.inputs}
                                 />
                                 <TextField
                                     label="LinkedIn"
                                     onChange={this.handleChangeFor('linkedin_url')}
+                                    className={this.props.classes.inputs}
                                 />
                                 <TextField
                                     label="Phone"
                                     onChange={this.handleChangeFor('phone')}
+                                    className={this.props.classes.inputs}
                                 />
                                 <TextField
                                     label="Cell"
                                     onChange={this.handleChangeFor('cell')}
+                                    className={this.props.classes.inputs}
                                 />
                                 <TextField
                                     id="notes"
@@ -97,17 +113,12 @@ class ContactPage extends Component {
                                     rows="4"
                                     margin="normal"
                                     onChange={this.handleChangeFor('notes')}
+                                    className={this.props.classes.inputs}
                                 />
                                 <Button variant="contained" color="primary" type="submit">Save</Button>
                             </form>
                         </Grid>
-                        {/* <Grid item xs={6}>
-                            <AddTask currentContact={this.currentContact} />
-                            <TaskList/>
-                            
-                        </Grid> */}
-                    </Grid>
-                        
+                    </Grid>                        
                 </CardContent>
             </Card>
         )
@@ -118,4 +129,4 @@ const mapStateToProps = reduxState => ({
     reduxState
 });
 
-export default withRouter(connect(mapStateToProps)(ContactPage))
+export default withRouter(withStyles(styles)(connect(mapStateToProps)(ContactPage)))
