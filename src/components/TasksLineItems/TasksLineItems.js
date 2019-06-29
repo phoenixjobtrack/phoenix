@@ -14,6 +14,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
+import TextField from '@material-ui/core/TextField';
 import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from '@material-ui/core/Tooltip';
 
@@ -73,7 +74,7 @@ class TasksLineItems extends Component {
     postTask = (id) => {
         console.log('postTask:', this.state.task)
         let task = this.state.task_name;
-        this.props.dispatch({ type: 'UPDATE_TASK', payload: { task_name: task, id: id } })
+        this.props.dispatch({ type: 'UPDATE_TASK', payload: { task_name: task, id: this.state.editableTaskId } })
     }
 
     saveTask = () => {
@@ -96,92 +97,101 @@ class TasksLineItems extends Component {
     }; // end handleClickRemove
 
     render() {
+        console.log('this.state', this.state)
 
         let userTasks;
 
+        // Dates
+        let today = new Date();
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let yyyy = today.getFullYear();
+        let taskDay = mm + '/' + dd + '/' + yyyy;
+
+
         userTasks = this.props.reduxState.tasks.map(({ id, task_name, due_date, complete, contact_id, job_id, disabled }) => {
-            return (
-                <Paper key={id}>
-                    <Toolbar>
-                        <ListItem>
+            if (this.props.reduxState.tasks.due_date !== taskDay) {
+                return (
+                    <Paper key={id}>
+                        <Toolbar>
+                            <ListItem>
 
-                            <div className="moreMenu">
-                                <PopupState variant="popover" popupId="popup-menu">
-                                    {popupState => (
-                                        <React.Fragment>
-                                            <Tooltip title="More">
-                                                <IconButton variant="contained" {...bindTrigger(popupState)} >
-                                                    <MoreVertIcon />
-                                                </ IconButton>
-                                            </Tooltip>
-                                            <Menu {...bindMenu(popupState)}>
-                                                <MenuItem onClick={popupState.close}>Add Note</MenuItem>
-                                                <MenuItem onClick={popupState.close}>Add To Contact</MenuItem>
-                                                <MenuItem onClick={popupState.close}>Add To Job</MenuItem>
-                                            </Menu>
-                                        </React.Fragment>
-                                    )}
-                                </PopupState>
-                            </div>
-                            <Tooltip title="Mark Complete">
-                                <IconButton
-                                    onClick={() => this.handleClickCheckBox(id)}
-                                    size="small"
-                                >
-                                    <TasksCheckBox
-                                        complete={complete}
-                                    />
-                                </IconButton>
-                            </Tooltip>
-                            <div className="listItemText">
-                                {this.state.taskIsEditable ?
-                                    <><ListItemText
-                                        onClick={this.saveTask}
-                                    ><input
-                                            placeholder={task_name}
-                                            text={task_name}
-                                            onChange={this.handleChange}
+                                <div className="moreMenu">
+                                    <PopupState variant="popover" popupId="popup-menu">
+                                        {popupState => (
+                                            <React.Fragment>
+                                                <Tooltip title="More">
+                                                    <IconButton variant="contained" {...bindTrigger(popupState)} >
+                                                        <MoreVertIcon />
+                                                    </ IconButton>
+                                                </Tooltip>
+                                                <Menu {...bindMenu(popupState)}>
+                                                    <MenuItem onClick={popupState.close}>Add Note</MenuItem>
+                                                    <MenuItem onClick={popupState.close}>Add To Contact</MenuItem>
+                                                    <MenuItem onClick={popupState.close}>Add To Job</MenuItem>
+                                                </Menu>
+                                            </React.Fragment>
+                                        )}
+                                    </PopupState>
+                                </div>
+                                <Tooltip title="Mark Complete">
+                                    <IconButton
+                                        onClick={() => this.handleClickCheckBox(id)}
+                                        size="small"
+                                    >
+                                        <TasksCheckBox
+                                            complete={complete}
                                         />
-                                        <IconButton
-                                            onClick={this.saveTask}
-                                        >
-                                            <CheckIcon />
-                                        </IconButton>
-                                    </ListItemText></> :
-                                    <><ListItemText
-                                        onClick={this.editTask}
-                                    >{task_name}
-                                        <IconButton
-                                            onClick={this.editTask}
-                                        >
-                                            <EditIcon />
-                                        </IconButton>
-                                    </ListItemText></>
-                                }
-                            </div>
-                            <ListItemText className="dueDate">
-                                {due_date}
-                            </ListItemText>
-                            <Tooltip title="Delete">
-                                <IconButton
-                                    onClick={() => this.removeAlert(id)}
-                                    size="small"
-                                >
-                                    <ClearIcon />
-                                </IconButton>
-                            </Tooltip>
-                        </ListItem>
-                    </ Toolbar>
-                </Paper>
-            ) // End Return
+                                    </IconButton>
+                                </Tooltip>
+                                <div className="listItemText">
+                                    {this.state.taskIsEditable ?
+                                        <><ListItemText
+                                        ><TextField
+                                                placeholder={task_name}
+                                                text={task_name}
+                                                onChange={this.handleChange}
+                                            />
+                                            <IconButton
+                                                onClick={() => this.saveTask(id)}
+                                            >
+                                                <CheckIcon />
+                                            </IconButton>
+                                        </ListItemText></> :
+                                        <><ListItemText>
+                                            {task_name}
+                                            <IconButton
+                                                onClick={() => this.editTask(id)}
+                                            >
+                                                <EditIcon />
+                                            </IconButton>
+                                        </ListItemText></>
+                                    }
+                                </div>
+                                <ListItemText className="dueDate">
+                                    {due_date}
+                                </ListItemText>
+                                <Tooltip title="Delete">
+                                    <IconButton
+                                        onClick={() => this.removeAlert(id)}
+                                        size="small"
+                                    >
+                                        <ClearIcon />
+                                    </IconButton>
+                                </Tooltip>
+                            </ListItem>
+                        </ Toolbar>
+                    </Paper>
+                ) // End Return
+            }// End If Statement
         }) // End userTasks
-
         return (
             <List>
                 {userTasks}
             </List>
         ) // End Return
     } // End Render
+
 } // End Class
 
 const mapStateToProps = (reduxState) => {

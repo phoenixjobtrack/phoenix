@@ -40,17 +40,30 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
     console.log('in PUT /api/tasks req.params.id', req.params.id);
-    const queryText = `UPDATE "tasks" SET "complete" =NOT "complete" WHERE "id"=$1`;
+    const queryText = `UPDATE "tasks" SET "complete" =NOT "complete" WHERE "id"=$1;`;
     pool.query(queryText, [req.params.id])
         .then(response => {
             console.log('in PUT /api/tasks', response)
             res.sendStatus(200)
         })
         .catch(err => {
-            console.log('error in POST /api/tasks', err)
+            console.log('error in PUT /api/tasks', err)
             res.sendStatus(500)
         })
 }); // End router.put/api/tasks/:id
+
+router.put('/update/:task_name/:id', (req, res) => {
+    const queryText = `UPDATE "tasks" SET "task_name" = $1 WHERE "id" = $2;`;
+    pool.query(queryText, [req.params.task_name, req.params.id])
+        .then(response => {
+            console.log('in PUT /api/tasks/update', response)
+            res.sendStatus(200)
+        })
+        .catch(err => {
+            console.log('error in PUT /api/update/tasks', err)
+            res.sendStatus(500)
+        })
+}); // End router.put/api/tasks/update/:id
 
 router.delete('/:id', (req, res) => {
     console.log('in DELETE /api/tasks req.params.id', req.params.id);
