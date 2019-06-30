@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 // ----- COMPONENTS ----- //
 import TasksCheckBox from '../TasksCheckBox/TasksCheckBox';
+import TasksMoreDropdown from '../TasksMenuItem/TasksMenuItem';
+
 
 // ----- MATERIAL UI CORE ----- //
 import IconButton from '@material-ui/core/IconButton';
@@ -96,6 +98,12 @@ class TasksLineItems extends Component {
         this.props.dispatch({ type: 'REMOVE_TASK', payload: id })
     }; // end handleClickRemove
 
+    // Items in "More" dropdown menu
+    addNoteToTask(props) {
+        console.log('in addNoteToTask');
+       
+    }
+
     render() {
         console.log('this.state', this.state)
 
@@ -115,25 +123,7 @@ class TasksLineItems extends Component {
                     <Paper key={id}>
                         <Toolbar>
                             <ListItem>
-
-                                <div className="moreMenu">
-                                    <PopupState variant="popover" popupId="popup-menu">
-                                        {popupState => (
-                                            <React.Fragment>
-                                                <Tooltip title="More">
-                                                    <IconButton variant="contained" {...bindTrigger(popupState)} >
-                                                        <MoreVertIcon />
-                                                    </ IconButton>
-                                                </Tooltip>
-                                                <Menu {...bindMenu(popupState)}>
-                                                    <MenuItem onClick={popupState.close}>Add Note</MenuItem>
-                                                    <MenuItem onClick={popupState.close}>Add To Contact</MenuItem>
-                                                    <MenuItem onClick={popupState.close}>Add To Job</MenuItem>
-                                                </Menu>
-                                            </React.Fragment>
-                                        )}
-                                    </PopupState>
-                                </div>
+                                <TasksMoreDropdown />
                                 <Tooltip title="Mark Complete">
                                     <IconButton
                                         onClick={() => this.handleClickCheckBox(id)}
