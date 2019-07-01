@@ -1,4 +1,4 @@
-const requirementReducer = (state = [], action) => {
+const requirementsReducer = (state = [], action) => {
     // console.log('in requirementReducer - state:', state);
     // console.log('in requirementReducer - action:', action);
     if (action.type ==='STORE_REQUIREMENTS'){
@@ -12,4 +12,4 @@ const requirementReducer = (state = [], action) => {
 
 
 
-export default requirementReducer;
+export default requirementsReducer;

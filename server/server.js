@@ -10,10 +10,11 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
-const requirementRouter = require('./routes/requirement.router');
+const requirementsRouter = require('./routes/requirements.router');
 const tasksRouter = require('./routes/tasks.router');
 const contactRouter = require('./routes/contact.router');
 const jobsRouter = require('./routes/jobs.router');
+const interviewStagesRouter = require('./routes/interviewStages.router');
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,10 +28,11 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
-app.use('/api/requirement', requirementRouter);
+app.use('/api/requirements', requirementsRouter);
 app.use('/api/tasks', tasksRouter);
 app.use('/api/contact', contactRouter);
 app.use('/api/jobs', jobsRouter);
+app.use('/api/interviewStages', interviewStagesRouter);
 // Serve static files
 app.use(express.static('build'));
 

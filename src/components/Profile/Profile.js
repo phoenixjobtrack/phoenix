@@ -49,7 +49,7 @@ class Profile extends Component {
             profileView =
                 <div className="profileInfo">
                     <Button variant="contained" color="primary" onClick={this.handleEdit}>Edit</Button>
-                    <p>First Name: {this.props.profile.first_name}</p>
+                    <p contenteditable>First Name: {this.props.profile.first_name}</p>
                     <p>Last Name: {this.props.profile.last_name}</p>
                     <p>E-mail: {this.props.profile.email}</p>
                     {/* {this.props.require.map((user, i) => {
@@ -95,28 +95,26 @@ class Profile extends Component {
                             name="email"
                             autoComplete="email"
                             margin="dense"
-                            onChange={this.handleChange('email')} />
+                            onChange={this.handleChange('email')} 
+                        />
 
-                        {
-                            this.state.requireList.map((requirement, index) => {
+                            {this.state.requireList.map((requirement, index) => {
                                 return (
-                                    <div>
-                                        <br />
+                                    <p>
                                         <TextField
                                             id="standard-dense"
                                             label="Requirement"
                                             className="profileInput"
                                             margin="dense"
-                                        // onChange={this.handleChange('requirement')} 
+                                            // onChange={this.handleChange('requirement')} 
                                         />
-                                    </div>
+                                    </p>
                                 )
-                            })
-                        }
-                        <p ><AddIcon className="profileAddIcon" onClick={(event) => this.addRequirementInput(event)} /> Requirement</p>
+                            })}
+                    <p ><AddIcon className="profileAddIcon" onClick={(event) => this.addRequirementInput(event)} /> Requirement</p>
 
-                    </div>
-                </form>
+                </div>
+            </form>
         }
 
         return (
