@@ -53,9 +53,10 @@ router.put('/:id', (req, res) => {
         })
 }); // End router.put/api/tasks/:id
 
-router.put('/note/:task/:id', (req, res) => {
+// Adds Note To Task in Task View
+router.put('/note/:note/:id', (req, res) => {
     const queryText = `UPDATE "tasks" SET "note"=$1 WHERE "tasks"."id"=$2;`;
-    pool.query(queryText, [req.params.task, req.params.id])
+    pool.query(queryText, [req.params.note, req.params.id])
         .then(response => {
             console.log('in PUT /api/tasks/note', response)
             res.sendStatus(200)

@@ -32,11 +32,9 @@ class TasksMoreDropdown extends Component {
                 closeModal: false,
             },
         })
-            .then(task => {
-                if (!task) throw null;
-
-                this.props.dispatch({ type: 'ADD_TASK_NOTE', payload: { id: this.props.id, task: `${task}`}})
-                
+            .then(note => {
+                if (!note) throw null;
+                this.props.dispatch({ type: 'ADD_TASK_NOTE', payload: { id: this.props.id, note: `${note}`}})
             })
             .then(results => {
                 swal("Note Added", {
