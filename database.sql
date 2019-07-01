@@ -43,7 +43,7 @@ CREATE TABLE "contacts" (
     "first_name" VARCHAR (255) NOT NULL,
     "last_name" VARCHAR (255) NOT NULL,
     "company" VARCHAR (255) NOT NULL,
-    "postion" VARCHAR (255),
+    "position" VARCHAR (255),
     "email" VARCHAR (255),
     "linkedin_url" VARCHAR (200),
     "cell" VARCHAR (30),
@@ -52,7 +52,7 @@ CREATE TABLE "contacts" (
     "disabled" BOOLEAN DEFAULT 'false'
 );
 
-INSERT INTO "contacts" ("user_id", "first_name", "last_name", "company", "postion", "email", "linkedin_url", 
+INSERT INTO "contacts" ("user_id", "first_name", "last_name", "company", "position", "email", "linkedin_url", 
 "cell", "phone", "notes", "disabled")
 VALUES 
 ('1', 'Karen', 'Wickleberg', 'Orbit', 'Sales Lead', 'Karen.Wickleberg@gmail.com', 
@@ -69,7 +69,7 @@ CREATE TABLE "stages" (
 INSERT INTO "stages" ("job_id", "stage", "note", "date")
 VALUES 
 ('1', 'Hiring Manager Interview', 'Talk to Karen for advice', '7/13/2019'),
-('2', 'Phone Screening', 'Review the postion information on their website', '7/13/2019');
+('2', 'Phone Screening', 'Review the position information on their website', '7/13/2019');
 
 CREATE TABLE "requirements" (
     "id" SERIAL PRIMARY KEY,
