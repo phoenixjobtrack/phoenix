@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import Stages from './Stages'
+
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Input from '@material-ui/core/Input';
@@ -189,7 +192,7 @@ class JobOpportunity extends Component {
                 </div>
 
                 {/* Stages of the Hiring Process */}
-
+                <Stages/>                           
                 <div className="jobOppForm">
                     <p className="jobOppsTitle">Stages of the Hiring Process</p>
                    
