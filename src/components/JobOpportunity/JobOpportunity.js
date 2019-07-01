@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import Stages from './Stages'
+
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -190,8 +193,8 @@ class JobOpportunity extends Component {
                 </div>
 
                 {/* Stages of the Hiring Process */}
-
-                <div className="jobOppForm">
+                <Stages/>                           
+                {/* <div className="jobOppForm">
                     <p className="jobOppsTitle">Stages of the Hiring Process</p>
                    
                     {this.state.stages.map((stage, index) => {
@@ -260,7 +263,7 @@ class JobOpportunity extends Component {
                         <p>Current Stage:</p>
                         <p>Next Stage:</p>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Tasks */}
 
