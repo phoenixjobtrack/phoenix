@@ -4,7 +4,7 @@ import loginMode from './loginModeReducer';
 import tasks from './tasksReducer';
 import user from './userReducer';
 import contacts from './contactReducer';
-import requirements from './requirementReducer'
+import requirements from './requirementsReducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.

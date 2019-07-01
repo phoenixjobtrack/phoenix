@@ -1,10 +1,10 @@
 /* Today's Task Box Styling */
 .todayBox{
-  width: 550px;
+  width: 525px;
   height: 350px;
   border: 4px solid rgb(0, 110, 138);
   background: linear-gradient(to right, rgb(255, 255, 255), rgb(208, 239, 248)), rgb(223, 239, 252);
-  box-shadow: 2px 3px rgb(0, 0, 82);
+  box-shadow: 1.5px 2px rgb(144, 144, 156);
   border-radius: 2%;
 }
 
@@ -42,7 +42,7 @@
   height: 175px;
   border: 4px solid rgb(8, 107, 41);
   background: linear-gradient(to right, rgb(255, 255, 255), rgb(208, 248, 231)), rgb(223, 239, 252);
-  box-shadow: 2px 3px rgb(0, 61, 15);
+  box-shadow: 1.5px 2px rgb(144, 156, 147);
   border-radius: 2%;
 }
 

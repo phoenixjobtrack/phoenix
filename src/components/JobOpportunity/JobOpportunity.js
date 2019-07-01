@@ -18,9 +18,17 @@ import './JobOpportunity.css';
 class JobOpportunity extends Component {
     state = {
         jobs: {},
-        stages: {},
-        tasks: {},
+        stages: [{}],
+        tasks: [{}],
         job_requirements: {},
+    }
+
+    addStageInput() {
+        this.setState({ stages: [...this.state.stages, ''] })
+    }
+
+    addTasksInput() {
+        this.setState({ tasks: [...this.state.tasks, ''] })
     }
 
     handleJobChange = propertyName => (event) => {
@@ -89,36 +97,36 @@ class JobOpportunity extends Component {
                     <p className="jobOppsTitle">Employment Information</p>
                     <div className="oppGrid1">
                         <Grid container>
-                            <Grid item sm>
-                                <p>Company:
-                                    <Input
+                            <Grid item sm={3}>
+                                <p>Company: </p>
+                                <p>Position: </p>
+                                <p>Posting URL: </p>
+                                <p>Deadline: </p>
+                            </Grid>
+                            <Grid item sm={3}>
+                            <Input
                                         placeholder="Company"
                                         onChange={this.handleJobChange('company')}
                                         inputProps={{
                                             'aria-label': 'Description',
                                         }}
                                     />
-                                </p>
-                                <p>Position:
-                                    <Input
+                            <Input
                                         placeholder="Position"
                                         onChange={this.handleJobChange('position')}
                                         inputProps={{
                                             'aria-label': 'Description',
                                         }}
                                     />
-                                </p>
-                                <p>Posting URL:
-                                    <Input
+                            <Input
                                         placeholder="Posting URL"
                                         onChange={this.handleJobChange('posting_url')}
                                         inputProps={{
                                             'aria-label': 'Description',
                                         }}
                                     />
-                                </p>
-                                <p>Deadline:
-                                <TextField
+                                    <br />
+                            <TextField
                                         id="date"
                                         style={{ width: 150 }}
                                         type="date"
@@ -128,20 +136,28 @@ class JobOpportunity extends Component {
                                             shrink: true,
                                         }}
                                     />
+                            </Grid>
+                            <Grid item sm={3}>
+                                <p> Salary:
+                       
+                                </p>
+                                <p> Benefits:
+                      
+                                </p>
+                                <br />
+                                <p> Travel:
+                    
                                 </p>
                             </Grid>
-                            <Grid item sm >
-                                <p> Salary:
-                                    <Input
+                            <Grid item sm={3}>
+                            <Input
                                         placeholder="Salary"
                                         onChange={this.handleJobChange('salary')}
                                         inputProps={{
                                             'aria-label': 'Description',
                                         }}
                                     />
-                                </p>
-                                <p> Benefits:
-                                <TextField
+                            <TextField
                                         id="outlined-multiline-flexible"
                                         label="Benefits"
                                         onChange={this.handleJobChange('benefits')}
@@ -150,16 +166,13 @@ class JobOpportunity extends Component {
                                         margin="normal"
                                         variant="outlined"
                                     />
-                                </p>
-                                <p> Travel:
-                                    <Input
+                            <Input
                                         placeholder="Travel"
                                         onChange={this.handleJobChange('travel')}
                                         inputProps={{
                                             'aria-label': 'Description',
                                         }}
                                     />
-                                </p>
                             </Grid>
                         </Grid>
                         <p>Notes:</p>
@@ -179,83 +192,120 @@ class JobOpportunity extends Component {
 
                 <div className="jobOppForm">
                     <p className="jobOppsTitle">Stages of the Hiring Process</p>
-                    <ul></ul>
-                    <Grid container>
-                        <Grid item sm={2}>
-                            <RemoveIcon className="OppsRemoveIcon" noValidate style={{ paddingTop: 25, fontSize: 45 }} />
-                            <span style={{ fontSize: 20 }}>
+                   
+                    {this.state.stages.map((stage, index) => {
+                                return (
+                                    <div>
+                                         <Grid container>
+                                    <Grid item sm={2}>
+                                    <button className="oppsSubBut">
+                                        <RemoveIcon className="OppsRemoveIcon" noValidate style={{ paddingTop: 15, fontSize: 30 }} />
+                                        <span style={{ fontSize: 20 }}>
+            
+                                            Stages:
+            
+                                        </span>
+                                        </button>
+                                    </Grid>
+                                    <Grid item sm={3}>
+                                        <FormControl >
+                                            <InputLabel htmlFor="age-simple">Choose Your Stage</InputLabel>
+                                            <Select
+                                                style={{ width: 235 }}
+                                                onChange={this.handleStageChange('stage')}
+                                                inputProps={{
+                                                    name: 'age',
+                                                    id: 'age-simple',
+                                                }}
+                                            >
+                                                <MenuItem value={10}>Ten</MenuItem>
+                                                <MenuItem value={20}>Twenty</MenuItem>
+                                                <MenuItem value={30}>Thirty</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    </Grid>
+                                    <Grid item sm={2}>
+                                        <form noValidate style={{ paddingTop: 16 }}>
+                                            <TextField
+                                                id="date"
+                                                style={{ width: 150 }}
+                                                onChange={this.handleStageChange('date')}
+                                                type="date"
+                                                // defaultValue="2017-05-24"
+                                                InputLabelProps={{
+                                                    shrink: true,
+                                                }}
+                                            />
+                                        </form>
+                                    </Grid>
+                                    <Grid item sm={5}>
+                                        <Input
+                                            style={{ width: 300, paddingTop: 16 }}
+                                            onChange={this.handleStageChange('notes')}
+                                            placeholder="Notes"
+                                            inputProps={{
+                                                'aria-label': 'Description',
+                                            }}
+                                        />
+                                        </Grid>
+                                        </Grid>
 
-                                Stages:
+                                        </div>
 
-                            </span>
-                        </Grid>
-                        <Grid item sm={3}>
-                            <FormControl >
-                                <InputLabel htmlFor="age-simple">Choose Your Stage</InputLabel>
-                                <Select
-                                    style={{ width: 200 }}
-                                    onChange={this.handleStageChange('stage')}
-                                    inputProps={{
-                                        name: 'age',
-                                        id: 'age-simple',
-                                    }}
-                                >
-                                    <MenuItem value={10}>Ten</MenuItem>
-                                    <MenuItem value={20}>Twenty</MenuItem>
-                                    <MenuItem value={30}>Thirty</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </Grid>
-                        <Grid item sm={2}>
-                            <form noValidate style={{ paddingTop: 16 }}>
-                                <TextField
-                                    id="date"
-                                    style={{ width: 150 }}
-                                    onChange={this.handleStageChange('date')}
-                                    type="date"
-                                    // defaultValue="2017-05-24"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                />
-                            </form>
-                        </Grid>
-                        <Grid item sm={5}>
-                            <Input
-                                style={{ width: 350, paddingTop: 16 }}
-                                onChange={this.handleStageChange('notes')}
-                                placeholder="Notes"
-                                inputProps={{
-                                    'aria-label': 'Description',
-                                }}
-                            />
-                        </Grid>
-                    </Grid>
-                    <p><AddIcon />Add Stage</p>
+                                )
+                            })}
+                    <p><AddIcon onClick={(event) => this.addStageInput(event)} />Add Stage</p>
+                    <div className="oppStageView">
+                        <p>Current Stage:</p>
+                        <p>Next Stage:</p>
+                    </div>
                 </div>
 
                 {/* Tasks */}
 
                 <div className="jobOppForm">
                     <p className="jobOppsTitle">Tasks</p>
-                    <span>Tasks:</span>
+                    {this.state.tasks.map((stage, index) => {
+                                return (
+                                    <div>
+                    <Grid container>
+                    <Grid item sm={2}>
+                                    <button className="oppsSubBut">
+                                        <RemoveIcon className="OppsRemoveIcon" noValidate style={{ paddingTop: 15, fontSize: 30 }} />
+                                        <span style={{ fontSize: 20 }}>
+            
+                                            Tasks:
+            
+                                        </span>
+                                        </button>
+                                    </Grid>
+                                    <Grid item sm={5}>
                     <Input
+                    style={{ width: 415, paddingTop: 16 }}
                         placeholder="Task Details"
                         onChange={this.handleTaskChange('task_name')}
                         inputProps={{
                             'aria-label': 'Description',
                         }}
                     />
+                    </Grid>
+                    <Grid item sm={5} >
                     <TextField
                         id="date"
                         type="date"
+                        style={{ paddingTop: 16 }}
                         onChange={this.handleTaskChange('due_date')}
                         // defaultValue="2017-05-24"
                         InputLabelProps={{
                             shrink: true,
                         }}
                     />
-                    <p><AddIcon />Add Tasks</p>
+                    </Grid>
+                    </Grid>
+                    </div>
+                              )
+                            })}
+                    <p><AddIcon onClick={(event) => this.addTasksInput(event)} />Add Tasks</p>
                 </div>
 
                 {/* Employment Requirements */}
@@ -264,17 +314,24 @@ class JobOpportunity extends Component {
                     <p className="jobOppsTitle">Employment Requirements</p>
                     <button>Update Personal Requirements</button>
                     <br />
-                    <span>Requirement: 180K salary: </span>
+                    <div className="oppGrid1">
+                    <Grid container>
+                    <Grid item sm={3}>
+                    <span style={{ marginTop: 16 }}>Requirement: 180K salary </span>
+                    </Grid>
+                    <Grid item sm={5}>
                     <Input
+                        style={{ width: 350 }}
                         placeholder="Offer Details"
                         onChange={this.handleRequireChange('job_requirement')}
                         inputProps={{
                             'aria-label': 'Description',
                         }}
                     />
+                    </Grid>
                     <FormControl component="fieldset" >
                         <FormLabel component="legend">Requirements Match</FormLabel>
-                        <FormGroup>
+                        <FormGroup >
                             <FormControlLabel
                                 control={
                                     <Checkbox onChange={this.handleRequireChange('requirement_met')} value="true" />}
@@ -289,6 +346,8 @@ class JobOpportunity extends Component {
                             />
                         </FormGroup>
                     </FormControl>
+                    </Grid>
+                    </div>
                 </div>
                 <Button variant="contained" color="primary" style={{ width: 350, marginTop: 30 }}>Add Job Opportunity</Button>
             </div>
