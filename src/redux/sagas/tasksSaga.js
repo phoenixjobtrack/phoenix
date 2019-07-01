@@ -19,7 +19,7 @@ function* addTask(action) {
 function* addTaskNote(action) {
     console.log('in addTaskNote Saga', action.payload);
     try {
-        yield axios.put(`api/tasks/note/${action.payload.task}/${action.payload.id}`, action.payload)
+        yield axios.put(`api/tasks/note/${action.payload.note}/${action.payload.id}`, action.payload)
         yield put({ type: 'FETCH_TASKS'})
     } catch (error) {
         console.log('error in addTaskNote', error);

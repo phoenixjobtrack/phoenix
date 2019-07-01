@@ -69,7 +69,6 @@ class TasksLineItemsContent extends Component {
         this.setState({
             task_name: event.target.value
         })
-
     }; // end handleChange
 
     postTask = (id) => {
