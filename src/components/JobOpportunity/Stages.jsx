@@ -10,6 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import Checkbox from '@material-ui/core/Checkbox';
+import IconButton from '@material-ui/core/IconButton';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -28,8 +29,17 @@ class Stages extends Component {
             date: ''
         }],
     }
+    stageCounter = 0
     addStageInput() {
-        this.setState({ stages: [...this.state.stages, {}] })
+        this.stageCounter = this.stageCounter+1
+        // this.setState({ stages: [...this.state.stages, {}] })
+        this.props.dispatch({
+            type: 'ADD_TO_REDUX_STAGE', payload: {
+                key: this.stageCounter, stage: {
+                    stage: '',
+                    note: '',
+                    date: ''
+                }}})
     }
     
     handleStageChange = (propertyName, stage, i) => (event) => {
@@ -43,17 +53,19 @@ class Stages extends Component {
         // });
     }
 
+    
+
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_INTERVIEW_STAGES'})
     }
 
     render() {
-        console.log('stages state', this.state)
+        // console.log('stages state', this.props.reduxState.currentStage, Object.entries(this.props.reduxState.currentStage))
         return(
             <div className="jobOppForm">
                 <p className="jobOppsTitle">Stages of the Hiring Process</p>
-
-                {this.state.stages.map((stage, i) => {
+                
+                {Object.entries(this.props.reduxState.currentStage).map((stage, i) => {
                     return (
                         <ul>
                             <StageItem stage={stage} i={i}/>
@@ -61,7 +73,10 @@ class Stages extends Component {
                         
                     )
                 })}
-                <p><AddIcon onClick={(event) => this.addStageInput(event)} />Add Stage</p>
+                <IconButton onClick={(event) => this.addStageInput(event)}>
+                    <AddIcon/>
+                </IconButton>
+                <p>Add Stage</p>
                 <div className="oppStageView">
                     <p>Current Stage:</p>
                     <p>Next Stage:</p>

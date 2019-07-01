@@ -2,19 +2,14 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux';
 
 
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
 import RemoveIcon from '@material-ui/icons/Remove';
-import AddIcon from '@material-ui/icons/Add';
-import Checkbox from '@material-ui/core/Checkbox';
 import InputLabel from '@material-ui/core/InputLabel';
+import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
 import Select from '@material-ui/core/Select';
 
 
@@ -23,7 +18,8 @@ class StageItem extends Component {
 
     state = {
         stage: {
-            jobId: 0,
+
+            jobId: this.props.reduxState.jobs.length,
             stage: this.props.stage.stage,
             note: this.props.stage.note,
             date: this.props.stage.date
@@ -32,25 +28,35 @@ class StageItem extends Component {
 
     handleStageChange = (propertyName) => (event) => {
         console.log('stageInfo', event.target.value, propertyName);
-        this.setState({
-            stage: {
-                ...this.state.stage,
-                [propertyName]: event.target.value
-            }
-        })
+        //send stage object to redux
+        this.props.dispatch({ type: 'UPDATE_REDUX_STAGE', payload: { key: this.props.i, prop: propertyName, value: event.target.value }})
+        // this.setState({
+        //     stage: {
+        //         ...this.state.stage,
+        //         [propertyName]: event.target.value
+        //     }
+        // })
+        // this.props.updateStageArray(this.state.stage)
+    }
+
+    handleRemove = (i) => {
+        console.log('in handleRemove', i)
+
     }
 
     render(){
+        console.log('value', this.props.reduxState.currentStage[this.props.i])
         return(
             <div>
                 <Grid container>
                     <Grid item sm={2}>
-                        <button className="oppsSubBut">
-                            <RemoveIcon className="OppsRemoveIcon" noValidate style={{ paddingTop: 15, fontSize: 30 }} />
-                            <span style={{ fontSize: 20 }}>
-                                Stages:
-                                        </span>
-                        </button>
+                        <IconButton className="oppsSubBut" onClick={()=>this.handleRemove(this.props.i)}>
+                            <RemoveIcon/>
+                            {/* <RemoveIcon className="OppsRemoveIcon" noValidate style={{ paddingTop: 15, fontSize: 30 }} onClick={this.handleRemove}/>      */}
+                        </IconButton>
+                        <span style={{ fontSize: 20 }}>
+                            Stage:
+                            </span>
                     </Grid>
                     <Grid item sm={3}>
                         <FormControl >
@@ -58,13 +64,13 @@ class StageItem extends Component {
                             <Select
                                 style={{ width: 235 }}
                                 onChange={this.handleStageChange('stage')}
-                                value={this.state.stage.stage}
+                                value={this.props.reduxState.currentStage[this.props.i].stage}
                                 inputProps={{
                                     name: 'stage',
                                     id: 'stage-simple',
                                 }}
                             >
-                                {this.props.reduxState.interviewStages.map((interviewStage, i) => {
+                                {this.props.reduxState.interviewStages.map((interviewStage) => {
                                     return (
                                         <MenuItem value={interviewStage.stage} primaryText={interviewStage.stage}>{interviewStage.stage}</MenuItem>
                                     )
