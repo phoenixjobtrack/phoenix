@@ -23,15 +23,17 @@ class DashboardPage extends Component {
             <Paper style={{ padding: 40, marginTop: 20 }}>
               <h2>Today's Task<AddIcon className="dashAddIcon" /></h2>
               <div className="todayBox">
-                {this.props.dayTask.map((tasks, i) => {
-                  if (tasks.due_date === taskDay) {
-                    return (
-                      <ul>
-                        <li>{tasks.task_name}</li>
-                      </ul>
-                    )
-                  }
-                })}
+              <div className="todayText">
+                  {this.props.dayTask.map((tasks, i) => {
+                    if (tasks.due_date === taskDay) {
+                      return (
+                        <ul>
+                          <li>{tasks.task_name}</li>
+                        </ul>
+                      )
+                    }
+                  })}
+                </div>
               </div>
             </Paper>
           </Grid>
@@ -40,20 +42,31 @@ class DashboardPage extends Component {
               <FaceIcon className="dashIcon" />
               <h2>Job Requirements<AddIcon className="dashAddIcon" /></h2>
               <div className="requireBox">
-                <ul className="boxText">
-                {/* {this.props.require.map((user, i) => {
-                    return (
-                      <ul>
-                        <li>{user.requirement}</li>
-                      </ul>
-                    )
-                  }
-                })}
-              </div> */}
-                  <li>6 weeks vacation</li>
-                  <li>Work from home</li>
-                  <li>75k annually</li>
-                </ul>
+                <div className="requireText">
+                  <ul className="boxText">
+                    {/* {this.props.require.map((user, i) => {
+                        return (
+                          <ul>
+                            <li>{user.requirement}</li>
+                          </ul>
+                        )
+                      }
+                    })}
+                  </div> */}
+                    <li>6 weeks vacation</li>
+                    <li>Work from home</li>
+                    <li>75k annually</li>
+                    <li>6 weeks vacation</li>
+                    <li>Work from home</li>
+                    <li>75k annually</li>
+                    <li>6 weeks vacation</li>
+                    <li>Work from home</li>
+                    <li>75k annually</li>
+                    <li>6 weeks vacation</li>
+                    <li>Work from home</li>
+                    <li>75k annually</li>
+                  </ul>
+              </div>
               </div>
             </Paper>
           </Grid>

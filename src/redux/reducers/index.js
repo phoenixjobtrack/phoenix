@@ -7,6 +7,7 @@ import contacts from './contactReducer';
 import requirements from './requirementReducer';
 import jobs from './jobReducer';
 import currentContact from './currentContactReducer';
+
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga

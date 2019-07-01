@@ -2,24 +2,24 @@ import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_USER" actions
-function* addRequirement(action) {
-    console.log('in addRequirement saga', action.payload)
+function* addRequirements(action) {
+    console.log('in addRequirements saga', action.payload)
         
     try {
         yield action.payload.requirements.map(requirement=>{
-            axios.post('api/requirement', {requirement: requirement})
+            axios.post('api/requirements', {requirement: requirement})
         })       
         
     } catch (error) {
-        console.log('error in addRequirement saga', error);
+        console.log('error in addRequirements saga', error);
     }
 };
 
 //SAGA to GET requirements from database
 function* fetchRequirements(action) {
-    
+
     try {
-        const requirements = yield axios.get('/api/requirement')
+        const requirements = yield axios.get('/api/requirements')
         console.log('in fetchRequirements saga', requirements)
         yield put({type:'STORE_REQUIREMENTS', payload: requirements.data})
     }
@@ -29,7 +29,7 @@ function* fetchRequirements(action) {
 }
 
 function* requirementsSaga() {
-    yield takeEvery('ADD_REQUIREMENTS', addRequirement);
+    yield takeEvery('ADD_REQUIREMENTS', addRequirements);
     yield takeEvery('FETCH_REQUIREMENTS', fetchRequirements)
 }
 
