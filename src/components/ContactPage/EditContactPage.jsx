@@ -2,12 +2,43 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import PropTypes from 'prop-types';
+import MaskedInput from 'react-text-mask'
+
 import AddTask from './AddTask'
 import TaskList from './TaskList'
 
 
-import { Card, CardContent, Typography, Button, TextField, List, ListItem, Grid } from '@material-ui/core'
+import { Card, CardContent, Typography, Button, TextField, List, ListItem, Grid, withStyles } from '@material-ui/core'
 
+const styles = theme => ({
+
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    input: {
+        margin: theme.spacing.unit,
+    },
+
+});
+
+const TextMaskCustom = (props) => {
+    const { inputRef, ...other } = props;
+
+    return (
+        <MaskedInput
+            {...other}
+            ref={inputRef}
+            mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+            placeholderChar={'\u2000'}
+        />
+    );
+}
+
+TextMaskCustom.propTypes = {
+    inputRef: PropTypes.func.isRequired,
+};
 
 class ContactPage extends Component {
     //retrieve contactId from URL params
@@ -15,9 +46,6 @@ class ContactPage extends Component {
     currentContact = {}
 
 
-    // retrieveContactData = () => {
-    //     this.currentContact = this.props.reduxState.currentContact
-    // }
 
     handleChangeFor = key => event => {
         console.log('in handleChangeFor', key, event)
@@ -33,12 +61,12 @@ class ContactPage extends Component {
 
 
     componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_CURRENT_CONTACT', payload: this.contactId})
-
+        this.props.dispatch({ type: 'FETCH_CURRENT_CONTACT', payload: this.contactId })
     }
 
 
     render() {
+        
         console.log('currentContact', this.props.reduxState.currentContact)
         let currentContact = this.props.reduxState.currentContact
         return (
@@ -79,13 +107,19 @@ class ContactPage extends Component {
                                 />
                                 <TextField
                                     label="Phone"
-                                    value={currentContact.phone}
-                                    onChange={this.handleChangeFor('phone')}
+                                    InputProps={{
+                                        inputComponent: TextMaskCustom,
+                                        value: currentContact.phone,
+                                        onChange: this.handleChangeFor('phone'),
+                                    }}
                                 />
                                 <TextField
                                     label="Cell"
-                                    value={currentContact.cell}
-                                    onChange={this.handleChangeFor('cell')}
+                                    InputProps={{
+                                        inputComponent: TextMaskCustom,
+                                        value: currentContact.cell,
+                                        onChange: this.handleChangeFor('cell'),
+                                    }}
                                 />
                                 <TextField
                                     id="notes"
@@ -115,4 +149,4 @@ const mapStateToProps = reduxState => ({
     reduxState
 });
 
-export default withRouter(connect(mapStateToProps)(ContactPage))
+export default withRouter(withStyles(styles)(connect(mapStateToProps)(ContactPage)))

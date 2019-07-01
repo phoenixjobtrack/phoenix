@@ -6,8 +6,11 @@ import { withRouter } from 'react-router-dom'
 import ContactCard from './ContactCard'
 import { makeStyles } from '@material-ui/core/styles';
 import {Button} from '@material-ui/core'
+import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
+
+import PersonAddIcon from '@material-ui/icons/PersonAdd'
 
 
 const useStyles = makeStyles(theme => ({
@@ -15,7 +18,6 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
         maxWidth: 1000,
         backgroundColor: theme.palette.background.paper,
-        // position: 'relative',
         overflow: 'auto',
         maxHeight: 1000,
         height:'75vh'
@@ -37,10 +39,6 @@ const useStyles = makeStyles(theme => ({
     sorting: {
         position: 'sticky'
     },
-    
-        
-
-    
 }));
 
 function PinnedSubheaderList(props) {
@@ -85,7 +83,9 @@ function PinnedSubheaderList(props) {
                     </Button>
                     <Button variant="contained" color="primary" onClick={() => { setSorting('last') }}>Last Name</Button>
                     <Button variant="contained" color="primary" onClick={() => { setSorting('company') }}>Company</Button>
-                    <Button variant="contained" color="primary" onClick={addNewContact} >Add New Contact</Button>
+                    <IconButton variant="contained" color="primary" aria-label="add new contact" onClick={addNewContact} >
+                        <PersonAddIcon/>
+                    </IconButton>
                 </h3>                
                 {alphabet.map(letter => (
                     <button onClick={() => { scrollToLetter(letter) }}>{letter}</button>
