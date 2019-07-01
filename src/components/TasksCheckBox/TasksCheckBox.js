@@ -12,8 +12,6 @@ class TasksCheckBox extends Component {
 
         let checkBox;
 
-        
-
         if (this.props.complete === true) {
             checkBox = <CheckBoxIcon />
         } else {

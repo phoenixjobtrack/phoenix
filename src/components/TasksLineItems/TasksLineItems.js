@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // ----- COMPONENTS ----- //
 import TasksCheckBox from '../TasksCheckBox/TasksCheckBox';
+import TasksLineItemsContent from '../TasksLineItemsContent/TasksLineItemsContent';
 import TasksMoreDropdown from '../TasksMoreDropdown/TasksMoreDropdown';
 
 
@@ -32,71 +33,74 @@ import swal from 'sweetalert';
 
 class TasksLineItems extends Component {
 
-    state = {
-        taskIsEditable: false,
-    }
+    // state = {
+    //     taskIsEditable: false,
+    //     editableTaskId: null,
+    // }
 
-    // Triggers an Alert to Confirm Deletion of a Task
-    removeAlert(id) {
-        console.log('Remove Alert', id);
-        swal({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this task",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-            .then((willDelete) => {
-                if (willDelete) {
-                    { this.handleClickRemove(id) };
-                    swal("Your task has been deleted", {
-                        icon: "success",
+    // // Triggers an Alert to Confirm Deletion of a Task
+    // removeAlert(id) {
+    //     console.log('Remove Alert', id);
+    //     swal({
+    //         title: "Are you sure?",
+    //         text: "Once deleted, you will not be able to recover this task",
+    //         icon: "warning",
+    //         buttons: true,
+    //         dangerMode: true,
+    //     })
+    //         .then((willDelete) => {
+    //             if (willDelete) {
+    //                 { this.handleClickRemove(id) };
+    //                 swal("Your task has been deleted", {
+    //                     icon: "success",
 
-                    });
-                } else {
-                    swal("Your task is safe!");
-                }
-            });
-    }; // End removeAlert
+    //                 });
+    //             } else {
+    //                 swal("Your task is safe!");
+    //             }
+    //         });
+    // }; // End removeAlert
 
-    // Edit and Update a Task Name & Date
-    editTask = (id) => {
-        this.setState({
-            taskIsEditable: true,
-            editableTaskId: id,
-        });
-    }; // end editTask
+    // // Edit and Update a Task Name & Date
+    // editTask = (id, task_name) => {
+    //     // let task_name = task_name;
+    //     this.setState({
+    //         taskIsEditable: true,
+    //         editableTaskId: id,
+    //         task_name: task_name,
+    //     });
+    // }; // end editTask
 
-    handleChange = (event) => {
-        this.setState({
-            task_name: event.target.value
-        })
-    }; // end handleChange
+    // handleChange = (event) => {
+    //     this.setState({
+    //         task_name: event.target.value
+    //     })
 
-    postTask = (id) => {
-        console.log('postTask:', this.state.task)
-        let task = this.state.task_name;
-        this.props.dispatch({ type: 'UPDATE_TASK', payload: { task_name: task, id: this.state.editableTaskId } })
-    }
+    // }; // end handleChange
 
-    saveTask = () => {
-        this.setState({
-            taskIsEditable: false,
+    // postTask = (id) => {
+    //     console.log('postTask:', this.state.task)
+    //     let task = this.state.task_name;
+    //     this.props.dispatch({ type: 'UPDATE_TASK', payload: { task_name: task, id: this.state.editableTaskId } })
+    // }
 
-        })
-        this.postTask();
-    }; // end saveTask
+    // saveTask = () => {
+    //     this.setState({
+    //         taskIsEditable: false,
+    //     })
+    //     this.postTask();
+    // }; // end saveTask
 
-    // Click Listeners For Icons on Line Items
-    handleClickCheckBox(id) {
-        console.log('Checkbox Clicked', id);
-        this.props.dispatch({ type: 'CHECK_TASK_BOX', payload: id })
-    }; // end handleClickCheckBox
+    // // Click Listeners For Icons on Line Items
+    // handleClickCheckBox(id) {
+    //     console.log('Checkbox Clicked', id);
+    //     this.props.dispatch({ type: 'CHECK_TASK_BOX', payload: id })
+    // }; // end handleClickCheckBox
 
-    handleClickRemove(id) {
-        console.log('Remove Clicked', id);
-        this.props.dispatch({ type: 'REMOVE_TASK', payload: id })
-    }; // end handleClickRemove
+    // handleClickRemove(id) {
+    //     console.log('Remove Clicked', id);
+    //     this.props.dispatch({ type: 'REMOVE_TASK', payload: id })
+    // }; // end handleClickRemove
 
     render() {
         console.log('this.state', this.state)
@@ -112,60 +116,77 @@ class TasksLineItems extends Component {
 
 
         userTasks = this.props.reduxState.tasks.map(({ id, task_name, due_date, complete, contact_id, job_id, disabled }) => {
+            // console.log('taskDay', taskDay, this.props.reduxState.tasks[id].due_date);
             if (this.props.reduxState.tasks.due_date !== taskDay) {
                 return (
-                    <Paper key={id}>
-                        <Toolbar>
-                            <ListItem>
-                                <TasksMoreDropdown />
-                                <Tooltip title="Mark Complete">
-                                    <IconButton
-                                        onClick={() => this.handleClickCheckBox(id)}
-                                        size="small"
-                                    >
-                                        <TasksCheckBox
-                                            complete={complete}
-                                        />
-                                    </IconButton>
-                                </Tooltip>
-                                <div className="listItemText">
-                                    {this.state.taskIsEditable ?
-                                        <><ListItemText
-                                        ><TextField
-                                                placeholder={task_name}
-                                                text={task_name}
-                                                onChange={this.handleChange}
-                                            />
-                                            <IconButton
-                                                onClick={() => this.saveTask(id)}
-                                            >
-                                                <CheckIcon />
-                                            </IconButton>
-                                        </ListItemText></> :
-                                        <><ListItemText>
-                                            {task_name}
-                                            <IconButton
-                                                onClick={() => this.editTask(id)}
-                                            >
-                                                <EditIcon />
-                                            </IconButton>
-                                        </ListItemText></>
-                                    }
-                                </div>
-                                <ListItemText className="dueDate">
-                                    {due_date}
-                                </ListItemText>
-                                <Tooltip title="Delete">
-                                    <IconButton
-                                        onClick={() => this.removeAlert(id)}
-                                        size="small"
-                                    >
-                                        <ClearIcon />
-                                    </IconButton>
-                                </Tooltip>
-                            </ListItem>
-                        </ Toolbar>
-                    </Paper>
+                    <TasksLineItemsContent 
+                        id={id}
+                        task_name={task_name}
+                        due_date={due_date}
+                        complete={complete}
+                        contact_id={contact_id}
+                        job_id={job_id}
+                        disabled={disabled}
+                    />
+                    // <Paper key={id}>
+                    //     <Toolbar>
+                            
+                    //         <ListItem>
+                    //             <TasksMoreDropdown />
+                    //             <Tooltip title="Mark Complete">
+                    //                 <IconButton
+                    //                     onClick={() => this.handleClickCheckBox(id)}
+                    //                     size="small"
+                    //                 >
+                    //                     <TasksCheckBox
+                    //                         complete={complete}
+                    //                     />
+                    //                 </IconButton>
+                    //             </Tooltip>
+                    //             <div className="listItemText">
+
+                    //                 {
+                    //                     // this.state.editableTaskId == { id } && 
+                    //                     this.state.taskIsEditable ?
+                    //                         <><ListItemText
+                    //                         ><TextField
+                    //                                 placeholder={task_name}
+                    //                                 value={this.state.task_name}
+                    //                                 onChange={this.handleChange}
+                    //                             />
+                    //                             <IconButton
+                    //                                 onClick={() => this.saveTask(id)}
+                    //                             >
+                    //                                 <CheckIcon />
+                    //                             </IconButton>
+                    //                         </ListItemText></> :
+                    //                         <><ListItemText>
+                    //                             {task_name}
+                    //                             <Tooltip title="Edit Task">
+                    //                                 <IconButton
+                    //                                     onClick={() => this.editTask(id, task_name)}
+                    //                                 >
+                    //                                     <EditIcon />
+                    //                                 </IconButton>
+                    //                             </Tooltip>
+                    //                         </ListItemText></>
+                    //                 }
+
+                    //             </div>
+                    //             <ListItemText className="dueDate">
+                    //                 {due_date}
+                    //             </ListItemText>
+                    //             <Tooltip title="Delete">
+                    //                 <IconButton
+                    //                     onClick={() => this.removeAlert(id)}
+                    //                     size="small"
+                    //                 >
+                    //                     <ClearIcon />
+                    //                 </IconButton>
+                    //             </Tooltip>
+                    //         </ListItem>
+                    //     </ Toolbar>
+                    // </Paper>
                 ) // End Return
             }// End If Statement
         }) // End userTasks
