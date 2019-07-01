@@ -193,7 +193,7 @@ class JobOpportunity extends Component {
 
                 {/* Stages of the Hiring Process */}
                 <Stages/>                           
-                <div className="jobOppForm">
+                {/* <div className="jobOppForm">
                     <p className="jobOppsTitle">Stages of the Hiring Process</p>
                    
                     {this.state.stages.map((stage, index) => {
@@ -262,7 +262,7 @@ class JobOpportunity extends Component {
                         <p>Current Stage:</p>
                         <p>Next Stage:</p>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Tasks */}
 
