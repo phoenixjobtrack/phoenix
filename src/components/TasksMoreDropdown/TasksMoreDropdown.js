@@ -33,42 +33,17 @@ class TasksMoreDropdown extends Component {
             },
         })
             .then(task => {
-                this.props.dispatch({ type: 'ADD_TASK_NOTE', payload: { id: this.props.id, task: `${task}`}})
-                // if (!name) throw null;
+                if (!task) throw null;
 
-                // return fetch(`https://itunes.apple.com/search?term=${name}&entity=movie`);
+                this.props.dispatch({ type: 'ADD_TASK_NOTE', payload: { id: this.props.id, task: `${task}`}})
+                
             })
             .then(results => {
                 swal("Note Added", {
                     icon: "success",
                 });
 
-                // return results.json();
             })
-            .then(json => {
-                // const movie = json.results[0];
-
-                // if (!movie) {
-                //     return swal("No movie was found!");
-                // }
-
-                // const name = movie.trackName;
-                // const imageURL = movie.artworkUrl100;
-
-                // swal({
-                //     title: "Top result:",
-                //     text: name,
-                //     icon: imageURL,
-                // });
-            })
-            .catch(err => {
-                // if (err) {
-                //     swal("Oh noes!", "The AJAX request failed!", "error");
-                // } else {
-                //     swal.stopLoading();
-                //     swal.close();
-                // }
-            });
     }; // End addNoteToTask
 
     addContactToTask(popupState) {
