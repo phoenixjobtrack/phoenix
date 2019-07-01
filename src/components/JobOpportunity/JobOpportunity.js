@@ -14,10 +14,20 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import Select from '@material-ui/core/Select';
 import './JobOpportunity.css';
+//import JobInfo from './JobInfo';
 
 class JobOpportunity extends Component {
     state = {
-        jobs: {},
+        jobs: {
+            company : '',
+            position : '',
+            posting_url : '',
+            deadline : '',
+            salary : '',
+            benefits : '',
+            travel : '',
+            notes : '',
+        },
         stages: [{}],
         tasks: [{}],
         job_requirements: {},
@@ -74,7 +84,7 @@ class JobOpportunity extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         console.log('jobOpps', this.state);
-        this.props.dispatch({ type: '', payload: this.state.jobs });
+        this.props.dispatch({ type: 'ADD_JOB', payload: this.state.jobs });
         this.props.dispatch({ type: '', payload: this.state.stages });
         this.props.dispatch({ type: 'ADD_TASK', payload: this.state.tasks });
         this.props.dispatch({ type: '', payload: this.state.requirements });
@@ -90,8 +100,9 @@ class JobOpportunity extends Component {
                     <Button variant="contained" color="primary">Offer Accepted</Button>
                     <Button variant="contained" color="primary">Close Opportunity</Button>
                 </div>
+                {/* <JobInfo /> */}
 
-                {/* Employment Information */}
+                 {/* Employment Information */}
 
                 <div className="jobOppForm">
                     <p className="jobOppsTitle">Employment Information</p>
@@ -106,6 +117,7 @@ class JobOpportunity extends Component {
                             <Grid item sm={3}>
                             <Input
                                         placeholder="Company"
+                                        value={this.state.company}
                                         onChange={this.handleJobChange('company')}
                                         inputProps={{
                                             'aria-label': 'Description',
@@ -113,6 +125,7 @@ class JobOpportunity extends Component {
                                     />
                             <Input
                                         placeholder="Position"
+                                        value={this.state.position}
                                         onChange={this.handleJobChange('position')}
                                         inputProps={{
                                             'aria-label': 'Description',
@@ -120,6 +133,7 @@ class JobOpportunity extends Component {
                                     />
                             <Input
                                         placeholder="Posting URL"
+                                        value={this.state.posting_url}
                                         onChange={this.handleJobChange('posting_url')}
                                         inputProps={{
                                             'aria-label': 'Description',
@@ -130,6 +144,7 @@ class JobOpportunity extends Component {
                                         id="date"
                                         style={{ width: 150 }}
                                         type="date"
+                                        value={this.state.deadline}
                                         onChange={this.handleJobChange('deadline')}
                                         // defaultValue="2017-05-24"
                                         InputLabelProps={{
@@ -152,6 +167,7 @@ class JobOpportunity extends Component {
                             <Grid item sm={3}>
                             <Input
                                         placeholder="Salary"
+                                        value={this.state.salary}
                                         onChange={this.handleJobChange('salary')}
                                         inputProps={{
                                             'aria-label': 'Description',
@@ -160,6 +176,7 @@ class JobOpportunity extends Component {
                             <TextField
                                         id="outlined-multiline-flexible"
                                         label="Benefits"
+                                         value={this.state.benefits}
                                         onChange={this.handleJobChange('benefits')}
                                         multiline
                                         rowsMax="15"
@@ -168,6 +185,7 @@ class JobOpportunity extends Component {
                                     />
                             <Input
                                         placeholder="Travel"
+                                         value={this.state.travel}
                                         onChange={this.handleJobChange('travel')}
                                         inputProps={{
                                             'aria-label': 'Description',
@@ -179,6 +197,7 @@ class JobOpportunity extends Component {
                         <TextField
                             id="outlined-multiline-flexible"
                             label="Notes"
+                             value={this.state.notes}
                             onChange={this.handleJobChange('notes')}
                             multiline
                             rowsMax="15"
@@ -186,7 +205,7 @@ class JobOpportunity extends Component {
                             variant="outlined"
                         />
                     </div>
-                </div>
+                </div> 
 
                 {/* Stages of the Hiring Process */}
 
@@ -349,7 +368,7 @@ class JobOpportunity extends Component {
                     </Grid>
                     </div>
                 </div>
-                <Button variant="contained" color="primary" style={{ width: 350, marginTop: 30 }}>Add Job Opportunity</Button>
+                <Button variant="contained" color="primary"  style={{ width: 350, marginTop: 30 }}>Add Job Opportunity</Button>
             </div>
         )
     }
