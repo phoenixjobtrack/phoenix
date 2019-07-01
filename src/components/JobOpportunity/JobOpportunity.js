@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Stages from './Stages'
 
+import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Input from '@material-ui/core/Input';
@@ -106,7 +107,7 @@ class JobOpportunity extends Component {
                                 <p>Posting URL: </p>
                                 <p>Deadline: </p>
                             </Grid>
-                            <Grid item sm={3}>
+                            <Grid item sm={3} >
                             <Input
                                         placeholder="Company"
                                         onChange={this.handleJobChange('company')}
@@ -315,42 +316,58 @@ class JobOpportunity extends Component {
 
                 <div className="jobOppForm">
                     <p className="jobOppsTitle">Employment Requirements</p>
-                    <button>Update Personal Requirements</button>
-                    <br />
-                    <div className="oppGrid1">
                     <Grid container>
-                    <Grid item sm={3}>
-                    <span style={{ marginTop: 16 }}>Requirement: 180K salary </span>
+                    <Grid item sm={8}>
                     </Grid>
-                    <Grid item sm={5}>
-                    <Input
-                        style={{ width: 350 }}
-                        placeholder="Offer Details"
-                        onChange={this.handleRequireChange('job_requirement')}
-                        inputProps={{
-                            'aria-label': 'Description',
-                        }}
-                    />
+                    <Grid item sm={4}>
+                    <button>Update Personal Requirements</button>
                     </Grid>
-                    <FormControl component="fieldset" >
-                        <FormLabel component="legend">Requirements Match</FormLabel>
-                        <FormGroup >
-                            <FormControlLabel
-                                control={
-                                    <Checkbox onChange={this.handleRequireChange('requirement_met')} value="true" />}
-                                label="True"
-                            />
- 
-                            <FormControlLabel
-                                control={
-                                    <Checkbox onChange={this.handleRequireChange('requirement_met')} value="false" />
-                                }
-                                label="false"
-                            />
-                        </FormGroup>
-                    </FormControl>
                     </Grid>
-                    </div>
+                    {this.props.require.map((user, i) => {
+                            return (
+                         
+                                <div className="oppGrid4">
+                                <Grid container>
+                                <Grid item sm={4}>
+                                <span> Requirement: {user.requirement} </span>
+                                </Grid>
+                                <Grid item sm={5}>
+                                <Input
+                                    style={{ width: 350 }}
+                                    placeholder="Offer Details"
+                                    onChange={this.handleRequireChange('job_requirement')}
+                                    inputProps={{
+                                        'aria-label': 'Description',
+                                    }}
+                                />
+                                </Grid>
+                                <Grid item sm={3}>
+                                <FormControl component="fieldset" >
+                                    <FormLabel component="legend">Meets Requirement?</FormLabel>
+                                    <FormGroup >
+                                        <FormControlLabel
+                                        
+                                            control={
+                                                <Checkbox onChange={this.handleRequireChange('requirement_met')} value="true" />}
+                                            label="True"
+                                        />
+             
+                                        <FormControlLabel
+                                            control={
+                                                <Checkbox onChange={this.handleRequireChange('requirement_met')} value="false" />
+                                            }
+                                            label="False"
+                                        />
+                                    </FormGroup>
+                                </FormControl>
+                                </Grid>
+                                </Grid>
+                                </div>                      
+
+                        
+                            )
+                        })}
+                    
                 </div>
                 <Button variant="contained" color="primary" style={{ width: 350, marginTop: 30 }}>Add Job Opportunity</Button>
             </div>
@@ -358,4 +375,7 @@ class JobOpportunity extends Component {
     }
 }
 
-export default JobOpportunity;
+const mapStateToProps = (state) => ({
+    require: state.requirements
+});
+export default connect(mapStateToProps)(JobOpportunity);

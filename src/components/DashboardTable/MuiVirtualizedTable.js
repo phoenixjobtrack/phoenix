@@ -5,7 +5,9 @@ import { withStyles } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import Paper from '@material-ui/core/Paper';
 import { AutoSizer, Column, Table } from 'react-virtualized';
-//import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import {withRouter} from 'react-router-dom';
+
 
 const styles = theme => ({
   flexContainer: {
@@ -106,14 +108,17 @@ class MuiVirtualizedTable extends React.PureComponent {
   }
 }
 
-MuiVirtualizedTable.propTypes = {
-  classes: PropTypes.object.isRequired,
-  columns: PropTypes.arrayOf(PropTypes.object).isRequired,
-  headerHeight: PropTypes.number,
-  onRowClick: PropTypes.func,
-  rowHeight: PropTypes.number,
-};
+// MuiVirtualizedTable.propTypes = {
+//   classes: PropTypes.object.isRequired,
+//   columns: PropTypes.arrayOf(PropTypes.object).isRequired,
+//   headerHeight: PropTypes.number,
+//   onRowClick: PropTypes.func,
+//   rowHeight: PropTypes.number,
+// };
 
-export default withStyles(styles)(MuiVirtualizedTable);
-
+const mapStateToProps = reduxState => ({
+  reduxState
+});
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(MuiVirtualizedTable)));
+// export default withRouter(connect()(withStyles(styles)(FirstPage)))
 //---
