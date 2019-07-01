@@ -49,12 +49,23 @@ function* toggleTaskCheck(action) {
     }
 }
 
+function* updateTask(action) {
+    console.log('in updateTask', action.payload);
+    try {
+        yield axios.put(`api/tasks/update/${action.payload.task_name}/${action.payload.id}`, action.payload)
+        yield put({ type: 'FETCH_TASKS' })
+    } catch (error) {
+        console.log('error in upateTask saga', error);
+    }
+}
+
 // Watcher Saga
 function* tasksSaga() {
     yield takeEvery('ADD_TASK', addTask);
     yield takeEvery('CHECK_TASK_BOX', toggleTaskCheck);
     yield takeEvery('FETCH_TASKS', fetchTasks);
     yield takeEvery('REMOVE_TASK', removeTask);
+    yield takeEvery('UPDATE_TASK', updateTask);
 }
 
 export default tasksSaga;
