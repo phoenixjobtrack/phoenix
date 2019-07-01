@@ -8,8 +8,9 @@ import MaskedInput from 'react-text-mask'
 import AddTask from './AddTask'
 import TaskList from './TaskList'
 
-
-import { Card, CardContent, Typography, Button, TextField, List, ListItem, Grid, withStyles } from '@material-ui/core'
+import Avatar from '@material-ui/core/Avatar';
+import { red } from '@material-ui/core/colors';
+import { Card, CardContent, CardHeader, Typography, Button, TextField, List, ListItem, Grid, withStyles } from '@material-ui/core'
 
 const styles = theme => ({
 
@@ -19,6 +20,14 @@ const styles = theme => ({
     },
     input: {
         margin: theme.spacing.unit,
+    },
+    card: {
+        height: '85vh'
+    },
+    avatar: {
+        backgroundColor: red[500],
+        height: '100px',
+        width: '100px'
     },
 
 });
@@ -66,11 +75,43 @@ class ContactPage extends Component {
 
 
     render() {
-        
+         
         console.log('currentContact', this.props.reduxState.currentContact)
         let currentContact = this.props.reduxState.currentContact
+        let avatar 
+
+        //define avatar depending on what text fields are filled
+        if (currentContact.first_name && currentContact.last_name){
+            avatar = 
+                <Avatar aria-label="Contact" className={this.props.classes.avatar}>
+                    {currentContact.first_name[0]}{currentContact.last_name[0]}
+                </Avatar>
+        }
+        else if (currentContact.first_name && !currentContact.last_name) {
+            avatar = 
+                <Avatar aria-label="Contact" className={this.props.classes.avatar}>
+                    {currentContact.first_name[0]}
+                </Avatar>
+        }
+        else if (!currentContact.first_name && currentContact.last_name) {
+            avatar = 
+                <Avatar aria-label="Contact" className={this.props.classes.avatar}>
+                    {currentContact.last_name[0]}
+                </Avatar>
+        }
+        else 
+            avatar = 
+                <Avatar aria-label="Contact" className={this.props.classes.avatar}>
+                    
+                </Avatar>
+        
         return (
-            <Card>
+            <Card className={this.props.classes.card}>
+                <CardHeader
+                    avatar={avatar}
+                    title={`${currentContact.first_name} ${currentContact.last_name}`}
+                    subheader={currentContact.company}
+                />
                 <CardContent>
                     <Grid container>
                         <Grid item xs={6}>
