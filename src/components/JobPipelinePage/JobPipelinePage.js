@@ -32,7 +32,7 @@ const rows = this.props.reduxState.jobs;
               </ButtonGroup>
             </Grid>
             <Grid item sm>
-            <Button variant="contained" color="primary">NEW OPPORTUNITY</Button>
+            <Button onClick={() => {this.props.history.push('/jobOpportunity');}} variant="contained" color="primary">NEW OPPORTUNITY</Button>
             </Grid>
           </Grid>
     <Paper style={{ height: 335, width: '100%' }}>
@@ -67,6 +67,12 @@ const rows = this.props.reduxState.jobs;
             width: 600,
             label: 'Notes',
             dataKey: 'note',
+            //numeric: true,
+          },
+          {
+            width: 600,
+            label: 'NextStage',
+            dataKey: 'stage',
             //numeric: true,
           },
         ]}
