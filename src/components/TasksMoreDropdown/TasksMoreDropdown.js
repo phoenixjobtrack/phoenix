@@ -6,10 +6,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // ----- COMPONENTS ----- //
-
+// import MenuNotesTask from '../MenuNotesTask/MenuNotesTask';
+import swal from 'sweetalert';
 
 // ----- MATERIAL UI CORE ----- //
-import Dialog from '@material-ui/core/Dialog';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -24,7 +24,51 @@ class TasksMoreDropdown extends Component {
     addNoteToTask(popupState) {
         console.log('in addNoteToTask');
         popupState();
+        swal({
+            text: 'Add note to task',
+            content: "input",
+            button: {
+                text: "add",
+                closeModal: false,
+            },
+        })
+            .then(task => {
+                this.props.dispatch({ type: 'ADD_TASK_NOTE', payload: { id: this.props.id, task: `${task}`}})
+                // if (!name) throw null;
 
+                // return fetch(`https://itunes.apple.com/search?term=${name}&entity=movie`);
+            })
+            .then(results => {
+                swal("Note Added", {
+                    icon: "success",
+                });
+
+                // return results.json();
+            })
+            .then(json => {
+                // const movie = json.results[0];
+
+                // if (!movie) {
+                //     return swal("No movie was found!");
+                // }
+
+                // const name = movie.trackName;
+                // const imageURL = movie.artworkUrl100;
+
+                // swal({
+                //     title: "Top result:",
+                //     text: name,
+                //     icon: imageURL,
+                // });
+            })
+            .catch(err => {
+                // if (err) {
+                //     swal("Oh noes!", "The AJAX request failed!", "error");
+                // } else {
+                //     swal.stopLoading();
+                //     swal.close();
+                // }
+            });
     }; // End addNoteToTask
 
     addContactToTask(popupState) {
@@ -40,24 +84,34 @@ class TasksMoreDropdown extends Component {
     render() {
         return (
             <>
-            <div className="moreMenu">
-                <PopupState variant="popover" popupId="popup-menu">
-                    {popupState => (
-                        <React.Fragment>
-                            <Tooltip title="More">
-                                <IconButton variant="contained" {...bindTrigger(popupState)} >
-                                    <MoreVertIcon />
-                                </ IconButton>
-                            </Tooltip>
-                            <Menu {...bindMenu(popupState)}>
-                                <MenuItem onClick={() => this.addNoteToTask(popupState.close)}>Add Note</MenuItem>
-                                <MenuItem onClick={() => this.addContactToTask(popupState.close)}>Add To Contact</MenuItem>
-                                <MenuItem onClick={() => this.addJobToTask(popupState.close)}>Add To Job</MenuItem>
-                            </Menu>
-                        </React.Fragment>
-                    )}
-                </PopupState>
-            </div>
+                <div className="moreMenu">
+                    <PopupState variant="popover" popupId="popup-menu">
+                        {popupState => (
+                            <React.Fragment>
+                                <Tooltip title="More">
+                                    <IconButton variant="contained" {...bindTrigger(popupState)} >
+                                        <MoreVertIcon />
+                                    </ IconButton>
+                                </Tooltip>
+                                <Menu {...bindMenu(popupState)}>
+                                    <MenuItem
+                                        onClick={() => this.addNoteToTask(popupState.close)}
+
+                                    >Add Note</MenuItem>
+                                    <MenuItem
+                                        onClick={() => this.addContactToTask(popupState.close)}
+
+                                    >Add To Contact</MenuItem>
+                                    <MenuItem
+                                        onClick={() => this.addJobToTask(popupState.close)}
+
+                                    >Add To Job</MenuItem>
+                                </Menu>
+                            </React.Fragment>
+                        )
+                        }
+                    </PopupState>
+                </div>
             </>
         )
     }

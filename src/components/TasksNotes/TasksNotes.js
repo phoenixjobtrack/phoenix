@@ -20,7 +20,6 @@ import './TasksNotes.css'
 
 class TasksNotes extends Component {
     render() {
-        console.log('TasksNotes State', this.props.note)
         if (this.props.note !== null) {
             return (
                 <div className="tasksNotes">

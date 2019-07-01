@@ -6,15 +6,13 @@ import { connect } from 'react-redux';
 import TasksLineItemsContent from '../TasksLineItemsContent/TasksLineItemsContent';
 import TasksNotes from '../TasksNotes/TasksNotes';
 
-
 // ----- MATERIAL UI CORE ----- //
 import List from '@material-ui/core/List';
 
 // ----- MATERIAL UI ICONS ----- //
 
-
 // ----- STYLES ----- //
-import swal from 'sweetalert';
+
 
 class TasksLineItems extends Component {
 

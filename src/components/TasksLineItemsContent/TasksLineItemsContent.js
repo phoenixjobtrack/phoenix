@@ -104,7 +104,10 @@ class TasksLineItemsContent extends Component {
             <Paper key={this.props.id}>
                 <Toolbar>
                     <ListItem>
-                        <TasksMoreDropdown id={this.props.id}/>
+                        <TasksMoreDropdown 
+                            id={this.props.id}
+                            task_name={this.props.task_name}
+                        />
                         <Tooltip title="Mark Complete">
                             <IconButton
                                 onClick={() => this.handleClickCheckBox(this.props.id)}

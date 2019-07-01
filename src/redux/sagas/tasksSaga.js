@@ -15,6 +15,17 @@ function* addTask(action) {
     }
 }
 
+// Adds a note to a task in the "tasks" table
+function* addTaskNote(action) {
+    console.log('in addTaskNote Saga', action.payload);
+    try {
+        yield axios.put(`api/tasks/note/${action.payload.task}/${action.payload.id}`, action.payload)
+        yield put({ type: 'FETCH_TASKS'})
+    } catch (error) {
+        console.log('error in addTaskNote', error);
+    }
+}
+
 // Fetch all tasks from the database in the "tasks" table
 function* fetchTasks(action) {
     console.log('in fetchTasks Saga', action.payload);
@@ -62,6 +73,7 @@ function* updateTask(action) {
 // Watcher Saga
 function* tasksSaga() {
     yield takeEvery('ADD_TASK', addTask);
+    yield takeEvery('ADD_TASK_NOTE', addTaskNote)
     yield takeEvery('CHECK_TASK_BOX', toggleTaskCheck);
     yield takeEvery('FETCH_TASKS', fetchTasks);
     yield takeEvery('REMOVE_TASK', removeTask);

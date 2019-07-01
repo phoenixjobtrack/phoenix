@@ -53,6 +53,18 @@ router.put('/:id', (req, res) => {
         })
 }); // End router.put/api/tasks/:id
 
+router.put('/note/:task/:id', (req, res) => {
+    const queryText = `UPDATE "tasks" SET "note"=$1 WHERE "tasks"."id"=$2;`;
+    pool.query(queryText, [req.params.task, req.params.id])
+        .then(response => {
+            console.log('in PUT /api/tasks/note', response)
+            res.sendStatus(200)
+        })
+        .catch(err => {
+            console.log('error in PUT /api/tasks/note', err)
+        })
+}); // End router.put/api/tasks/note
+
 router.put('/update/:task_name/:id', (req, res) => {
     const queryText = `UPDATE "tasks" SET "task_name" = $1 WHERE "id" = $2;`;
     pool.query(queryText, [req.params.task_name, req.params.id])
