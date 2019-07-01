@@ -19,6 +19,12 @@ import Tooltip from '@material-ui/core/Tooltip';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 class TasksMoreDropdown extends Component {
+
+    addNoteToTask(props) {
+        console.log('in addNoteToTask');
+
+    }
+
     render() {
         return (
             <div className="moreMenu">

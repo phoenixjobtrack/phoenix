@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 // ----- COMPONENTS ----- //
 import TasksCheckBox from '../TasksCheckBox/TasksCheckBox';
-import TasksMoreDropdown from '../TasksMenuItem/TasksMenuItem';
+import TasksMoreDropdown from '../TasksMoreDropdown/TasksMoreDropdown';
 
 
 // ----- MATERIAL UI CORE ----- //
@@ -97,12 +97,6 @@ class TasksLineItems extends Component {
         console.log('Remove Clicked', id);
         this.props.dispatch({ type: 'REMOVE_TASK', payload: id })
     }; // end handleClickRemove
-
-    // Items in "More" dropdown menu
-    addNoteToTask(props) {
-        console.log('in addNoteToTask');
-       
-    }
 
     render() {
         console.log('this.state', this.state)
