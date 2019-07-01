@@ -103,6 +103,7 @@ CREATE TABLE "tasks" (
     "complete" BOOLEAN DEFAULT 'false',
     "contact_id" INTEGER REFERENCES "contacts" ON DELETE CASCADE,
     "job_id" INTEGER REFERENCES "jobs" ON DELETE CASCADE,
+    "note" VARCHAR (255),
     "disabled" BOOLEAN DEFAULT 'false'
 );
 
