@@ -128,65 +128,6 @@ class TasksLineItems extends Component {
                         job_id={job_id}
                         disabled={disabled}
                     />
-                    // <Paper key={id}>
-                    //     <Toolbar>
-                            
-                    //         <ListItem>
-                    //             <TasksMoreDropdown />
-                    //             <Tooltip title="Mark Complete">
-                    //                 <IconButton
-                    //                     onClick={() => this.handleClickCheckBox(id)}
-                    //                     size="small"
-                    //                 >
-                    //                     <TasksCheckBox
-                    //                         complete={complete}
-                    //                     />
-                    //                 </IconButton>
-                    //             </Tooltip>
-                    //             <div className="listItemText">
-
-                    //                 {
-                    //                     // this.state.editableTaskId == { id } && 
-                    //                     this.state.taskIsEditable ?
-                    //                         <><ListItemText
-                    //                         ><TextField
-                    //                                 placeholder={task_name}
-                    //                                 value={this.state.task_name}
-                    //                                 onChange={this.handleChange}
-                    //                             />
-                    //                             <IconButton
-                    //                                 onClick={() => this.saveTask(id)}
-                    //                             >
-                    //                                 <CheckIcon />
-                    //                             </IconButton>
-                    //                         </ListItemText></> :
-                    //                         <><ListItemText>
-                    //                             {task_name}
-                    //                             <Tooltip title="Edit Task">
-                    //                                 <IconButton
-                    //                                     onClick={() => this.editTask(id, task_name)}
-                    //                                 >
-                    //                                     <EditIcon />
-                    //                                 </IconButton>
-                    //                             </Tooltip>
-                    //                         </ListItemText></>
-                    //                 }
-
-                    //             </div>
-                    //             <ListItemText className="dueDate">
-                    //                 {due_date}
-                    //             </ListItemText>
-                    //             <Tooltip title="Delete">
-                    //                 <IconButton
-                    //                     onClick={() => this.removeAlert(id)}
-                    //                     size="small"
-                    //                 >
-                    //                     <ClearIcon />
-                    //                 </IconButton>
-                    //             </Tooltip>
-                    //         </ListItem>
-                    //     </ Toolbar>
-                    // </Paper>
                 ) // End Return
             }// End If Statement
         }) // End userTasks

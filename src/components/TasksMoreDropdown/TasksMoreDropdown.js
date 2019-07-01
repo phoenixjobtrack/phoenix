@@ -20,10 +20,20 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 class TasksMoreDropdown extends Component {
 
-    addNoteToTask(props) {
+    addNoteToTask(popupState) {
         console.log('in addNoteToTask');
+        popupState();
+    }; // End addNoteToTask
 
-    }
+    addContactToTask(popupState) {
+        console.log('in addContactToTask');
+        popupState();
+    }; // End addContactToTask
+
+    addJobToTask(popupState) {
+        console.log('in addJobToTask');
+        popupState();
+    }; // End addJobToTask
 
     render() {
         return (
@@ -37,12 +47,9 @@ class TasksMoreDropdown extends Component {
                                 </ IconButton>
                             </Tooltip>
                             <Menu {...bindMenu(popupState)}>
-                                <MenuItem
-                                    onClick={popupState.close}
-                                    onClose={() => this.addNoteToTask}
-                                >Add Note</MenuItem>
-                                <MenuItem onClick={popupState.close}>Add To Contact</MenuItem>
-                                <MenuItem onClick={popupState.close}>Add To Job</MenuItem>
+                                <MenuItem onClick={() => this.addNoteToTask(popupState.close)}>Add Note</MenuItem>
+                                <MenuItem onClick={() => this.addContactToTask(popupState.close)}>Add To Contact</MenuItem>
+                                <MenuItem onClick={() => this.addJobToTask(popupState.close)}>Add To Job</MenuItem>
                             </Menu>
                         </React.Fragment>
                     )}
