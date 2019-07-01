@@ -60,10 +60,12 @@ class TasksLineItems extends Component {
     }; // End removeAlert
 
     // Edit and Update a Task Name & Date
-    editTask = (id) => {
+    editTask = (id, task_name) => {
+        // let task_name = task_name;
         this.setState({
             taskIsEditable: true,
             editableTaskId: id,
+            task_name: task_name,
         });
     }; // end editTask
 
@@ -71,6 +73,7 @@ class TasksLineItems extends Component {
         this.setState({
             task_name: event.target.value
         })
+
     }; // end handleChange
 
     postTask = (id) => {
@@ -82,7 +85,6 @@ class TasksLineItems extends Component {
     saveTask = () => {
         this.setState({
             taskIsEditable: false,
-
         })
         this.postTask();
     }; // end saveTask
@@ -133,7 +135,7 @@ class TasksLineItems extends Component {
                                         <><ListItemText
                                         ><TextField
                                                 placeholder={task_name}
-                                                text={task_name}
+                                                value={this.state.task_name}
                                                 onChange={this.handleChange}
                                             />
                                             <IconButton
@@ -145,7 +147,7 @@ class TasksLineItems extends Component {
                                         <><ListItemText>
                                             {task_name}
                                             <IconButton
-                                                onClick={() => this.editTask(id)}
+                                                onClick={() => this.editTask(id, task_name)}
                                             >
                                                 <EditIcon />
                                             </IconButton>
