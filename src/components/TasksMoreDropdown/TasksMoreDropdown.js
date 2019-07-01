@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 
 
 // ----- MATERIAL UI CORE ----- //
+import Dialog from '@material-ui/core/Dialog';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -23,6 +24,7 @@ class TasksMoreDropdown extends Component {
     addNoteToTask(popupState) {
         console.log('in addNoteToTask');
         popupState();
+
     }; // End addNoteToTask
 
     addContactToTask(popupState) {
@@ -37,6 +39,7 @@ class TasksMoreDropdown extends Component {
 
     render() {
         return (
+            <>
             <div className="moreMenu">
                 <PopupState variant="popover" popupId="popup-menu">
                     {popupState => (
@@ -55,6 +58,7 @@ class TasksMoreDropdown extends Component {
                     )}
                 </PopupState>
             </div>
+            </>
         )
     }
 }
