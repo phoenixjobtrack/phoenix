@@ -43,30 +43,15 @@ class DashboardPage extends Component {
               <h2>Job Requirements<AddIcon className="dashAddIcon" /></h2>
               <div className="requireBox">
                 <div className="requireText">
-                  <ul className="boxText">
-                    {/* {this.props.require.map((user, i) => {
+                    {this.props.require.map((user, i) => {
                         return (
-                          <ul>
+                          <ul className="boxText">
                             <li>{user.requirement}</li>
                           </ul>
                         )
-                      }
+                      
                     })}
-                  </div> */}
-                    <li>6 weeks vacation</li>
-                    <li>Work from home</li>
-                    <li>75k annually</li>
-                    <li>6 weeks vacation</li>
-                    <li>Work from home</li>
-                    <li>75k annually</li>
-                    <li>6 weeks vacation</li>
-                    <li>Work from home</li>
-                    <li>75k annually</li>
-                    <li>6 weeks vacation</li>
-                    <li>Work from home</li>
-                    <li>75k annually</li>
-                  </ul>
-              </div>
+                </div>
               </div>
             </Paper>
           </Grid>

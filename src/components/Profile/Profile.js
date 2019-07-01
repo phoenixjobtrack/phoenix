@@ -39,8 +39,18 @@ class Profile extends Component {
         });
     }
 
+    handleEditChange = propertyName => (event) => {
+        this.setState({
+            requireList: [{
+            ...this.state,
+            [propertyName]: event.target.value,
+          }]
+        });
+      }
+
     handleSubmit = (event) => {
         event.preventDefault();
+        this.props.dispatch({ type: 'UPDATE_REQUIREMENTS', payload: this.state.requireList })
     }
 
     render() {
@@ -52,14 +62,12 @@ class Profile extends Component {
                     <p contenteditable>First Name: {this.props.profile.first_name}</p>
                     <p>Last Name: {this.props.profile.last_name}</p>
                     <p>E-mail: {this.props.profile.email}</p>
-                    {/* {this.props.require.map((user, i) => {
+                    <p>Employment Requirement(s):</p>
+                    {this.props.require.map((user, i) => {
                         return (
-                        <ul>
-                            <li>{user.requirement}</li>
-                        </ul>
+                            <p>{user.requirement}</p>
                         )
-                    }
-                    })} */}
+                    })}
                 </div>
         } else {
             profileView =
@@ -97,7 +105,21 @@ class Profile extends Component {
                             margin="dense"
                             onChange={this.handleChange('email')} 
                         />
-
+                        
+                        <p> Employment Requirement(s): </p>
+                        {this.props.require.map((user, i) => {
+                            return (
+                            <p>
+                                <TextField
+                                    id="standard-dense"
+                                    label={user.requirement}
+                                    className="profileInput"
+                                    margin="dense"
+                                    // onChange={this.handleChange('requirement')} 
+                                />
+                            </p>
+                            )
+                        })}
                             {this.state.requireList.map((requirement, index) => {
                                 return (
                                     <p>

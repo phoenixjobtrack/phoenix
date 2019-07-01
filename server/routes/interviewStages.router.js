@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    console.log('in /tasks router.get');
+    console.log('in /interviewstages router.get');
     let query = `SELECT * FROM "interview_stages" WHERE "user_id"=$1;`;
     pool.query(query, [req.user.id])
         .then((result) => {
