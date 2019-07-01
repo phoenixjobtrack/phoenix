@@ -1,3 +1,4 @@
+// ========== REACT ========== //
 import React, {Component} from 'react';
 import {
   HashRouter as Router,
@@ -5,31 +6,42 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-
 import {connect} from 'react-redux';
 
-import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
-
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-
+// ========== COMPONENTS ========== //
 import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
+import ContactBookPage from '../ContactbookPage/ContactBookPage';
 import DashboardPage from '../DashboardPage/DashboardPage';
+import Footer from '../Footer/Footer';
+import InfoPage from '../InfoPage/InfoPage';
+import Profile from '../Profile/Profile';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import SideMenu from '../SideMenu/SideMenu';
+import Tasks from '../Tasks/Tasks';
+import JobPipelinePage from '../JobPipelinePage/JobPipelinePage';
+import JobOpportunity from '../JobOpportunity/JobOpportunity';
+import UserPage from '../UserPage/UserPage';
+import TopBar from '../TopBar/TopBar';
+import AddContactPage from '../ContactPage/AddContactPage'
+import EditContactPage from '../ContactPage/EditContactPage'
 
+// ========== STYLE ========== //
 import './App.css';
+
 
 class App extends Component {
   componentDidMount () {
     this.props.dispatch({type: 'FETCH_USER'})
+    this.props.dispatch({type: 'FETCH_TASKS'})
+    this.props.dispatch({type: 'FETCH_REQUIREMENTS'})
   }
 
   render() {
     return (
       <Router>
-        <div>
-          <Nav />
+        <div className="app">
+          <TopBar />
+          <SideMenu />
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
@@ -61,6 +73,42 @@ class App extends Component {
               exact
               path="/dashboard"
               component={DashboardPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/profile"
+              component={Profile}
+            />
+            {/* This is the protected Route for the Task page */}
+            <ProtectedRoute
+              exact
+              path="/tasks"
+              component={Tasks}
+            />
+            <ProtectedRoute
+              exact
+              path="/contact"
+              component={ContactBookPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/contact/view/:id"
+              component={EditContactPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/contact/add"
+              component={AddContactPage}
+            />
+            <ProtectedRoute
+              exact
+              path="/jobpipeline"
+              component={JobPipelinePage}
+            />
+            <ProtectedRoute
+              exact
+              path="/jobOpportunity"
+              component={JobOpportunity}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

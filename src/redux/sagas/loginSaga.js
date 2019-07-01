@@ -3,6 +3,7 @@ import axios from 'axios';
 
 // worker Saga: will be fired on "LOGIN" actions
 function* loginUser(action) {
+  console.log('loginUser Saga', action)
   try {
     // clear any existing error on the login page
     yield put({ type: 'CLEAR_LOGIN_ERROR' });
@@ -11,7 +12,7 @@ function* loginUser(action) {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     };
-
+    console.log('in login saga', action.payload, config)
     // send the action.payload as the body
     // the config includes credentials which
     // allow the server session to recognize the user
@@ -20,12 +21,16 @@ function* loginUser(action) {
     // after the user has logged in
     // get the user information from the server
     yield put({type: 'FETCH_USER'});
+
+    //save requirements for new user
+    yield put({ type: 'ADD_REQUIREMENTS', payload: action.payload });
+    
   } catch (error) {
     console.log('Error with user login:', error);
     if (error.response.status === 401) {
       // The 401 is the error status sent from passport
       // if user isn't in the database or
-      // if the username and password don't match in the database
+      // if the email and password don't match in the database
       yield put({ type: 'LOGIN_FAILED' });
     } else {
       // Got an error that wasn't a 401

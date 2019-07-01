@@ -1,7 +1,11 @@
 import { all } from 'redux-saga/effects';
 import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
+import requirementsSaga from './requirementsSaga';
+import tasksSaga from './tasksSaga';
 import userSaga from './userSaga';
+import contactSaga from './contactSaga';
+import jobSaga from './jobSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -14,6 +18,10 @@ export default function* rootSaga() {
   yield all([
     loginSaga(),
     registrationSaga(),
+    requirementsSaga(),
+    tasksSaga(),
     userSaga(),
+    contactSaga(),
+    jobSaga(),
   ]);
 }
