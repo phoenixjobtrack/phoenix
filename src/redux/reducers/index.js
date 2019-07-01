@@ -4,7 +4,7 @@ import loginMode from './loginModeReducer';
 import tasks from './tasksReducer';
 import user from './userReducer';
 import contacts from './contactReducer';
-import requirements from './requirementReducer';
+import requirements from './requirementsReducer';
 import jobs from './jobReducer';
 import currentContact from './currentContactReducer';
 
