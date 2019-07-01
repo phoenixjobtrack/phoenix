@@ -7,6 +7,7 @@ import contacts from './contactReducer';
 import requirements from './requirementsReducer';
 import jobs from './jobReducer';
 import currentContact from './currentContactReducer';
+import interviewStages from './interviewStagesReducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   requirements, //will store all of the user's job requirements
   jobs,
   currentContact, //stores data for selected contact
+  interviewStages //stores list of interview stages
 });
 
 export default rootReducer;

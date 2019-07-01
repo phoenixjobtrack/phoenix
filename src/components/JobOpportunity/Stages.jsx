@@ -37,7 +37,7 @@ class Stages extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch({type: 'FETCH_STAGES'})
+        this.props.dispatch({ type: 'FETCH_INTERVIEW_STAGES'})
     }
 
     render() {
@@ -68,6 +68,11 @@ class Stages extends Component {
                                                 id: 'age-simple',
                                             }}
                                         >
+                                            {this.props.reduxState.interviewStages.map((interviewStage,i)=>{
+                                                return(
+                                                    <MenuItem value={interviewStage.stage}>{interviewStage.stage}</MenuItem>
+                                                )
+                                            })}
                                             <MenuItem value={10}>Ten</MenuItem>
                                             <MenuItem value={20}>Twenty</MenuItem>
                                             <MenuItem value={30}>Thirty</MenuItem>
@@ -110,7 +115,10 @@ class Stages extends Component {
             </div>
         )
     }
-    
 }
 
-export default connect()(Stages)
+const mapStateToProps = reduxState => ({
+    reduxState
+});
+
+export default connect(mapStateToProps)(Stages)
