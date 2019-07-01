@@ -2,6 +2,9 @@ import React from 'react';
 import { withRouter } from 'react-router-dom'
 import {connect} from 'react-redux'
 
+import UpcomingTasks from './UpcomingTasks'
+import CompletedTasks from './CompletedTasks'
+
 //Material UI
 import {Grid} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
@@ -53,6 +56,7 @@ function ContactCard(props) {
 
     function handleOpenContact(){
         console.log('in handleContactSelect', contact)
+        props.dispatch({ type: 'SET_TO_EDIT_MODE'})
         props.history.push(`/contact/view/${contact.id}`)
 
     }
@@ -92,8 +96,7 @@ function ContactCard(props) {
                             Phone: {contact.phone}
                         </Typography>
                     </Grid>
-                    <Grid item sm={4}>
-                        
+                    <Grid item sm={4}>                       
                     </Grid>
                     <Grid item sm={4}>
                         <Typography >
@@ -117,14 +120,10 @@ function ContactCard(props) {
                         <Typography >
                             Tasks:
                             {/* insert tasks here */}
-                            <ul>
-                                <li>Task Here</li>
-                                
-                            </ul>
+                            <CompletedTasks contactId={contact.id}/>
                         </Typography>
                     </Grid>  
-                </Grid>
-                
+                </Grid>               
             </CardContent>
             <CardActions disableSpacing>
                 History
@@ -138,15 +137,12 @@ function ContactCard(props) {
                 >
                     <ExpandMoreIcon />
                 </IconButton>
-
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
                     <Typography paragraph>
                         {/* insert task history here */}
-                        <ul>
-                            <li>Task History Here</li>
-                        </ul>                       
+                        <CompletedTasks contactId={contact.id}/>                       
                     </Typography>                    
                 </CardContent>
             </Collapse>

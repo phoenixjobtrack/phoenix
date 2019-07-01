@@ -17,7 +17,7 @@ function* addRequirements(action) {
 
 //SAGA to GET requirements from database
 function* fetchRequirements(action) {
-    
+
     try {
         const requirements = yield axios.get('/api/requirements')
         console.log('in fetchRequirements saga', requirements)
