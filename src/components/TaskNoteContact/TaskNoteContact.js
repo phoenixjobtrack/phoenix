@@ -16,13 +16,12 @@ import FaceIcon from '@material-ui/icons/Face';
 
 
 // ----- STYLES ----- //
-import swal from 'sweetalert';
+
 
 class TaskNoteContact extends Component {
 
     render() {
-        console.log('TaskNoteContact', this.props.reduxState.contacts);
-
+        
             let contactChip;
         
             if (this.props.contact_id !== null) {

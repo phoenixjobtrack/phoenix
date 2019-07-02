@@ -64,6 +64,7 @@ class Tasks extends Component {
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_TASKS' })
         this.props.dispatch({ type: 'FETCH_CONTACTS'})
+        this.props.dispatch({ type: 'FETCH_JOBS'})
     }
 
     state = {
