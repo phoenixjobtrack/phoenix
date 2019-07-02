@@ -99,6 +99,7 @@ class JobOpportunity extends Component {
 
     componentDidMount = () =>{
         this.props.dispatch({ type: 'FETCH_JOBS' })
+        this.props.dispatch({type: 'FETCH_JOB_STAGES'})
 
     }
     render() {
