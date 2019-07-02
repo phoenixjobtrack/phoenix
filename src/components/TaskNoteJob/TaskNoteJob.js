@@ -8,50 +8,46 @@ import { connect } from 'react-redux';
 // ----- MATERIAL UI CORE ----- //
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
-import Divider from '@material-ui/core/Divider'
-import IconButton from '@material-ui/core/IconButton';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
-import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from '@material-ui/core/Tooltip';
 
 
 // ----- MATERIAL UI ICONS ----- //
-import BubbleChartIcon from '@material-ui/icons/BubbleChart';
+import WorkIcon from '@material-ui/icons/Work';
 
 
 // ----- STYLES ----- //
 import swal from 'sweetalert';
 
-class TaskNoteJob extends Component {
+class TaskNoteContact extends Component {
 
     render() {
-        console.log('TaskNoteJob');
-        if (this.props.job_id !== null) {
-            return (
-                <div className="taskNoteContact">
-                    <Tooltip title="Job Opportunity">
-                    <Chip
-                        avatar={
-                            <Avatar>
-                                <BubbleChartIcon />
-                            </Avatar>
-                        }
-                        label={this.props.job_id}
-                        variant="outlined"
-                    />
-                    </Tooltip>
-                </div>
-            )
-        }
-        else {
-            return (
-                <div></div>
-            )
-        }
+        let jobChip;
 
+        if (this.props.job_id !== null) {
+            this.props.reduxState.jobs.map((job, i) => {
+                if (job.id == this.props.job_id) {
+                    console.log('It is a match', this.props.job_id, job.id);
+                    jobChip =
+                        <div className="taskNoteJob">
+                            <Tooltip title="Job">
+                                <Chip
+                                    avatar={
+                                        <Avatar>
+                                            <WorkIcon />
+                                        </Avatar>
+                                    }
+                                label={job.company_name}
+                                    variant="outlined"
+                                />
+                            </Tooltip>
+                        </div>
+                }
+            })
+
+        }
+        return (
+            <div>{jobChip}</div>
+        )
     }
 }
 
@@ -62,4 +58,4 @@ const mapStateToProps = (reduxState) => {
     }
 }
 
-export default connect(mapStateToProps)(TaskNoteJob);
+export default connect(mapStateToProps)(TaskNoteContact);

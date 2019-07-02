@@ -20,6 +20,7 @@ import Select from '@material-ui/core/Select';
 import './JobOpportunity.css';
 //import JobInfo from './JobInfo';
 
+
 class JobOpportunity extends Component {
     state = {
         job: {
@@ -97,6 +98,10 @@ class JobOpportunity extends Component {
      
     }
 
+    componentDidMount = () =>{
+        this.props.dispatch({ type: 'FETCH_JOBS' })
+
+    }
     render() {
         return (
             <div>

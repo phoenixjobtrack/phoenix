@@ -6,7 +6,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // ----- COMPONENTS ----- //
+import TasksFuture from '../TasksFuture/TasksFuture';
 import TasksLineItems from '../TasksLineItems/TasksLineItems';
+import TasksOverdue from '../TasksOverdue/TasksOverdue';
+import TasksTomorrow from '../TasksTomorrow/TasksTomorrow';
 
 // ----- STYLES ----- //
 import { makeStyles } from '@material-ui/core/styles';
@@ -63,6 +66,8 @@ class Tasks extends Component {
 
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_TASKS' })
+        this.props.dispatch({ type: 'FETCH_CONTACTS'})
+        this.props.dispatch({ type: 'FETCH_JOBS'})
     }
 
     state = {
@@ -111,56 +116,61 @@ class Tasks extends Component {
                 <ThemeProvider theme={theme}>
                     {/* // ----- Add Task Input Form ----- // */}
                     <span >
-                        <Paper><Toolbar >
-                            <TextField
-                                id="add-new-task"
-                                label="Add New Task"
-                                margin="normal"
-                                onChange={this.handleTaskChange}
-                                placeholder="Send Email To CJ"
-                                position="Relative"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                variant="outlined"
-                            />
-                            <TextField
-                                id="date"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                label="Due Date"
-                                margin="normal"
-                                onChange={this.handleDateSelect}
-                                position="Relative"
-                                type="date"
-                                variant="outlined"
-                            />
-                            <Tooltip title="Add Task">
-                                <IconButton
-                                    label="Submit"
+                        <Paper variant="outlined">
+                            <Toolbar >
+                                <TextField
+                                    id="add-new-task"
+                                    label="Add New Task"
                                     margin="normal"
-                                    onClick={() => this.handleClickAddTask()}
-                                    size="medium"
-                                    type="submit"
+                                    onChange={this.handleTaskChange}
+                                    placeholder="Send Email To CJ"
+                                    position="Relative"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
                                     variant="outlined"
-                                ><AddIcon />
-                                </IconButton>
-                            </Tooltip>
+                                />
+                                <TextField
+                                    id="date"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    label="Due Date"
+                                    margin="normal"
+                                    onChange={this.handleDateSelect}
+                                    position="Relative"
+                                    type="date"
+                                    variant="outlined"
+                                />
+                                <Tooltip title="Add Task">
+                                    <IconButton
+                                        label="Submit"
+                                        margin="normal"
+                                        onClick={() => this.handleClickAddTask()}
+                                        size="medium"
+                                        type="submit"
+                                        variant="outlined"
+                                    ><AddIcon />
+                                    </IconButton>
+                                </Tooltip>
 
-                        </Toolbar ></Paper>
+                            </Toolbar >
+                        </Paper>
                     </span>
                     <Divider />
-                    
+
                     {/* // ----- TASK DISPLAYS ----- // */}
                     <OverdueTasks className="overdueTasks" />
-                    <TasksLineItems />
+                    <TasksOverdue />
                     <Divider />
                     <TodayTasks />
+                    <TasksLineItems />
                     <Divider />
                     <TomorrowTasks />
+                    <TasksTomorrow />
                     <Divider />
                     <FutureTasks />
+                    <TasksFuture />
                     <Divider />
                     <HistoryTasks />
                     <Divider />
