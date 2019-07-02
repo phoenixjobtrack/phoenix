@@ -13,12 +13,17 @@ class Profile extends Component {
             last_name: '',
             email: '',
         },
-        requireList: [],
+        requireList: {},
         editMode: false
     }
 
-    addRequirementInput() {
-        this.setState({ requireList: [...this.state.requireList, ''] })
+    requirementCounter = 0
+
+    addRequirementInput(event) {
+        console.log('add requirement', this.requirementCounter);
+        // this.setState({ requireList: [...this.state.requireList, ''] })
+        this.setState({...this.state, requireList: { ...this.state.requireList, [this.requirementCounter]: ''} })
+        this.requirementCounter += 1
     }
 
     handleEdit = (event) => {
@@ -40,6 +45,7 @@ class Profile extends Component {
     }
 
     handleEditChange = propertyName => (event) => {
+        console.log('edit change', event.target.value);
         this.setState({
             requireList: [{
             ...this.state,
@@ -54,6 +60,7 @@ class Profile extends Component {
     }
 
     render() {
+        console.log('LOOK', this.state.requireList);
         let profileView;
         if (this.state.editMode === false) {
             profileView =
@@ -115,12 +122,12 @@ class Profile extends Component {
                                     label={user.requirement}
                                     className="profileInput"
                                     margin="dense"
-                                    // onChange={this.handleChange('requirement')} 
+                                    onChange={this.handleEditChange('requirement')} 
                                 />
                             </p>
                             )
                         })}
-                            {this.state.requireList.map((requirement, index) => {
+                            {Object.entries(this.state.requireList).map((requirement, index) => {
                                 return (
                                     <p>
                                         <TextField
@@ -128,7 +135,7 @@ class Profile extends Component {
                                             label="Requirement"
                                             className="profileInput"
                                             margin="dense"
-                                            // onChange={this.handleChange('requirement')} 
+                                            onChange={this.handleChange('requirement')} 
                                         />
                                     </p>
                                 )

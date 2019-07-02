@@ -28,9 +28,23 @@ function* fetchRequirements(action) {
     }
 }
 
+function* updateRequirements(action) {
+    console.log('in updateRequirements saga', action.payload)
+        
+    try {
+        yield action.payload.requirements.map(requirement=>{
+            axios.put(`api/requirements/update/${action.payload.task_name}/${action.payload.id}`, action.payload)
+            put({ type: 'FETCH_REQUIREMENTS' })
+        })       
+    } catch (error) {
+        console.log('error in updateRequirements saga', error);
+    }
+};
+
 function* requirementsSaga() {
     yield takeEvery('ADD_REQUIREMENTS', addRequirements);
-    yield takeEvery('FETCH_REQUIREMENTS', fetchRequirements)
+    yield takeEvery('FETCH_REQUIREMENTS', fetchRequirements);
+    yield takeEvery('UPDATE_REQUIREMENTS', updateRequirements)
 }
 
 export default requirementsSaga;
