@@ -14,7 +14,7 @@ import List from '@material-ui/core/List';
 // ----- STYLES ----- //
 
 
-class TasksOverdue extends Component {
+class TasksTomorrow extends Component {
 
     render() {
 
@@ -30,7 +30,7 @@ class TasksOverdue extends Component {
 
         userTasks = this.props.reduxState.tasks.map(({ id, task_name, due_date, complete, contact_id, job_id, disabled, note }) => {
             console.log('taskDay', taskDay, this.props.reduxState.tasks.due_date);
-            if (taskDay > due_date) {
+            if (taskDay < due_date) {
                 return (
                     <div>
                         <TasksLineItemsContent
@@ -72,4 +72,4 @@ const mapStateToProps = (reduxState) => {
     }
 }
 
-export default connect(mapStateToProps)(TasksOverdue);
+export default connect(mapStateToProps)(TasksTomorrow);
