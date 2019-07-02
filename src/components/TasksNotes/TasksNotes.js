@@ -3,9 +3,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // ----- COMPONENTS ----- //
-
+// import TaskNoteContact from '../TaskNoteContact/taskNoteContact';
+import TaskNoteContact from '../TaskNoteContact/TaskNoteContact';
 
 // ----- MATERIAL UI CORE ----- //
+import Avatar from '@material-ui/core/Avatar';
+import Chip from '@material-ui/core/Chip';
 import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton';
 import ListItem from '@material-ui/core/ListItem';
@@ -20,6 +23,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import EditIcon from '@material-ui/icons/Edit';
+import FaceIcon from '@material-ui/icons/Face';
 import NotesIcon from '@material-ui/icons/Notes';
 
 // ----- STYLES ----- //
@@ -124,7 +128,7 @@ class TasksNotes extends Component {
                                         >
                                             <EditIcon />
                                         </IconButton>
-                                    </Tooltip>
+                                    </Tooltip>                               
                                     <Tooltip title="Delete">
                                         <IconButton
                                             onClick={() => this.removeAlert(this.props.id)}
@@ -134,10 +138,10 @@ class TasksNotes extends Component {
                                         </IconButton>
                                     </Tooltip>
                                     <Divider />
+                                    
                                 </ListItem>
                             </Toolbar>
                         </Paper>
-
                     }
                 </div>
             ) // End return if
