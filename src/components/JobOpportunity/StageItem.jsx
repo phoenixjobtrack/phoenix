@@ -29,28 +29,32 @@ class StageItem extends Component {
     handleStageChange = (propertyName) => (event) => {
         console.log('stageInfo', event.target.value, propertyName);
         //send stage object to redux
-        this.props.dispatch({ type: 'UPDATE_REDUX_STAGE', payload: { key: this.props.i, prop: propertyName, value: event.target.value }})
-        // this.setState({
-        //     stage: {
-        //         ...this.state.stage,
-        //         [propertyName]: event.target.value
-        //     }
-        // })
-        // this.props.updateStageArray(this.state.stage)
+        this.props.dispatch({ 
+            type: 'UPDATE_REDUX_STAGE', 
+            payload: { 
+                key: this.props.i, 
+                prop: propertyName, 
+                value: event.target.value 
+            }
+        })
     }
-
-    handleRemove = (i) => {
-        console.log('in handleRemove', i)
-
+    handleRemove = () => {
+        console.log('in handleRemove', this.props.i)
+        this.props.dispatch({
+            type: 'REMOVE_STAGE_FROM_REDUX',
+            payload: this.props.i
+        })
+        //call function in parent component that forces parent to rerender
+        this.props.handleForceUpdate()
     }
 
     render(){
-        console.log('value', this.props.reduxState.currentStage[this.props.i])
+        console.log('value', this.props.i)
         return(
             <div>
                 <Grid container>
                     <Grid item sm={2}>
-                        <IconButton className="oppsSubBut" onClick={()=>this.handleRemove(this.props.i)}>
+                        <IconButton className="oppsSubBut" onClick={this.handleRemove}>
                             <RemoveIcon/>
                             {/* <RemoveIcon className="OppsRemoveIcon" noValidate style={{ paddingTop: 15, fontSize: 30 }} onClick={this.handleRemove}/>      */}
                         </IconButton>
@@ -85,7 +89,8 @@ class StageItem extends Component {
                                 style={{ width: 150 }}
                                 onChange={this.handleStageChange('date')}
                                 type="date"
-                                // defaultValue="2017-05-24"
+                                value={this.props.reduxState.currentStage[this.props.i].date}
+                            // defaultValue="2017-05-24"
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
@@ -95,7 +100,8 @@ class StageItem extends Component {
                     <Grid item sm={5}>
                         <Input
                             style={{ width: 300, paddingTop: 16 }}
-                            onChange={this.handleStageChange('notes')}
+                            onChange={this.handleStageChange('note')}
+                            value={this.props.reduxState.currentStage[this.props.i].note}
                             placeholder="Notes"
                             inputProps={{
                                 'aria-label': 'Description',
