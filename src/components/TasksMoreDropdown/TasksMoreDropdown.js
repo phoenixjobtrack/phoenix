@@ -6,7 +6,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // ----- COMPONENTS ----- //
-// import MenuNotesTask from '../MenuNotesTask/MenuNotesTask';
 import swal from 'sweetalert';
 
 // ----- MATERIAL UI CORE ----- //

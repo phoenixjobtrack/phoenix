@@ -26,9 +26,8 @@ router.get('/', (req, res) => {
 // POST route
 router.post('/', (req, res) => {
     console.log('in POST /api/job_requirements', req.body)
-    const newCandle = req.body;
     const queryText='INSERT INTO "job_requirements" (requirement_offer, job_id, requirement_id, requirement_met) VALUES ($1, $2, $3, $4)'
-    pool.query(queryText, [req.body.requirement_offer, req.user.id])
+    pool.query(queryText, [req.body.requirement_offer, req.body.job_id, req.body.requirement_id, req.body.requirement_met])
         .then(response=>{
             console.log('in POST /api/requirements', response)
             res.sendStatus(201)

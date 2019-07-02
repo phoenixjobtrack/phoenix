@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import FaceIcon from '@material-ui/icons/Face';
 import AddIcon from '@material-ui/icons/Add';
 import './Profile.css';
+import './EditRequirements'
 
 class Profile extends Component {
     state = {
@@ -13,14 +14,24 @@ class Profile extends Component {
             last_name: '',
             email: '',
         },
-        requireList: [],
-        newRequirement: [],
+        requireList: {},
+        oldRequirement: {},
         editMode: false
     }
 
-    addRequirementInput() {
-        console.log('new', this.state.newRequirement);
-        this.setState({ newRequirement: [...this.state.newRequirement, ''] })
+    requirementCounter = 1
+
+    addRequirementInput(event) {
+        console.log('add requirement', this.requirementCounter);
+        this.setState({
+            ...this.state, 
+            requireList: { ...this.state.requireList, 
+                [this.requirementCounter]: {
+                    requirement: ''
+                }
+            } 
+        })
+        this.requirementCounter += 1
     }
 
     handleEdit = (event) => {
@@ -32,7 +43,7 @@ class Profile extends Component {
       }
 
     handleProfileChange = propertyName => (event) => {
-        console.log('new', event.target.value);
+        console.log('new Profile Info', event.target.value);
         this.setState({
             profileInfo: {
                 ...this.state.profileInfo,
@@ -41,23 +52,41 @@ class Profile extends Component {
         });
     }
 
-    handleEditRequirement = propertyName => (event) => {
+    handleEditChange = propertyName => (event) => {
+        console.log('edit old Requirement info', event.target.value);
         this.setState({
-            requireList: [{
             ...this.state,
-            [propertyName]: event.target.value,
-          }]
+            oldRequirement: {
+                [event.target.value]: {
+                ...this.state.newRequirement,
+                [propertyName]: event.target.value,
+                }
+            }
         });
-      }
+    }
+
+    handleNewReqChange = (index) => (event) => {
+        console.log('edit NewReq info', this.state.requireList);
+        this.setState({
+            requireList: {
+                ...this.state.requireList,
+                [index] : {
+                    requirement: event.target.value
+                }
+            
+            }
+        });
+    }
 
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.dispatch({ type: 'UPDATE_USERS', payload: this.state.profileInfo })
         this.props.dispatch({ type: 'UPDATE_REQUIREMENTS', payload: this.state.requireList })
-        this.props.dispatch({ type: 'ADD_REQUIREMENTS', payload: this.state.newRequirement })
+        this.props.dispatch({ type: 'ADD_REQUIREMENTS', payload: this.state.oldRequirement })
     }
 
     render() {
+        console.log('LOOK', this.state.requireList);
         let profileView;
         console.log(this.state);
         
@@ -110,32 +139,34 @@ class Profile extends Component {
                         />
                         
                         <p> Employment Requirement(s): </p>
-                        {this.props.require.map((user, index) => {
+                        {this.props.require.map((userReq, index) => {
                             return (
                             <p>
                                 <TextField
-                                    key={index}
+                                    key={userReq.id}
                                     id="standard-dense"
-                                    label={user.requirement} 
+                                    label={userReq.requirement} 
                                     className="profileInput"
-                                    margin="dense"
-                                    onChange={this.handleEditRequirement(`requirement`)} 
+                                    margin="dense" 
+                                    onChange={this.handleEditChange('requirement')} 
+
                                 />
                             </p>
                             )
                         })}
-                            {this.state.requireList.map((requirement, index) => {
-                                return (
-                                    <p>
-                                        <TextField
-                                            id="standard-dense"
-                                            label="Requirement"
-                                            className="profileInput"
-                                            margin="dense"
-                                        />
-                                    </p>
-                                )
-                            })}
+                        {Object.entries(this.state.requireList).map((requirement, index) => {
+                            return (
+                                <p>
+                                    <TextField
+                                        id="standard-dense"
+                                        label="New Requirement"
+                                        className="profileInput"
+                                        margin="dense"
+                                        onChange={this.handleNewReqChange(index)}
+                                    />
+                                </p>
+                            )
+                        })}
                     <p ><AddIcon className="profileAddIcon" onClick={(event) => this.addRequirementInput(event)} /> Requirement</p>
 
                 </div>
