@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
     "complete",
     "contact_id",
     "job_id",
+    "note",
     "disabled" FROM "tasks" WHERE "user_id"=$1
     ORDER BY "id" DESC;`;
     pool.query(query, [req.user.id])
@@ -51,6 +52,19 @@ router.put('/:id', (req, res) => {
             res.sendStatus(500)
         })
 }); // End router.put/api/tasks/:id
+
+// Adds Note To Task in Task View
+router.put('/note/:note/:id', (req, res) => {
+    const queryText = `UPDATE "tasks" SET "note"=$1 WHERE "tasks"."id"=$2;`;
+    pool.query(queryText, [req.params.note, req.params.id])
+        .then(response => {
+            console.log('in PUT /api/tasks/note', response)
+            res.sendStatus(200)
+        })
+        .catch(err => {
+            console.log('error in PUT /api/tasks/note', err)
+        })
+}); // End router.put/api/tasks/note
 
 router.put('/update/:task_name/:id', (req, res) => {
     const queryText = `UPDATE "tasks" SET "task_name" = $1 WHERE "id" = $2;`;

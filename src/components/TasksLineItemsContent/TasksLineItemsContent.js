@@ -9,13 +9,9 @@ import TasksMoreDropdown from '../TasksMoreDropdown/TasksMoreDropdown';
 
 // ----- MATERIAL UI CORE ----- //
 import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
-import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import TextField from '@material-ui/core/TextField';
 import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -24,7 +20,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import EditIcon from '@material-ui/icons/Edit';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 
 // ----- STYLES ----- //
@@ -74,7 +69,6 @@ class TasksLineItemsContent extends Component {
         this.setState({
             task_name: event.target.value
         })
-
     }; // end handleChange
 
     postTask = (id) => {
@@ -108,9 +102,11 @@ class TasksLineItemsContent extends Component {
         return (
             <Paper key={this.props.id}>
                 <Toolbar>
-
                     <ListItem>
-                        <TasksMoreDropdown />
+                        <TasksMoreDropdown 
+                            id={this.props.id}
+                            task_name={this.props.task_name}
+                        />
                         <Tooltip title="Mark Complete">
                             <IconButton
                                 onClick={() => this.handleClickCheckBox(this.props.id)}
@@ -122,15 +118,13 @@ class TasksLineItemsContent extends Component {
                             </IconButton>
                         </Tooltip>
                         <div className="listItemText">
-
-                            {
-                                // this.state.editableTaskId == { id } && 
-                                this.state.taskIsEditable ?
+                            {this.state.taskIsEditable ?
                                     <><ListItemText
                                     ><TextField
                                             placeholder={this.props.task_name}
                                             value={this.state.task_name}
                                             onChange={this.handleChange}
+                                            variant="outlined"
                                         />
                                         <IconButton
                                             onClick={() => this.saveTask(this.props.id)}
