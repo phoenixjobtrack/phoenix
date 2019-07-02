@@ -144,7 +144,6 @@ class TasksLineItemsContent extends Component {
                                         </Tooltip>
                                     </ListItemText></>
                             }
-
                         </div>
                         <ListItemText className="dueDate">
                             {this.props.due_date}
