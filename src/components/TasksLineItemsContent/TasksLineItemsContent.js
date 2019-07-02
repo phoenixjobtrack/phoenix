@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // ----- COMPONENTS ----- //
+import TaskNoteContact from '../TaskNoteContact/TaskNoteContact';
+import TaskNoteJob from '../TaskNoteJob/TaskNoteJob';
 import TasksCheckBox from '../TasksCheckBox/TasksCheckBox';
 import TasksMoreDropdown from '../TasksMoreDropdown/TasksMoreDropdown';
 
@@ -96,13 +98,11 @@ class TasksLineItemsContent extends Component {
     }; // end handleClickRemove
 
     render() {
-
-
-
         return (
             <Paper key={this.props.id}>
                 <Toolbar>
                     <ListItem>
+                        {/* See component: TasksMoreDropdown */}
                         <TasksMoreDropdown 
                             id={this.props.id}
                             task_name={this.props.task_name}
@@ -112,6 +112,7 @@ class TasksLineItemsContent extends Component {
                                 onClick={() => this.handleClickCheckBox(this.props.id)}
                                 size="small"
                             >
+                                {/* See component: TasksCheckBox */}
                                 <TasksCheckBox
                                     complete={this.props.complete}
                                 />
@@ -148,6 +149,10 @@ class TasksLineItemsContent extends Component {
                         <ListItemText className="dueDate">
                             {this.props.due_date}
                         </ListItemText>
+                        {/* See component: TaskNoteContact */}
+                        <TaskNoteContact contact_id={this.props.contact_id}/>
+                        {/* See component: TaskNoteJob */}
+                        <TaskNoteJob job_id={this.props.job_id}/>
                         <Tooltip title="Delete">
                             <IconButton
                                 onClick={() => this.removeAlert(this.props.id)}
