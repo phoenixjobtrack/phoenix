@@ -14,11 +14,13 @@ class Profile extends Component {
             email: '',
         },
         requireList: [],
+        newRequirement: [],
         editMode: false
     }
 
     addRequirementInput() {
-        this.setState({ requireList: [...this.state.requireList, ''] })
+        console.log('new', this.state.newRequirement);
+        this.setState({ newRequirement: [...this.state.newRequirement, ''] })
     }
 
     handleEdit = (event) => {
@@ -29,7 +31,7 @@ class Profile extends Component {
         });
       }
 
-    handleChange = propertyName => (event) => {
+    handleProfileChange = propertyName => (event) => {
         console.log('new', event.target.value);
         this.setState({
             profileInfo: {
@@ -39,7 +41,7 @@ class Profile extends Component {
         });
     }
 
-    handleEditChange = propertyName => (event) => {
+    handleEditRequirement = propertyName => (event) => {
         this.setState({
             requireList: [{
             ...this.state,
@@ -50,16 +52,20 @@ class Profile extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+        this.props.dispatch({ type: 'UPDATE_USERS', payload: this.state.profileInfo })
         this.props.dispatch({ type: 'UPDATE_REQUIREMENTS', payload: this.state.requireList })
+        this.props.dispatch({ type: 'ADD_REQUIREMENTS', payload: this.state.newRequirement })
     }
 
     render() {
         let profileView;
+        console.log(this.state);
+        
         if (this.state.editMode === false) {
             profileView =
                 <div className="profileInfo">
                     <Button variant="contained" color="primary" onClick={this.handleEdit}>Edit</Button>
-                    <p contenteditable>First Name: {this.props.profile.first_name}</p>
+                    <p>First Name: {this.props.profile.first_name}</p>
                     <p>Last Name: {this.props.profile.last_name}</p>
                     <p>E-mail: {this.props.profile.email}</p>
                     <p>Employment Requirement(s):</p>
@@ -71,51 +77,49 @@ class Profile extends Component {
                 </div>
         } else {
             profileView =
-                <form className="profileForm" onSubmit={this.handleSubmit}>
+                <form className="profileForm" >
                     <div>
                         <div className="profileInfo">
                         <Button variant="contained" color="primary" onClick={this.handleEdit}>Save</Button>
                         </div>
                         <TextField
                             id="standard-dense"
-                            label="First Name"
-
+                            label={this.props.profile.first_name}
                             className="profileInput"
                             margin="dense"
-                            onChange={this.handleChange('first_name')}
+                            onChange={this.handleProfileChange('first_name')}
                         />
                         <br />
                         <TextField
                             id="standard-dense"
-                            label="Last Name"
-
+                            label={this.props.profile.last_name}
                             className="profileInput"
                             margin="dense"
-                            onChange={this.handleChange('last_name')}
+                            onChange={this.handleProfileChange('last_name')}
                         />
                         <br />
                         <TextField
                             id="filled-email-input"
-                            label="E-mail"
+                            label={this.props.profile.email}
                             className="profileInput"
-
                             type="email"
                             name="email"
                             autoComplete="email"
                             margin="dense"
-                            onChange={this.handleChange('email')} 
+                            onChange={this.handleProfileChange('email')} 
                         />
                         
                         <p> Employment Requirement(s): </p>
-                        {this.props.require.map((user, i) => {
+                        {this.props.require.map((user, index) => {
                             return (
                             <p>
                                 <TextField
+                                    key={index}
                                     id="standard-dense"
-                                    label={user.requirement}
+                                    label={user.requirement} 
                                     className="profileInput"
                                     margin="dense"
-                                    // onChange={this.handleChange('requirement')} 
+                                    onChange={this.handleEditRequirement(`requirement`)} 
                                 />
                             </p>
                             )
@@ -128,7 +132,6 @@ class Profile extends Component {
                                             label="Requirement"
                                             className="profileInput"
                                             margin="dense"
-                                            // onChange={this.handleChange('requirement')} 
                                         />
                                     </p>
                                 )

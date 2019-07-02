@@ -34,7 +34,27 @@ router.post('/register', (req, res, next) => {
     });
 });
 
+router.put('/:id', (req, res) => {
+  const updatedProfile = req.body;
 
+  const queryText = `UPDATE "users"
+  SET "first_name" = $1, 
+  "last_name" = $2, 
+  "email" = $3, 
+  WHERE id=$4;`;
+
+  const queryValues = [
+  updatedProfile.first_name,
+  updatedProfile.last_name,
+  updatedProfile.email,
+  req.params.id
+  ];
+  pool.query(queryText, queryValues).then(() => { res.sendStatus(200); })
+  .catch((err) => {
+    console.log('Error in PUT /api/candle', err);
+    res.sendStatus(500);
+  });
+});
 
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route

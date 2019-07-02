@@ -23,20 +23,20 @@ router.get('/', (req, res) => {
 });
 
 
-// // POST route
-// router.post('/', rejectUnauthenticated, (req, res) => {
-//     console.log('in POST /api/requirements', req.body, req.user.id)
-//     const queryText='INSERT INTO "requirements" (requirement, user_id) VALUES ($1,$2)'
-//     pool.query(queryText, [req.body.requirement, req.user.id])
-//         .then(response=>{
-//             console.log('in POST /api/requirements', response)
-//             res.sendStatus(201)
-//         })
-//         .catch(err=>{
-//             console.log('error in POST /api/requirements', err)
-//             res.sendStatus(500)
-//         })
-// });
+// POST route
+router.post('/', (req, res) => {
+    console.log('in POST /api/requirements', req.body, req.user.id)
+    const queryText='INSERT INTO "requirements" (requirement, user_id) VALUES ($1,$2)'
+    pool.query(queryText, [req.body.requirement, req.user.id])
+        .then(response=>{
+            console.log('in POST /api/requirements', response)
+            res.sendStatus(201)
+        })
+        .catch(err=>{
+            console.log('error in POST /api/requirements', err)
+            res.sendStatus(500)
+        })
+});
 
 // //PUT route
 router.put('/', (req,res)=>{
