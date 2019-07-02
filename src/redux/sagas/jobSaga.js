@@ -15,8 +15,22 @@ function* fetchJobs(action) {
     }
 }
 
+function* addJob(action) {
+    console.log('in addJob Saga', action.payload);
+    // Do or Do Not. There is no
+    try {
+        yield axios.post('api/jobs', action.payload)
+        yield put({ type: 'FETCH_JOBS'})
+
+    } catch (error) {
+        console.log('error in addJob saga', error);
+    }
+}
+
 function* jobSaga() {
     yield takeEvery('FETCH_JOBS', fetchJobs);
+    yield takeEvery('ADD_JOB', addJob);
+
 }
 
 export default jobSaga;
