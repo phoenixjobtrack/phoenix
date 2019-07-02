@@ -111,47 +111,49 @@ class Tasks extends Component {
                 <ThemeProvider theme={theme}>
                     {/* // ----- Add Task Input Form ----- // */}
                     <span >
-                        <Paper><Toolbar >
-                            <TextField
-                                id="add-new-task"
-                                label="Add New Task"
-                                margin="normal"
-                                onChange={this.handleTaskChange}
-                                placeholder="Send Email To CJ"
-                                position="Relative"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                variant="outlined"
-                            />
-                            <TextField
-                                id="date"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                label="Due Date"
-                                margin="normal"
-                                onChange={this.handleDateSelect}
-                                position="Relative"
-                                type="date"
-                                variant="outlined"
-                            />
-                            <Tooltip title="Add Task">
-                                <IconButton
-                                    label="Submit"
+                        <Paper variant="outlined">
+                            <Toolbar >
+                                <TextField
+                                    id="add-new-task"
+                                    label="Add New Task"
                                     margin="normal"
-                                    onClick={() => this.handleClickAddTask()}
-                                    size="medium"
-                                    type="submit"
+                                    onChange={this.handleTaskChange}
+                                    placeholder="Send Email To CJ"
+                                    position="Relative"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
                                     variant="outlined"
-                                ><AddIcon />
-                                </IconButton>
-                            </Tooltip>
+                                />
+                                <TextField
+                                    id="date"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    label="Due Date"
+                                    margin="normal"
+                                    onChange={this.handleDateSelect}
+                                    position="Relative"
+                                    type="date"
+                                    variant="outlined"
+                                />
+                                <Tooltip title="Add Task">
+                                    <IconButton
+                                        label="Submit"
+                                        margin="normal"
+                                        onClick={() => this.handleClickAddTask()}
+                                        size="medium"
+                                        type="submit"
+                                        variant="outlined"
+                                    ><AddIcon />
+                                    </IconButton>
+                                </Tooltip>
 
-                        </Toolbar ></Paper>
+                            </Toolbar >
+                        </Paper>
                     </span>
                     <Divider />
-                    
+
                     {/* // ----- TASK DISPLAYS ----- // */}
                     <OverdueTasks className="overdueTasks" />
                     <TasksLineItems />

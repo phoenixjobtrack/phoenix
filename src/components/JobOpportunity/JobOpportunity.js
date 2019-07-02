@@ -18,7 +18,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import Select from '@material-ui/core/Select';
 import './JobOpportunity.css';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 //import JobInfo from './JobInfo';
 
 class JobOpportunity extends Component {

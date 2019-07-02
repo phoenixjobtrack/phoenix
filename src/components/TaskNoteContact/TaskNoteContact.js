@@ -35,6 +35,7 @@ class TaskNoteContact extends Component {
         if (this.props.contact_id !== null){
             return (
                 <div className="taskNoteContact">
+                    <Tooltip title="Contact">
                     <Chip
                         avatar={
                             <Avatar>
@@ -44,6 +45,7 @@ class TaskNoteContact extends Component {
                         label={this.props.contact_id}
                         variant="outlined"
                     />
+                    </Tooltip>
                 </div>
             )
         }
