@@ -34,6 +34,7 @@ class App extends Component {
     this.props.dispatch({type: 'FETCH_USER'})
     this.props.dispatch({type: 'FETCH_TASKS'})
     this.props.dispatch({type: 'FETCH_REQUIREMENTS'})
+    this.props.dispatch({type: 'FETCH_JOB_REQUIREMENTS'})
   }
 
   render() {

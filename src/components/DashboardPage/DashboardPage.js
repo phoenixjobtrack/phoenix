@@ -10,6 +10,7 @@ import DashboardTable from '../DashboardTable/DashboardTable';
 
 class DashboardPage extends Component {
   render() {
+    //this gives us today's date in mm/dd/yyyy format
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
     let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
