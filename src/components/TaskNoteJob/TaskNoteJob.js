@@ -12,7 +12,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 
 // ----- MATERIAL UI ICONS ----- //
-import FaceIcon from '@material-ui/icons/Face';
+import WorkIcon from '@material-ui/icons/Work';
 
 
 // ----- STYLES ----- //
@@ -27,18 +27,18 @@ class TaskNoteContact extends Component {
 
         if (this.props.job_id !== null) {
             this.props.reduxState.jobs.map((job, i) => {
-                if (job.id == this.props.contact_id) {
-                    console.log('It is a match', this.props.contact_id, job.id);
+                if (job.id == this.props.job_id) {
+                    console.log('It is a match', this.props.job_id, job.id);
                     jobChip =
                         <div className="taskNoteJob">
                             <Tooltip title="Job">
                                 <Chip
                                     avatar={
                                         <Avatar>
-                                            <FaceIcon />
+                                            <WorkIcon />
                                         </Avatar>
                                     }
-                                label={job.first_name}
+                                label={job.company_name}
                                     variant="outlined"
                                 />
                             </Tooltip>
