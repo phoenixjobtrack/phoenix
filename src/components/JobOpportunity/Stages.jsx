@@ -29,7 +29,7 @@ class Stages extends Component {
             date: ''
         }],
     }
-    stageCounter = 0
+    stageCounter = -1
     addStageInput() {
         this.stageCounter = this.stageCounter+1
         // this.setState({ stages: [...this.state.stages, {}] })
@@ -42,12 +42,37 @@ class Stages extends Component {
                 }}})
     }
 
+    fetchJobStages = () => {
+        console.log('redux job stuff', this.props.reduxState.jobs)
+        this.props.reduxState.jobs.map(job=>{
+            console.log('fetchJobStages', job)
+            if (2 === job.job_id){
+                console.log('fetchJobStages: stage matches job', job.stage)
+                this.stageCounter+=1
+                console.log('stagecounter', this.stageCounter)
+                this.props.dispatch({
+                    type:'ADD_TO_REDUX_STAGE', payload: {
+                        key: this.stageCounter, stage: {
+                            stage: job.stage,
+                            note: job.note,
+                            date: job.date
+                        }
+                    }
+                })
+            }
+        })
+    }
+
     handleForceUpdate = () => {
         this.forceUpdate()
     }
 
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_INTERVIEW_STAGES'})
+        // this.fetchJobStages()
+        // this.props.dispatch({type:'FETCH_JOB_STAGES'})
+        
+        
     }
 
     render() {

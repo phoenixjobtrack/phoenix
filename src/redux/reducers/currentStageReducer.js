@@ -22,6 +22,28 @@ const currentStageReducer = (state = {0:{
                 date: ''}
         }
     }
+    else if (action.type==='LOAD_STAGES'){
+        let stageObject = state
+        console.log('in currentStageReducer', action.payload)
+        action.payload.map((job,i)=>{
+            console.log('mapping in currentStageReducer', job, i)
+            stageObject = {
+                ...stageObject,
+                [i]: {
+                    stage: job.stage,
+                    note: job.note,
+                    date: job.date
+                }
+            }
+        })
+        return stageObject
+        // {
+        //     ...state,
+        //     []:{
+
+        //     }
+        // }
+    }
     else if (action.type ==='REMOVE_STAGE_FROM_REDUX'){
         console.log('in REMOVE_STAGE_FROM_REDUX', action.payload)
         let key = action.payload

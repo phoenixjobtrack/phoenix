@@ -9,6 +9,7 @@ function* fetchJobs(action) {
         let allJobs = yield axios.get('/api/jobs')
         console.log('in fetchJobs saga', allJobs.data)
         yield put({type: 'STORE_JOBS', payload: allJobs.data})
+        yield put({ type: 'LOAD_STAGES', payload: allJobs.data})
         
     } catch (error) {
         console.log('error in fetchJobs saga', error);
