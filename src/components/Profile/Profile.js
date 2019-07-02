@@ -47,10 +47,10 @@ class Profile extends Component {
     handleEditChange = propertyName => (event) => {
         console.log('edit change', event.target.value);
         this.setState({
-            requireList: [{
+            requireList: {
             ...this.state,
             [propertyName]: event.target.value,
-          }]
+          }
         });
       }
 
