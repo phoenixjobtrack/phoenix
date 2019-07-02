@@ -41,34 +41,26 @@ class Stages extends Component {
                     date: ''
                 }}})
     }
-    
-    handleStageChange = (propertyName, stage, i) => (event) => {
-        console.log('stageInfo', event.target.value, propertyName, stage,i, this.state.stages[i]);
-        // this.setState({
-        //     ...this.state,
-        //     stages: {
-        //         ...this.state.stages,
-        //         [propertyName]: event.target.value
-        //     }
-        // });
-    }
 
-    
+    handleForceUpdate = () => {
+        this.forceUpdate()
+    }
 
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_INTERVIEW_STAGES'})
     }
 
     render() {
-        // console.log('stages state', this.props.reduxState.currentStage, Object.entries(this.props.reduxState.currentStage))
+        console.log('stages state', this.props.reduxState.currentStage, Object.entries(this.props.reduxState.currentStage))
         return(
             <div className="jobOppForm">
                 <p className="jobOppsTitle">Stages of the Hiring Process</p>
                 
-                {Object.entries(this.props.reduxState.currentStage).map((stage, i) => {
+                {Object.entries(this.props.reduxState.currentStage).map((stage) => {
+                    console.log('stage from Redux', stage, stage[0])
                     return (
                         <ul>
-                            <StageItem stage={stage} i={i}/>
+                            <StageItem stage={stage} i={stage[0]} handleForceUpdate={this.handleForceUpdate}/>
                         </ul>
                         
                     )

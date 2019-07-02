@@ -79,7 +79,7 @@ class JobOpportunity extends Component {
         event.preventDefault();
         console.log('jobOpps', this.state);
         this.props.dispatch({ type: '', payload: this.state.jobs });
-        this.props.dispatch({ type: '', payload: this.state.stages });
+        this.props.dispatch({ type: 'SAVE_STAGES', payload: this.props.reduxState.currentStage });
         this.props.dispatch({ type: 'ADD_TASK', payload: this.state.tasks });
         this.props.dispatch({ type: '', payload: this.state.requirements });
         this.props.history.push('/jobpipeline')
