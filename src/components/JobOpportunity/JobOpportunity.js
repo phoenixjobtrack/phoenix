@@ -19,15 +19,15 @@ import { connect } from 'react-redux';
 
 class JobOpportunity extends Component {
     state = {
-        jobs: {
-            company : '',
-            position : '',
-            posting_url : '',
-            deadline : '',
-            salary : '',
-            benefits : '',
-            travel : '',
-            notes : '',
+        job: {
+            // company : '',
+            // position : '',
+            // posting_url : '',
+            // deadline : '',
+            // salary : '',
+            // benefits : '',
+            // travel : '',
+            // notes : '',
         },
         stages: [{}],
         tasks: [{}],
@@ -45,8 +45,9 @@ class JobOpportunity extends Component {
     handleJobChange = propertyName => (event) => {
         console.log('jobInfo', event.target.value);
         this.setState({
-            jobs: {
-                ...this.state,
+            ...this.state,
+             job: {
+               ...this.state.job,
                 [propertyName]: event.target.value
             }
         });
@@ -85,7 +86,7 @@ class JobOpportunity extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         console.log('jobOpps', this.state);
-        this.props.dispatch({ type: 'ADD_JOB', payload: this.state.jobs });
+        this.props.dispatch({ type: 'ADD_JOB', payload: this.state.job });
         this.props.dispatch({ type: '', payload: this.state.stages });
         this.props.dispatch({ type: 'ADD_TASK', payload: this.state.tasks });
         this.props.dispatch({ type: '', payload: this.state.requirements });
@@ -117,15 +118,15 @@ class JobOpportunity extends Component {
                             <Grid item sm={3}>
                             <Input
                                         placeholder="Company"
-                                        value={this.state.company}
-                                        onChange={this.handleJobChange('company')}
+                                        //value={this.state.jobs.company}
+                                        onChange={this.handleJobChange('company_name')}
                                         inputProps={{
                                             'aria-label': 'Description',
                                         }}
                                     />
                             <Input
                                         placeholder="Position"
-                                        value={this.state.position}
+                                        //value={this.state.jobs.position}
                                         onChange={this.handleJobChange('position')}
                                         inputProps={{
                                             'aria-label': 'Description',
@@ -133,7 +134,7 @@ class JobOpportunity extends Component {
                                     />
                             <Input
                                         placeholder="Posting URL"
-                                        value={this.state.posting_url}
+                                        //value={this.state.jobs.posting_url}
                                         onChange={this.handleJobChange('posting_url')}
                                         inputProps={{
                                             'aria-label': 'Description',
@@ -144,7 +145,7 @@ class JobOpportunity extends Component {
                                         id="date"
                                         style={{ width: 150 }}
                                         type="date"
-                                        value={this.state.deadline}
+                                        //value={this.state.jobs.deadline}
                                         onChange={this.handleJobChange('deadline')}
                                         // defaultValue="2017-05-24"
                                         InputLabelProps={{
@@ -167,7 +168,7 @@ class JobOpportunity extends Component {
                             <Grid item sm={3}>
                             <Input
                                         placeholder="Salary"
-                                        value={this.state.salary}
+                                        //value={this.state.jobs.salary}
                                         onChange={this.handleJobChange('salary')}
                                         inputProps={{
                                             'aria-label': 'Description',
@@ -176,7 +177,7 @@ class JobOpportunity extends Component {
                             <TextField
                                         id="outlined-multiline-flexible"
                                         label="Benefits"
-                                         value={this.state.benefits}
+                                        // value={this.state.jobs.benefits}
                                         onChange={this.handleJobChange('benefits')}
                                         multiline
                                         rowsMax="15"
@@ -185,7 +186,7 @@ class JobOpportunity extends Component {
                                     />
                             <Input
                                         placeholder="Travel"
-                                         value={this.state.travel}
+                                        // value={this.state.jobs.travel}
                                         onChange={this.handleJobChange('travel')}
                                         inputProps={{
                                             'aria-label': 'Description',
@@ -197,7 +198,7 @@ class JobOpportunity extends Component {
                         <TextField
                             id="outlined-multiline-flexible"
                             label="Notes"
-                             value={this.state.notes}
+                            // value={this.state.jobs.notes}
                             onChange={this.handleJobChange('notes')}
                             multiline
                             rowsMax="15"
