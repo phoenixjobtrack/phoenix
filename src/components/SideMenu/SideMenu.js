@@ -20,16 +20,19 @@ import './SideMenu.css';
 
 // ========== MUI ICONS ========== //
 import AccountIcon from '@material-ui/icons/AccountCircle';
+import ContactsIcon from '@material-ui/icons/Contacts'
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import FolderIcon from '@material-ui/icons/Folder';
 import HomeIcon from '@material-ui/icons/Home';
 import IconButton from '@material-ui/core/IconButton';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import InfoIcon from '@material-ui/icons/Info';
+import ListAltIcon from '@material-ui/icons/ListAlt'
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
+import ViewAgendaIcon from '@material-ui/icons/ViewAgenda';
 
 const drawerWidth = 240;
 
@@ -82,11 +85,11 @@ function SideMenu(props) {
                 <Divider />                    
                     <List>
                         <ListItem component={Link} to="/dashboard" button><HomeIcon className="icon" /> Home</ListItem>
-                        <ListItem component={Link} to="/tasks" button><FolderIcon className="icon" /> Tasks</ListItem>
-                        <ListItem component={Link} to="/jobpipeline" button><DashboardIcon className="icon" /> Job Pipeline</ListItem>
-                        <ListItem component={Link} to="/jobOpportunity" button><DashboardIcon className="icon" /> Job Opportunity </ListItem>
-                        <ListItem component={Link} to="/contact" button><InfoIcon className="icon" /> Contacts</ListItem>
-                        <ListItem component={Link} to="/profile" button><InfoIcon className="icon" /> Profile</ListItem>
+                        <ListItem component={Link} to="/tasks" button><ListAltIcon className="icon" /> Tasks</ListItem>
+                        <ListItem component={Link} to="/jobpipeline" button><ViewAgendaIcon className="icon" /> Job Pipeline</ListItem>
+                        <ListItem component={Link} to="/jobOpportunity" button><ViewAgendaIcon className="icon" /> Job Opportunity </ListItem>
+                        <ListItem component={Link} to="/contact" button><ContactsIcon className="icon" /> Contacts</ListItem>
+                        <ListItem component={Link} to="/profile" button><AccountIcon className="icon" /> Profile</ListItem>
                     </List>
                 <Divider />
                 <List>
@@ -99,9 +102,6 @@ function SideMenu(props) {
                     </ListItem>
                 </List>
                 <Divider />
-                <List>
-                    <ListItem component={Link} to="/about" button><InfoIcon className="icon" /> About</ListItem>
-                </List>
             </Drawer>
             {/* <main className={classes.content}>
                 <div className={classes.toolbar} />
