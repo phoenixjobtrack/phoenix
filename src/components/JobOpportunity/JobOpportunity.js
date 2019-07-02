@@ -18,10 +18,21 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import Select from '@material-ui/core/Select';
 import './JobOpportunity.css';
+//import { connect } from 'react-redux';
+//import JobInfo from './JobInfo';
 
 class JobOpportunity extends Component {
     state = {
-        jobs: {},
+        job: {
+            // company : '',
+            // position : '',
+            // posting_url : '',
+            // deadline : '',
+            // salary : '',
+            // benefits : '',
+            // travel : '',
+            // notes : '',
+        },
         stages: [{}],
         tasks: [{}],
         job_requirements: {},
@@ -38,8 +49,9 @@ class JobOpportunity extends Component {
     handleJobChange = propertyName => (event) => {
         console.log('jobInfo', event.target.value);
         this.setState({
-            jobs: {
-                ...this.state,
+            ...this.state,
+             job: {
+               ...this.state.job,
                 [propertyName]: event.target.value
             }
         });
@@ -78,8 +90,8 @@ class JobOpportunity extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         console.log('jobOpps', this.state);
-        this.props.dispatch({ type: '', payload: this.state.jobs });
         this.props.dispatch({ type: 'SAVE_STAGES', payload: this.props.reduxState.currentStage });
+        this.props.dispatch({ type: 'ADD_JOB', payload: this.state.job });
         this.props.dispatch({ type: 'ADD_TASK', payload: this.state.tasks });
         this.props.dispatch({ type: '', payload: this.state.requirements });
         this.props.history.push('/jobpipeline')
@@ -95,7 +107,7 @@ class JobOpportunity extends Component {
                     <Button variant="contained" color="primary">Close Opportunity</Button>
                 </div>
 
-                {/* Employment Information */}
+                 {/* Employment Information */}
 
                 <div className="jobOppForm">
                     <p className="jobOppsTitle">Employment Information</p>
@@ -110,13 +122,15 @@ class JobOpportunity extends Component {
                             <Grid item sm={3} >
                             <Input
                                         placeholder="Company"
-                                        onChange={this.handleJobChange('company')}
+                                        //value={this.state.jobs.company}
+                                        onChange={this.handleJobChange('company_name')}
                                         inputProps={{
                                             'aria-label': 'Description',
                                         }}
                                     />
                             <Input
                                         placeholder="Position"
+                                        //value={this.state.jobs.position}
                                         onChange={this.handleJobChange('position')}
                                         inputProps={{
                                             'aria-label': 'Description',
@@ -124,6 +138,7 @@ class JobOpportunity extends Component {
                                     />
                             <Input
                                         placeholder="Posting URL"
+                                        //value={this.state.jobs.posting_url}
                                         onChange={this.handleJobChange('posting_url')}
                                         inputProps={{
                                             'aria-label': 'Description',
@@ -134,6 +149,7 @@ class JobOpportunity extends Component {
                                         id="date"
                                         style={{ width: 150 }}
                                         type="date"
+                                        //value={this.state.jobs.deadline}
                                         onChange={this.handleJobChange('deadline')}
                                         // defaultValue="2017-05-24"
                                         InputLabelProps={{
@@ -156,6 +172,7 @@ class JobOpportunity extends Component {
                             <Grid item sm={3}>
                             <Input
                                         placeholder="Salary"
+                                        //value={this.state.jobs.salary}
                                         onChange={this.handleJobChange('salary')}
                                         inputProps={{
                                             'aria-label': 'Description',
@@ -164,6 +181,7 @@ class JobOpportunity extends Component {
                             <TextField
                                         id="outlined-multiline-flexible"
                                         label="Benefits"
+                                        // value={this.state.jobs.benefits}
                                         onChange={this.handleJobChange('benefits')}
                                         multiline
                                         rowsMax="15"
@@ -172,6 +190,7 @@ class JobOpportunity extends Component {
                                     />
                             <Input
                                         placeholder="Travel"
+                                        // value={this.state.jobs.travel}
                                         onChange={this.handleJobChange('travel')}
                                         inputProps={{
                                             'aria-label': 'Description',
@@ -183,6 +202,7 @@ class JobOpportunity extends Component {
                         <TextField
                             id="outlined-multiline-flexible"
                             label="Notes"
+                            // value={this.state.jobs.notes}
                             onChange={this.handleJobChange('notes')}
                             multiline
                             rowsMax="15"
@@ -190,7 +210,7 @@ class JobOpportunity extends Component {
                             variant="outlined"
                         />
                     </div>
-                </div>
+                </div> 
 
                 {/* Stages of the Hiring Process */}
                 <Stages/>                           
@@ -369,11 +389,12 @@ class JobOpportunity extends Component {
                         })}
                     
                 </div>
-                <Button variant="contained" color="primary" style={{ width: 350, marginTop: 30 }}>Add Job Opportunity</Button>
+                <Button variant="contained" color="primary" onClick = {this.handleSubmit} style={{ width: 350, marginTop: 30 }}>Add Job Opportunity</Button>
             </div>
         )
     }
 }
+
 
 const mapStateToProps = (state) => ({
     require: state.requirements

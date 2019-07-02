@@ -19,7 +19,7 @@ function* addTask(action) {
 function* addTaskNote(action) {
     console.log('in addTaskNote Saga', action.payload);
     try {
-        yield axios.put(`api/tasks/note/${action.payload.task}/${action.payload.id}`, action.payload)
+        yield axios.put(`api/tasks/note/${action.payload.note}/${action.payload.id}`, action.payload)
         yield put({ type: 'FETCH_TASKS'})
     } catch (error) {
         console.log('error in addTaskNote', error);
@@ -35,6 +35,17 @@ function* fetchTasks(action) {
         yield put({type: 'STORE_TASKS', payload: tasks.data})
     } catch (error) {
         console.log('error in fetchTasks saga', error);
+    }
+}
+
+// Removes note from a task in the the "tasks" table in the database at id of selected task
+function* removeTaskNote(action) {
+    console.log('in removeTaskNote Saga', action.payload);
+    try {
+        yield axios.put(`api/tasks/note/${action.payload.note}/${action.payload.id}`, action.payload)
+        yield put({ type: 'FETCH_TASKS'})
+    } catch (error) {
+        console.log('error in removeTaskNote', error);
     }
 }
 
@@ -76,6 +87,7 @@ function* tasksSaga() {
     yield takeEvery('ADD_TASK_NOTE', addTaskNote)
     yield takeEvery('CHECK_TASK_BOX', toggleTaskCheck);
     yield takeEvery('FETCH_TASKS', fetchTasks);
+    yield takeEvery('REMOVE_TASK_NOTE', removeTaskNote);
     yield takeEvery('REMOVE_TASK', removeTask);
     yield takeEvery('UPDATE_TASK', updateTask);
 }
