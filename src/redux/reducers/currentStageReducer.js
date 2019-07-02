@@ -16,7 +16,7 @@ const currentStageReducer = (state = {0:{
     else if (action.type === 'ADD_TO_REDUX_STAGE'){
         return{
             ...state,
-            [action.payload.key]: {
+            [Object.entries(state).length]: {
                 stage: '',
                 note: '',
                 date: ''}
