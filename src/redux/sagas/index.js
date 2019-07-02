@@ -28,8 +28,8 @@ export default function* rootSaga() {
     contactSaga(),
     jobSaga(),
     interviewStagesSaga(),
-    jobRequirementsSaga()
-    jobStagesSaga()
+    jobRequirementsSaga(),
+    jobStagesSaga(),
 
   ]);
 }
