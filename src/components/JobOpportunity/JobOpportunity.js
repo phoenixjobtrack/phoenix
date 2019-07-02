@@ -97,6 +97,10 @@ class JobOpportunity extends Component {
      
     }
 
+    componentDidMount = () =>{
+        this.props.dispatch({ type: 'FETCH_JOBS' })
+
+    }
     render() {
         return (
             <div>
