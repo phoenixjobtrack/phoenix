@@ -21,8 +21,6 @@ import swal from 'sweetalert';
 class TaskNoteContact extends Component {
 
     render() {
-        console.log('TaskNoteContact', this.props.reduxState.contacts);
-
         let jobChip;
 
         if (this.props.job_id !== null) {

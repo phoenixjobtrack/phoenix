@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 // ----- COMPONENTS ----- //
 import TasksLineItemsContent from '../TasksLineItemsContent/TasksLineItemsContent';
 import TasksNotes from '../TasksNotes/TasksNotes';
-import TasksOverdue from '../TasksOverdue/TasksOverdue';
 
 // ----- MATERIAL UI CORE ----- //
 import List from '@material-ui/core/List';
@@ -18,7 +17,6 @@ import './TasksLineItems.css';
 class TasksLineItems extends Component {
 
     render() {
-        console.log('this.state', this.state)
 
         let userTasks;
 
@@ -31,11 +29,10 @@ class TasksLineItems extends Component {
 
 
         userTasks = this.props.reduxState.tasks.map(({ id, task_name, due_date, complete, contact_id, job_id, disabled, note }) => {
-            console.log('taskDay', taskDay, this.props.reduxState);
-            if (this.props.reduxState.tasks.due_date !== taskDay) {
+            console.log('taskDay', taskDay, this.props.reduxState.tasks.due_date);
+            if (taskDay == due_date) {
                 return (
                     <div>
-                    
                     <TasksLineItemsContent 
                         id={id}
                         task_name={task_name}
@@ -46,16 +43,6 @@ class TasksLineItems extends Component {
                         disabled={disabled}
                     />
                     <TasksNotes 
-                        id={id}
-                        task_name={task_name}
-                        due_date={due_date}
-                        complete={complete}
-                        contact_id={contact_id}
-                        job_id={job_id}
-                        disabled={disabled}
-                        note={note}
-                    />
-                    <TasksOverdue 
                         id={id}
                         task_name={task_name}
                         due_date={due_date}

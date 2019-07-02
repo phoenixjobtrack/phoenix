@@ -4,31 +4,21 @@ import { connect } from 'react-redux';
 
 // ----- COMPONENTS ----- //
 import TasksLineItemsContent from '../TasksLineItemsContent/TasksLineItemsContent';
+import TasksNotes from '../TasksNotes/TasksNotes';
 
 // ----- MATERIAL UI CORE ----- //
-import IconButton from '@material-ui/core/IconButton';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
-import Toolbar from '@material-ui/core/Toolbar';
-import Tooltip from '@material-ui/core/Tooltip';
+import List from '@material-ui/core/List';
 
 // ----- MATERIAL UI ICONS ----- //
-import CheckIcon from '@material-ui/icons/Check';
-import ClearIcon from '@material-ui/icons/Clear';
-import EditIcon from '@material-ui/icons/Edit';
-
 
 // ----- STYLES ----- //
-import swal from 'sweetalert';
 
-class TasksOverdue extends Component {
-    
-    
-    render () {
 
-        let overdueTasks;
+class TasksLineItems extends Component {
+
+    render() {
+
+        let userTasks;
 
         // Dates
         let today = new Date();
@@ -37,32 +27,43 @@ class TasksOverdue extends Component {
         let yyyy = today.getFullYear();
         let taskDay = mm + '/' + dd + '/' + yyyy;
 
-        overdueTasks = this.props.reduxState.tasks.map((task, i) => {
-            if (taskDay > task.due_date) {
-                console.log('Task Overdue. Today:', taskDay, 'Task Due Date:', task.due_date, 'Task Name:', task.task_name);
+
+        userTasks = this.props.reduxState.tasks.map(({ id, task_name, due_date, complete, contact_id, job_id, disabled, note }) => {
+            console.log('taskDay', taskDay, this.props.reduxState.tasks.due_date);
+            if (taskDay > due_date) {
                 return (
-                    <div className="tasksOverdue">
-                        <TasksLineItemsContent 
-                            id={this.props.id}
-                            task_name={this.props.task_name}
-                            due_date={this.props.due_date}
-                            complete={this.props.complete}
-                            contact_id={this.props.contact_id}
-                            job_id={this.props.job_id}
-                            disabled={this.props.disabled}
-                            note={this.props.note}
+                    <div>
+                        <TasksLineItemsContent
+                            id={id}
+                            task_name={task_name}
+                            due_date={due_date}
+                            complete={complete}
+                            contact_id={contact_id}
+                            job_id={job_id}
+                            disabled={disabled}
+                        />
+                        <TasksNotes
+                            id={id}
+                            task_name={task_name}
+                            due_date={due_date}
+                            complete={complete}
+                            contact_id={contact_id}
+                            job_id={job_id}
+                            disabled={disabled}
+                            note={note}
                         />
                     </div>
-                )
-                
-            }
-        })
-
+                ) // End Return
+            }// End If Statement
+        }) // End userTasks
         return (
-            <div>{overdueTasks}</div>
-        )
-    }
-}
+            <List>
+                {userTasks}
+
+            </List>
+        ) // End Return
+    } // End Render
+} // End Class
 
 const mapStateToProps = (reduxState) => {
     return {
@@ -71,4 +72,4 @@ const mapStateToProps = (reduxState) => {
     }
 }
 
-export default connect(mapStateToProps)(TasksOverdue);
+export default connect(mapStateToProps)(TasksLineItems);

@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 
 // ----- COMPONENTS ----- //
 import TasksLineItems from '../TasksLineItems/TasksLineItems';
+import TasksOverdue from '../TasksOverdue/TasksOverdue';
 
 // ----- STYLES ----- //
 import { makeStyles } from '@material-ui/core/styles';
@@ -158,9 +159,10 @@ class Tasks extends Component {
 
                     {/* // ----- TASK DISPLAYS ----- // */}
                     <OverdueTasks className="overdueTasks" />
-                    <TasksLineItems />
+                    <TasksOverdue />
                     <Divider />
                     <TodayTasks />
+                    <TasksLineItems />
                     <Divider />
                     <TomorrowTasks />
                     <Divider />
