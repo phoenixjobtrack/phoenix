@@ -26,20 +26,20 @@ const currentTasksReducer = (state = {
         }
     }
     else if (action.type === 'LOAD_TASKS') {
-        let stageObject = state
+        let taskObject = state
         console.log('in currentTasksReducer', action.payload)
         action.payload.map((job, i) => {
             console.log('mapping in currentTasksReducer', job, i)
-            stageObject = {
-                ...stageObject,
+            taskObject = {
+                ...taskObject,
                 [i]: {
-                    task_name: job.stage,
-                    due_date: job.note,
-                    note: job.date
+                    task_name: job.task_name,
+                    due_date: job.task_due_date,
+                    note: job.task_note
                 }
             }
         })
-        return stageObject
+        return taskObject
     }
     else if (action.type === 'REMOVE_TASK_FROM_REDUX') {
         console.log('in REMOVE_TASK_FROM_REDUX', action.payload)

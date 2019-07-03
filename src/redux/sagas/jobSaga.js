@@ -32,8 +32,15 @@ function* fetchJobStages(action) {
 function* fetchJobTasks(action){
     
     let allJobTasks = yield axios.get('api/jobs/tasks')
+    let currentTasks = []
     console.log('in fetchJobStages saga', allJobTasks.data)
-    yield put({type: 'LOAD_TASKS', paylod: allJobTasks.data})
+    allJobTasks.data.map(task=>{
+        if (task.job_id == action.payload){
+            currentTasks = [...currentTasks, task]
+        }
+    })
+    console.log('tasks for reducer', currentTasks)
+    yield put({type: 'LOAD_TASKS', payload: currentTasks})
 }
 
 function* addJob(action) {
