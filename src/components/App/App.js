@@ -108,6 +108,11 @@ class App extends Component {
             />
             <ProtectedRoute
               exact
+              path="/jobOpportunity/:id" 
+              component={JobOpportunity}
+            />
+            <ProtectedRoute
+              exact
               path="/jobOpportunity"
               component={JobOpportunity}
             />
