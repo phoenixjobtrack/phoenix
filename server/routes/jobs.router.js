@@ -23,7 +23,6 @@ router.get('/opp', (req,res)=>{
 
 router.get('/', (req,res) => {
     console.log('this is for job', req.user.id);
-    
     // let query = `
     //     SELECT j1.company_name, j1.position, currentstage.stage as stage, nextstage.stage as nextstage, nextstage.date, nextstage.note 
     //     FROM "jobs" j1 
