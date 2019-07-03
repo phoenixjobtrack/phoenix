@@ -32,12 +32,14 @@ class TaskItem extends Component {
 
     handleTaskChange = propertyName => (event) => {
         console.log('taskInfo', event.target.value);
-        this.setState({
-            tasks: {
-                ...this.state,
-                [propertyName]: event.target.value
+        this.props.dispatch({
+            type: 'UPDATE_REDUX_TASKS',
+            payload: {
+                key: this.props.i,
+                prop: propertyName,
+                value: event.target.value
             }
-        });
+        })
     }
     render() {
         return(
@@ -55,9 +57,10 @@ class TaskItem extends Component {
                     <Input
                         style={{ width: 415, paddingTop: 16 }}
                         placeholder="Task Details"
+                        value={this.props.reduxState.currentTasks[this.props.i].task_name}
                         onChange={this.handleTaskChange('task_name')}
                         inputProps={{
-                            'aria-label': 'Description',
+                            'aria-label': 'Task Name',
                         }}
                     />
                 </Grid>
@@ -66,6 +69,7 @@ class TaskItem extends Component {
                         id="date"
                         type="date"
                         style={{ paddingTop: 16 }}
+                        value={this.props.reduxState.currentTasks[this.props.i].due_date}
                         onChange={this.handleTaskChange('due_date')}
                         // defaultValue="2017-05-24"
                         InputLabelProps={{
