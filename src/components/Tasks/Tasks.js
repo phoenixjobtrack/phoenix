@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 
 // ----- COMPONENTS ----- //
 import TasksFuture from '../TasksFuture/TasksFuture';
+import TasksHistory from '../TasksHistory/TasksHistory';
 import TasksLineItems from '../TasksLineItems/TasksLineItems';
 import TasksOverdue from '../TasksOverdue/TasksOverdue';
 import TasksTomorrow from '../TasksTomorrow/TasksTomorrow';
@@ -33,11 +34,11 @@ import AddIcon from '@material-ui/icons/Add';
 
 
 // ----- TASKS SECTIONS ----- //
-const OverdueTasks = () => <Paper className="overdueTasks"><Toolbar ><Typography>Overdue Tasks Go Here (Past Today's Date - Not Yet Marked As Complete)</Typography></Toolbar></Paper>
+const OverdueTasks = () => <Paper className="overdueTasks" ><Toolbar ><Typography backgroundColor="#939292" color="#939292">Overdue Tasks</Typography></Toolbar></Paper>
 const TodayTasks = () => <Paper className="todayTasks"><Toolbar ><Typography>Today</Typography></Toolbar></Paper>
 const TomorrowTasks = () => <Paper className="tomorrowTasks"><Toolbar ><Typography>Tomorrow</Typography></Toolbar></Paper>
-const FutureTasks = () => <Paper className="futureTasks"><Toolbar ><Typography>Future Tasks Go Here (Beyond Tomorrow)</Typography></Toolbar></Paper>
-const HistoryTasks = () => <Paper className="historyTasks"><Toolbar ><Typography>Task History Goes Here (Past Today's Date - Marked As Complete)</Typography></Toolbar></Paper>
+const FutureTasks = () => <Paper className="futureTasks"><Toolbar ><Typography>Future Tasks</Typography></Toolbar></Paper>
+const HistoryTasks = () => <Paper className="historyTasks"><Toolbar ><Typography>Task History</Typography></Toolbar></Paper>
 
 
 // ----- MUI THEME ----- //
@@ -87,6 +88,7 @@ class Tasks extends Component {
             console.log('clickAddTask');
             this.props.dispatch({ type: 'ADD_TASK', payload: this.state });
         }
+        this.clearInputs();
     } // end handleClickAddTask
 
     handleDateSelect = (event) => {
@@ -106,6 +108,17 @@ class Tasks extends Component {
         })
     }; // end handleTaskChange
 
+    clearInputs = () => {
+        console.log('clearInputs')
+
+        this.setState({
+            task_name: '',
+            due_date: 'mm/dd/yyyy',
+            contact_id: null,
+            job_id: null,
+        })
+    }
+
     // ----- RENDER ----- //
     render() {
 
@@ -119,6 +132,7 @@ class Tasks extends Component {
                         <Paper variant="outlined">
                             <Toolbar >
                                 <TextField
+                                    value={this.state.task_name}
                                     id="add-new-task"
                                     label="Add New Task"
                                     margin="normal"
@@ -131,6 +145,7 @@ class Tasks extends Component {
                                     variant="outlined"
                                 />
                                 <TextField
+                                    value={this.state.due_date}
                                     id="date"
                                     InputLabelProps={{
                                         shrink: true,
@@ -173,6 +188,7 @@ class Tasks extends Component {
                     <TasksFuture />
                     <Divider />
                     <HistoryTasks />
+                    <TasksHistory />
                     <Divider />
                 </ThemeProvider>
             </div>

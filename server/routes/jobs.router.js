@@ -4,14 +4,26 @@ const router = express.Router();
 
 
 //-----GET for job pipeline table-------//
-router.get('/', (req,res) => {
-    console.log('this is for job', req.user.id);
+router.get('/opp', (req,res)=>{
     let query = `
         SELECT * FROM "jobs" 
         FULL OUTER JOIN "users" ON jobs.user_id = users.id
         FULL OUTER JOIN "stages" ON jobs.id = stages.job_id
         FULL OUTER JOIN "tasks" ON jobs.id = tasks.id
         WHERE jobs.user_id=$1;`
+    pool.query(query, [req.user.id])
+        .then((result) => {
+            res.send(result.rows);
+        })
+        .catch((error) => {
+            console.log(`Error on query ${error}`);
+            res.sendStatus(500);
+        })
+})
+
+router.get('/', (req,res) => {
+    console.log('this is for job', req.user.id);
+    
     // let query = `
     //     SELECT j1.company_name, j1.position, currentstage.stage as stage, nextstage.stage as nextstage, nextstage.date, nextstage.note 
     //     FROM "jobs" j1 

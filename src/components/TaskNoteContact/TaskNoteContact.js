@@ -18,6 +18,7 @@ import FaceIcon from '@material-ui/icons/Face';
 // ----- STYLES ----- //
 
 
+
 class TaskNoteContact extends Component {
 
     render() {
@@ -31,6 +32,7 @@ class TaskNoteContact extends Component {
                         <div className="taskNoteContact"> 
                             <Tooltip title="Contact">
                                 <Chip
+                                    color="primary"
                                     avatar={
                                         <Avatar>
                                             <FaceIcon />

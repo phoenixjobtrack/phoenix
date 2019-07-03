@@ -70,7 +70,7 @@ class DashboardPage extends Component {
             </Paper>
           </Grid>
         </Grid>
-        <div className="piplineBox">
+        <div className="pipelineBox">
           <h2>Job Pipeline<AddIcon className="dashAddIcon" /></h2>
           <DashboardTable />
         </div>
