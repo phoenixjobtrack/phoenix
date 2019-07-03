@@ -8,10 +8,38 @@
   border-radius: 2%;
 }
 
-/* Today's Task Scrollbar -- smaller div for task list */
+/* Today's Task Scrollbar and smaller div for task list inside of the task box*/
 .todayText{
   margin: 20px;
   height: 185px;
+  overflow-y: auto;
+}
+
+/* Today's Task Scrollbar Styling */
+.todayText::-webkit-scrollbar {
+  width: 15px;
+}
+
+.todayText::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	background-image: -webkit-gradient(linear,
+									   left bottom,
+									   left top,
+									   color-stop(0.44, rgb(208, 239, 248)),
+									   color-stop(0.62, rgb(96, 138, 189)),
+									   color-stop(0.86, rgb(170, 227, 243)));
+}
+
+.todayText::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgb(170, 227, 243); 
+  border-radius: 10px;
+}
+
+/* OVERDUE Today's Task Scrollbar and smaller div for task list inside of the task box*/
+.todayText{
+  margin: 10px;
+  height: 125px;
   overflow-y: auto;
 }
 
@@ -74,11 +102,17 @@
   border-radius: 10px;
 }
 
-.dashIcon{
-  transform: scale(10);
-  margin-left: 200px;
-  margin-top: 150px;
-  padding-bottom: 20px
+.logoBox{
+  display: block;
+  margin-left: 10%;
+  margin-right: auto;
+  width: 50%;
+  margin-top: 20px
+}
+
+.logo{
+  width: 300px;
+  opacity: .65;
 }
 
 .dashAddIcon{

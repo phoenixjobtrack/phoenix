@@ -35,12 +35,25 @@ class DashboardPage extends Component {
                     }
                   })}
                 </div>
+                <div className="overdueText">
+                  {this.props.dayTask.map((tasks, i) => {
+                    if (tasks.due_date > taskDay) {
+                      return (
+                        <ul>
+                          <li>{tasks.task_name}</li>
+                        </ul>
+                      )
+                    }
+                  })}
+                </div>
               </div>
             </Paper>
           </Grid>
           <Grid item sm>
-            <Paper style={{ padding: 40, marginTop: 20 }}>
-              <FaceIcon className="dashIcon" />
+            <Paper >
+              <div className="logoBox">
+                <img className="logo" src="/images/logo3.png" alt="phoenix logo" />
+              </div>
               <h2>Job Requirements<AddIcon className="dashAddIcon" /></h2>
               <div className="requireBox">
                 <div className="requireText">
