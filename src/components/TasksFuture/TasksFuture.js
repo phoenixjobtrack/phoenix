@@ -26,11 +26,16 @@ class TasksTomorrow extends Component {
         let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         let yyyy = today.getFullYear();
         let taskDay = mm + '/' + dd + '/' + yyyy;
-
+        let tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1)
+        let ee = String(tomorrow.getDate()).padStart(2, '0');
+        let nn = String(tomorrow.getMonth() + 1).padStart(2, '0');
+        let zzzz = tomorrow.getFullYear();
+        let taskTomorrow = nn + '/' + ee + '/' + zzzz;
 
         userTasks = this.props.reduxState.tasks.map(({ id, task_name, due_date, complete, contact_id, job_id, disabled, note }) => {
-            console.log('taskDay', taskDay, this.props.reduxState.tasks.due_date);
-            if (taskDay < due_date) {
+            console.log('taskTomorrow', taskTomorrow);
+            if (taskTomorrow < due_date) {
                 return (
                     <div>
                         <TasksLineItemsContent
