@@ -23,6 +23,12 @@ router.get('/opp', (req,res)=>{
 
 router.get('/', (req,res) => {
     console.log('this is for job', req.user.id);
+    let query = `
+        SELECT * FROM "jobs" 
+        FULL OUTER JOIN "users" ON jobs.user_id = users.id
+        FULL OUTER JOIN "stages" ON jobs.id = stages.job_id
+        FULL OUTER JOIN "tasks" ON jobs.id = tasks.id
+        WHERE jobs.user_id=$1;`
     // let query = `
     //     SELECT j1.company_name, j1.position, currentstage.stage as stage, nextstage.stage as nextstage, nextstage.date, nextstage.note 
     //     FROM "jobs" j1 
