@@ -24,7 +24,8 @@ import ClearIcon from '@material-ui/icons/Clear';
 import EditIcon from '@material-ui/icons/Edit';
 
 
-// ----- STYLES ----- //
+// ----- DEPENDENCIES ----- //
+import moment from 'moment';
 import swal from 'sweetalert';
 
 class TasksLineItemsContent extends Component {
@@ -58,25 +59,36 @@ class TasksLineItemsContent extends Component {
     }; // End removeAlert
 
     // Edit and Update a Task Name & Date
-    editTask = (id, task_name) => {
+    editTask = (id, task_name, due_date) => {
         // let task_name = task_name;
         this.setState({
             taskIsEditable: true,
             editableTaskId: id,
             task_name: task_name,
+            due_date: due_date,
         });
     }; // end editTask
 
-    handleChange = (event) => {
+    handleChangeDate = (event) => {
+        let newDate = event.target.value;
+        console.log('newDate', newDate);
         this.setState({
-            task_name: event.target.value
+            due_date: newDate,
+        })
+    }; // end handleChange
+
+    handleChangeText = (event) => {
+        this.setState({
+            task_name: event.target.value,
+            
         })
     }; // end handleChange
 
     postTask = (id) => {
         console.log('postTask:', this.state.task)
         let task = this.state.task_name;
-        this.props.dispatch({ type: 'UPDATE_TASK', payload: { task_name: task, id: this.state.editableTaskId } })
+        let date = this.state.due_date;
+        this.props.dispatch({ type: 'UPDATE_TASK', payload: { task_name: task, id: this.state.editableTaskId, date: date } })
     }
 
     saveTask = () => {
@@ -122,11 +134,21 @@ class TasksLineItemsContent extends Component {
                             {this.state.taskIsEditable ?
                                     <><ListItemText
                                     ><TextField
-                                            placeholder={this.props.task_name}
-                                            value={this.state.task_name}
-                                            onChange={this.handleChange}
-                                            variant="outlined"
+                                        placeholder={this.props.task_name}
+                                        value={this.state.task_name}
+                                        onChange={this.handleChangeText}
+                                        variant="outlined"
                                         />
+                                    <TextField
+                                        type="date"
+                                        placeholder={this.props.due_date}
+                                        defaultValue={this.state.due_date}
+                                        onChange={this.handleChangeDate}
+                                        format={'YYYY-MM-DD'}
+                                        formatDate={(date) => moment(new Date()).format('YYYY-MM-DD')}
+                                        variant="outlined"
+                                        // label="update due date"
+                                    />
                                         <IconButton
                                             onClick={() => this.saveTask(this.props.id)}
                                         >
@@ -137,7 +159,7 @@ class TasksLineItemsContent extends Component {
                                         {this.props.task_name}
                                         <Tooltip title="Edit Task">
                                             <IconButton
-                                                onClick={() => this.editTask(this.props.id, this.props.task_name)}
+                                                onClick={() => this.editTask(this.props.id, this.props.task_name, this.props.due_date)}
                                             >
                                                 <EditIcon />
                                             </IconButton>

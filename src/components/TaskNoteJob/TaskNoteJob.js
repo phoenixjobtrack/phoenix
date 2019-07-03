@@ -31,6 +31,7 @@ class TaskNoteContact extends Component {
                         <div className="taskNoteJob">
                             <Tooltip title="Job">
                                 <Chip
+                                    color="primary"
                                     avatar={
                                         <Avatar>
                                             <WorkIcon />
