@@ -107,7 +107,7 @@ class App extends Component {
             />
             <ProtectedRoute
               exact
-              path="/jobOpportunity"
+              path="/jobOpportunity/:id"
               component={JobOpportunity}
             />
             {/* If none of the other routes matched, we will show a 404. */}

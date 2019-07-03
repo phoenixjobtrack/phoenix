@@ -10,6 +10,7 @@ import currentContact from './currentContactReducer';
 import interviewStages from './interviewStagesReducer';
 import currentStage from './currentStageReducer'
 import jobEditMode from './jobEditModeReducer'
+import currentJob from './currentJobReducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -29,7 +30,7 @@ const rootReducer = combineReducers({
   interviewStages, //stores list of interview stages
   currentStage, //stores new or edited stage from JobOp page
   jobEditMode, //stores wether job opp view is in 'edit' or 'create' mode
-  
+  currentJob, //stores currently selected job
 });
 
 export default rootReducer;

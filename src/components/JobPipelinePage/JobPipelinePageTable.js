@@ -44,11 +44,18 @@ class JobPipelinePageTable extends React.PureComponent {
       [classes.tableRowHover]: index !== -1 && onRowClick != null,
     });
   };
-
+  handleClick = () => {
+    console.log('in handleClick');
+  }
   cellRenderer = ({ cellData, columnIndex }) => {
     const { columns, classes, rowHeight, onRowClick } = this.props;
+    
+    
+    
+
     return (
       <TableCell
+        onRowClick={()=>this.handleClick()}
         component="div"
         className={clsx(classes.tableCell, classes.flexContainer, {
           [classes.noClick]: onRowClick == null,

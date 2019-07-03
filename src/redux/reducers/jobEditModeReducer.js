@@ -1,4 +1,4 @@
-const jobEditMode = (state = 'create', action) => {
+const jobEditMode = (state = 'edit', action) => {
     switch (action.type) {
         case 'SET_TO_EDIT_MODE':
             return 'edit';

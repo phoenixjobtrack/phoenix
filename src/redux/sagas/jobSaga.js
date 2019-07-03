@@ -34,10 +34,26 @@ function* addJob(action) {
     }
 }
 
+function* fetchCurrentJob(action) {
+    
+    let allJobs = yield axios.get('api/jobs/opp')
+    let currentJob
+    console.log('fetchCurrentJob', allJobs ,action.payload)
+    allJobs.data.map(job=>{
+        if (job.id == action.payload) {
+            console.log('in fetchCurrentJobSaga', job.id, action.payload)
+            currentJob = job
+            
+        }
+    })
+    yield put({ type: 'STORE_CURRENT_JOB', payload: currentJob })
+}
+
 function* jobSaga() {
     yield takeEvery('FETCH_JOBS', fetchJobs);
     yield takeEvery('ADD_JOB', addJob);
     yield takeEvery('FETCH_JOB_STAGES', fetchJobStages)
+    yield takeEvery('FETCH_CURRENT_JOB', fetchCurrentJob)
 
 }
 
