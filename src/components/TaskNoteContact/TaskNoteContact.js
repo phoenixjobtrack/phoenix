@@ -27,7 +27,6 @@ class TaskNoteContact extends Component {
             if (this.props.contact_id !== null) {
             this.props.reduxState.contacts.map((contact, i) => {
                 if (contact.id == this.props.contact_id) {
-                    console.log('It is a match', this.props.contact_id, contact.id);
                     contactChip=
                         <div className="taskNoteContact"> 
                             <Tooltip title="Contact">

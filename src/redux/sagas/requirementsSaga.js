@@ -7,7 +7,7 @@ function* addRequirements(action) {
         
     try {
         yield action.payload.requirements.map(requirement=>{
-            axios.post('api/requirements', {requirement: requirement})
+            axios.post('api/requirements', {requirements: requirement})
         })       
         
     } catch (error) {

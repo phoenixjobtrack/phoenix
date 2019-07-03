@@ -19,6 +19,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import Select from '@material-ui/core/Select';
 import './JobOpportunity.css';
+//import JobInfo from './JobInfo';
 
 
 class JobOpportunity extends Component {
@@ -93,7 +94,7 @@ class JobOpportunity extends Component {
         this.props.dispatch({ type: 'SAVE_STAGES', payload: this.props.reduxState.currentStage });
         this.props.dispatch({ type: 'ADD_JOB', payload: this.state.job });
         this.props.dispatch({ type: 'ADD_TASK', payload: this.state.tasks });
-        this.props.dispatch({ type: '', payload: this.state.requirements });
+        this.props.dispatch({ type: 'ADD_JOB_REQUIREMENTS', payload: this.state.job_requirements });
         this.props.history.push('/jobpipeline')
      
     }
