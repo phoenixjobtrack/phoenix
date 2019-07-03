@@ -87,6 +87,7 @@ class Tasks extends Component {
             console.log('clickAddTask');
             this.props.dispatch({ type: 'ADD_TASK', payload: this.state });
         }
+        this.clearInputs();
     } // end handleClickAddTask
 
     handleDateSelect = (event) => {
@@ -106,6 +107,17 @@ class Tasks extends Component {
         })
     }; // end handleTaskChange
 
+    clearInputs = () => {
+        console.log('clearInputs')
+
+        this.setState({
+            task_name: '',
+            due_date: 'mm/dd/yyyy',
+            contact_id: null,
+            job_id: null,
+        })
+    }
+
     // ----- RENDER ----- //
     render() {
 
@@ -119,6 +131,7 @@ class Tasks extends Component {
                         <Paper variant="outlined">
                             <Toolbar >
                                 <TextField
+                                    value={this.state.task_name}
                                     id="add-new-task"
                                     label="Add New Task"
                                     margin="normal"
@@ -131,6 +144,7 @@ class Tasks extends Component {
                                     variant="outlined"
                                 />
                                 <TextField
+                                    value={this.state.due_date}
                                     id="date"
                                     InputLabelProps={{
                                         shrink: true,
