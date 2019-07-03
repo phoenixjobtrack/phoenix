@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 
 // ----- COMPONENTS ----- //
 import TasksFuture from '../TasksFuture/TasksFuture';
+import TasksHistory from '../TasksHistory/TasksHistory';
 import TasksLineItems from '../TasksLineItems/TasksLineItems';
 import TasksOverdue from '../TasksOverdue/TasksOverdue';
 import TasksTomorrow from '../TasksTomorrow/TasksTomorrow';
@@ -187,6 +188,7 @@ class Tasks extends Component {
                     <TasksFuture />
                     <Divider />
                     <HistoryTasks />
+                    <TasksHistory />
                     <Divider />
                 </ThemeProvider>
             </div>
