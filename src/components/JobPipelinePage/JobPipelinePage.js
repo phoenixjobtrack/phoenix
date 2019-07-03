@@ -10,6 +10,8 @@ class JobPipelinePage extends Component {
 
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_JOBS'})
+    //just to get data to jobs reducer
+    this.props.dispatch({type:'FETCH_JOB_STAGES'})
 }
 
 render(){
@@ -37,7 +39,7 @@ const rows = this.props.reduxState.jobs;
           </Grid>
     <Paper style={{ height: 335, width: '100%' }}>
       <JobPipelinePageTable
-         rowCount={rows.length}
+        rowCount={rows.length}
         rowGetter={({ index }) => rows[index]}
         columns={[
           {

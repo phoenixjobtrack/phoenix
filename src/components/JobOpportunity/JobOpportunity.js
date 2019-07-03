@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router-dom'
 
 import Stages from './Stages'
 
@@ -100,6 +101,13 @@ class JobOpportunity extends Component {
 
     componentDidMount = () =>{
         this.props.dispatch({ type: 'FETCH_JOBS' })
+        this.props.dispatch({type: 'FETCH_JOB_STAGES'})
+        if (this.props.jobEditMode==='edit') {
+            console.log('match params', this.props.match.params.id)
+            this.props.dispatch({
+                type: 'FETCH_CURRENT_JOB', payload: this.props.match.params.id
+            })
+        }
 
     }
     render() {
@@ -401,6 +409,8 @@ class JobOpportunity extends Component {
 
 
 const mapStateToProps = (state) => ({
-    require: state.requirements
+    require: state.requirements,
+    jobEditMode: state.jobEditMode
+
 });
-export default connect(mapStateToProps)(JobOpportunity);
+export default withRouter(connect(mapStateToProps)(JobOpportunity));

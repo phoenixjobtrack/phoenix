@@ -78,7 +78,6 @@ function SignIn(props) {
     event.preventDefault();
     if (!email) return;
     if (!password) return;
-
     if (email && password) {
       props.dispatch({
         type: 'LOGIN',
@@ -87,6 +86,7 @@ function SignIn(props) {
           password: password
         }
       })
+      props.history.push('/dashboard')
     } else {
       props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
