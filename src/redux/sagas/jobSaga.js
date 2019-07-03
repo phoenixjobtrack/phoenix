@@ -16,10 +16,11 @@ function* fetchJobs(action) {
 }
 
 function* fetchJobStages(action) {
-    let allJobs = yield axios.get('/api/jobs/opp')
+    let allJobs = yield axios.get('/api/jobs/stages')
     console.log('in fetchJobs saga', allJobs.data)
     yield put({ type: 'STORE_JOBS', payload: allJobs.data })
     yield put({ type: 'LOAD_STAGES', payload: allJobs.data })
+    yield put({ type: 'LOAD_TASKS', payload: allJobs.data })
 }
 
 function* addJob(action) {
@@ -36,7 +37,7 @@ function* addJob(action) {
 
 function* fetchCurrentJob(action) {
     
-    let allJobs = yield axios.get('api/jobs/opp')
+    let allJobs = yield axios.get('api/jobs/stages')
     let currentJob
     console.log('fetchCurrentJob', allJobs ,action.payload)
     allJobs.data.map(job=>{

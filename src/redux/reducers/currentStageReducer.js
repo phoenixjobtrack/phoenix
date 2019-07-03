@@ -31,8 +31,8 @@ const currentStageReducer = (state = {0:{
                 ...stageObject,
                 [i]: {
                     stage: job.stage,
-                    note: job.note,
-                    date: job.date
+                    note: job.stage_note,
+                    date: job.stage_date
                 }
             }
         })

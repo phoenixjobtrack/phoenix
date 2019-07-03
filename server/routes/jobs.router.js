@@ -4,24 +4,39 @@ const router = express.Router();
 
 
 //-----GET for job pipeline table-------//
-router.get('/opp', (req,res)=>{
-    
-    let query = `
-        SELECT * FROM "jobs" 
-        FULL OUTER JOIN "users" ON jobs.user_id = users.id
-        FULL OUTER JOIN "stages" ON jobs.id = stages.job_id
-
-        WHERE jobs.user_id=$1;`
+router.get('/stages', (req,res)=>{
+    let query = `SELECT j.id as job_id, j.user_id as job_user_id, j.position, j.company_name, j.notes as job_notes, j.posting_url, j.deadline, j.compensation, j.benefits, j.travel,
+        s.id as stage_id, s.stage, s.note as stage_note, s.date as stage_date
+    FROM "jobs" j JOIN "stages" s ON j.id = s.job_id
+    WHERE j.user_id = $1;`
     pool.query(query, [req.user.id])
         .then((result) => {
-            console.log('in GET /api/jobs/opp', result.rows, req.user.id)
+            console.log('in GET /api/jobs/stages', result.rows, req.user.id)
             res.send(result.rows);
         })
         .catch((error) => {
             console.log(`Error on query ${error}`);
             res.sendStatus(500);
+        }) 
+})
+
+router.get('/tasks', (req,res)=>{
+    let query = `SELECT
+        j.id as job_id, j.user_id as job_user_id, j.position, j.company_name, j.notes as job_notes, j.posting_url, j.deadline, j.compensation, j.benefits, j.travel,
+        t.id as task_id, t.user_id as task_user_id, t.task_name, t.due_date as task_due_date, t.complete, t.contact_id as task_contact_id, t.note as task_note
+    FROM "jobs" j JOIN "tasks" t on j.id = t.job_id
+    WHERE j.user_id = $1;`
+    pool.query(query,[req.user.id])
+        .then((result)=>{
+            console.log('in GET /api/jobs/tasks', result.rows, req.user.id)
+            res.send(result.rows)
+        })
+        .catch((error)=>{
+            console.log('error in /api/jobs/tasks', error)
+            res.sendStatus(500);
         })
 })
+
 
 router.get('/', (req,res) => {
     console.log('this is for job', req.user.id);

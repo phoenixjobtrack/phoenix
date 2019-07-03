@@ -12,6 +12,7 @@ import currentStage from './currentStageReducer'
 import jobEditMode from './jobEditModeReducer'
 import currentJob from './currentJobReducer'
 import jobRequirements from './jobRequirementsReducer';
+import currentTasks from './currentTasksReducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -32,7 +33,8 @@ const rootReducer = combineReducers({
   currentStage, //stores new or edited stage from JobOp page
   jobEditMode, //stores wether job opp view is in 'edit' or 'create' mode
   currentJob, //stores currently selected job
-  jobRequirements
+  jobRequirements, //stores job_requirements junction table data
+  currentTasks, //stores object of task objects associated with current job
 });
 
 export default rootReducer;

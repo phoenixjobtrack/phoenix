@@ -21,14 +21,6 @@ import Select from '@material-ui/core/Select';
 
 
 class Stages extends Component {
-    // state = {
-    //     stages: [{
-    //         jobId: 0,
-    //         stage: '',
-    //         note: '',
-    //         date: ''
-    //     }],
-    // }
     stageCounter = Object.entries(this.props.reduxState.currentStage).length-1
     addStageInput() {
         this.stageCounter = this.stageCounter+1
