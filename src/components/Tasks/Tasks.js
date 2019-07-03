@@ -34,11 +34,11 @@ import AddIcon from '@material-ui/icons/Add';
 
 
 // ----- TASKS SECTIONS ----- //
-const OverdueTasks = () => <Paper className="overdueTasks" ><Toolbar ><Typography backgroundColor="#939292" color="#939292">Overdue Tasks Go Here (Past Today's Date - Not Yet Marked As Complete)</Typography></Toolbar></Paper>
+const OverdueTasks = () => <Paper className="overdueTasks" ><Toolbar ><Typography backgroundColor="#939292" color="#939292">Overdue Tasks</Typography></Toolbar></Paper>
 const TodayTasks = () => <Paper className="todayTasks"><Toolbar ><Typography>Today</Typography></Toolbar></Paper>
 const TomorrowTasks = () => <Paper className="tomorrowTasks"><Toolbar ><Typography>Tomorrow</Typography></Toolbar></Paper>
-const FutureTasks = () => <Paper className="futureTasks"><Toolbar ><Typography>Future Tasks Go Here (Beyond Tomorrow)</Typography></Toolbar></Paper>
-const HistoryTasks = () => <Paper className="historyTasks"><Toolbar ><Typography>Task History Goes Here (Past Today's Date - Marked As Complete)</Typography></Toolbar></Paper>
+const FutureTasks = () => <Paper className="futureTasks"><Toolbar ><Typography>Future Tasks</Typography></Toolbar></Paper>
+const HistoryTasks = () => <Paper className="historyTasks"><Toolbar ><Typography>Task History</Typography></Toolbar></Paper>
 
 
 // ----- MUI THEME ----- //

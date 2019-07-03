@@ -23,6 +23,8 @@ import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import EditIcon from '@material-ui/icons/Edit';
 
+// ----- STYLES ----- //
+import './TasksLineItemsContent.css';
 
 // ----- DEPENDENCIES ----- //
 import moment from 'moment';
@@ -80,7 +82,7 @@ class TasksLineItemsContent extends Component {
     handleChangeText = (event) => {
         this.setState({
             task_name: event.target.value,
-            
+
         })
     }; // end handleChange
 
@@ -115,7 +117,7 @@ class TasksLineItemsContent extends Component {
                 <Toolbar>
                     <ListItem>
                         {/* See component: TasksMoreDropdown */}
-                        <TasksMoreDropdown 
+                        <TasksMoreDropdown
                             id={this.props.id}
                             task_name={this.props.task_name}
                         />
@@ -132,13 +134,13 @@ class TasksLineItemsContent extends Component {
                         </Tooltip>
                         <div className="listItemText">
                             {this.state.taskIsEditable ?
-                                    <><ListItemText
-                                    ><TextField
+                                <><ListItemText
+                                ><TextField
                                         placeholder={this.props.task_name}
                                         value={this.state.task_name}
                                         onChange={this.handleChangeText}
                                         variant="outlined"
-                                        />
+                                    />
                                     <TextField
                                         type="date"
                                         placeholder={this.props.due_date}
@@ -147,33 +149,47 @@ class TasksLineItemsContent extends Component {
                                         format={'YYYY-MM-DD'}
                                         formatDate={(date) => moment(new Date()).format('YYYY-MM-DD')}
                                         variant="outlined"
-                                        // label="update due date"
+                                    // label="update due date"
                                     />
+                                    <IconButton
+                                        onClick={() => this.saveTask(this.props.id)}
+                                    >
+                                        <CheckIcon />
+                                    </IconButton>
+                                </ListItemText></> :
+                                <><ListItemText>
+                                    {this.props.complete ?
+                                        <span className="taskNameTextComplete">
+                                            {this.props.task_name}
+                                        </span> :
+                                        <span className="taskNameTextIncomplete">
+                                            {this.props.task_name}
+                                        </span>
+                                    }
+                                    <Tooltip title="Edit Task">
                                         <IconButton
-                                            onClick={() => this.saveTask(this.props.id)}
+                                            onClick={() => this.editTask(this.props.id, this.props.task_name, this.props.due_date)}
                                         >
-                                            <CheckIcon />
+                                            <EditIcon />
                                         </IconButton>
-                                    </ListItemText></> :
-                                    <><ListItemText>
-                                        {this.props.task_name}
-                                        <Tooltip title="Edit Task">
-                                            <IconButton
-                                                onClick={() => this.editTask(this.props.id, this.props.task_name, this.props.due_date)}
-                                            >
-                                                <EditIcon />
-                                            </IconButton>
-                                        </Tooltip>
-                                    </ListItemText></>
+                                    </Tooltip>
+                                </ListItemText></>
                             }
                         </div>
                         <ListItemText className="dueDate">
-                            {this.props.due_date}
+                            {this.props.complete ?
+                                <span className="taskNameTextComplete">
+                                    {this.props.due_date}
+                                </span> :
+                                <span className="taskNameTextIncomplete">
+                                    {this.props.due_date}
+                                </span>
+                            }
                         </ListItemText>
                         {/* See component: TaskNoteContact */}
-                        <TaskNoteContact contact_id={this.props.contact_id}/>
+                        <TaskNoteContact contact_id={this.props.contact_id} />
                         {/* See component: TaskNoteJob */}
-                        <TaskNoteJob job_id={this.props.job_id}/>
+                        <TaskNoteJob job_id={this.props.job_id} />
                         <Tooltip title="Delete">
                             <IconButton
                                 onClick={() => this.removeAlert(this.props.id)}
