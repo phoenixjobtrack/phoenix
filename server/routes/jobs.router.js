@@ -5,14 +5,16 @@ const router = express.Router();
 
 //-----GET for job pipeline table-------//
 router.get('/opp', (req,res)=>{
+    
     let query = `
         SELECT * FROM "jobs" 
         FULL OUTER JOIN "users" ON jobs.user_id = users.id
         FULL OUTER JOIN "stages" ON jobs.id = stages.job_id
-        FULL OUTER JOIN "tasks" ON jobs.id = tasks.id
+
         WHERE jobs.user_id=$1;`
     pool.query(query, [req.user.id])
         .then((result) => {
+            console.log('in GET /api/jobs/opp', result.rows, req.user.id)
             res.send(result.rows);
         })
         .catch((error) => {
