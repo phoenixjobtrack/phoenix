@@ -36,7 +36,7 @@ class Stages extends Component {
     }
 
     fetchJobStages = () => {
-        console.log('redux job stuff', this.props.reduxState.jobs)
+        console.log('redux job stuff', this.props.reduxState.jobStages)
         this.props.reduxState.jobs.map(job=>{
             console.log('fetchJobStages', job)
             if (2 === job.job_id){

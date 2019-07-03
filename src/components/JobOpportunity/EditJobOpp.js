@@ -101,7 +101,7 @@ class JobOpportunity extends Component {
 
     componentDidMount = () =>{
         // this.props.dispatch({ type: 'FETCH_JOBS' })
-        this.props.dispatch({type: 'FETCH_JOB_STAGES'}) 
+        this.props.dispatch({type: 'FETCH_JOB_STAGES', payload: this.props.match.params.id}) 
         this.props.dispatch({type: 'FETCH_CURRENT_JOB', payload: this.props.match.params.id})
     }
     

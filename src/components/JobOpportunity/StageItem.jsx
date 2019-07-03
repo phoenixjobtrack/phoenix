@@ -19,7 +19,7 @@ class StageItem extends Component {
     state = {
         stage: {
 
-            jobId: this.props.reduxState.jobs.length,
+            jobId: this.props.reduxState.jobStages.length,
             stage: this.props.stage.stage,
             note: this.props.stage.note,
             date: this.props.stage.date

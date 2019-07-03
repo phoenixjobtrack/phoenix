@@ -16,11 +16,24 @@ function* fetchJobs(action) {
 }
 
 function* fetchJobStages(action) {
-    let allJobs = yield axios.get('/api/jobs/stages')
-    console.log('in fetchJobs saga', allJobs.data)
-    yield put({ type: 'STORE_JOBS', payload: allJobs.data })
-    yield put({ type: 'LOAD_STAGES', payload: allJobs.data })
-    yield put({ type: 'LOAD_TASKS', payload: allJobs.data })
+    let allJobStages = yield axios.get('/api/jobs/stages')
+    let currentStages = []
+    console.log('in fetchJobs saga', allJobStages.data, action.payload)
+    yield put({type:'STORE_JOBS', payload: allJobStages.data})
+    yield put({ type: 'STORE_JOB_STAGES', payload: allJobStages.data })
+    allJobStages.data.map(stage=>{
+        if(stage.job_id==action.payload){
+            currentStages = [...currentStages, stage]
+        }
+    })
+    yield put({ type: 'LOAD_STAGES', payload: currentStages })
+}
+
+function* fetchJobTasks(action){
+    
+    let allJobTasks = yield axios.get('api/jobs/tasks')
+    console.log('in fetchJobStages saga', allJobTasks.data)
+    yield put({type: 'LOAD_TASKS', paylod: allJobTasks.data})
 }
 
 function* addJob(action) {
@@ -59,6 +72,7 @@ function* jobSaga() {
     yield takeEvery('ADD_JOB', addJob);
     yield takeEvery('FETCH_JOB_STAGES', fetchJobStages)
     yield takeEvery('FETCH_CURRENT_JOB', fetchCurrentJob)
+    yield takeEvery('FETCH_JOB_TASKS', fetchJobTasks)
 
 }
 
