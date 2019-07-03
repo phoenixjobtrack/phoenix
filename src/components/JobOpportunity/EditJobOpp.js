@@ -18,7 +18,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import Select from '@material-ui/core/Select';
-import './JobOpportunity.css';
+// import './JobOpportunity.css';
 //import JobInfo from './JobInfo';
 
 
@@ -129,41 +129,41 @@ class JobOpportunity extends Component {
                             </Grid>
                             <Grid item sm={3} >
                             <Input
-                                        placeholder="Company"
-                                        value={this.props.currentJob.company_name}
-                                        onChange={this.handleJobChange('company_name')}
-                                        inputProps={{
-                                            'aria-label': 'Description',
-                                        }}
-                                    />
+                                placeholder="Company"
+                                value={this.props.currentJob.company_name}
+                                onChange={this.handleJobChange('company_name')}
+                                inputProps={{
+                                    'aria-label': 'Description',
+                                }}
+                            />
                             <Input
-                                        placeholder="Position"
-                                        value={this.props.currentJob.position}
-                                        onChange={this.handleJobChange('position')}
-                                        inputProps={{
-                                            'aria-label': 'Description',
-                                        }}
-                                    />
+                                placeholder="Position"
+                                value={this.props.currentJob.position}
+                                onChange={this.handleJobChange('position')}
+                                inputProps={{
+                                    'aria-label': 'Description',
+                                }}
+                            />
                             <Input
-                                        placeholder="Posting URL"
-                                        value={this.props.currentJob.posting_url}
-                                        onChange={this.handleJobChange('posting_url')}
-                                        inputProps={{
-                                            'aria-label': 'Description',
-                                        }}
-                                    />
-                                    <br />
+                                placeholder="Posting URL"
+                                value={this.props.currentJob.posting_url}
+                                onChange={this.handleJobChange('posting_url')}
+                                inputProps={{
+                                    'aria-label': 'Description',
+                                }}
+                            />
+                            <br />
                             <TextField
-                                        id="date"
-                                        style={{ width: 150 }}
-                                        type="date"
-                                        value={this.props.currentJob.deadline}
-                                        onChange={this.handleJobChange('deadline')}
-                                        // defaultValue="2017-05-24"
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                    />
+                                id="date"
+                                style={{ width: 150 }}
+                                type="date"
+                                value={this.props.currentJob.deadline}
+                                onChange={this.handleJobChange('deadline')}
+                                // defaultValue="2017-05-24"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                            />
                             </Grid>
                             <Grid item sm={3}>
                                 <p> Salary:
@@ -179,31 +179,31 @@ class JobOpportunity extends Component {
                             </Grid>
                             <Grid item sm={3}>
                             <Input
-                                        placeholder="Salary"
-                                        value={this.props.currentJob.salary}
-                                        onChange={this.handleJobChange('salary')}
-                                        inputProps={{
-                                            'aria-label': 'Description',
-                                        }}
-                                    />
+                                placeholder="Salary"
+                                value={this.props.currentJob.compensation}
+                                onChange={this.handleJobChange('salary')}
+                                inputProps={{
+                                    'aria-label': 'Description',
+                                }}
+                            />
                             <TextField
-                                        id="outlined-multiline-flexible"
-                                        label="Benefits"
-                                        value={this.props.currentJob.benefits}
-                                        onChange={this.handleJobChange('benefits')}
-                                        multiline
-                                        rowsMax="15"
-                                        margin="normal"
-                                        variant="outlined"
-                                    />
+                                id="outlined-multiline-flexible"
+                                label="Benefits"
+                                value={this.props.currentJob.benefits}
+                                onChange={this.handleJobChange('benefits')}
+                                multiline
+                                rowsMax="15"
+                                margin="normal"
+                                variant="outlined"
+                            />
                             <Input
-                                        placeholder="Travel"
-                                        value={this.props.currentJob.travel}
-                                        onChange={this.handleJobChange('travel')}
-                                        inputProps={{
-                                            'aria-label': 'Description',
-                                        }}
-                                    />
+                                placeholder="Travel"
+                                value={this.props.currentJob.travel}
+                                onChange={this.handleJobChange('travel')}
+                                inputProps={{
+                                    'aria-label': 'Description',
+                                }}
+                            />
                             </Grid>
                         </Grid>
                         <p>Notes:</p>
@@ -223,103 +223,98 @@ class JobOpportunity extends Component {
                 <div className="jobOppForm">
                     <p className="jobOppsTitle">Tasks</p>
                     {this.state.tasks.map((stage, index) => {
-                                return (
-                                    <div>
-                    <Grid container>
-                    <Grid item sm={2}>
-                                    <button className="oppsSubBut">
-                                        <RemoveIcon className="OppsRemoveIcon" noValidate style={{ paddingTop: 15, fontSize: 30 }} />
-                                        <span style={{ fontSize: 20 }}>
-            
-                                            Tasks:
-            
-                                        </span>
-                                        </button>
-                                    </Grid>
-                                    <Grid item sm={5}>
-                    <Input
-                    style={{ width: 415, paddingTop: 16 }}
-                        placeholder="Task Details"
-                        onChange={this.handleTaskChange('task_name')}
-                        inputProps={{
-                            'aria-label': 'Description',
-                        }}
-                    />
-                    </Grid>
-                    <Grid item sm={5} >
-                    <TextField
-                        id="date"
-                        type="date"
-                        style={{ paddingTop: 16 }}
-                        onChange={this.handleTaskChange('due_date')}
-                        // defaultValue="2017-05-24"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
-                    </Grid>
-                    </Grid>
-                    </div>
-                              )
-                            })}
-                    <p><AddIcon onClick={(event) => this.addTasksInput(event)} />Add Tasks</p>
-                </div>
-
-                {/* Employment Requirements */}
-
-                <div className="jobOppForm">
-                    <p className="jobOppsTitle">Employment Requirements</p>
-                    <Grid container>
-                    <Grid item sm={8}>
-                    </Grid>
-                    <Grid item sm={4}>
-                    <button>Update Personal Requirements</button>
-                    </Grid>
-                    </Grid>
-                    {this.props.require.map((user, i) => {
-                            return (
-                         
-                                <div className="oppGrid4">
+                        return (
+                            <div>
                                 <Grid container>
-                                <Grid item sm={4}>
-                                <span> Requirement: {user.requirement} </span>
-                                </Grid>
-                                <Grid item sm={5}>
+                                <Grid item sm={2}>
+                                                <button className="oppsSubBut">
+                                                    <RemoveIcon className="OppsRemoveIcon" noValidate style={{ paddingTop: 15, fontSize: 30 }} />
+                                                    <span style={{ fontSize: 20 }}>
+                        
+                                                        Tasks:
+                        
+                                                    </span>
+                                                    </button>
+                                                </Grid>
+                                                <Grid item sm={5}>
                                 <Input
-                                    style={{ width: 350 }}
-                                    placeholder="Offer Details"
-                                    onChange={this.handleRequireChange('job_requirement')}
+                                style={{ width: 415, paddingTop: 16 }}
+                                    placeholder="Task Details"
+                                    onChange={this.handleTaskChange('task_name')}
                                     inputProps={{
                                         'aria-label': 'Description',
                                     }}
                                 />
                                 </Grid>
-                                <Grid item sm={3}>
-                                <FormControl component="fieldset" >
-                                    <FormLabel component="legend">Meets Requirement?</FormLabel>
-                                    <FormGroup >
-                                        <FormControlLabel
-                                        
-                                            control={
-                                                <Checkbox onChange={this.handleRequireChange('requirement_met')} value="true" />}
-                                            label="True"
-                                        />
-             
-                                        <FormControlLabel
-                                            control={
-                                                <Checkbox onChange={this.handleRequireChange('requirement_met')} value="false" />
-                                            }
-                                            label="False"
-                                        />
-                                    </FormGroup>
-                                </FormControl>
+                                <Grid item sm={5} >
+                                <TextField
+                                    id="date"
+                                    type="date"
+                                    style={{ paddingTop: 16 }}
+                                    onChange={this.handleTaskChange('due_date')}
+                                    // defaultValue="2017-05-24"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
                                 </Grid>
                                 </Grid>
-                                </div>                      
+                                </div>
+                                        )
+                                        })}
+                                <p><AddIcon onClick={(event) => this.addTasksInput(event)} />Add Tasks</p>
+                            </div>
 
-                        
-                            )
-                        })}
+                            {/* Employment Requirements */}
+
+                            <div className="jobOppForm">
+                                <p className="jobOppsTitle">Employment Requirements</p>
+                                <Grid container>
+                                    <Grid item sm={8}></Grid>
+                                    <Grid item sm={4}>
+                                        <button>Update Personal Requirements</button>
+                                    </Grid>
+                                </Grid>
+                                {this.props.require.map((user, i) => {
+                                    return (
+                                        <div className="oppGrid4">
+                                            <Grid container>
+                                                <Grid item sm={4}>
+                                                    <span> Requirement: {user.requirement} </span>
+                                                </Grid>
+                                                <Grid item sm={5}>
+                                                <Input
+                                                    style={{ width: 350 }}
+                                                    placeholder="Offer Details"
+                                                    onChange={this.handleRequireChange('job_requirement')}
+                                                    inputProps={{
+                                                        'aria-label': 'Description',
+                                                    }}
+                                                />
+                                                </Grid>
+                                                <Grid item sm={3}>
+                                                    <FormControl component="fieldset" >
+                                                        <FormLabel component="legend">Meets Requirement?</FormLabel>
+                                                            <FormGroup >
+                                                                <FormControlLabel
+                                                                    control={
+                                                                        <Checkbox onChange={this.handleRequireChange('requirement_met')} value="true" />
+                                                                    }
+                                                                    label="True"
+                                                                />
+                                                                <FormControlLabel
+                                                                    control={
+                                                                        <Checkbox onChange={this.handleRequireChange('requirement_met')} value="false" />
+                                                                    }
+                                                                    label="False"
+                                                                />
+                                                            </FormGroup>
+                                                    </FormControl>
+                                                </Grid>
+                                            </Grid>
+                                        </div>                      
+                                    )
+                                })}
                     
                 </div>
                 <Button variant="contained" color="primary" onClick = {this.handleSubmit} style={{ width: 350, marginTop: 30 }}>Add Job Opportunity</Button>

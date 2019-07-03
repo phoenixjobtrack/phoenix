@@ -3,11 +3,12 @@ import { put, takeEvery } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_USER" actions
 function* addRequirements(action) {
-    console.log('in addRequirements saga', action.payload)
+    // console.log('in addRequirements saga', action.payload)
         
     try {
         yield action.payload.requirements.map(requirement=>{
-            axios.post('api/requirements', {requirements: requirement})
+            console.log('in addRequirements saga', requirement)
+            axios.post('api/requirements', {requirement: requirement})
         })       
         
     } catch (error) {
