@@ -74,7 +74,7 @@ function* toggleTaskCheck(action) {
 function* updateTask(action) {
     console.log('in updateTask', action.payload);
     try {
-        yield axios.put(`api/tasks/update/${action.payload.task_name}/${action.payload.id}`, action.payload)
+        yield axios.put(`api/tasks/update/${action.payload.task_name}/${action.payload.id}/${action.payload.due_date}`, action.payload)
         yield put({ type: 'FETCH_TASKS' })
     } catch (error) {
         console.log('error in upateTask saga', error);
