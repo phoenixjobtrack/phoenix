@@ -24,6 +24,7 @@ import UserPage from '../UserPage/UserPage';
 import TopBar from '../TopBar/TopBar';
 import AddContactPage from '../ContactPage/AddContactPage'
 import EditContactPage from '../ContactPage/EditContactPage'
+import EditJobOpp from '../JobOpportunity/EditJobOpp'
 
 // ========== STYLE ========== //
 import './App.css';
@@ -109,7 +110,7 @@ class App extends Component {
             <ProtectedRoute
               exact
               path="/jobOpportunity/:id" 
-              component={JobOpportunity}
+              component={EditJobOpp}
             />
             <ProtectedRoute
               exact

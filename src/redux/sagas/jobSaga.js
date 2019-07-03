@@ -40,13 +40,17 @@ function* fetchCurrentJob(action) {
     let currentJob
     console.log('fetchCurrentJob', allJobs ,action.payload)
     allJobs.data.map(job=>{
-        if (job.id == action.payload) {
-            console.log('in fetchCurrentJobSaga', job.id, action.payload)
+        if (job.job_id == action.payload) {
+            console.log('in fetchCurrentJobSaga', job.job_id, action.payload)
             currentJob = job
             
         }
+        
     })
-    yield put({ type: 'STORE_CURRENT_JOB', payload: currentJob })
+    if (currentJob){
+        yield put({ type: 'STORE_CURRENT_JOB', payload: currentJob })
+    }
+    
 }
 
 function* jobSaga() {
