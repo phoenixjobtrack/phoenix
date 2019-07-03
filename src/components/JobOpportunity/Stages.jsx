@@ -27,34 +27,38 @@ class Stages extends Component {
         console.log('stageCounter', this.stageCounter)
         // this.setState({ stages: [...this.state.stages, {}] })
         this.props.dispatch({
-            type: 'ADD_TO_REDUX_STAGE', payload: {
-                key: this.stageCounter, stage: {
+            type: 'ADD_TO_REDUX_STAGE', 
+            payload: {
+                key: this.stageCounter, 
+                stage: {
                     stage: '',
                     note: '',
                     date: ''
-                }}})
-    }
-
-    fetchJobStages = () => {
-        console.log('redux job stuff', this.props.reduxState.jobStages)
-        this.props.reduxState.jobs.map(job=>{
-            console.log('fetchJobStages', job)
-            if (2 === job.job_id){
-                console.log('fetchJobStages: stage matches job', job.stage)
-                this.stageCounter+=1
-                console.log('stagecounter', this.stageCounter)
-                this.props.dispatch({
-                    type:'ADD_TO_REDUX_STAGE', payload: {
-                        key: this.stageCounter, stage: {
-                            stage: job.stage,
-                            note: job.note,
-                            date: job.date
-                        }
-                    }
-                })
+                }
             }
         })
     }
+
+    // fetchJobStages = () => {
+    //     console.log('redux job stuff', this.props.reduxState.jobStages)
+    //     this.props.reduxState.jobs.map(job=>{
+    //         console.log('fetchJobStages', job)
+    //         if (2 === job.job_id){
+    //             console.log('fetchJobStages: stage matches job', job.stage)
+    //             this.stageCounter+=1
+    //             console.log('stagecounter', this.stageCounter)
+    //             this.props.dispatch({
+    //                 type:'ADD_TO_REDUX_STAGE', payload: {
+    //                     key: this.stageCounter, stage: {
+    //                         stage: job.stage,
+    //                         note: job.note,
+    //                         date: job.date
+    //                     }
+    //                 }
+    //             })
+    //         }
+    //     })
+    // }
 
     handleForceUpdate = () => {
         this.forceUpdate()

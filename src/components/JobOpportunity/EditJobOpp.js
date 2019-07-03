@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom'
 
 import Stages from './Stages'
+import Tasks from './Tasks'
 
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
@@ -220,8 +221,9 @@ class JobOpportunity extends Component {
                         />
                     </div>
                 </div> 
-                <Stages/>                           
-                <div className="jobOppForm">
+                <Stages/>
+                <Tasks/>                           
+                {/* <div className="jobOppForm">
                     <p className="jobOppsTitle">Tasks</p>
                     {this.state.tasks.map((stage, index) => {
                         return (
@@ -264,7 +266,7 @@ class JobOpportunity extends Component {
                                         )
                                         })}
                                 <p><AddIcon onClick={(event) => this.addTasksInput(event)} />Add Tasks</p>
-                            </div>
+                            </div> */}
 
                             {/* Employment Requirements */}
 
