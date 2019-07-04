@@ -40,6 +40,18 @@ function* fetchRequirements(action) {
     }
 }
 
+// BE CAREFUL
+// This is updateRequirement NOT updateRequirementS with an "S"
+function* updateRequirement(action) {
+    console.log('in updateRequiremenT', action.payload)
+    try {
+        yield axios.put(`api/requirements`, action.payload)
+        yield put({type: 'FETCH_REQUIREMENTS' })
+    } catch (error) {
+        console.log('error in updateRequiremenT saga', error);
+    }
+}
+
 function* updateRequirements(action) {
     console.log('in updateRequirements saga', action.payload)
         
@@ -57,7 +69,8 @@ function* requirementsSaga() {
     yield takeEvery('ADD_REQUIREMENTS', addRequirements);
     yield takeEvery('ADD_NEW_REQUIREMENT', addNewRequirement);
     yield takeEvery('FETCH_REQUIREMENTS', fetchRequirements);
-    yield takeEvery('UPDATE_REQUIREMENTS', updateRequirements)
+    yield takeEvery('UPDATE_REQUIREMENTS', updateRequirements);
+    yield takeEvery('UPDATE_REQUIREMENT', updateRequirement);
 }
 
 export default requirementsSaga;

@@ -10,7 +10,7 @@ const router = express.Router();
 // // GET route
 router.get('/', (req, res) => {
     console.log('in GET /api/requirements user:', req.user.id)
-    const queryText = `SELECT * FROM "requirements" WHERE "user_id"=$1`
+    const queryText = `SELECT * FROM "requirements" WHERE "user_id"=$1 ORDER BY "id" ASC;`
     pool.query(queryText,[req.user.id])
         .then(result=>{
             console.log('back from GET /api/requirements', result.rows)
@@ -38,7 +38,7 @@ router.post('/', (req, res) => {
         })
 });
 
-// //PUT route
+//PUT route
 router.put('/', (req,res)=>{
     console.log('in PUT /api/requirements', req.body, req.user.id)
     const queryText='UPDATE "requirements" SET "requirement"=$1 WHERE "user_id"=$2 AND "id"=$3'

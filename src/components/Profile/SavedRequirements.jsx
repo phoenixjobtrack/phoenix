@@ -30,11 +30,13 @@ class SavedRequirements extends Component {
         });
     }
 
+    componentWillUnmount () {
+        this.updateChange()
+    }
+
     state = {
         requirementName: '',
-        // requireList: {},
-        // oldRequirement: {},
-        // editMode: false
+        
     }
 
     handleEditChange = (event) => {
@@ -44,7 +46,18 @@ class SavedRequirements extends Component {
         });
     }
 
+    updateChange = () => {
+        if (this.state.requirementName !== this.props.userReq.requirement){
+            console.log('in updateChange', this.props.id, this.state.requirementName, this.props.userReq.requirement);
+            this.props.dispatch({ type: 'UPDATE_REQUIREMENT', payload: { id: this.props.id, requirement: this.state.requirementName } })
+        }
+        else {
+            console.log('in updateChange - NO CHANGE', this.props.id, this.state.requirementName);
+        }
+    }
+
     render () {
+
         return (
             <>
             <div>
