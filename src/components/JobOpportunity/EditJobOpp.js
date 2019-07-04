@@ -117,7 +117,7 @@ class JobOpportunity extends Component {
                             <Input
                                 placeholder="Salary"
                                 value={this.props.currentJob.compensation}
-                                onChange={this.handleJobChange('salary')}
+                                onChange={this.handleJobChange('compensation')}
                                 inputProps={{
                                     'aria-label': 'Description',
                                 }}

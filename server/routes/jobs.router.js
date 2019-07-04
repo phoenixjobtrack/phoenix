@@ -172,7 +172,7 @@ router.put('/tasks', (req, res) => {
     console.log('in POST /api/jobs/tasks', req.body.task[1], req.body.job_id)
     let query = `INSERT INTO "tasks" (user_id, task_name, due_date, job_id, note ) VALUES ($1, $2, $3, $4, $5)`
     // let query = `UPDATE "stages" SET stage=$1, note=$2, date=$3 WHERE job_id=$4`
-    pool.query(query, [req.body.task[1].user_id, req.body.task[1].task_name, '2019-07-30', req.body.job_id, req.body.task[1].note])
+    pool.query(query, [req.user.id, req.body.task[1].task_name, '2019-07-30', req.body.job_id, req.body.task[1].note])
         .then(response => {
             console.log('in POST /api/jobs/tasks', response);
             res.sendStatus(201)
@@ -181,22 +181,7 @@ router.put('/tasks', (req, res) => {
             console.log('error in in POST /api/jobs/tasks', err)
             res.sendStatus(500)
         })
-    // console.log('in PUT /api/jobs/tasks', req.body)
 })
-
-// router.delete('/requirements/:id', rejectUnauthenticated, (req, res) => {
-//     console.log('in DELETE /api/jobs/requirements', req.params.id)
-//     let query = `DELETE FROM "jobs_requirements" WHERE job_id=$1`
-//     pool.query(query, [req.params.id])
-//         .then(response => {
-//             console.log('in DELETE /api/jobs/requirements', response)
-//             res.sendStatus(200)
-//         })
-//         .catch(err => {
-//             console.log('error in DELETE /api/jobs/requirements', err)
-//             res.sendStatus(500)
-//         })
-// })
 
 router.put('/requirements', (req, res) => {
     console.log('in PUT /api/jobs/requirements', req.body[1])
