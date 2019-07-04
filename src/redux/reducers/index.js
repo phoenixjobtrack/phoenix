@@ -14,6 +14,7 @@ import currentJob from './currentJobReducer'
 import jobRequirements from './jobRequirementsReducer';
 import currentTasks from './currentTasksReducer'
 import jobStages from './jobStagesReducer'
+import currentRequirements from './currentRequirementsReducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
   jobRequirements, //stores job_requirements junction table data
   currentTasks, //stores object of task objects associated with current job
   jobStages, //stores stages and their associated jobs
+  currentRequirements, //stores requirement assessment for currently selected job opp
 });
 
 export default rootReducer;

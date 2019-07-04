@@ -3,6 +3,7 @@ import {withRouter} from 'react-router-dom'
 
 import Stages from './Stages'
 import Tasks from './Tasks'
+import Requirements from './Requirements'
 
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
@@ -26,17 +27,15 @@ import Select from '@material-ui/core/Select';
 class JobOpportunity extends Component {
     state = {
         job: {
-            // company : '',
-            // position : '',
-            // posting_url : '',
-            // deadline : '',
-            // salary : '',
-            // benefits : '',
-            // travel : '',
-            // notes : '',
+            company : '',
+            position : '',
+            posting_url : '',
+            deadline : '',
+            salary : '',
+            benefits : '',
+            travel : '',
+            notes : '',
         },
-        stages: [{}],
-        tasks: [{}],
         job_requirements: {},
     }
 
@@ -79,24 +78,18 @@ class JobOpportunity extends Component {
         });
     }
 
-    handleRequireChange = propertyName => (event) => {
-        console.log('requireInfo', event.target.value);
-        this.setState({
-            job_requirements: {
-                ...this.state,
-                [propertyName]: event.target.value
-            }
-        });
-    }
+    
 
-    handleSubmit = (event) => {
+    handleSave = (event) => {
         event.preventDefault();
-        console.log('jobOpps', this.state);
-        this.props.dispatch({ type: 'SAVE_STAGES', payload: this.props.reduxState.currentStage });
-        this.props.dispatch({ type: 'ADD_JOB', payload: this.state.job });
-        this.props.dispatch({ type: 'ADD_TASK', payload: this.state.tasks });
-        this.props.dispatch({ type: 'ADD_JOB_REQUIREMENTS', payload: this.state.job_requirements });
-        this.props.history.push('/jobpipeline')
+        this.props.dispatch({
+            type: 'SAVE_JOB_UPDATES', 
+            payload: {
+                job: this.props.currentJob,
+                stages: this.props.stages,
+                tasks: this.props.tasks,
+            }})
+        
      
     }
 
@@ -105,6 +98,7 @@ class JobOpportunity extends Component {
         this.props.dispatch({type: 'FETCH_JOB_STAGES', payload: this.props.match.params.id}) 
         this.props.dispatch({type: 'FETCH_CURRENT_JOB', payload: this.props.match.params.id})
         this.props.dispatch({type: 'FETCH_JOB_TASKS', payload: this.props.match.params.id})
+        
     }
     
     render() {
@@ -118,7 +112,6 @@ class JobOpportunity extends Component {
                 </div>
 
                  {/* Employment Information */}
-
                 <div className="jobOppForm">
                     <p className="jobOppsTitle">Employment Information</p>
                     <div className="oppGrid1">
@@ -222,105 +215,9 @@ class JobOpportunity extends Component {
                     </div>
                 </div> 
                 <Stages/>
-                <Tasks/>                           
-                {/* <div className="jobOppForm">
-                    <p className="jobOppsTitle">Tasks</p>
-                    {this.state.tasks.map((stage, index) => {
-                        return (
-                            <div>
-                                <Grid container>
-                                <Grid item sm={2}>
-                                                <button className="oppsSubBut">
-                                                    <RemoveIcon className="OppsRemoveIcon" noValidate style={{ paddingTop: 15, fontSize: 30 }} />
-                                                    <span style={{ fontSize: 20 }}>
-                        
-                                                        Tasks:
-                        
-                                                    </span>
-                                                    </button>
-                                                </Grid>
-                                                <Grid item sm={5}>
-                                <Input
-                                style={{ width: 415, paddingTop: 16 }}
-                                    placeholder="Task Details"
-                                    onChange={this.handleTaskChange('task_name')}
-                                    inputProps={{
-                                        'aria-label': 'Description',
-                                    }}
-                                />
-                                </Grid>
-                                <Grid item sm={5} >
-                                <TextField
-                                    id="date"
-                                    type="date"
-                                    style={{ paddingTop: 16 }}
-                                    onChange={this.handleTaskChange('due_date')}
-                                    // defaultValue="2017-05-24"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                />
-                                </Grid>
-                                </Grid>
-                                </div>
-                                        )
-                                        })}
-                                <p><AddIcon onClick={(event) => this.addTasksInput(event)} />Add Tasks</p>
-                            </div> */}
-
-                            {/* Employment Requirements */}
-
-                            <div className="jobOppForm">
-                                <p className="jobOppsTitle">Employment Requirements</p>
-                                <Grid container>
-                                    <Grid item sm={8}></Grid>
-                                    <Grid item sm={4}>
-                                        <button>Update Personal Requirements</button>
-                                    </Grid>
-                                </Grid>
-                                {this.props.require.map((user, i) => {
-                                    return (
-                                        <div className="oppGrid4">
-                                            <Grid container>
-                                                <Grid item sm={4}>
-                                                    <span> Requirement: {user.requirement} </span>
-                                                </Grid>
-                                                <Grid item sm={5}>
-                                                <Input
-                                                    style={{ width: 350 }}
-                                                    placeholder="Offer Details"
-                                                    onChange={this.handleRequireChange('job_requirement')}
-                                                    inputProps={{
-                                                        'aria-label': 'Description',
-                                                    }}
-                                                />
-                                                </Grid>
-                                                <Grid item sm={3}>
-                                                    <FormControl component="fieldset" >
-                                                        <FormLabel component="legend">Meets Requirement?</FormLabel>
-                                                            <FormGroup >
-                                                                <FormControlLabel
-                                                                    control={
-                                                                        <Checkbox onChange={this.handleRequireChange('requirement_met')} value="true" />
-                                                                    }
-                                                                    label="True"
-                                                                />
-                                                                <FormControlLabel
-                                                                    control={
-                                                                        <Checkbox onChange={this.handleRequireChange('requirement_met')} value="false" />
-                                                                    }
-                                                                    label="False"
-                                                                />
-                                                            </FormGroup>
-                                                    </FormControl>
-                                                </Grid>
-                                            </Grid>
-                                        </div>                      
-                                    )
-                                })}
-                    
-                </div>
-                <Button variant="contained" color="primary" onClick = {this.handleSubmit} style={{ width: 350, marginTop: 30 }}>Add Job Opportunity</Button>
+                <Tasks/>                          
+                <Requirements/>
+                <Button variant="contained" color="primary" onClick = {this.handleSave} style={{ width: 350, marginTop: 30 }}>Save</Button>
             </div>
         )
     }
@@ -330,7 +227,9 @@ class JobOpportunity extends Component {
 const mapStateToProps = (state) => ({
     require: state.requirements,
     jobEditMode: state.jobEditMode,
-    currentJob: state.currentJob
+    currentJob: state.currentJob,
+    stages: state.currentStage,
+    tasks: state.currentTasks
 
 });
 export default withRouter(connect(mapStateToProps)(JobOpportunity));

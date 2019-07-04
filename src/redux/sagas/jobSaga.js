@@ -31,7 +31,7 @@ function* fetchJobStages(action) {
 
 function* fetchJobTasks(action){
     
-    let allJobTasks = yield axios.get('api/jobs/tasks')
+    let allJobTasks = yield axios.get('/api/jobs/tasks')
     let currentTasks = []
     console.log('in fetchJobStages saga', allJobTasks.data)
     allJobTasks.data.map(task=>{
@@ -47,7 +47,7 @@ function* addJob(action) {
     console.log('in addJob Saga', action.payload);
     // Do or Do Not. There is no
     try {
-        yield axios.post('api/jobs', action.payload)
+        yield axios.post('/api/jobs', action.payload)
         yield put({ type: 'FETCH_JOBS'})
 
     } catch (error) {
@@ -56,8 +56,7 @@ function* addJob(action) {
 }
 
 function* fetchCurrentJob(action) {
-    
-    let allJobs = yield axios.get('api/jobs/stages')
+    let allJobs = yield axios.get('/api/jobs/stages')
     let currentJob
     console.log('fetchCurrentJob', allJobs ,action.payload)
     allJobs.data.map(job=>{
@@ -74,12 +73,45 @@ function* fetchCurrentJob(action) {
     
 }
 
+function* fetchJobRequirements(action) {
+    console.log('in fetchJobRequirements Saga', action.payload);
+    try {
+        const jobRequirements = yield axios.get('api/job_requirements', action.payload)
+        yield put({ type: 'STORE_JOB_REQUIREMENTS', payload: jobRequirements.data })
+        console.log('fetchJobRequirements saga', jobRequirements.data)
+        yield put({ type: 'LOAD_REQUIREMENTS', payload: jobRequirements.data})
+    } catch (error) {
+        console.log('error in fetchJobRequirements saga', error);
+    }
+
+}
+
+function* saveJobUpdates(action){
+    console.log('in saveJobUpdates', action.payload)
+    //send job data
+    yield axios.put('/api/jobs', action.payload.job)
+    //send stage data
+    yield Object.entries(action.payload.stages).map(stage=>{
+        console.log('in saveJobUpdates saga stage:', stage)
+        axios.put('/api/jobs/stages', stage)
+    })
+    // send task data
+    yield Object.entries(action.payload.tasks).map(task=>{
+        console.log('in saveJobUpdates saga task:', task)
+        axios.put('/api/jobs/tasks', task)
+    })
+    
+
+}
+
 function* jobSaga() {
     yield takeEvery('FETCH_JOBS', fetchJobs);
     yield takeEvery('ADD_JOB', addJob);
     yield takeEvery('FETCH_JOB_STAGES', fetchJobStages)
     yield takeEvery('FETCH_CURRENT_JOB', fetchCurrentJob)
     yield takeEvery('FETCH_JOB_TASKS', fetchJobTasks)
+    yield takeEvery('SAVE_JOB_UPDATES', saveJobUpdates)
+    yield takeEvery('FETCH_JOB_REQUIREMENTS', fetchJobRequirements)
 
 }
 
