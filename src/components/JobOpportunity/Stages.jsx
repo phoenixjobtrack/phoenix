@@ -42,7 +42,7 @@ class Stages extends Component {
     render() {
         console.log('stages state', this.props.reduxState.currentStage, Object.entries(this.props.reduxState.currentStage))
         return(
-            <div className="jobOppForm">
+            <div >
                 <p className="jobOppsTitle">Stages of the Hiring Process</p>
                 
                 {Object.entries(this.props.reduxState.currentStage).map((stage) => {
