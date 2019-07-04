@@ -20,6 +20,7 @@ const currentRequirementsReducer = (state = {
         return {
             ...state,
             [Object.entries(state).length]: {
+                job_id: '',
                 requirement_id: '',
                 requirement_offer: '',
                 requirement_met: ''
@@ -27,12 +28,12 @@ const currentRequirementsReducer = (state = {
         }
     }
     else if (action.type === 'LOAD_REQUIREMENTS') {
-        let stageObject = state
+        let requirementObject = state
         console.log('in currentRequirementsReducer', action.payload)
         action.payload.map((job, i) => {
             console.log('mapping in currentRequirementsReducer', job, i)
-            stageObject = {
-                ...stageObject,
+            requirementObject = {
+                ...requirementObject,
                 [i]: {
                     job_id: job.job_id,
                     requirement_id: job.requirement_id,
@@ -41,16 +42,10 @@ const currentRequirementsReducer = (state = {
                 }
             }
         })
-        return stageObject
-        // {
-        //     ...state,
-        //     []:{
-
-        //     }
-        // }
+        return requirementObject
     }
-    else if (action.type === 'REMOVE_STAGE_FROM_REDUX') {
-        console.log('in REMOVE_STAGE_FROM_REDUX', action.payload)
+    else if (action.type === 'REMOVE_REQUIREMENT_FROM_REDUX') {
+        console.log('in REMOVE_REQUIREMENT_FROM_REDUX', action.payload)
         let key = action.payload
         delete state[key]
 

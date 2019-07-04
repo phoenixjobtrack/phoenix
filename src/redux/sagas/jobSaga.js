@@ -77,9 +77,16 @@ function* fetchJobRequirements(action) {
     console.log('in fetchJobRequirements Saga', action.payload);
     try {
         const jobRequirements = yield axios.get('api/job_requirements', action.payload)
+        let currentRequirements = []
         yield put({ type: 'STORE_JOB_REQUIREMENTS', payload: jobRequirements.data })
         console.log('fetchJobRequirements saga', jobRequirements.data)
-        yield put({ type: 'LOAD_REQUIREMENTS', payload: jobRequirements.data})
+        jobRequirements.data.map(requirement => {
+            if (requirement.job_id == action.payload) {
+                currentRequirements = [...currentRequirements, requirement]
+            }
+        })
+        console.log('requirements for reducer', currentRequirements)
+        yield put({ type: 'LOAD_REQUIREMENTS', payload: currentRequirements})
     } catch (error) {
         console.log('error in fetchJobRequirements saga', error);
     }
