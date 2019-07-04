@@ -74,15 +74,14 @@ class ProfileRequirements extends Component {
                             {this.props.require.map((userReq, index) => {
                                 return (
                                     <p>
-
                                         <TextField
                                             key={userReq.id}
                                             id="standard-dense"
-                                            label={userReq.requirement}
+                                            label="Requirement"
                                             className="profileInput"
                                             margin="dense"
                                             onChange={this.handleEditChange('requirement')}
-
+                                            variant="outlined"
                                         />
                                     </p>
                                 )

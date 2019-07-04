@@ -23,6 +23,7 @@ class UserInfo extends Component {
 
     state = {
         profileInfo: {
+            id: '',
             first_name: '',
             last_name: '',
             email: '',
@@ -33,9 +34,20 @@ class UserInfo extends Component {
     }
 
     handleEdit = (event) => {
+        console.log('handleEdit UserInfo:', this.props.profile.first_name, this.props.profile.last_name, this.props.profile.email)
         event.preventDefault();
+        let id = this.props.profile.id;
+        let first_name =  this.props.profile.first_name;
+        let last_name = this.props.profile.last_name;
+        let email = this.props.profile.email;
         this.setState({
             ...this.state,
+            profileInfo: {
+                id: id,
+                first_name: first_name,
+                last_name: last_name,
+                email: email,
+            },
             editMode: !this.state.editMode
         });
     }
@@ -63,6 +75,15 @@ class UserInfo extends Component {
         });
     }
 
+    handleUpdateProfile = () => {
+        console.log('handleUpdateProfile', this.state.profileInfo);
+        this.setState({
+            ...this.state,
+            editMode: false,
+        }) 
+        this.props.dispatch({ type: 'UPDATE_USER', payload: this.state.profileInfo })
+    }
+
     render() {
 
         let profileView;
@@ -80,7 +101,6 @@ class UserInfo extends Component {
                             </Card>
                         </Grid>
                     </Grid>
-
                 </div>
         } else {
             profileView =
@@ -91,32 +111,38 @@ class UserInfo extends Component {
                                 <Card>
                                     {/* <Grid item xs={12}> */}
                                     <div className="profileInfo">
-                                        <h2>Edit Personal Info <IconButton variant="contained" color="primary" onClick={this.handleEdit}><CheckIcon /></IconButton></h2>
+                                    <h2>Edit Personal Info <IconButton variant="contained" color="primary" onClick={this.handleUpdateProfile}><CheckIcon /></IconButton></h2>
                                         <TextField
                                             id="standard-dense"
-                                            label={this.props.profile.first_name}
+                                            label="First Name"
+                                            value={this.state.profileInfo.first_name}
                                             className="profileInput"
                                             margin="dense"
                                             onChange={this.handleProfileChange('first_name')}
+                                            variant="outlined"
                                         />
                                         <br />
                                         <TextField
                                             id="standard-dense"
-                                            label={this.props.profile.last_name}
+                                            label="Last Name"
+                                            value={this.state.profileInfo.last_name}
                                             className="profileInput"
                                             margin="dense"
                                             onChange={this.handleProfileChange('last_name')}
+                                            variant="outlined"
                                         />
                                         <br />
                                         <TextField
                                             id="filled-email-input"
-                                            label={this.props.profile.email}
+                                            label="email address"
+                                            value={this.state.profileInfo.email}
                                             className="profileInput"
                                             type="email"
                                             name="email"
                                             autoComplete="email"
                                             margin="dense"
                                             onChange={this.handleProfileChange('email')}
+                                            variant="outlined"
                                         />
                                     </div>
                                     {/* </Grid> */}
