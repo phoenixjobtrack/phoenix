@@ -1,3 +1,7 @@
+// ----- TASKS LINE ITEMS ----- //
+// Individual Line Item for each task and note
+// Child of Tasks
+
 // ----- REACT ----- //
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -59,7 +63,6 @@ class TasksLineItems extends Component {
         return (
             <List>
                 {userTasks}
-                
             </List>
         ) // End Return
     } // End Render

@@ -1,3 +1,8 @@
+// ----- TASKS LINE ITEMS CONTENT ----- //
+// Content contained within each line item in the Tasks view
+// Child of TasksLineItems
+
+
 // ----- REACT ----- //
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
