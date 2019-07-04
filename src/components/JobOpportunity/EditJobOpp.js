@@ -63,96 +63,120 @@ class JobOpportunity extends Component {
                     <p className="jobOppsTitle">Employment Information</p>
                     <div className="oppGrid1">
                         <Grid container>
-                            <Grid item sm={3}>
-                                <p>Company: </p>
-                                <p>Position: </p>
-                                <p>Posting URL: </p>
-                                <p>Deadline: </p>
+                            <Grid container item xs={6}>
+                                <Grid item xs={12}>
+                                    <p>Company: </p>
+                                    <Input
+                                        placeholder="Company"
+                                        value={this.props.currentJob.company_name}
+                                        onChange={this.handleJobChange('company_name')}
+                                        inputProps={{
+                                            'aria-label': 'Company Name',
+                                        }}
+                                    />
+                                </Grid >
+                                <Grid item xs={12}>
+                                    <p>Position: </p>
+                                    <Input
+                                        placeholder="Position"
+                                        value={this.props.currentJob.position}
+                                        onChange={this.handleJobChange('position')}
+                                        inputProps={{
+                                            'aria-label': 'Position',
+                                        }}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <p>Posting URL: </p>
+                                    <Input
+                                        placeholder="Posting URL"
+                                        value={this.props.currentJob.posting_url}
+                                        onChange={this.handleJobChange('posting_url')}
+                                        inputProps={{
+                                            'aria-label': 'Posting URL',
+                                        }}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <p>Deadline: </p>
+                                    <Input
+                                        id="date"
+                                        style={{ width: 150 }}
+                                        type="date"
+                                        value={this.props.currentJob.deadline}
+                                        onChange={this.handleJobChange('deadline')}
+                                        // defaultValue="2017-05-24"
+                                        InputLabelProps={{
+                                            'aria-label': 'Application Deadline',
+                                        }}
+                                    />
+                                </Grid>
                             </Grid>
-                            <Grid item sm={3} >
-                            <Input
-                                placeholder="Company"
-                                value={this.props.currentJob.company_name}
-                                onChange={this.handleJobChange('company_name')}
-                                inputProps={{
-                                    'aria-label': 'Description',
-                                }}
-                            />
-                            <Input
-                                placeholder="Position"
-                                value={this.props.currentJob.position}
-                                onChange={this.handleJobChange('position')}
-                                inputProps={{
-                                    'aria-label': 'Description',
-                                }}
-                            />
-                            <Input
-                                placeholder="Posting URL"
-                                value={this.props.currentJob.posting_url}
-                                onChange={this.handleJobChange('posting_url')}
-                                inputProps={{
-                                    'aria-label': 'Description',
-                                }}
-                            />
-                            <br />
-                            <TextField
-                                id="date"
-                                style={{ width: 150 }}
-                                type="date"
-                                value={this.props.currentJob.deadline}
-                                onChange={this.handleJobChange('deadline')}
-                                // defaultValue="2017-05-24"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
+                            <Grid container item xs={6}>
+                                <Grid item xs={12}>
+                                    <p> Salary:</p>
+                                    <Input
+                                        placeholder="Salary"
+                                        value={this.props.currentJob.compensation}
+                                        onChange={this.handleJobChange('compensation')}
+                                        inputProps={{
+                                            'aria-label': 'Compensation',
+                                        }}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <p> Benefits:</p>
+                                    <Input
+                                        id="outlined-multiline-flexible"
+                                        label="Benefits"
+                                        value={this.props.currentJob.benefits}
+                                        onChange={this.handleJobChange('benefits')}
+                                        multiline
+                                        rowsMax="15"
+                                        margin="normal"
+                                        variant="outlined"
+                                        inputProps={{
+                                            'aria-label': 'Benefits',
+                                        }}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <p> Travel:</p>
+                                    <Input
+                                        placeholder="Travel"
+                                        value={this.props.currentJob.travel}
+                                        onChange={this.handleJobChange('travel')}
+                                        inputProps={{
+                                            'aria-label': 'Travel',
+                                        }}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <p>Notes:</p>
+                                    <Input
+                                        id="outlined-multiline-flexible"
+                                        label="Notes"
+                                        value={this.props.currentJob.job_notes}
+                                        onChange={this.handleJobChange('job_notes')}
+                                        multiline
+                                        rowsMax="15"
+                                        margin="normal"
+                                        variant="outlined"
+                                        inputProps={{
+                                            'aria-label': 'Notes',
+                                        }}
+                                    />
+                                </Grid>
                             </Grid>
-                            <Grid item sm={3}>
-                                <p> Salary:</p>
-                                <p> Benefits:</p>
-                                <br />
-                                <p> Travel:</p>
-                            </Grid>
-                            <Grid item sm={3}>
-                            <Input
-                                placeholder="Salary"
-                                value={this.props.currentJob.compensation}
-                                onChange={this.handleJobChange('compensation')}
-                                inputProps={{
-                                    'aria-label': 'Description',
-                                }}
-                            />
-                            <TextField
-                                id="outlined-multiline-flexible"
-                                label="Benefits"
-                                value={this.props.currentJob.benefits}
-                                onChange={this.handleJobChange('benefits')}
-                                multiline
-                                rowsMax="15"
-                                margin="normal"
-                                variant="outlined"
-                            />
-                            <Input
-                                placeholder="Travel"
-                                value={this.props.currentJob.travel}
-                                onChange={this.handleJobChange('travel')}
-                                inputProps={{
-                                    'aria-label': 'Description',
-                                }}
-                            />
-                            </Grid>
+
+                            
+                                
+                            
+                            
+                            
+                            
+
                         </Grid>
-                        <p>Notes:</p>
-                        <TextField
-                            id="outlined-multiline-flexible"
-                            label="Notes"
-                            value={this.props.currentJob.job_notes}
-                            onChange={this.handleJobChange('job_notes')}
-                            multiline
-                            rowsMax="15"
-                            margin="normal"
-                            variant="outlined"
-                        />
                     </div>
                 </div> 
                 <Stages/>
