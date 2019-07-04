@@ -1,10 +1,11 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 
 //-----GET for job pipeline table-------//
-router.get('/stages', (req,res)=>{
+router.get('/stages', rejectUnauthenticated, (req,res)=>{
     let query = `SELECT j.id as job_id, j.user_id as job_user_id, j.position, j.company_name, j.notes as job_notes, j.posting_url, j.deadline, j.compensation, j.benefits, j.travel,
         s.id as stage_id, s.stage, s.note as stage_note, s.date as stage_date
     FROM "jobs" j JOIN "stages" s ON j.id = s.job_id
@@ -20,7 +21,7 @@ router.get('/stages', (req,res)=>{
         }) 
 })
 
-router.get('/tasks', (req,res)=>{
+router.get('/tasks', rejectUnauthenticated,(req,res)=>{
     let query = `SELECT
         j.id as job_id, j.user_id as job_user_id, j.position, j.company_name, j.notes as job_notes, j.posting_url, j.deadline, j.compensation, j.benefits, j.travel,
         t.id as task_id, t.user_id as task_user_id, t.task_name, t.due_date as task_due_date, t.complete, t.contact_id as task_contact_id, t.note as task_note
@@ -38,7 +39,7 @@ router.get('/tasks', (req,res)=>{
 })
 
 
-router.get('/', (req,res) => {
+router.get('/', rejectUnauthenticated, (req,res) => {
     console.log('this is for job', req.user.id);
     
     // let query = `
@@ -69,7 +70,7 @@ router.get('/', (req,res) => {
 }
 )
 
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('in POST /api/jobs', req.user.id, req.body)
     const queryText = `INSERT INTO "jobs" (user_id, position, company_name, notes, posting_url, deadline,
         compensation, benefits, travel) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);`;
@@ -84,5 +85,40 @@ router.post('/', (req, res) => {
             res.sendStatus(500)
         })
 }); // End router.post/api/tasks/:id
+
+router.put('/', rejectUnauthenticated, (req,res)=>{
+    console.log('in PUT /api/jobs', req.user.id, req.body)
+    const query = `
+        UPDATE "jobs" 
+        SET position = $1, 
+        company_name=$2, 
+        notes=$3, 
+        posting_url=$4, 
+        deadline=$5, 
+        compensation=$6, 
+        benefits=$7, 
+        travel=$8 
+        WHERE id=$9
+    `
+    pool.query(query,[
+        req.body.position, 
+        req.body.company_name, 
+        req.body.job_notes, 
+        req.body.posting_url, 
+        req.body.deadline, 
+        req.body.compensation, 
+        req.body.benefits, 
+        req.body.travel, 
+        req.body.job_id
+    ])
+    .then(response=>{
+        console.log('in PUT /api/jobs', response);
+        res.sendStatus(200)
+    })
+    .catch(err=>{
+        console.log('error in PUT /api/jobs', err)
+        res.sendStatus(500)
+    })
+})
 
 module.exports = router;

@@ -25,60 +25,11 @@ import Select from '@material-ui/core/Select';
 
 
 class JobOpportunity extends Component {
-    state = {
-        job: {
-            company : '',
-            position : '',
-            posting_url : '',
-            deadline : '',
-            salary : '',
-            benefits : '',
-            travel : '',
-            notes : '',
-        },
-        job_requirements: {},
-    }
-
-    addStageInput() {
-        this.setState({ stages: [...this.state.stages, ''] })
-    }
-
-    addTasksInput() {
-        this.setState({ tasks: [...this.state.tasks, ''] })
-    }
 
     handleJobChange = propertyName => (event) => {
         console.log('jobInfo', event.target.value);
-        this.setState({
-            ...this.state,
-             job: {
-               ...this.state.job,
-                [propertyName]: event.target.value
-            }
-        });
+        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: propertyName, value: event.target.value } })
     }
-
-    handleStageChange = propertyName => (event) => {
-        console.log('stageInfo', event.target.value);
-        this.setState({
-            stages: {
-                ...this.state,
-                [propertyName]: event.target.value
-            }
-        });
-    }
-
-    handleTaskChange = propertyName => (event) => {
-        console.log('taskInfo', event.target.value);
-        this.setState({
-            tasks: {
-                ...this.state,
-                [propertyName]: event.target.value
-            }
-        });
-    }
-
-    
 
     handleSave = (event) => {
         event.preventDefault();
@@ -88,16 +39,23 @@ class JobOpportunity extends Component {
                 job: this.props.currentJob,
                 stages: this.props.stages,
                 tasks: this.props.tasks,
+                requirements: this.props.requirements
             }})
-        
-     
     }
 
     componentDidMount = () =>{
         // this.props.dispatch({ type: 'FETCH_JOBS' })
+
+        //fetch current job data, store in redux
+        this.props.dispatch({ type: 'FETCH_CURRENT_JOB', payload: this.props.match.params.id })
+        
+        //fetch job stages for selected job and store in redux
         this.props.dispatch({type: 'FETCH_JOB_STAGES', payload: this.props.match.params.id}) 
-        this.props.dispatch({type: 'FETCH_CURRENT_JOB', payload: this.props.match.params.id})
+
+        //fetch job tasks for selected job and store in redux
         this.props.dispatch({type: 'FETCH_JOB_TASKS', payload: this.props.match.params.id})
+
+        //fetch requirements assessment for selected job and store in redux
         this.props.dispatch({ type: 'FETCH_JOB_REQUIREMENTS', payload: this.props.match.params.id })
     }
     
@@ -161,16 +119,10 @@ class JobOpportunity extends Component {
                             />
                             </Grid>
                             <Grid item sm={3}>
-                                <p> Salary:
-                       
-                                </p>
-                                <p> Benefits:
-                      
-                                </p>
+                                <p> Salary:</p>
+                                <p> Benefits:</p>
                                 <br />
-                                <p> Travel:
-                    
-                                </p>
+                                <p> Travel:</p>
                             </Grid>
                             <Grid item sm={3}>
                             <Input
@@ -225,11 +177,10 @@ class JobOpportunity extends Component {
 
 
 const mapStateToProps = (state) => ({
-    require: state.requirements,
-    jobEditMode: state.jobEditMode,
     currentJob: state.currentJob,
     stages: state.currentStage,
-    tasks: state.currentTasks
+    tasks: state.currentTasks,
+    requirements: state.currentRequirements
 
 });
 export default withRouter(connect(mapStateToProps)(JobOpportunity));

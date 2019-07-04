@@ -44,13 +44,6 @@ const currentRequirementsReducer = (state = {
         })
         return requirementObject
     }
-    else if (action.type === 'REMOVE_REQUIREMENT_FROM_REDUX') {
-        console.log('in REMOVE_REQUIREMENT_FROM_REDUX', action.payload)
-        let key = action.payload
-        delete state[key]
-
-        return state
-    }
     else {
         return state;
     }

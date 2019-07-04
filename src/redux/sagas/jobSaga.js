@@ -107,6 +107,11 @@ function* saveJobUpdates(action){
         console.log('in saveJobUpdates saga task:', task)
         axios.put('/api/jobs/tasks', task)
     })
+    //send requirement assessment data
+    yield Object.entries(action.payload.requirements).map(requirement=>{
+        console.log('in saveJobUpdates saga requirement:', requirement)
+        axios.put('/api/jobs/requirements', requirement)
+    })
     
 
 }
