@@ -115,7 +115,7 @@ router.put('/', rejectUnauthenticated, (req,res)=>{
     ])
     .then(response=>{
         console.log('in PUT /api/jobs', response);
-        res.sendStatus(200)
+        res.sendStatus(200) 
     })
     .catch(err=>{
         console.log('error in PUT /api/jobs', err)
@@ -123,15 +123,41 @@ router.put('/', rejectUnauthenticated, (req,res)=>{
     })
 })
 
-router.put('/stages', (req,res)=>{
-    console.log('in PUT /api/jobs/stages', req.body)
+router.delete('/stages/:id', rejectUnauthenticated, (req,res)=>{
+    console.log('in DELETE /api/jobs/stages', req.params.id)
+    let query = `DELETE FROM "stages" WHERE job_id=$1`
+    pool.query(query, [req.params.id])
+    .then(response=>{
+        console.log('in DELETE /api/jobs/stages', response)
+        res.sendStatus(200)
+    })
+    .catch(err=>{
+        console.log('error in DELETE /api/jobs/stages', err)
+        res.sendStatus(500)
+    })
+})
+
+router.post('/stages', rejectUnauthenticated, (req,res)=>{
+    //req.body is an array, numbered key followed up actual stage object, so look at req.body.stage[1]
+    // console.log('in POST /api/jobs/stages', req.body.stage[1], req.body.job_id)
+    // let query = `INSERT INTO "stages" (job_id, stage, note, date) VALUES ($1, $2, $3, $4)`
+    // // let query = `UPDATE "stages" SET stage=$1, note=$2, date=$3 WHERE job_id=$4`
+    // pool.query(query, [req.body.job_id, req.body.stage[1].stage, req.body.stage[1].note, req.body.stage[1].date])
+    // .then(response=>{
+    //     console.log('in POST /api/jobs/stages', response);
+    //     res.sendStatus(201)
+    // })
+    // .catch(err=>{
+    //     console.log('error in in POST /api/jobs/stages', err)
+    //     res.sendStatus(500)
+    // })
 })
 
 router.put('/tasks', (req, res) => {
-    console.log('in PUT /api/jobs/tasks', req.body)
+    // console.log('in PUT /api/jobs/tasks', req.body)
 })
 
 router.put('/requirements', (req, res) => {
-    console.log('in PUT /api/jobs/requirements', req.body)
+    // console.log('in PUT /api/jobs/requirements', req.body)
 })
 module.exports = router;

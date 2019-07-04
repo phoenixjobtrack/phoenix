@@ -94,20 +94,22 @@ function* fetchJobRequirements(action) {
 }
 
 function* saveJobUpdates(action){
-    console.log('in saveJobUpdates', action.payload)
+    // console.log('in saveJobUpdates', action.payload)
     //send job data
     try{
-        console.log('in saveJobUpdates', action.payload.job)
+        // console.log('in saveJobUpdates', action.payload.job)
         yield axios.put('/api/jobs', action.payload.job)
     }
     catch(err) {
         console.log('error in PUT /api/jobs', err)
     }
     
+    //delete stages associated with job before adding all from redux
+    yield axios.delete(`/api/jobs/stages/${action.payload.job.job_id}`)
     //send stage data
     yield Object.entries(action.payload.stages).map(stage=>{
-        console.log('in saveJobUpdates saga stage:', stage)
-        axios.put('/api/jobs/stages', stage)
+        console.log('in saveJobUpdates saga stage:', stage, action.payload.job.job_id)
+        axios.post('/api/jobs/stages', {stage: stage, job_id: action.payload.job.job_id})
     })
     // send task data
     yield Object.entries(action.payload.tasks).map(task=>{
