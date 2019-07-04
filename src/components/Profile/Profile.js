@@ -116,9 +116,8 @@ class Profile extends Component {
                 <div className="profileBox">
                     <FaceIcon className="profileIcon" />
                 </div>
-                {/* {profileView} */}
-                <UserInfo />
                 <ProfileRequirements />
+                <UserInfo />
             </div>
         )
     }

@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 // ----- COMPONENTS ----- //
 import SavedRequirements from './SavedRequirements';
 
+// ----- DEPENDENCIES ----- //
+import swal from 'sweetalert';
+
 // ----- MATERIAL UI CORE ----- //
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card'
@@ -48,6 +51,28 @@ class ProfileRequirements extends Component {
         this.requirementCounter += 1
     }
 
+    // Triggers Popup to add new Employment Requirement when + is clicked
+    addRequirement() {
+        console.log('in addRequirement');
+        swal({
+            text: 'Add new Employment Requirement',
+            content: "input",
+            button: {
+                text: "add",
+                closeModal: false,
+            },
+        })
+            .then(requirement => {
+                if (!requirement) throw null;
+                this.props.dispatch({ type: 'ADD_NEW_REQUIREMENT', payload: { requirement: `${requirement}`} })
+            })
+            .then(results => {
+                swal("New Requirement Added", {
+                    icon: "success",
+                });
+            })
+    } // End addRequirement
+
     handleEdit = (event) => {
         event.preventDefault();
         this.setState({
@@ -89,6 +114,7 @@ class ProfileRequirements extends Component {
             editMode: false,
         });
         console.log('this.state', this.state);
+        this.props.dispatch({ type: 'ADD_REQUIREMENTS', payload: this.state.requireList })
     }
 
     render() {
@@ -100,10 +126,10 @@ class ProfileRequirements extends Component {
                 <div className="profileRequirementDisplay">
                     <Card>
                         <h2>
-                            Employment Requirements 
-                            <IconButton 
-                                variant="contained" 
-                                color="primary" 
+                            Employment Requirements
+                            <IconButton
+                                variant="contained"
+                                color="primary"
                                 onClick={this.handleEdit}
                             >
                                 <EditIcon />
@@ -123,46 +149,33 @@ class ProfileRequirements extends Component {
                 <div >
                     <Card>
                         <div className="profileRequirementDisplay">
-                            
-                                <h2>
-                                    Edit Employment Requirements
+
+                            <h2>
+                                Edit Employment Requirements
                                 <Tooltip
-                                        title="Submit Change"
+                                    title="Submit Change"
+                                >
+                                    <IconButton
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={this.submitNewRequirements}
                                     >
-                                        <IconButton
-                                            variant="contained"
-                                            color="primary"
-                                            onClick={this.submitNewRequirements}
-                                        >
-                                            <CheckIcon />
-                                        </IconButton>
-                                    </Tooltip>
-                                </h2>
-                                {this.props.require.map((userReq, i) => {
-                                    return (
-                                        <div>
-                                                <SavedRequirements 
-                                                    key={userReq.id}
-                                                    id={i}
-                                                    userReq={userReq}
-                                                />
-                                        {/* <p>
-                                            <TextField
-                                                key={userReq.id}
-                                                id={i}
-                                                value={this.state.oldRequirement}
-                                                label="Requirement"
-                                                className="profileInput"
-                                                margin="dense"
-                                                onChange={this.handleEditChange('requirement')}
-                                                variant="outlined"
-                                                userReq={userReq}
-                                            />
-                                        </p> */}
-                                        </div>
-                                    )
-                                })}
-                            
+                                        <CheckIcon />
+                                    </IconButton>
+                                </Tooltip>
+                            </h2>
+                            {this.props.require.map((userReq, i) => {
+                                return (
+                                    <div>
+                                        <SavedRequirements
+                                            key={userReq.id}
+                                            id={i}
+                                            userReq={userReq}
+                                        />
+                                    </div>
+                                )
+                            })}
+
                             {Object.entries(this.state.requireList).map((requirement, index) => {
                                 return (
                                     <p>
@@ -183,7 +196,7 @@ class ProfileRequirements extends Component {
                                 <IconButton>
                                     <AddIcon
                                         className="profileAddIcon"
-                                        onClick={(event) => this.addRequirementInput(event)}
+                                        onClick={(event) => this.addRequirement(event)}
                                     />
                                 </IconButton>
                             </Tooltip></p>
