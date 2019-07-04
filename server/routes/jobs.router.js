@@ -153,6 +153,20 @@ router.post('/stages', rejectUnauthenticated, (req,res)=>{
     })
 })
 
+router.delete('/tasks/:id',rejectUnauthenticated, (req,res)=>{
+    console.log('in DELETE /api/jobs/tasks', req.params.id)
+    let query = `DELETE FROM "tasks" WHERE job_id=$1`
+    pool.query(query, [req.params.id])
+        .then(response => {
+            console.log('in DELETE /api/jobs/tasks', response)
+            res.sendStatus(200)
+        })
+        .catch(err => {
+            console.log('error in DELETE /api/jobs/tasks', err)
+            res.sendStatus(500)
+        })
+})
+
 router.put('/tasks', (req, res) => {
     res.sendStatus(200)
     // console.log('in PUT /api/jobs/tasks', req.body)

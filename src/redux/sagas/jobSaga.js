@@ -107,6 +107,8 @@ function* saveJobUpdates(action){
             console.log('in saveJobUpdates saga stage:', stage, action.payload.job.job_id)
             axios.post('/api/jobs/stages', { stage: stage, job_id: action.payload.job.job_id })
         })
+        //delete tasks associated with job before adding all from redux
+        yield axios.delete(`api/jobs/tasks/${action.payload.job.job_id}`)
         // send task data
         yield Object.entries(action.payload.tasks).map(task => {
             console.log('in saveJobUpdates saga task:', task)
