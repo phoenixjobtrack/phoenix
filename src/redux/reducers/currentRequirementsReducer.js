@@ -1,5 +1,6 @@
 const currentRequirementsReducer = (state = {
     0: {
+        id: 0,
         requirement_id: '',
         requirement_offer: '',
         requirement_met: ''
@@ -20,6 +21,7 @@ const currentRequirementsReducer = (state = {
         return {
             ...state,
             [Object.entries(state).length]: {
+                id: '',
                 job_id: '',
                 requirement_id: '',
                 requirement_offer: '',
@@ -30,15 +32,16 @@ const currentRequirementsReducer = (state = {
     else if (action.type === 'LOAD_REQUIREMENTS') {
         let requirementObject = state
         console.log('in currentRequirementsReducer', action.payload)
-        action.payload.map((job, i) => {
-            console.log('mapping in currentRequirementsReducer', job, i)
+        action.payload.map((requirement, i) => {
+            console.log('mapping in currentRequirementsReducer', requirement, i)
             requirementObject = {
                 ...requirementObject,
                 [i]: {
-                    job_id: job.job_id,
-                    requirement_id: job.requirement_id,
-                    requirement_offer: job.requirement_offer,
-                    requirement_met: job.requirement_met
+                    id: requirement.id,
+                    job_id: requirement.job_id,
+                    requirement_id: requirement.requirement_id,
+                    requirement_offer: requirement.requirement_offer,
+                    requirement_met: requirement.requirement_met
                 }
             }
         })

@@ -174,18 +174,42 @@ router.put('/tasks', (req, res) => {
     // let query = `UPDATE "stages" SET stage=$1, note=$2, date=$3 WHERE job_id=$4`
     pool.query(query, [req.body.task[1].user_id, req.body.task[1].task_name, '2019-07-30', req.body.job_id, req.body.task[1].note])
         .then(response => {
-            console.log('in POST /api/jobs/stages', response);
+            console.log('in POST /api/jobs/tasks', response);
             res.sendStatus(201)
         })
         .catch(err => {
-            console.log('error in in POST /api/jobs/stages', err)
+            console.log('error in in POST /api/jobs/tasks', err)
             res.sendStatus(500)
         })
     // console.log('in PUT /api/jobs/tasks', req.body)
 })
 
+// router.delete('/requirements/:id', rejectUnauthenticated, (req, res) => {
+//     console.log('in DELETE /api/jobs/requirements', req.params.id)
+//     let query = `DELETE FROM "jobs_requirements" WHERE job_id=$1`
+//     pool.query(query, [req.params.id])
+//         .then(response => {
+//             console.log('in DELETE /api/jobs/requirements', response)
+//             res.sendStatus(200)
+//         })
+//         .catch(err => {
+//             console.log('error in DELETE /api/jobs/requirements', err)
+//             res.sendStatus(500)
+//         })
+// })
+
 router.put('/requirements', (req, res) => {
-    res.sendStatus(200)
-    // console.log('in PUT /api/jobs/requirements', req.body)
+    console.log('in PUT /api/jobs/requirements', req.body[1])
+    let query = `UPDATE "jobs_requirements" SET requirement_offer = $1, requirement_met = $2 WHERE id = $3`
+    pool.query(query, [req.body[1].requirement_offer, req.body[1].requirement_met, req.body[1].id])
+    .then(response=>{
+        console.log('in PUT /api/jobs/requirements', response);
+        res.sendStatus(200)
+    })
+    .catch(err=>{
+        console.log('error in PUT /api/jobs/requirements', err);
+        res.sendStatus(500)
+        
+    })
 })
 module.exports = router;
