@@ -146,8 +146,8 @@ class JobOpportunity extends Component {
                         <TextField
                             id="outlined-multiline-flexible"
                             label="Notes"
-                            value={this.props.currentJob.notes}
-                            onChange={this.handleJobChange('notes')}
+                            value={this.props.currentJob.job_notes}
+                            onChange={this.handleJobChange('job_notes')}
                             multiline
                             rowsMax="15"
                             margin="normal"
