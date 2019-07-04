@@ -96,7 +96,14 @@ function* fetchJobRequirements(action) {
 function* saveJobUpdates(action){
     console.log('in saveJobUpdates', action.payload)
     //send job data
-    yield axios.put('/api/jobs', action.payload.job)
+    try{
+        console.log('in saveJobUpdates', action.payload.job)
+        yield axios.put('/api/jobs', action.payload.job)
+    }
+    catch(err) {
+        console.log('error in PUT /api/jobs', err)
+    }
+    
     //send stage data
     yield Object.entries(action.payload.stages).map(stage=>{
         console.log('in saveJobUpdates saga stage:', stage)

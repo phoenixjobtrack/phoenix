@@ -22,11 +22,13 @@ router.get('/stages', rejectUnauthenticated, (req,res)=>{
 })
 
 router.get('/tasks', rejectUnauthenticated,(req,res)=>{
-    let query = `SELECT
+    let query = 
+    `SELECT
         j.id as job_id, j.user_id as job_user_id, j.position, j.company_name, j.notes as job_notes, j.posting_url, j.deadline, j.compensation, j.benefits, j.travel,
         t.id as task_id, t.user_id as task_user_id, t.task_name, t.due_date as task_due_date, t.complete, t.contact_id as task_contact_id, t.note as task_note
     FROM "jobs" j JOIN "tasks" t on j.id = t.job_id
     WHERE j.user_id = $1;`
+    
     pool.query(query,[req.user.id])
         .then((result)=>{
             console.log('in GET /api/jobs/tasks', result.rows, req.user.id)
@@ -121,4 +123,15 @@ router.put('/', rejectUnauthenticated, (req,res)=>{
     })
 })
 
+router.put('/stages', (req,res)=>{
+    console.log('in PUT /api/jobs/stages', req.body)
+})
+
+router.put('/tasks', (req, res) => {
+    console.log('in PUT /api/jobs/tasks', req.body)
+})
+
+router.put('/requirements', (req, res) => {
+    console.log('in PUT /api/jobs/requirements', req.body)
+})
 module.exports = router;
