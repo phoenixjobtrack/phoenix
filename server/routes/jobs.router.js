@@ -140,9 +140,9 @@ router.delete('/stages/:id', rejectUnauthenticated, (req,res)=>{
 router.post('/stages', rejectUnauthenticated, (req,res)=>{
     // req.body is an array, numbered key followed up actual stage object, so look at req.body.stage[1]
     console.log('in POST /api/jobs/stages', req.body.stage[1], req.body.job_id)
-    let query = `INSERT INTO "stages" (job_id, stage, note, date) VALUES ($1, $2, $3, '2019-04-03')`
+    let query = `INSERT INTO "stages" (job_id, stage, note, date) VALUES ($1, $2, $3, $4)`
     // let query = `UPDATE "stages" SET stage=$1, note=$2, date=$3 WHERE job_id=$4`
-    pool.query(query, [req.body.job_id, req.body.stage[1].stage, req.body.stage[1].note])
+    pool.query(query, [req.body.job_id, req.body.stage[1].stage, req.body.stage[1].note, '2019-07-30'])
     .then(response=>{
         console.log('in POST /api/jobs/stages', response);
         res.sendStatus(201)
@@ -168,7 +168,19 @@ router.delete('/tasks/:id',rejectUnauthenticated, (req,res)=>{
 })
 
 router.put('/tasks', (req, res) => {
-    res.sendStatus(200)
+    // req.body is an array, numbered key followed up actual stage object, so look at req.body.stage[1]
+    console.log('in POST /api/jobs/tasks', req.body.task[1], req.body.job_id)
+    let query = `INSERT INTO "tasks" (user_id, task_name, due_date, job_id, note ) VALUES ($1, $2, $3, $4, $5)`
+    // let query = `UPDATE "stages" SET stage=$1, note=$2, date=$3 WHERE job_id=$4`
+    pool.query(query, [req.body.task[1].user_id, req.body.task[1].task_name, '2019-07-30', req.body.job_id, req.body.task[1].note])
+        .then(response => {
+            console.log('in POST /api/jobs/stages', response);
+            res.sendStatus(201)
+        })
+        .catch(err => {
+            console.log('error in in POST /api/jobs/stages', err)
+            res.sendStatus(500)
+        })
     // console.log('in PUT /api/jobs/tasks', req.body)
 })
 

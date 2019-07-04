@@ -112,7 +112,7 @@ function* saveJobUpdates(action){
         // send task data
         yield Object.entries(action.payload.tasks).map(task => {
             console.log('in saveJobUpdates saga task:', task)
-            axios.put('/api/jobs/tasks', task)
+            axios.put('/api/jobs/tasks', {task: task, job_id: action.payload.job.job_id})
         })
         //send requirement assessment data
         yield Object.entries(action.payload.requirements).map(requirement => {
