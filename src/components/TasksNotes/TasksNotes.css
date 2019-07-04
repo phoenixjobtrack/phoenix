@@ -9,3 +9,6 @@
     margin-bottom: 5px;
 }
 
+.taskNoteTextComplete {
+    color: gray;
+}

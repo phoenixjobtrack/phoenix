@@ -1,11 +1,12 @@
 // ----- TASKS MENU ITEMS ----- //
 // Menu items from TaskLineItems drop down menu //
+// Child of TasksLineItemsContent
 
 // ----- REACT ----- //
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-// ----- COMPONENTS ----- //
+// ----- DEPENDENCIES ----- //
 import swal from 'sweetalert';
 
 // ----- MATERIAL UI CORE ----- //
@@ -21,7 +22,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 class TasksMoreDropdown extends Component {
 
     addNoteToTask(popupState) {
-        console.log('in addNoteToTask');
+        
         popupState();
         swal({
             text: 'Add note to task',
