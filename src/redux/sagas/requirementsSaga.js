@@ -33,7 +33,7 @@ function* updateRequirements(action) {
         
     try {
         yield action.payload.requirements.map(requirement=>{
-            axios.put(`api/requirements/update/${action.payload.task_name}/${action.payload.id}`, action.payload)
+            axios.put(`api/requirements/update//${action.payload.id}`, action.payload)
             put({ type: 'FETCH_REQUIREMENTS' })
         })       
     } catch (error) {

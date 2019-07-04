@@ -59,7 +59,6 @@ class TasksLineItems extends Component {
         return (
             <List>
                 {userTasks}
-                
             </List>
         ) // End Return
     } // End Render

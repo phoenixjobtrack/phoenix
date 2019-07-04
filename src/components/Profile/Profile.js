@@ -24,6 +24,12 @@ import './Profile.css';
 
 
 class Profile extends Component {
+
+    componentDidMount () {
+        this.props.dispatch({ type: 'FETCH_REQUIREMENTS' })
+        
+    }
+
     state = {
         profileInfo: {
             first_name: '',

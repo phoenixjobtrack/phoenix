@@ -8,6 +8,7 @@ import Card from '@material-ui/core/Card'
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 // ----- MATERIAL UI ICONS ----- //
@@ -111,7 +112,7 @@ class UserInfo extends Component {
                                 <Card>
                                     {/* <Grid item xs={12}> */}
                                     <div className="profileInfo">
-                                    <h2>Edit Personal Info <IconButton variant="contained" color="primary" onClick={this.handleUpdateProfile}><CheckIcon /></IconButton></h2>
+                                    <h2>Edit Personal Info <Tooltip title="Submit Change"><IconButton variant="contained" color="primary" onClick={this.handleUpdateProfile}><CheckIcon /></IconButton></Tooltip></h2>
                                         <TextField
                                             id="standard-dense"
                                             label="First Name"
