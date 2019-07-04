@@ -8,7 +8,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 router.get('/stages', rejectUnauthenticated, (req,res)=>{
     let query = `SELECT j.id as job_id, j.user_id as job_user_id, j.position, j.company_name, j.notes as job_notes, j.posting_url, j.deadline, j.compensation, j.benefits, j.travel,
         s.id as stage_id, s.stage, s.note as stage_note, s.date as stage_date
-    FROM "jobs" j JOIN "stages" s ON j.id = s.job_id
+    FROM "jobs" j FULL OUTER JOIN "stages" s ON j.id = s.job_id
     WHERE j.user_id = $1;`
     pool.query(query, [req.user.id])
         .then((result) => {
@@ -138,26 +138,28 @@ router.delete('/stages/:id', rejectUnauthenticated, (req,res)=>{
 })
 
 router.post('/stages', rejectUnauthenticated, (req,res)=>{
-    //req.body is an array, numbered key followed up actual stage object, so look at req.body.stage[1]
-    // console.log('in POST /api/jobs/stages', req.body.stage[1], req.body.job_id)
-    // let query = `INSERT INTO "stages" (job_id, stage, note, date) VALUES ($1, $2, $3, $4)`
-    // // let query = `UPDATE "stages" SET stage=$1, note=$2, date=$3 WHERE job_id=$4`
-    // pool.query(query, [req.body.job_id, req.body.stage[1].stage, req.body.stage[1].note, req.body.stage[1].date])
-    // .then(response=>{
-    //     console.log('in POST /api/jobs/stages', response);
-    //     res.sendStatus(201)
-    // })
-    // .catch(err=>{
-    //     console.log('error in in POST /api/jobs/stages', err)
-    //     res.sendStatus(500)
-    // })
+    // req.body is an array, numbered key followed up actual stage object, so look at req.body.stage[1]
+    console.log('in POST /api/jobs/stages', req.body.stage[1], req.body.job_id)
+    let query = `INSERT INTO "stages" (job_id, stage, note, date) VALUES ($1, $2, $3, '2019-04-03')`
+    // let query = `UPDATE "stages" SET stage=$1, note=$2, date=$3 WHERE job_id=$4`
+    pool.query(query, [req.body.job_id, req.body.stage[1].stage, req.body.stage[1].note])
+    .then(response=>{
+        console.log('in POST /api/jobs/stages', response);
+        res.sendStatus(201)
+    })
+    .catch(err=>{
+        console.log('error in in POST /api/jobs/stages', err)
+        res.sendStatus(500)
+    })
 })
 
 router.put('/tasks', (req, res) => {
+    res.sendStatus(200)
     // console.log('in PUT /api/jobs/tasks', req.body)
 })
 
 router.put('/requirements', (req, res) => {
+    res.sendStatus(200)
     // console.log('in PUT /api/jobs/requirements', req.body)
 })
 module.exports = router;

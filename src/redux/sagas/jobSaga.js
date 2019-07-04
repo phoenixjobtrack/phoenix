@@ -94,33 +94,36 @@ function* fetchJobRequirements(action) {
 }
 
 function* saveJobUpdates(action){
-    // console.log('in saveJobUpdates', action.payload)
-    //send job data
+    console.log('in saveJobUpdates', action.payload)
+    
     try{
         // console.log('in saveJobUpdates', action.payload.job)
+        //send job data
         yield axios.put('/api/jobs', action.payload.job)
+        //delete stages associated with job before adding all from redux
+        yield axios.delete(`/api/jobs/stages/${action.payload.job.job_id}`)
+        //send stage data
+        yield Object.entries(action.payload.stages).map(stage => {
+            console.log('in saveJobUpdates saga stage:', stage, action.payload.job.job_id)
+            axios.post('/api/jobs/stages', { stage: stage, job_id: action.payload.job.job_id })
+        })
+        // send task data
+        yield Object.entries(action.payload.tasks).map(task => {
+            console.log('in saveJobUpdates saga task:', task)
+            axios.put('/api/jobs/tasks', task)
+        })
+        //send requirement assessment data
+        yield Object.entries(action.payload.requirements).map(requirement => {
+            console.log('in saveJobUpdates saga requirement:', requirement)
+            axios.put('/api/jobs/requirements', requirement)
+        })
     }
     catch(err) {
         console.log('error in PUT /api/jobs', err)
     }
     
-    //delete stages associated with job before adding all from redux
-    yield axios.delete(`/api/jobs/stages/${action.payload.job.job_id}`)
-    //send stage data
-    yield Object.entries(action.payload.stages).map(stage=>{
-        console.log('in saveJobUpdates saga stage:', stage, action.payload.job.job_id)
-        axios.post('/api/jobs/stages', {stage: stage, job_id: action.payload.job.job_id})
-    })
-    // send task data
-    yield Object.entries(action.payload.tasks).map(task=>{
-        console.log('in saveJobUpdates saga task:', task)
-        axios.put('/api/jobs/tasks', task)
-    })
-    //send requirement assessment data
-    yield Object.entries(action.payload.requirements).map(requirement=>{
-        console.log('in saveJobUpdates saga requirement:', requirement)
-        axios.put('/api/jobs/requirements', requirement)
-    })
+    
+    
     
 
 }
