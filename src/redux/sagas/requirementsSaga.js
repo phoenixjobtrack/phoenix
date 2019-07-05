@@ -44,8 +44,11 @@ function* fetchRequirements(action) {
 // This is updateRequirement NOT updateRequirementS with an "S"
 function* updateRequirement(action) {
     console.log('in updateRequiremenT', action.payload)
+    console.log('in updateRequiremenT saga id', action.payload.id)
+    console.log('in updateRequiremenT saga requirement', action.payload.requirement)
+
     try {
-        yield axios.put(`api/requirements`, action.payload)
+        yield axios.put(`api/requirements/${action.payload.id}`, action.payload)
         yield put({type: 'FETCH_REQUIREMENTS' })
     } catch (error) {
         console.log('error in updateRequiremenT saga', error);
@@ -54,10 +57,12 @@ function* updateRequirement(action) {
 
 function* updateRequirements(action) {
     console.log('in updateRequirements saga', action.payload)
+    console.log('in updateRequirements saga id', action.payload.id)
+    console.log('in updateRequirements saga requirement', action.payload.requirement)
         
     try {
         yield action.payload.requirements.map(requirement=>{
-            axios.put(`api/requirements/update/${action.payload.id}`, action.payload)
+            axios.put(`api/requirements/${action.payload.id}`, action.payload)
             put({ type: 'FETCH_REQUIREMENTS' })
         })       
     } catch (error) {

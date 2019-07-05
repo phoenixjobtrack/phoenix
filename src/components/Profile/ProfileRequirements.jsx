@@ -1,3 +1,7 @@
+// ----- PROFILE REQUIREMENTS ----- //
+// The Employment Requirements section of the Profile View
+// Child of Profile
+
 // ----- REACT ----- //
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -138,7 +142,7 @@ class ProfileRequirements extends Component {
             editMode: false,
         });
         console.log('this.state', this.state);
-        this.props.dispatch({ type: 'ADD_REQUIREMENTS', payload: this.state.requireList })
+        // this.props.dispatch({ type: 'ADD_REQUIREMENTS', payload: this.state.requireList })
     }
 
     render() {
