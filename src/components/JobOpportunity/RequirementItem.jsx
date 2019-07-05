@@ -22,21 +22,16 @@ import Select from '@material-ui/core/Select';
 
 class RequirementItem extends Component {
     handleRequireChange = propertyName => (event) => {
-        console.log('requireInfo', event.target.value);
+        console.log('requireInfo', event.target.value, this.props.user);
         this.props.dispatch({
             type: 'UPDATE_REDUX_REQUIREMENT',
             payload: {
                 key: this.props.i,
+                requirement_id: this.props.user.id,
                 prop: propertyName,
                 value: event.target.value
             }
         })
-        // this.setState({
-        //     job_requirements: {
-        //         ...this.state,
-        //         [propertyName]: event.target.value
-        //     }
-        // });
     }
     
     componentDidMount(){
@@ -84,4 +79,9 @@ class RequirementItem extends Component {
     }
 }
 
-export default connect()(RequirementItem)
+const mapStateToProps = (reduxState) => ({
+    currentJob: reduxState.currentJob
+
+});
+
+export default connect(mapStateToProps)(RequirementItem)

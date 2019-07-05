@@ -48,7 +48,7 @@ router.get('/tasks', rejectUnauthenticated,(req,res)=>{
         t.id as task_id, t.user_id as task_user_id, t.task_name, t.due_date as task_due_date, t.complete, t.contact_id as task_contact_id, t.note as task_note
     FROM "jobs" j JOIN "tasks" t on j.id = t.job_id
     WHERE j.user_id = $1;`
-    
+
     pool.query(query,[req.user.id])
         .then((result)=>{
             // console.log('in GET /api/jobs/tasks', result.rows, req.user.id)
@@ -60,10 +60,22 @@ router.get('/tasks', rejectUnauthenticated,(req,res)=>{
         })
 })
 
-
 router.get('/', rejectUnauthenticated, (req,res) => {
+    let query = `SELECT j.id as job_id, j.user_id as job_user_id, j.position, j.company_name, j.notes as job_notes, j.posting_url, j.deadline, j.compensation, j.benefits, j.travel,
+        s.id as stage_id, s.stage, s.note as stage_note, s.date as stage_date
+    FROM "jobs" j FULL OUTER JOIN "stages" s ON j.id = s.job_id
+    WHERE j.user_id = $1;`
+    pool.query(query, [req.user.id])
+        .then((result) => {
+            // console.log('in GET /api/jobs/stages', result.rows, req.user.id)
+            res.send(result.rows);
+        })
+        .catch((error) => {
+            console.log(`Error on query ${error}`);
+            res.sendStatus(500);
+        }) 
     // console.log('this is for job', req.user.id);
-    res.sendStatus(200)
+    // res.sendStatus(200)
     // let query = `
     //     SELECT j1.company_name, j1.position, currentstage.stage as stage, nextstage.stage as nextstage, nextstage.date, nextstage.note 
     //     FROM "jobs" j1 
