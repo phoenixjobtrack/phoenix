@@ -16,42 +16,27 @@ router.get('/opp', (req,res)=>{
             res.send(result.rows);
         })
         .catch((error) => {
-            console.log(`Error on query ${error}`);
+            console.log(`Error on 777 query ${error}`);
             res.sendStatus(500);
         })
 })
 
 router.get('/', (req,res) => {
+   
     console.log('this is for job', req.user.id);
-    let query = `
-        SELECT * FROM "jobs" 
-        FULL OUTER JOIN "users" ON jobs.user_id = users.id
-        FULL OUTER JOIN "stages" ON jobs.id = stages.job_id
-        FULL OUTER JOIN "tasks" ON jobs.id = tasks.id
-        WHERE jobs.user_id=$1;`
-    // let query = `
-    //     SELECT j1.company_name, j1.position, currentstage.stage as stage, nextstage.stage as nextstage, nextstage.date, nextstage.note 
-    //     FROM "jobs" j1 
-    //     LEFT JOIN "stages" currentstage 
-    //     ON (j1.id = currentstage.job_id AND currentstage.date <= now()) 
-    //     LEFT JOIN (
-    //         select ordered_stages.id,ordered_stages.job_id,ordered_stages.stage,
-    //         ordered_stages.note,ordered_stages.date,ordered_stages.row_num 
-    //         from (select ss.id,ss.job_id,ss.stage,ss.note,ss.date, row_number() 
-    //         over (
-    //             partition by ss.job_id
-    //             order by date asc
-    //         ) as row_num
-    //         from "stages" ss where ss.date >= now()
-    //     ) as ordered_stages
-    //     where ordered_stages.row_num = 1) as nextstage ON (j1.id = nextstage.job_id)  WHERE "user_id"=64 order by nextstage.date asc;`
-    
+//     let query = `
+//     SELECT job.company_name, job.position, currentstage.id, currentstage.job_id, currentstage.stage  stage, nextstage.stage  nextstage, nextstage.date, nextstage.note FROM jobs job 
+// LEFT JOIN stages currentstage ON (job.id = currentstage.job_id)
+// LEFT JOIN (select ss.id, ss.job_id, ss.stage, ss.note  note, ss.date from stages ss) nextstage ON (job.id = nextstage.job_id)  WHERE user_id=$1 order by nextstage.date asc
+//     `
+    let query = `SELECT jobs.id, jobs.company_name, jobs.position, stages.stage, stages.date, stages.note FROM "jobs" 
+    JOIN "stages" ON jobs.id = stages.job_id WHERE "user_id" = $1;`
     pool.query(query,[req.user.id])
         .then( (result) => {
             res.send(result.rows);
         })
         .catch( (error) => {
-            console.log(`Error on query ${error}`);
+            console.log(`Error on 1234 query ${error}`);
             res.sendStatus(500);
         })
 }

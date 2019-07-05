@@ -99,7 +99,7 @@ class JobOpportunity extends Component {
      
     }
 
-    handleCloseJob = (event) => {
+    handleCloseJob = () => {
         this.props.dispatch({ type: 'CLOSE_JOB', payload: this.props.job.id})
     }
 
