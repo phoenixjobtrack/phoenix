@@ -33,8 +33,6 @@ class Stages extends Component {
 
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_INTERVIEW_STAGES'})
-        // this.fetchJobStages()
-        // this.props.dispatch({type:'FETCH_JOB_STAGES'})
     }
 
     render() {

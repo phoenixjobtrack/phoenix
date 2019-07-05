@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom'
+import moment from 'moment'
 
 import Stages from './Stages'
 import Tasks from './Tasks'
@@ -48,7 +49,9 @@ class EditJobOpp extends Component {
     }
     
     render() {
-        console.log('current job', this.props.currentJob)
+        
+        console.log('current job', this.props.currentJob, moment(this.props.currentJob.deadline).format("YYYY-MM-DD"))
+        // console.log('current job', this.props.currentJob)
         return (
             <div>
                 <h1>Job Opportunity</h1>
@@ -102,9 +105,8 @@ class EditJobOpp extends Component {
                                         id="date"
                                         style={{ width: 150 }}
                                         type="date"
-                                        value={this.props.currentJob.deadline}
+                                        value={moment(this.props.currentJob.deadline).format("YYYY-MM-DD")}
                                         onChange={this.handleJobChange('deadline')}
-                                        // defaultValue="2017-05-24"
                                         InputLabelProps={{
                                             'aria-label': 'Application Deadline',
                                         }}

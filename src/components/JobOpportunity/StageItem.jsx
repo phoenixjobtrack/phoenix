@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
-
+import moment from 'moment';
 
 import Grid from '@material-ui/core/Grid';
 import Input from '@material-ui/core/Input';
@@ -77,7 +77,7 @@ class StageItem extends Component {
                                 // style={{ width: 150 }}
                                 onChange={this.handleStageChange('date')}
                                 type="date"
-                                value={this.props.reduxState.currentStage[this.props.i].date}
+                                value={moment(this.props.reduxState.currentStage[this.props.i].date).format('YYYY-MM-DD')}
                                 // defaultValue="2017-05-24"
                                 InputLabelProps={{
                                     shrink: true,

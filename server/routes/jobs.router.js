@@ -109,7 +109,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('in POST /api/jobs', req.user.id, req.body)
     const queryText = `INSERT INTO "jobs" (user_id, position, company_name, notes, posting_url, deadline,
         compensation, benefits, travel) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);`;
-    pool.query(queryText, [req.user.id, req.body.position, req.body.company_name, req.body.notes, req.body.posting_url,
+    pool.query(queryText, [req.user.id, req.body.position, req.body.company_name, req.body.job_notes, req.body.posting_url,
         req.body.deadline, req.body.compensation, req.body.benefits, req.body.travel ])
         .then(response => {
             console.log('in POST /api/jobs', response)
@@ -175,7 +175,7 @@ router.post('/stages', rejectUnauthenticated, (req,res)=>{
     // console.log('in POST /api/jobs/stages', req.body.stage[1], req.body.job_id)
     let query = `INSERT INTO "stages" (job_id, stage, note, date) VALUES ($1, $2, $3, $4)`
     // let query = `UPDATE "stages" SET stage=$1, note=$2, date=$3 WHERE job_id=$4`
-    pool.query(query, [req.body.job_id, req.body.stage[1].stage, req.body.stage[1].note, '2019-07-30'])
+    pool.query(query, [req.body.job_id, req.body.stage[1].stage, req.body.stage[1].note, req.body.stage[1].date])
     .then(response=>{
         // console.log('in POST /api/jobs/stages', response);
         res.sendStatus(201)
@@ -190,7 +190,7 @@ router.post('/stages/new', rejectUnauthenticated, (req,res)=>{
     console.log('/api/jobs/stages/new')
     // req.body is an array, numbered key followed up actual stage object, so look at req.body.stage[1]
     let query = `INSERT INTO "stages" (job_id, stage, note, date) VALUES ((SELECT MAX(id) FROM jobs),$1,$2,$3);`
-    pool.query(query, [req.body.stage, req.body.note, '2019-07-30'])
+    pool.query(query, [req.body.stage, req.body.note, req.body.date])
     .then(response=>{
         console.log('in POST /api/jobs/stages/new', response)
         res.sendStatus(201)
@@ -206,7 +206,7 @@ router.post('/tasks/new', rejectUnauthenticated, (req, res) => {
     // req.body is an array, numbered key followed up actual stage object, so look at req.body.stage[1]
     
     let query = `INSERT INTO "tasks" (user_id, task_name, due_date, job_id, note) VALUES ($1, $2, $3, (SELECT MAX(id) FROM jobs),$4);`
-    pool.query(query, [req.user.id, req.body.task_name, '2019-07-07', req.body.note])
+    pool.query(query, [req.user.id, req.body.task_name, req.body.due_date, req.body.note])
         .then(response => {
             console.log('in POST /api/jobs/tasks/new', response)
             res.sendStatus(201)
@@ -253,7 +253,7 @@ router.post('/tasks', (req, res) => {
     // console.log('in POST /api/jobs/tasks', req.body.task[1], req.body.job_id)
     let query = `INSERT INTO "tasks" (user_id, task_name, due_date, job_id, note ) VALUES ($1, $2, $3, $4, $5)`
     // let query = `UPDATE "stages" SET stage=$1, note=$2, date=$3 WHERE job_id=$4`
-    pool.query(query, [req.user.id, req.body.task[1].task_name, '2019-07-30', req.body.job_id, req.body.task[1].note])
+    pool.query(query, [req.user.id, req.body.task[1].task_name, req.body.task[1].due_date, req.body.job_id, req.body.task[1].note])
         .then(response => {
             // console.log('in POST /api/jobs/tasks', response);
             res.sendStatus(201)

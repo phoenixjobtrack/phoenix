@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-
+import moment from 'moment'
 
 import Grid from '@material-ui/core/Grid';
 import Input from '@material-ui/core/Input';
@@ -69,7 +69,7 @@ class TaskItem extends Component {
                         id="date"
                         type="date"
                         // style={{ paddingTop: 16 }}
-                        value={this.props.reduxState.currentTasks[this.props.i].due_date}
+                        value={moment(this.props.reduxState.currentTasks[this.props.i].due_date).format('YYYY-MM-DD')}
                         onChange={this.handleTaskChange('due_date')}
                         InputLabelProps={{
                             shrink: true,
