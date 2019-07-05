@@ -34,12 +34,12 @@ import RemoveIcon from '@material-ui/icons/Remove';
 
 class RequirementItem extends Component {
     handleRequireChange = propertyName => (event) => {
-        console.log('requireInfo', event.target.value, this.props.user);
+        console.log('requireInfo', event.target.value, this.props.requirement);
         this.props.dispatch({
             type: 'UPDATE_REDUX_REQUIREMENT',
             payload: {
                 key: this.props.i,
-                requirement_id: this.props.user.id,
+                requirement_id: this.props.requirement.id,
                 prop: propertyName,
                 value: event.target.value
             }
@@ -50,11 +50,19 @@ class RequirementItem extends Component {
         this.props.dispatch({ type: 'FETCH_REQUIREMENTS' })
     }
     render(){
+        let requirementOfferValue
+        let requirementMetValue
+        //jobs_requirements item only exists after edit so only preload data for existing entries
+        if (this.props.currentRequirements[this.props.i]){
+            requirementOfferValue = this.props.currentRequirements[this.props.i].requirement_offer
+            requirementMetValue = this.props.currentRequirements[this.props.i].requirement_met
+        }
+        console.log('in RequirementItem requirement:', this.props.requirement, this.props.i)
         return(
             <div className="oppGrid4">
                 <Grid container>
                     <Grid item sm={4}>
-                        <span> Requirement: {this.props.user.requirement} </span>
+                        <span> Requirement: {this.props.requirement.requirement} </span>
                     </Grid>
                     <Grid item sm={5}>
                         <Input
@@ -64,12 +72,14 @@ class RequirementItem extends Component {
                             inputProps={{
                                 'aria-label': 'Description',
                             }}
+                            value={requirementOfferValue}
                         />
                     </Grid>
                     <Grid item sm={3}>
                         <FormControl component="fieldset" >
                             <FormLabel component="legend">Meets Requirement?</FormLabel>
                             <RadioGroup >
+                                
                                 <FormControlLabel
                                     control={
                                         <Radio 
@@ -98,7 +108,8 @@ class RequirementItem extends Component {
 }
 
 const mapStateToProps = (reduxState) => ({
-    currentJob: reduxState.currentJob
+    currentJob: reduxState.currentJob,
+    currentRequirements: reduxState.currentRequirements
 
 });
 
