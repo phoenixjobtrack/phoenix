@@ -39,6 +39,7 @@
 /* OVERDUE Today's Task Scrollbar and smaller div for task list inside of the task box*/
 .overdueText{
   margin: 10px;
+  margin-left: 20px;
   height: 125px;
   overflow-y: auto;
 }

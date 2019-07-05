@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// ----- DEPENDENCIES ----- //
+import swal from 'sweetalert'
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Grid';
 import './DashboardPage.css';
+import './AddTaskDialog.jsx';
 import AddIcon from '@material-ui/icons/Add';
 import DashboardTable from '../DashboardTable/DashboardTable';
 
@@ -14,6 +17,33 @@ class DashboardPage extends Component {
     //temporary.  replace once Viji's query works
     this.props.dispatch({ type: 'FETCH_JOB_STAGES' })
   }
+
+      // Triggers Popup to add new Employment Requirement when + is clicked
+      addRequirement() {
+        console.log('in addRequirement');
+        swal({
+            text: 'Add New Employment Requirement',
+            content: "input",
+            button: {
+                text: "add",
+                closeModal: false,
+            },
+        })
+            .then(requirement => {
+                if (!requirement) throw null;
+                this.props.dispatch({ type: 'ADD_NEW_REQUIREMENT', payload: { requirement: `${requirement}` } })
+            })
+            .then(results => {
+                swal("New Requirement Added", {
+                    icon: "success",
+                });
+            })
+    } // End addRequirement
+
+          // Triggers Popup to add new Employment Requirement when + is clicked
+          addTask() {}
+
+
   render() {
     //this gives us today's date in mm/dd/yyyy format
     let today = new Date();
@@ -27,7 +57,7 @@ class DashboardPage extends Component {
         <Grid container>
           <Grid item sm>
             <Paper style={{ padding: 40, marginTop: 20 }}>
-              <h2>Today's Task<AddIcon className="dashAddIcon" onClick={() => this.props.history.push('/tasks')}/></h2>
+              <h2>Today's Task<AddIcon className="dashAddIcon" onClick={this.addTask}/></h2>
               <div className="todayBox">
               <div className="todayText">
                   <h4>Today</h4>
@@ -61,7 +91,7 @@ class DashboardPage extends Component {
               <div className="logoBox">
                 <img className="logo" src="/images/logo3.png" alt="phoenix logo" />
               </div>
-              <h2>Job Requirements<AddIcon className="dashAddIcon" onClick={() => this.props.history.push('/profile')}/></h2>
+              <h2>Job Requirements<AddIcon className="dashAddIcon" onClick={this.addRequirement}/></h2>
               <div className="requireBox">
                 <div className="requireText">
                     {this.props.require.map((user, i) => {
