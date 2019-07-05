@@ -21,7 +21,6 @@ router.get('/stages', rejectUnauthenticated, (req,res)=>{
         }) 
 })
 
-<<<<<<< HEAD
 router.get('/', (req,res) => {
    
     console.log('this is for job', req.user.id);
@@ -40,7 +39,8 @@ router.get('/', (req,res) => {
             console.log(`Error on 1234 query ${error}`);
             res.sendStatus(500);
         })
-=======
+})
+
 router.get('/tasks', rejectUnauthenticated,(req,res)=>{
     let query = 
     `SELECT
@@ -90,7 +90,6 @@ router.get('/', rejectUnauthenticated, (req,res) => {
     //         console.log(`Error on query ${error}`);
     //         res.sendStatus(500);
     //     })
->>>>>>> 5cdafa140b1cf505f7ee60fe45192c56d37b4f83
 }
 )
 
