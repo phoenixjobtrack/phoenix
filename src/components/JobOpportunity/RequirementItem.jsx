@@ -1,24 +1,36 @@
+// ----- REACT ----- //
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 
+// ----- COMPONENTS ----- //
 import Stages from './Stages'
 import Tasks from './Tasks'
 
-import { connect } from 'react-redux';
+// ----- MATERIAL UI CORE ----- //
 import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Input from '@material-ui/core/Input';
-import TextField from '@material-ui/core/TextField';
-import RemoveIcon from '@material-ui/icons/Remove';
-import AddIcon from '@material-ui/icons/Add';
 import Checkbox from '@material-ui/core/Checkbox';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormGroup from '@material-ui/core/FormGroup';
 import FormLabel from '@material-ui/core/FormLabel';
+import Grid from '@material-ui/core/Grid';
+import MenuItem from '@material-ui/core/MenuItem';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
+
+// ----- MATERIAL UI ICONS ----- //
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
+
+
+
+
+
 
 class RequirementItem extends Component {
     handleRequireChange = propertyName => (event) => {
@@ -57,20 +69,26 @@ class RequirementItem extends Component {
                     <Grid item sm={3}>
                         <FormControl component="fieldset" >
                             <FormLabel component="legend">Meets Requirement?</FormLabel>
-                            <FormGroup >
+                            <RadioGroup >
                                 <FormControlLabel
                                     control={
-                                        <Checkbox onChange={this.handleRequireChange('requirement_met')} value="true" />
+                                        <Radio 
+                                            onChange={this.handleRequireChange('requirement_met')} 
+                                            value="true" 
+                                        />
                                     }
                                     label="True"
                                 />
                                 <FormControlLabel
                                     control={
-                                        <Checkbox onChange={this.handleRequireChange('requirement_met')} value="false" />
+                                        <Radio 
+                                            onChange={this.handleRequireChange('requirement_met')} 
+                                            value="false" 
+                                        />
                                     }
                                     label="False"
                                 />
-                            </FormGroup>
+                            </RadioGroup>
                         </FormControl>
                     </Grid>
                 </Grid>
