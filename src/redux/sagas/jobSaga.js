@@ -59,6 +59,11 @@ function* addJob(action) {
             console.log('in addJob saga task:', task)
             axios.post('/api/jobs/tasks/new', task)
         })
+        //create new requirements assessment for new job
+        yield Object.values(action.payload.requirements).map(requirement=>{
+            console.log('in addJob saga requirement:', requirement)
+            axios.post('/api/jobs/requirements', requirement)
+        })
         
 
     } catch (error) {
