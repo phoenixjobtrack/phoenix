@@ -48,7 +48,7 @@ class SavedRequirements extends Component {
 
     updateChange = () => {
         if (this.state.requirementName !== this.props.userReq.requirement){
-            console.log('in updateChange', this.props.id, this.state.requirementName, this.props.userReq.requirement);
+            console.log('in updateChange', this.props.id, this.props.userReq.requirement, 'to' , this.state.requirementName );
             this.props.dispatch({ type: 'UPDATE_REQUIREMENT', payload: { id: this.props.id, requirement: this.state.requirementName } })
         }
         else {
