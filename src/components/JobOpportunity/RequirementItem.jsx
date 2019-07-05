@@ -52,12 +52,31 @@ class RequirementItem extends Component {
     render(){
         let requirementOfferValue
         let requirementMetValue
+        let value
         //jobs_requirements item only exists after edit so only preload data for existing entries
         if (this.props.currentRequirements[this.props.i]){
             requirementOfferValue = this.props.currentRequirements[this.props.i].requirement_offer
-            requirementMetValue = this.props.currentRequirements[this.props.i].requirement_met
+            // requirementMetValue = 
+            if (this.props.currentRequirements[this.props.i].requirement_met === true){
+                requirementMetValue = "true"
+            }
+            else if (this.props.currentRequirements[this.props.i].requirement_met === true) {
+                requirementMetValue = "false"
+            }
+            else {
+
+            }
         }
-        console.log('in RequirementItem requirement:', this.props.requirement, this.props.i)
+        // if (requirementMetValue === true){
+        //     value="true"
+        // }
+        // else if (requirementMetValue === false){
+        //     value="false"
+        // }
+        // else{
+
+        // }
+        console.log('in RequirementItem requirement:', this.props.requirement, this.props.i, requirementMetValue)
         return(
             <div className="oppGrid4">
                 <Grid container>
@@ -76,30 +95,34 @@ class RequirementItem extends Component {
                         />
                     </Grid>
                     <Grid item sm={3}>
-                        <FormControl component="fieldset" >
-                            <FormLabel component="legend">Meets Requirement?</FormLabel>
-                            <RadioGroup >
-                                
+                        {/* <FormControl component="fieldset" > */}
+                            <FormLabel component="legend">Meets Requirement?{value}</FormLabel>
+                        
+                            <RadioGroup 
+                                value={requirementMetValue}   
+                            >                        
                                 <FormControlLabel
                                     control={
                                         <Radio 
                                             onChange={this.handleRequireChange('requirement_met')} 
-                                            value="true" 
+                                        label="True"
+                                        value="true"
                                         />
                                     }
-                                    label="True"
+                                    
                                 />
                                 <FormControlLabel
                                     control={
                                         <Radio 
                                             onChange={this.handleRequireChange('requirement_met')} 
-                                            value="false" 
+                                        label="False"
+                                        value="false"
                                         />
                                     }
-                                    label="False"
+                                    
                                 />
                             </RadioGroup>
-                        </FormControl>
+                        {/* </FormControl> */}
                     </Grid>
                 </Grid>
             </div>
