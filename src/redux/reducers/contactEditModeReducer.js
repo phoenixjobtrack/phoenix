@@ -1,4 +1,4 @@
-const contactEditMode = (state = 'login', action) => {
+const contactEditMode = (state = 'create', action) => {
     switch (action.type) {
         case 'SET_TO_EDIT_MODE':
             return 'edit';

@@ -24,6 +24,7 @@ import UserPage from '../UserPage/UserPage';
 import TopBar from '../TopBar/TopBar';
 import AddContactPage from '../ContactPage/AddContactPage'
 import EditContactPage from '../ContactPage/EditContactPage'
+import EditJobOpp from '../JobOpportunity/EditJobOpp'
 
 // ========== STYLE ========== //
 import './App.css';
@@ -34,6 +35,7 @@ class App extends Component {
     this.props.dispatch({type: 'FETCH_USER'})
     this.props.dispatch({type: 'FETCH_TASKS'})
     this.props.dispatch({type: 'FETCH_REQUIREMENTS'})
+    
   }
 
   render() {
@@ -104,6 +106,11 @@ class App extends Component {
               exact
               path="/jobpipeline"
               component={JobPipelinePage}
+            />
+            <ProtectedRoute
+              exact
+              path="/jobOpportunity/:id" 
+              component={EditJobOpp}
             />
             <ProtectedRoute
               exact
