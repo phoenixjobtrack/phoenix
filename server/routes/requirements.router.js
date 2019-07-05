@@ -53,20 +53,20 @@ router.put('/:id', (req,res)=>{
         })    
 })
 
-// //DELETE route
-// router.delete('/', rejectUnauthenticated, (req,res)=>{
-//     console.log('in DELETE /api/requirements', req.body, req.user.id)
-//     const queryText='DELETE FROM "requirements" WHERE "user_id"=$1 AND "id"=$2'
-//     pool.query(queryText,[req.user.id,req.query.id])
-//         .then(response=>{
-//             console.log('in DELETE /api/requirements', response)
-//             res.sendStatus(200)
-//         })
-//         .catch(err=>{
-//             console.log('error in DELETE /api/requirements', err)
-//             res.sendStatus(500)
-//         })
-// })
+//DELETE route
+router.delete('/:id', rejectUnauthenticated, (req,res)=>{
+    console.log('in DELETE /api/requirements', req.params.id, req.user.id)
+    const queryText='DELETE FROM "requirements" WHERE "id"=$1 AND "user_id"=$2'
+    pool.query(queryText,[req.params.id, req.user.id])
+        .then(response=>{
+            console.log('in DELETE /api/requirements', response)
+            res.sendStatus(200)
+        })
+        .catch(err=>{
+            console.log('error in DELETE /api/requirements', err)
+            res.sendStatus(500)
+        })
+})
 
 
 module.exports = router;

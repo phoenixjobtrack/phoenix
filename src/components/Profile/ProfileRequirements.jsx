@@ -42,7 +42,7 @@ class ProfileRequirements extends Component {
 
     // updateStateRequirelist () {
     //     console.log('Update state.requireList 1', this.props.reduxState)
-            
+
     //         // let outputRequire = 
     //         this.props.require.map(requirementOut => {
     //             return (
@@ -58,8 +58,8 @@ class ProfileRequirements extends Component {
     //             }
     //         })
     //         console.log('requireList updated. this.state:', this.state)
-        
-        
+
+
     // }
 
     addRequirementInput(event) {
@@ -142,7 +142,6 @@ class ProfileRequirements extends Component {
             editMode: false,
         });
         console.log('this.state', this.state);
-        // this.props.dispatch({ type: 'ADD_REQUIREMENTS', payload: this.state.requireList })
     }
 
     render() {
@@ -155,13 +154,15 @@ class ProfileRequirements extends Component {
                     <Card>
                         <h2>
                             Employment Requirements
-                            <IconButton
-                                variant="contained"
-                                color="primary"
-                                onClick={this.handleEdit}
-                            >
-                                <EditIcon />
-                            </IconButton>
+                            <Tooltip title="Edit Employment Requirements">
+                                <IconButton
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={this.handleEdit}
+                                >
+                                    <EditIcon />
+                                </IconButton>
+                            </Tooltip>
                         </h2>
                         {
                             this.props.require.map((user, i) => {

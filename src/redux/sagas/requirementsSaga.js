@@ -40,6 +40,16 @@ function* fetchRequirements(action) {
     }
 }
 
+function* removeRequirement(action) {
+    console.log('in removeRequirement', action.payload);
+    try {
+        yield axios.delete(`api/requirements/${action.payload}`, action.payload)
+        yield put({ type: 'FETCH_REQUIREMENTS'})
+    } catch (error) {
+        console.log('error in removeRequirement', error);
+    }
+}
+
 // BE CAREFUL
 // This is updateRequirement NOT updateRequirementS with an "S"
 function* updateRequirement(action) {
@@ -55,6 +65,8 @@ function* updateRequirement(action) {
     }
 }
 
+// WATCH OUT
+// This is updateRequirementS NOT updateRequirement NO "S"
 function* updateRequirements(action) {
     console.log('in updateRequirements saga', action.payload)
     console.log('in updateRequirements saga id', action.payload.id)
@@ -74,6 +86,7 @@ function* requirementsSaga() {
     yield takeEvery('ADD_REQUIREMENTS', addRequirements);
     yield takeEvery('ADD_NEW_REQUIREMENT', addNewRequirement);
     yield takeEvery('FETCH_REQUIREMENTS', fetchRequirements);
+    yield takeEvery('REMOVE_REQUIREMENT', removeRequirement)
     yield takeEvery('UPDATE_REQUIREMENTS', updateRequirements);
     yield takeEvery('UPDATE_REQUIREMENT', updateRequirement);
 }

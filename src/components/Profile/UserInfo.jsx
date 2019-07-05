@@ -38,7 +38,7 @@ class UserInfo extends Component {
         console.log('handleEdit UserInfo:', this.props.profile.first_name, this.props.profile.last_name, this.props.profile.email)
         event.preventDefault();
         let id = this.props.profile.id;
-        let first_name =  this.props.profile.first_name;
+        let first_name = this.props.profile.first_name;
         let last_name = this.props.profile.last_name;
         let email = this.props.profile.email;
         this.setState({
@@ -81,7 +81,7 @@ class UserInfo extends Component {
         this.setState({
             ...this.state,
             editMode: false,
-        }) 
+        })
         this.props.dispatch({ type: 'UPDATE_USER', payload: this.state.profileInfo })
     }
 
@@ -95,7 +95,16 @@ class UserInfo extends Component {
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
                             <Card>
-                                <h2>Personal Info <IconButton variant="contained" color="primary" onClick={this.handleEdit}><EditIcon /></IconButton></h2>
+                                <h2>Personal Info
+                                    <Tooltip title="Edit Personal Info">
+                                        <IconButton
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={this.handleEdit}>
+                                            <EditIcon />
+                                        </IconButton>
+                                    </Tooltip>
+                                </h2>
                                 <p>First Name: {this.props.profile.first_name}</p>
                                 <p>Last Name: {this.props.profile.last_name}</p>
                                 <p>E-mail: {this.props.profile.email}</p>
@@ -112,7 +121,7 @@ class UserInfo extends Component {
                                 <Card>
                                     {/* <Grid item xs={12}> */}
                                     <div className="profileInfo">
-                                    <h2>Edit Personal Info <Tooltip title="Submit Change"><IconButton variant="contained" color="primary" onClick={this.handleUpdateProfile}><CheckIcon /></IconButton></Tooltip></h2>
+                                        <h2>Edit Personal Info <Tooltip title="Submit Change"><IconButton variant="contained" color="primary" onClick={this.handleUpdateProfile}><CheckIcon /></IconButton></Tooltip></h2>
                                         <TextField
                                             id="standard-dense"
                                             label="First Name"
