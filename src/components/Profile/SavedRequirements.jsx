@@ -1,19 +1,16 @@
+// ----- SAVED REQUIREMENTS ----- //
+// Individual Employment Requirement
+// Child of ProfileRequirements
+
 // ----- REACT ----- //
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // ----- MATERIAL UI CORE ----- //
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card'
-import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 
 // ----- MATERIAL UI ICONS ----- //
-import AddIcon from '@material-ui/icons/Add';
-import CheckIcon from '@material-ui/icons/Check';
-import EditIcon from '@material-ui/icons/Edit';
-import FaceIcon from '@material-ui/icons/Face';
+
 
 // ----- STYLES ----- //
 import './Profile.css';
@@ -30,11 +27,13 @@ class SavedRequirements extends Component {
         });
     }
 
+    componentWillUnmount () {
+        this.updateChange()
+    }
+
     state = {
         requirementName: '',
-        // requireList: {},
-        // oldRequirement: {},
-        // editMode: false
+        
     }
 
     handleEditChange = (event) => {
@@ -44,7 +43,18 @@ class SavedRequirements extends Component {
         });
     }
 
+    updateChange = () => {
+        if (this.state.requirementName !== this.props.userReq.requirement){
+            console.log('in updateChange', this.props.id, this.props.userReq.requirement, 'to' , this.state.requirementName );
+            this.props.dispatch({ type: 'UPDATE_REQUIREMENT', payload: { id: this.props.userReq.id, requirement: this.state.requirementName } })
+        }
+        else {
+            console.log('in updateChange - NO CHANGE', this.props.id, this.state.requirementName);
+        }
+    }
+
     render () {
+
         return (
             <>
             <div>

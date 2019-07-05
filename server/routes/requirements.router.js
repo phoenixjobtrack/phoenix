@@ -10,7 +10,7 @@ const router = express.Router();
 // // GET route
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('in GET /api/requirements user:', req.user.id)
-    const queryText = `SELECT * FROM "requirements" WHERE "user_id"=$1`
+    const queryText = `SELECT * FROM "requirements" WHERE "user_id"=$1 ORDER BY "id" ASC;`
     pool.query(queryText,[req.user.id])
         .then(result=>{
             console.log('back from GET /api/requirements', result.rows)
@@ -38,11 +38,11 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         })
 });
 
-// //PUT route
-router.put('/', (req,res)=>{
-    console.log('in PUT /api/requirements', req.body, req.user.id)
-    const queryText='UPDATE "requirements" SET "requirement"=$1 WHERE "user_id"=$2 AND "id"=$3'
-    pool.query(queryText,[req.body.requirement, req.user.id, req.body.id])
+//PUT route
+router.put('/:id', (req,res)=>{
+    console.log('in PUT /api/requirements/:id', req.body, req.params.id, req.user.id )
+    const queryText ='UPDATE "requirements" SET "requirement"=$1 WHERE "id"=$2 AND "user_id"=$3;';
+    pool.query(queryText, [req.body.requirement, req.params.id, req.user.id])
         .then(response=>{
             console.log('back from PUT /api/requirements', response)
             res.sendStatus(200);
