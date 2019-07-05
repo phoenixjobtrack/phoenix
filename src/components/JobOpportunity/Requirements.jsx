@@ -38,10 +38,10 @@ class Requirements extends Component {
                         <button>Update Personal Requirements</button>
                     </Grid>
                 </Grid>
-                {this.props.require.map((user, i) => {
+                {this.props.require.map((requirement, i) => {
                     return (
                         <ul>
-                            <RequirementItem user={user} i={i}/>
+                            <RequirementItem requirement={requirement} i={i}/>
                         </ul>
                         
                     )

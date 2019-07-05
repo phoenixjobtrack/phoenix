@@ -34,12 +34,7 @@ class JobOpportunity extends Component {
                 requirements: this.props.requirements
             }           
         })
-        // this.props.dispatch({ type: 'SAVE_STAGES', payload: this.props.reduxState.currentStage });
-        // this.props.dispatch({ type: 'ADD_JOB', payload: this.state.job });
-        // this.props.dispatch({ type: 'ADD_TASK', payload: this.state.tasks });
-        // this.props.dispatch({ type: 'ADD_JOB_REQUIREMENTS', payload: this.state.job_requirements });
         this.props.history.push('/jobpipeline')
-     
     }
 
     handleCloseJob = () => {
@@ -57,9 +52,9 @@ class JobOpportunity extends Component {
         this.props.dispatch({ type: 'FETCH_JOB_TASKS', payload: this.props.match.params.id })
 
         //fetch requirements assessment for selected job and store in redux
-        this.props.dispatch({ type: 'FETCH_JOB_REQUIREMENTS', payload: this.props.match.params.id })
-        
+        this.props.dispatch({ type: 'FETCH_JOB_REQUIREMENTS', payload: this.props.match.params.id })  
     }
+
     render() {
         console.log('current job', this.props.currentJob)
         return (
@@ -69,7 +64,7 @@ class JobOpportunity extends Component {
                     <Button variant="contained" color="primary">Offer Accepted</Button>
                     <Button variant="contained" color="primary" onClick = {this.handleCloseJob}>Close Opportunity</Button>
                 </div>
-
+                
                 {/* Employment Information */}
                 <div className="jobOppForm">
                     <p className="jobOppsTitle">Employment Information</p>
@@ -193,6 +188,9 @@ class JobOpportunity extends Component {
 }
 
 const mapStateToProps = (state) => ({
+    require: state.requirements,
+    jobEditMode: state.jobEditMode,
+    job: state.jobs,
     currentJob: state.currentJob,
     stages: state.currentStage,
     tasks: state.currentTasks,
