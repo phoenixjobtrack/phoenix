@@ -142,7 +142,6 @@ class ProfileRequirements extends Component {
             editMode: false,
         });
         console.log('this.state', this.state);
-        // this.props.dispatch({ type: 'ADD_REQUIREMENTS', payload: this.state.requireList })
     }
 
     render() {
