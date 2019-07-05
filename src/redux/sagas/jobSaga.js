@@ -54,6 +54,11 @@ function* addJob(action) {
             console.log('in addJob saga stage:', stage )
             axios.post('/api/jobs/stages/new', stage)
         })
+        //create tasks for new job
+        yield Object.values(action.payload.tasks).map(task=>{
+            console.log('in addJob saga task:', task)
+            axios.post('/api/jobs/tasks/new', task)
+        })
         
 
     } catch (error) {

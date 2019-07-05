@@ -169,6 +169,22 @@ router.post('/stages/new', rejectUnauthenticated, (req,res)=>{
     })
 })
 
+router.post('/tasks/new', rejectUnauthenticated, (req, res) => {
+    console.log('/api/jobs/tasks/new')
+    // req.body is an array, numbered key followed up actual stage object, so look at req.body.stage[1]
+    
+    let query = `INSERT INTO "tasks" (user_id, task_name, due_date, job_id, note) VALUES ($1, $2, $3, (SELECT MAX(id) FROM jobs),$4);`
+    pool.query(query, [req.user.id, req.body.task_name, '2019-07-07', req.body.note])
+        .then(response => {
+            console.log('in POST /api/jobs/tasks/new', response)
+            res.sendStatus(201)
+        })
+        .catch(err => {
+            console.log('error in POST /api/jobs/tasks/new', err)
+            res.sendStatus(500)
+        })
+})
+
 router.delete('/tasks/:id',rejectUnauthenticated, (req,res)=>{
     // console.log('in DELETE /api/jobs/tasks', req.params.id)
     let query = `DELETE FROM "tasks" WHERE job_id=$1`
