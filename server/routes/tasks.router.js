@@ -27,8 +27,8 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     console.log('in POST /api/tasks', req.user.id, req.body)
-    const queryText = `INSERT INTO "tasks" (user_id, task_name, due_date, contact_id, job_id) VALUES ($1, $2, $3, $4, $5);`;
-    pool.query(queryText, [req.user.id, req.body.task_name, req.body.due_date, req.body.contact_id, req.body.job_id])
+    const queryText = `INSERT INTO "tasks" (user_id, task_name, due_date, note, contact_id, job_id) VALUES ($1, $2, $3, $4, $5, $6);`;
+    pool.query(queryText, [req.user.id, req.body.task_name, req.body.due_date, req.body.note, req.body.contact_id, req.body.job_id])
         .then(response => {
             console.log('in POST /api/tasks', response)
             res.sendStatus(201)
