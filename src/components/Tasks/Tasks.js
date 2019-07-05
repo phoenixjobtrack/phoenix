@@ -132,6 +132,7 @@ class Tasks extends Component {
                         <Paper variant="outlined">
                             <Toolbar >
                                 <TextField
+                                    style={{ minWidth: 400 }}
                                     value={this.state.task_name}
                                     id="add-new-task"
                                     label="Add New Task"
