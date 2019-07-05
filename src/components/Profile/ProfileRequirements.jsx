@@ -1,3 +1,7 @@
+// ----- PROFILE REQUIREMENTS ----- //
+// The Employment Requirements section of the Profile View
+// Child of Profile
+
 // ----- REACT ----- //
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -27,6 +31,7 @@ import './Profile.css';
 
 class ProfileRequirements extends Component {
 
+
     state = {
         requireList: {},
         oldRequirement: {},
@@ -34,6 +39,28 @@ class ProfileRequirements extends Component {
     }
 
     requirementCounter = 0
+
+    // updateStateRequirelist () {
+    //     console.log('Update state.requireList 1', this.props.reduxState)
+
+    //         // let outputRequire = 
+    //         this.props.require.map(requirementOut => {
+    //             return (
+    //                 console.log('requirementOut', requirementOut.requirement)
+
+    //                 // console.log('requirementOut', requirementOut.requirement)
+    //             )
+    //         })
+    //         this.setState({
+    //             ...this.state,
+    //             requireList: {
+    //                 requirement: outputRequire
+    //             }
+    //         })
+    //         console.log('requireList updated. this.state:', this.state)
+
+
+    // }
 
     addRequirementInput(event) {
         console.log('this.requirementCounter', this.requirementCounter);
@@ -64,7 +91,7 @@ class ProfileRequirements extends Component {
         })
             .then(requirement => {
                 if (!requirement) throw null;
-                this.props.dispatch({ type: 'ADD_NEW_REQUIREMENT', payload: { requirement: `${requirement}`} })
+                this.props.dispatch({ type: 'ADD_NEW_REQUIREMENT', payload: { requirement: `${requirement}` } })
             })
             .then(results => {
                 swal("New Requirement Added", {
@@ -80,6 +107,7 @@ class ProfileRequirements extends Component {
             // oldRequirement: 'doodaaa',
             editMode: !this.state.editMode
         });
+        // this.updateStateRequirelist()
     }
 
     handleEditChange = propertyName => (event) => {
@@ -114,7 +142,6 @@ class ProfileRequirements extends Component {
             editMode: false,
         });
         console.log('this.state', this.state);
-        this.props.dispatch({ type: 'ADD_REQUIREMENTS', payload: this.state.requireList })
     }
 
     render() {
@@ -127,13 +154,15 @@ class ProfileRequirements extends Component {
                     <Card>
                         <h2>
                             Employment Requirements
-                            <IconButton
-                                variant="contained"
-                                color="primary"
-                                onClick={this.handleEdit}
-                            >
-                                <EditIcon />
-                            </IconButton>
+                            <Tooltip title="Edit Employment Requirements">
+                                <IconButton
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={this.handleEdit}
+                                >
+                                    <EditIcon />
+                                </IconButton>
+                            </Tooltip>
                         </h2>
                         {
                             this.props.require.map((user, i) => {
@@ -176,7 +205,7 @@ class ProfileRequirements extends Component {
                                 )
                             })}
 
-                            {Object.entries(this.state.requireList).map((requirement, index) => {
+                            {/* {Object.entries(this.state.requireList).map((requirement, index) => {
                                 return (
                                     <p>
                                         <TextField
@@ -189,7 +218,7 @@ class ProfileRequirements extends Component {
                                         />
                                     </p>
                                 )
-                            })}
+                            })} */}
                             <p ><Tooltip
                                 title="Add New Employment Requirement"
                             >
@@ -214,6 +243,7 @@ class ProfileRequirements extends Component {
 } // end class
 
 const mapStateToProps = (reduxState) => ({
+    reduxState,
     profile: reduxState.user,
     require: reduxState.requirements
 });
