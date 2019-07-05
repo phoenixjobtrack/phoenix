@@ -152,7 +152,7 @@ class TasksLineItemsContent extends Component {
                                         defaultValue={this.state.due_date}
                                         onChange={this.handleChangeDate}
                                         format={'YYYY-MM-DD'}
-                                        formatDate={(date) => moment(new Date()).format('YYYY-MM-DD')}
+                                        // formatDate={(date) => moment(new Date()).format('YYYY-MM-DD')}
                                         variant="outlined"
                                     // label="update due date"
                                     />
