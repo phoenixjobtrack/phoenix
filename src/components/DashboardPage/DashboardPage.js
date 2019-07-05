@@ -8,7 +8,13 @@ import FaceIcon from '@material-ui/icons/Face';
 import AddIcon from '@material-ui/icons/Add';
 import DashboardTable from '../DashboardTable/DashboardTable';
 
+
+
 class DashboardPage extends Component {
+  componentDidMount(){
+    //temporary.  replace once Viji's query works
+    this.props.dispatch({ type: 'FETCH_JOB_STAGES' })
+  }
   render() {
     //this gives us today's date in mm/dd/yyyy format
     let today = new Date();

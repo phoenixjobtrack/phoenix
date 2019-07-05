@@ -14,12 +14,12 @@ function* addNewRequirement(action) {
 
 // worker Saga: will be fired on "FETCH_USER" actions
 function* addRequirements(action) {
-    console.log('in addRequirements saga', action.payload)
+    // console.log('in addRequirements saga', action.payload)
         
     try {
-        yield action.payload.requirement.map(requirement=>{
-            console.log('requirement', requirement)
-            axios.post('api/requirements', {requirements: requirement})
+        yield action.payload.requirements.map(requirement=>{
+            console.log('in addRequirements saga', requirement)
+            axios.post('api/requirements', {requirement: requirement})
         })       
         
     } catch (error) {
