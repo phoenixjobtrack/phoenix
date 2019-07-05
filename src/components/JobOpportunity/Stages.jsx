@@ -35,8 +35,6 @@ class Stages extends Component {
         this.props.dispatch({ type: 'FETCH_INTERVIEW_STAGES'})
         // this.fetchJobStages()
         // this.props.dispatch({type:'FETCH_JOB_STAGES'})
-        
-        
     }
 
     render() {
@@ -50,8 +48,7 @@ class Stages extends Component {
                     return (
                         <ul>
                             <StageItem stage={stage} i={stage[0]} handleForceUpdate={this.handleForceUpdate}/>
-                        </ul>
-                        
+                        </ul>   
                     )
                 })}
                 <IconButton onClick={(event) => this.addStageInput(event)}>

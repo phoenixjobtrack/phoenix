@@ -9,7 +9,6 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import InputLabel from '@material-ui/core/InputLabel';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
 
@@ -72,6 +71,7 @@ class StageItem extends Component {
                     </Grid>
                     <Grid xs={3}>
                         <form noValidate >
+                            <InputLabel>Date</InputLabel>
                             <TextField
                                 id="date"
                                 // style={{ width: 150 }}
@@ -85,9 +85,10 @@ class StageItem extends Component {
                             />
                         </form>
                     </Grid>
-                    <Grid xs={3}>
+                    <Grid xs={4}>
+                        <InputLabel>Notes</InputLabel>
                         <Input
-                            style={{ paddingTop: 16 }}
+                            // style={{ paddingTop: 16 }}
                             onChange={this.handleStageChange('note')}
                             value={this.props.reduxState.currentStage[this.props.i].note}
                             placeholder="Notes"
