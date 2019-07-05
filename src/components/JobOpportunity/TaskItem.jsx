@@ -8,9 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import RemoveIcon from '@material-ui/icons/Remove';
 import InputLabel from '@material-ui/core/InputLabel';
 import IconButton from '@material-ui/core/IconButton';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+
 
 class TaskItem extends Component {
     state = {
@@ -44,18 +42,19 @@ class TaskItem extends Component {
     render() {
         return(
             <Grid container>
-                <Grid item sm={2}>
+                <Grid item xs={1}>
                     <IconButton className="oppsSubBut" onClick={this.handleRemove}>
                         <RemoveIcon />
                     </IconButton>
-                    <span style={{ fontSize: 20 }}>
+                    {/* <span style={{ fontSize: 20 }}>
                         Tasks:
-                    </span>
+                    </span> */}
 
                 </Grid>
-                <Grid item sm={3}>
+                <Grid item xs={4}>
+                    <InputLabel>Task</InputLabel>
                     <Input
-                        style={{ width: 415, paddingTop: 16 }}
+                        // style={{ width: 415, paddingTop: 16 }}
                         placeholder="Task Details"
                         value={this.props.reduxState.currentTasks[this.props.i].task_name}
                         onChange={this.handleTaskChange('task_name')}
@@ -64,16 +63,27 @@ class TaskItem extends Component {
                         }}
                     />
                 </Grid>
-                <Grid item sm={2} >
+                <Grid item xs={3} >
+                    <InputLabel>Due Date</InputLabel>
                     <TextField
                         id="date"
                         type="date"
-                        style={{ paddingTop: 16 }}
+                        // style={{ paddingTop: 16 }}
                         value={this.props.reduxState.currentTasks[this.props.i].due_date}
                         onChange={this.handleTaskChange('due_date')}
-                        // defaultValue="2017-05-24"
                         InputLabelProps={{
                             shrink: true,
+                        }}
+                    />
+                </Grid>
+                <Grid item xs={4}>
+                    <InputLabel>Notes</InputLabel>
+                    <Input
+                        placeholder="Task Note"
+                        value={this.props.reduxState.currentTasks[this.props.i].note}
+                        onChange={this.handleTaskChange('note')}
+                        inputProps={{
+                            'aria-label': 'Task Note',
                         }}
                     />
                 </Grid>

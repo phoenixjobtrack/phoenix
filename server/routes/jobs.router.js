@@ -12,7 +12,7 @@ router.get('/stages', rejectUnauthenticated, (req,res)=>{
     WHERE j.user_id = $1;`
     pool.query(query, [req.user.id])
         .then((result) => {
-            console.log('in GET /api/jobs/stages', result.rows, req.user.id)
+            // console.log('in GET /api/jobs/stages', result.rows, req.user.id)
             res.send(result.rows);
         })
         .catch((error) => {
@@ -31,7 +31,7 @@ router.get('/tasks', rejectUnauthenticated,(req,res)=>{
     
     pool.query(query,[req.user.id])
         .then((result)=>{
-            console.log('in GET /api/jobs/tasks', result.rows, req.user.id)
+            // console.log('in GET /api/jobs/tasks', result.rows, req.user.id)
             res.send(result.rows)
         })
         .catch((error)=>{
@@ -42,8 +42,8 @@ router.get('/tasks', rejectUnauthenticated,(req,res)=>{
 
 
 router.get('/', rejectUnauthenticated, (req,res) => {
-    console.log('this is for job', req.user.id);
-    
+    // console.log('this is for job', req.user.id);
+    res.sendStatus(200)
     // let query = `
     //     SELECT j1.company_name, j1.position, currentstage.stage as stage, nextstage.stage as nextstage, nextstage.date, nextstage.note 
     //     FROM "jobs" j1 
@@ -61,14 +61,15 @@ router.get('/', rejectUnauthenticated, (req,res) => {
     //     ) as ordered_stages
     //     where ordered_stages.row_num = 1) as nextstage ON (j1.id = nextstage.job_id)  WHERE "user_id"=64 order by nextstage.date asc;`
     
-    pool.query(query,[req.user.id])
-        .then( (result) => {
-            res.send(result.rows);
-        })
-        .catch( (error) => {
-            console.log(`Error on query ${error}`);
-            res.sendStatus(500);
-        })
+    // pool.query(query,[req.user.id])
+    //     .then( (result) => {
+
+    //         res.send(result.rows);
+    //     })
+    //     .catch( (error) => {
+    //         console.log(`Error on query ${error}`);
+    //         res.sendStatus(500);
+    //     })
 }
 )
 
@@ -89,7 +90,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 }); // End router.post/api/tasks/:id
 
 router.put('/', rejectUnauthenticated, (req,res)=>{
-    console.log('in PUT /api/jobs', req.user.id, req.body)
+    // console.log('in PUT /api/jobs', req.user.id, req.body)
     const query = `
         UPDATE "jobs" 
         SET position = $1, 
@@ -114,7 +115,7 @@ router.put('/', rejectUnauthenticated, (req,res)=>{
         req.body.job_id
     ])
     .then(response=>{
-        console.log('in PUT /api/jobs', response);
+        // console.log('in PUT /api/jobs', response);
         res.sendStatus(200) 
     })
     .catch(err=>{
@@ -124,11 +125,11 @@ router.put('/', rejectUnauthenticated, (req,res)=>{
 })
 
 router.delete('/stages/:id', rejectUnauthenticated, (req,res)=>{
-    console.log('in DELETE /api/jobs/stages', req.params.id)
+    // console.log('in DELETE /api/jobs/stages', req.params.id)
     let query = `DELETE FROM "stages" WHERE job_id=$1`
     pool.query(query, [req.params.id])
     .then(response=>{
-        console.log('in DELETE /api/jobs/stages', response)
+        // console.log('in DELETE /api/jobs/stages', response)
         res.sendStatus(200)
     })
     .catch(err=>{
@@ -139,12 +140,12 @@ router.delete('/stages/:id', rejectUnauthenticated, (req,res)=>{
 
 router.post('/stages', rejectUnauthenticated, (req,res)=>{
     // req.body is an array, numbered key followed up actual stage object, so look at req.body.stage[1]
-    console.log('in POST /api/jobs/stages', req.body.stage[1], req.body.job_id)
+    // console.log('in POST /api/jobs/stages', req.body.stage[1], req.body.job_id)
     let query = `INSERT INTO "stages" (job_id, stage, note, date) VALUES ($1, $2, $3, $4)`
     // let query = `UPDATE "stages" SET stage=$1, note=$2, date=$3 WHERE job_id=$4`
     pool.query(query, [req.body.job_id, req.body.stage[1].stage, req.body.stage[1].note, '2019-07-30'])
     .then(response=>{
-        console.log('in POST /api/jobs/stages', response);
+        // console.log('in POST /api/jobs/stages', response);
         res.sendStatus(201)
     })
     .catch(err=>{
@@ -153,12 +154,60 @@ router.post('/stages', rejectUnauthenticated, (req,res)=>{
     })
 })
 
+router.post('/stages/new', rejectUnauthenticated, (req,res)=>{
+    console.log('/api/jobs/stages/new')
+    // req.body is an array, numbered key followed up actual stage object, so look at req.body.stage[1]
+    let query = `INSERT INTO "stages" (job_id, stage, note, date) VALUES ((SELECT MAX(id) FROM jobs),$1,$2,$3);`
+    pool.query(query, [req.body.stage, req.body.note, '2019-07-30'])
+    .then(response=>{
+        console.log('in POST /api/jobs/stages/new', response)
+        res.sendStatus(201)
+    })
+    .catch(err=>{
+        console.log('error in POST /api/jobs/stages/new', err)
+        res.sendStatus(500)
+    })
+})
+
+router.post('/tasks/new', rejectUnauthenticated, (req, res) => {
+    console.log('/api/jobs/tasks/new')
+    // req.body is an array, numbered key followed up actual stage object, so look at req.body.stage[1]
+    
+    let query = `INSERT INTO "tasks" (user_id, task_name, due_date, job_id, note) VALUES ($1, $2, $3, (SELECT MAX(id) FROM jobs),$4);`
+    pool.query(query, [req.user.id, req.body.task_name, '2019-07-07', req.body.note])
+        .then(response => {
+            console.log('in POST /api/jobs/tasks/new', response)
+            res.sendStatus(201)
+        })
+        .catch(err => {
+            console.log('error in POST /api/jobs/tasks/new', err)
+            res.sendStatus(500)
+        })
+})
+
+
+router.post('/requirements', rejectUnauthenticated, (req, res) => {
+    console.log('/api/jobs/requirements/new')
+    // req.body is an array, numbered key followed up actual stage object, so look at req.body.stage[1]
+
+    let query = `INSERT INTO "jobs_requirements" (job_id, requirement_id, due_date, requirement_offer, requirement_met) VALUES ((SELECT MAX(id) FROM jobs), $1, $2, $3, $4);`
+    pool.query(query, [])
+        .then(response => {
+            console.log('in POST /api/jobs/requirements/new', response)
+            res.sendStatus(201)
+        })
+        .catch(err => {
+            console.log('error in POST /api/jobs/requirements/new', err)
+            res.sendStatus(500)
+        })
+})
+
 router.delete('/tasks/:id',rejectUnauthenticated, (req,res)=>{
-    console.log('in DELETE /api/jobs/tasks', req.params.id)
+    // console.log('in DELETE /api/jobs/tasks', req.params.id)
     let query = `DELETE FROM "tasks" WHERE job_id=$1`
     pool.query(query, [req.params.id])
         .then(response => {
-            console.log('in DELETE /api/jobs/tasks', response)
+            // console.log('in DELETE /api/jobs/tasks', response)
             res.sendStatus(200)
         })
         .catch(err => {
@@ -167,14 +216,14 @@ router.delete('/tasks/:id',rejectUnauthenticated, (req,res)=>{
         })
 })
 
-router.put('/tasks', (req, res) => {
+router.post('/tasks', (req, res) => {
     // req.body is an array, numbered key followed up actual stage object, so look at req.body.stage[1]
-    console.log('in POST /api/jobs/tasks', req.body.task[1], req.body.job_id)
+    // console.log('in POST /api/jobs/tasks', req.body.task[1], req.body.job_id)
     let query = `INSERT INTO "tasks" (user_id, task_name, due_date, job_id, note ) VALUES ($1, $2, $3, $4, $5)`
     // let query = `UPDATE "stages" SET stage=$1, note=$2, date=$3 WHERE job_id=$4`
     pool.query(query, [req.user.id, req.body.task[1].task_name, '2019-07-30', req.body.job_id, req.body.task[1].note])
         .then(response => {
-            console.log('in POST /api/jobs/tasks', response);
+            // console.log('in POST /api/jobs/tasks', response);
             res.sendStatus(201)
         })
         .catch(err => {
@@ -184,11 +233,11 @@ router.put('/tasks', (req, res) => {
 })
 
 router.put('/requirements', (req, res) => {
-    console.log('in PUT /api/jobs/requirements', req.body[1])
+    // console.log('in PUT /api/jobs/requirements', req.body[1])
     let query = `UPDATE "jobs_requirements" SET requirement_offer = $1, requirement_met = $2 WHERE id = $3`
     pool.query(query, [req.body[1].requirement_offer, req.body[1].requirement_met, req.body[1].id])
     .then(response=>{
-        console.log('in PUT /api/jobs/requirements', response);
+        // console.log('in PUT /api/jobs/requirements', response);
         res.sendStatus(200)
     })
     .catch(err=>{

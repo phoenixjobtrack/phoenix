@@ -3,7 +3,7 @@ import { put, takeEvery } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_USER" actions
 function* fetchJobs(action) {
-    console.log('in fetchjobss saga', action.payload)
+    console.log('in fetchjobs saga', action.payload)
     
     try {
         let allJobs = yield axios.get('/api/jobs')
@@ -45,14 +45,31 @@ function* fetchJobTasks(action){
 
 function* addJob(action) {
     console.log('in addJob Saga', action.payload);
-    // Do or Do Not. There is no
+
     try {
-        yield axios.post('/api/jobs', action.payload)
-        yield put({ type: 'FETCH_JOBS'})
+        //create job with job data
+        yield axios.post('/api/jobs', action.payload.job)
+        //create stages for new job
+        yield Object.values(action.payload.stages).map(stage => {
+            console.log('in addJob saga stage:', stage )
+            axios.post('/api/jobs/stages/new', stage)
+        })
+        //create tasks for new job
+        yield Object.values(action.payload.tasks).map(task=>{
+            console.log('in addJob saga task:', task)
+            axios.post('/api/jobs/tasks/new', task)
+        })
+        //create new requirements assessment for new job
+        yield Object.values(action.payload.requirements).map(requirement=>{
+            console.log('in addJob saga requirement:', requirement)
+            axios.post('/api/jobs/requirements', requirement)
+        })
+        
 
     } catch (error) {
         console.log('error in addJob saga', error);
     }
+    yield put({ type: 'FETCH_JOB_STAGES' })
 }
 
 function* fetchCurrentJob(action) {

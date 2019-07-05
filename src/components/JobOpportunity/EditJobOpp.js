@@ -9,11 +9,10 @@ import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Input from '@material-ui/core/Input';
-import TextField from '@material-ui/core/TextField';
+import {InputLabel} from '@material-ui/core'
 
 
-
-class JobOpportunity extends Component {
+class EditJobOpp extends Component {
 
     handleJobChange = propertyName => (event) => {
         console.log('jobInfo', event.target.value);
@@ -65,7 +64,7 @@ class JobOpportunity extends Component {
                         <Grid container>
                             <Grid container item xs={6}>
                                 <Grid item xs={12}>
-                                    <p>Company: </p>
+                                    <InputLabel>Company:</InputLabel>
                                     <Input
                                         placeholder="Company"
                                         value={this.props.currentJob.company_name}
@@ -168,14 +167,6 @@ class JobOpportunity extends Component {
                                     />
                                 </Grid>
                             </Grid>
-
-                            
-                                
-                            
-                            
-                            
-                            
-
                         </Grid>
                     </div>
                 </div> 
@@ -194,6 +185,6 @@ const mapStateToProps = (state) => ({
     stages: state.currentStage,
     tasks: state.currentTasks,
     requirements: state.currentRequirements
-
 });
-export default withRouter(connect(mapStateToProps)(JobOpportunity));
+
+export default withRouter(connect(mapStateToProps)(EditJobOpp));
