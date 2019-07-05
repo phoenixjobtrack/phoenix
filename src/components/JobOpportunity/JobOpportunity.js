@@ -42,6 +42,10 @@ class JobOpportunity extends Component {
      
     }
 
+    handleCloseJob = () => {
+        this.props.dispatch({ type: 'CLOSE_JOB', payload: this.props.job.id})
+    }
+
     componentDidMount = () =>{
         //fetch current job data, store in redux
         this.props.dispatch({ type: 'FETCH_CURRENT_JOB', payload: this.props.match.params.id })
@@ -63,7 +67,7 @@ class JobOpportunity extends Component {
                 <h1>Job Opportunity</h1>
                 <div className="jobOppsBut">
                     <Button variant="contained" color="primary">Offer Accepted</Button>
-                    <Button variant="contained" color="primary">Close Opportunity</Button>
+                    <Button variant="contained" color="primary" onClick = {this.handleCloseJob}>Close Opportunity</Button>
                 </div>
 
                 {/* Employment Information */}
@@ -189,10 +193,17 @@ class JobOpportunity extends Component {
 }
 
 const mapStateToProps = (state) => ({
+<<<<<<< HEAD
+    require: state.requirements,
+    jobEditMode: state.jobEditMode,
+    job: state.jobs
+
+=======
     currentJob: state.currentJob,
     stages: state.currentStage,
     tasks: state.currentTasks,
     requirements: state.currentRequirements
+>>>>>>> 5cdafa140b1cf505f7ee60fe45192c56d37b4f83
 });
 
 export default withRouter(connect(mapStateToProps)(JobOpportunity));

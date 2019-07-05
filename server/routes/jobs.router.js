@@ -16,11 +16,31 @@ router.get('/stages', rejectUnauthenticated, (req,res)=>{
             res.send(result.rows);
         })
         .catch((error) => {
-            console.log(`Error on query ${error}`);
+            console.log(`Error on 777 query ${error}`);
             res.sendStatus(500);
         }) 
 })
 
+<<<<<<< HEAD
+router.get('/', (req,res) => {
+   
+    console.log('this is for job', req.user.id);
+//     let query = `
+//     SELECT job.company_name, job.position, currentstage.id, currentstage.job_id, currentstage.stage  stage, nextstage.stage  nextstage, nextstage.date, nextstage.note FROM jobs job 
+// LEFT JOIN stages currentstage ON (job.id = currentstage.job_id)
+// LEFT JOIN (select ss.id, ss.job_id, ss.stage, ss.note  note, ss.date from stages ss) nextstage ON (job.id = nextstage.job_id)  WHERE user_id=$1 order by nextstage.date asc
+//     `
+    let query = `SELECT jobs.id, jobs.company_name, jobs.position, stages.stage, stages.date, stages.note FROM "jobs" 
+    JOIN "stages" ON jobs.id = stages.job_id WHERE "user_id" = $1;`
+    pool.query(query,[req.user.id])
+        .then( (result) => {
+            res.send(result.rows);
+        })
+        .catch( (error) => {
+            console.log(`Error on 1234 query ${error}`);
+            res.sendStatus(500);
+        })
+=======
 router.get('/tasks', rejectUnauthenticated,(req,res)=>{
     let query = 
     `SELECT
@@ -70,6 +90,7 @@ router.get('/', rejectUnauthenticated, (req,res) => {
     //         console.log(`Error on query ${error}`);
     //         res.sendStatus(500);
     //     })
+>>>>>>> 5cdafa140b1cf505f7ee60fe45192c56d37b4f83
 }
 )
 
