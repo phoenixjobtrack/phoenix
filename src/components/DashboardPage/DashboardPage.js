@@ -4,11 +4,16 @@ import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Grid';
 import './DashboardPage.css';
-import FaceIcon from '@material-ui/icons/Face';
 import AddIcon from '@material-ui/icons/Add';
 import DashboardTable from '../DashboardTable/DashboardTable';
 
+
+
 class DashboardPage extends Component {
+  componentDidMount(){
+    //temporary.  replace once Viji's query works
+    this.props.dispatch({ type: 'FETCH_JOB_STAGES' })
+  }
   render() {
     //this gives us today's date in mm/dd/yyyy format
     let today = new Date();
@@ -22,11 +27,24 @@ class DashboardPage extends Component {
         <Grid container>
           <Grid item sm>
             <Paper style={{ padding: 40, marginTop: 20 }}>
-              <h2>Today's Task<AddIcon className="dashAddIcon" /></h2>
+              <h2>Today's Task<AddIcon className="dashAddIcon" onClick={() => this.props.history.push('/tasks')}/></h2>
               <div className="todayBox">
               <div className="todayText">
+                  <h4>Today</h4>
                   {this.props.dayTask.map((tasks, i) => {
                     if (tasks.due_date === taskDay) {
+                      return (
+                        <ul>
+                          <li>{tasks.task_name}</li>
+                        </ul>
+                      )
+                    }
+                  })}
+                </div>
+                <div className="overdueText">
+                  <h4>Overdue</h4>
+                  {this.props.dayTask.map((tasks, i) => {
+                    if (tasks.due_date < taskDay) {
                       return (
                         <ul>
                           <li>{tasks.task_name}</li>
@@ -39,9 +57,11 @@ class DashboardPage extends Component {
             </Paper>
           </Grid>
           <Grid item sm>
-            <Paper style={{ padding: 40, marginTop: 20 }}>
-              <FaceIcon className="dashIcon" />
-              <h2>Job Requirements<AddIcon className="dashAddIcon" /></h2>
+            <Paper >
+              <div className="logoBox">
+                <img className="logo" src="/images/logo3.png" alt="phoenix logo" />
+              </div>
+              <h2>Job Requirements<AddIcon className="dashAddIcon" onClick={() => this.props.history.push('/profile')}/></h2>
               <div className="requireBox">
                 <div className="requireText">
                     {this.props.require.map((user, i) => {
@@ -57,8 +77,8 @@ class DashboardPage extends Component {
             </Paper>
           </Grid>
         </Grid>
-        <div className="piplineBox">
-          <h2>Job Pipeline<AddIcon className="dashAddIcon" /></h2>
+        <div className="pipelineBox">
+          <h2>Job Pipeline<AddIcon className="dashAddIcon"  onClick={() => this.props.history.push('/jobOpportunity')}/></h2>
           <DashboardTable />
         </div>
       </div>

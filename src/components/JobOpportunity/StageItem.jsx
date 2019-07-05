@@ -9,22 +9,11 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import InputLabel from '@material-ui/core/InputLabel';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
 
 
 class StageItem extends Component {
-
-    state = {
-        stage: {
-
-            jobId: this.props.reduxState.jobs.length,
-            stage: this.props.stage.stage,
-            note: this.props.stage.note,
-            date: this.props.stage.date
-        },
-    }
 
     handleStageChange = (propertyName) => (event) => {
         console.log('stageInfo', event.target.value, propertyName);
@@ -51,55 +40,55 @@ class StageItem extends Component {
     render(){
         console.log('value', this.props.i)
         return(
-            <div>
+            <div >
                 <Grid container>
-                    <Grid item sm={2}>
+                    <Grid item xs={1}>
                         <IconButton className="oppsSubBut" onClick={this.handleRemove}>
-                            <RemoveIcon/>
-                            {/* <RemoveIcon className="OppsRemoveIcon" noValidate style={{ paddingTop: 15, fontSize: 30 }} onClick={this.handleRemove}/>      */}
+                            <RemoveIcon />
                         </IconButton>
-                        <span style={{ fontSize: 20 }}>
+                        {/* <span>
                             Stage:
-                            </span>
+                        </span> */}
+                        
                     </Grid>
-                    <Grid item sm={3}>
-                        <FormControl >
-                            <InputLabel>Choose Your Stage</InputLabel>
-                            <Select
-                                style={{ width: 235 }}
-                                onChange={this.handleStageChange('stage')}
-                                value={this.props.reduxState.currentStage[this.props.i].stage}
-                                inputProps={{
-                                    name: 'stage',
-                                    id: 'stage-simple',
-                                }}
-                            >
-                                {this.props.reduxState.interviewStages.map((interviewStage) => {
-                                    return (
-                                        <MenuItem value={interviewStage.stage} primaryText={interviewStage.stage}>{interviewStage.stage}</MenuItem>
-                                    )
-                                })}
-                            </Select>
-                        </FormControl>
+                    <Grid item xs={4}>
+                        <InputLabel>Choose Your Stage</InputLabel>
+                        <Select
+                            style={{ minWidth: 230 }}
+                            onChange={this.handleStageChange('stage')}
+                            value={this.props.reduxState.currentStage[this.props.i].stage}
+                            inputProps={{
+                                name: 'stage',
+                                id: 'stage-simple',
+                            }}
+                        >
+                            {this.props.reduxState.interviewStages.map((interviewStage) => {
+                                return (
+                                    <MenuItem value={interviewStage.stage} primaryText={interviewStage.stage}>{interviewStage.stage}</MenuItem>
+                                )
+                            })}
+                        </Select>
                     </Grid>
-                    <Grid item sm={2}>
-                        <form noValidate style={{ paddingTop: 16 }}>
+                    <Grid xs={3}>
+                        <form noValidate >
+                            <InputLabel>Date</InputLabel>
                             <TextField
                                 id="date"
-                                style={{ width: 150 }}
+                                // style={{ width: 150 }}
                                 onChange={this.handleStageChange('date')}
                                 type="date"
                                 value={this.props.reduxState.currentStage[this.props.i].date}
-                            // defaultValue="2017-05-24"
+                                // defaultValue="2017-05-24"
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
                             />
                         </form>
                     </Grid>
-                    <Grid item sm={5}>
+                    <Grid xs={4}>
+                        <InputLabel>Notes</InputLabel>
                         <Input
-                            style={{ width: 300, paddingTop: 16 }}
+                            // style={{ paddingTop: 16 }}
                             onChange={this.handleStageChange('note')}
                             value={this.props.reduxState.currentStage[this.props.i].note}
                             placeholder="Notes"

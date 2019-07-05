@@ -115,7 +115,14 @@ class TasksNotes extends Component {
                                 <ListItem>
                                     <NotesIcon className="notesIcon" />
                                     <ListItemText>
-                                        {this.props.note}
+                                        {this.props.complete ?
+                                            <span className="taskNoteTextComplete">
+                                                {this.props.note}
+                                            </span> :
+                                            <span className="taskNoteTextIncomplete">
+                                                {this.props.note}
+                                            </span>
+                                        }
                                     </ListItemText>
                                     <Tooltip title="Edit Note">
                                         <IconButton
@@ -123,7 +130,7 @@ class TasksNotes extends Component {
                                         >
                                             <EditIcon />
                                         </IconButton>
-                                    </Tooltip>                               
+                                    </Tooltip>
                                     <Tooltip title="Delete">
                                         <IconButton
                                             onClick={() => this.removeAlert(this.props.id)}
@@ -133,7 +140,7 @@ class TasksNotes extends Component {
                                         </IconButton>
                                     </Tooltip>
                                     <Divider />
-                                    
+
                                 </ListItem>
                             </Toolbar>
                         </Paper>

@@ -10,7 +10,14 @@ const router = express.Router();
 // // GET route
 router.get('/', (req, res) => {
     console.log('in GET /api/job_requirements user:', req.user.id)
-    const queryText = `SELECT * FROM "job_requirements" WHERE "user_id"=$1`
+    const queryText = 
+        `
+            SELECT  jr.id, jr.job_id, jr.requirement_id, jr.requirement_offer, jr.requirement_met, r.requirement, r.user_id 
+            FROM "jobs_requirements" jr 
+            JOIN "requirements" r 
+            ON jr.requirement_id = r.id 
+            WHERE r.user_id=$1;
+        `
     pool.query(queryText,[req.user.id])
         .then(result=>{
             console.log('back from GET /api/job_requirements', result.rows)

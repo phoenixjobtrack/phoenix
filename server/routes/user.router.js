@@ -40,7 +40,7 @@ router.put('/:id', (req, res) => {
   const queryText = `UPDATE "users"
   SET "first_name" = $1, 
   "last_name" = $2, 
-  "email" = $3, 
+  "email" = $3 
   WHERE id=$4;`;
 
   const queryValues = [
@@ -51,7 +51,7 @@ router.put('/:id', (req, res) => {
   ];
   pool.query(queryText, queryValues).then(() => { res.sendStatus(200); })
   .catch((err) => {
-    console.log('Error in PUT /api/candle', err);
+    console.log('Error in PUT /api/user/:id', err);
     res.sendStatus(500);
   });
 });

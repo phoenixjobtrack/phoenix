@@ -10,7 +10,7 @@ import TaskList from './TaskList'
 
 import Avatar from '@material-ui/core/Avatar';
 import { red } from '@material-ui/core/colors';
-import { Card, CardContent, CardHeader, Typography, Button, TextField, List, ListItem, Grid, withStyles } from '@material-ui/core'
+import { Card, CardContent, CardHeader, Button, TextField, Grid, withStyles } from '@material-ui/core'
 
 const styles = theme => ({
 

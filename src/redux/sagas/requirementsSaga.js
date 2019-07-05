@@ -1,13 +1,25 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
+// Used for adding additional requirements from the Profile View
+function* addNewRequirement(action) {
+    console.log('in addNewRequirement saga', action.payload);
+    try {
+        yield axios.post(`api/requirements`, action.payload )
+        yield put({ type: 'FETCH_REQUIREMENTS' })
+    } catch (error) {
+        console.log('error in addNewRequirement saga', error);
+    }
+}
+
 // worker Saga: will be fired on "FETCH_USER" actions
 function* addRequirements(action) {
-    console.log('in addRequirements saga', action.payload)
+    // console.log('in addRequirements saga', action.payload)
         
     try {
         yield action.payload.requirements.map(requirement=>{
-            axios.post('api/requirements', {requirements: requirement})
+            console.log('in addRequirements saga', requirement)
+            axios.post('api/requirements', {requirement: requirement})
         })       
         
     } catch (error) {
@@ -28,12 +40,41 @@ function* fetchRequirements(action) {
     }
 }
 
+function* removeRequirement(action) {
+    console.log('in removeRequirement', action.payload);
+    try {
+        yield axios.delete(`api/requirements/${action.payload}`, action.payload)
+        yield put({ type: 'FETCH_REQUIREMENTS'})
+    } catch (error) {
+        console.log('error in removeRequirement', error);
+    }
+}
+
+// BE CAREFUL
+// This is updateRequirement NOT updateRequirementS with an "S"
+function* updateRequirement(action) {
+    console.log('in updateRequiremenT', action.payload)
+    console.log('in updateRequiremenT saga id', action.payload.id)
+    console.log('in updateRequiremenT saga requirement', action.payload.requirement)
+
+    try {
+        yield axios.put(`api/requirements/${action.payload.id}`, action.payload)
+        yield put({type: 'FETCH_REQUIREMENTS' })
+    } catch (error) {
+        console.log('error in updateRequiremenT saga', error);
+    }
+}
+
+// WATCH OUT
+// This is updateRequirementS NOT updateRequirement NO "S"
 function* updateRequirements(action) {
     console.log('in updateRequirements saga', action.payload)
+    console.log('in updateRequirements saga id', action.payload.id)
+    console.log('in updateRequirements saga requirement', action.payload.requirement)
         
     try {
         yield action.payload.requirements.map(requirement=>{
-            axios.put(`api/requirements/update/${action.payload.task_name}/${action.payload.id}`, action.payload)
+            axios.put(`api/requirements/${action.payload.id}`, action.payload)
             put({ type: 'FETCH_REQUIREMENTS' })
         })       
     } catch (error) {
@@ -43,8 +84,11 @@ function* updateRequirements(action) {
 
 function* requirementsSaga() {
     yield takeEvery('ADD_REQUIREMENTS', addRequirements);
+    yield takeEvery('ADD_NEW_REQUIREMENT', addNewRequirement);
     yield takeEvery('FETCH_REQUIREMENTS', fetchRequirements);
-    yield takeEvery('UPDATE_REQUIREMENTS', updateRequirements)
+    yield takeEvery('REMOVE_REQUIREMENT', removeRequirement)
+    yield takeEvery('UPDATE_REQUIREMENTS', updateRequirements);
+    yield takeEvery('UPDATE_REQUIREMENT', updateRequirement);
 }
 
 export default requirementsSaga;
