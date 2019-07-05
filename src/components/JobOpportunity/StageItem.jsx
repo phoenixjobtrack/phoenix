@@ -64,7 +64,7 @@ class StageItem extends Component {
                         >
                             {this.props.reduxState.interviewStages.map((interviewStage) => {
                                 return (
-                                    <MenuItem value={interviewStage.stage} primaryText={interviewStage.stage}>{interviewStage.stage}</MenuItem>
+                                    <MenuItem value={interviewStage.stage}>{interviewStage.stage}</MenuItem>
                                 )
                             })}
                         </Select>

@@ -51,25 +51,35 @@ function* addJob(action) {
         yield axios.post('/api/jobs', action.payload.job)
         //create stages for new job
         yield Object.values(action.payload.stages).map(stage => {
-            console.log('in addJob saga stage:', stage )
-            axios.post('/api/jobs/stages/new', stage)
+            //filter out blank stages
+            if (stage.stage){
+                console.log('in addJob saga stage:', stage)
+                axios.post('/api/jobs/stages/new', stage)
+            }
+            
         })
+        
         //create tasks for new job
         yield Object.values(action.payload.tasks).map(task=>{
-            console.log('in addJob saga task:', task)
-            axios.post('/api/jobs/tasks/new', task)
+            //filter out blank tasks
+            if (task.task_name){
+                console.log('in addJob saga task:', task)
+                axios.post('/api/jobs/tasks/new', task)
+            }  
         })
         //create new requirements assessment for new job
         yield Object.values(action.payload.requirements).map(requirement=>{
             console.log('in addJob saga requirement:', requirement)
-            axios.post('/api/jobs/requirements', requirement)
+            axios.post('/api/job_requirements', requirement)
         })
+        yield put({type: 'CLEAR_CURRENT_JOB'})
         
 
     } catch (error) {
         console.log('error in addJob saga', error);
     }
     yield put({ type: 'FETCH_JOB_STAGES' })
+    yield put({ type: 'CLEAR_CURRENT_JOB' })
 }
 
 function* fetchCurrentJob(action) {
@@ -129,7 +139,7 @@ function* saveJobUpdates(action){
         // send task data
         yield Object.entries(action.payload.tasks).map(task => {
             console.log('in saveJobUpdates saga task:', task)
-            axios.put('/api/jobs/tasks', {task: task, job_id: action.payload.job.job_id})
+            axios.post('/api/jobs/tasks', {task: task, job_id: action.payload.job.job_id})
         })
         // //delete requirements assessments associated with job before adding all from redux
         // yield axios.delete(`api/jobs/requirements/${action.payload.job.job_id}`)

@@ -1,11 +1,4 @@
-const currentRequirementsReducer = (state = {
-    0: {
-        id: 0,
-        requirement_id: '',
-        requirement_offer: '',
-        requirement_met: ''
-    }
-}, action) => {
+const currentRequirementsReducer = (state = {}, action) => {
 
     if (action.type === 'UPDATE_REDUX_REQUIREMENT') {
         console.log('UPDATE_REDUX_REQUIREMENT', action.payload)
@@ -13,6 +6,7 @@ const currentRequirementsReducer = (state = {
             ...state,
             [action.payload.key]: {
                 ...state[action.payload.key],
+                requirement_id: action.payload.requirement_id,
                 [action.payload.prop]: action.payload.value
             }
         }
@@ -46,6 +40,9 @@ const currentRequirementsReducer = (state = {
             }
         })
         return requirementObject
+    }
+    else if (action.type =='CLEAR_CURRENT_JOB'){
+        return {}
     }
     else {
         return state;
