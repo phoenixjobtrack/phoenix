@@ -39,7 +39,6 @@ router.get('/', (req,res) => {
             console.log(`Error on 1234 query ${error}`);
             res.sendStatus(500);
         })
-
 })
 
 router.get('/tasks', rejectUnauthenticated,(req,res)=>{
