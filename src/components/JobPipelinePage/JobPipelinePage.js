@@ -11,7 +11,7 @@ class JobPipelinePage extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_JOBS'})
     //just to get data to jobs reducer
-    this.props.dispatch({type:'FETCH_JOB_STAGES'})
+    //this.props.dispatch({type:'FETCH_JOB_STAGES'})
 }
 
 render(){
@@ -46,6 +46,7 @@ const rows = this.props.reduxState.jobs;
             width: 250,
             label: 'Company',
             dataKey: 'company_name',
+
           },
           {
             width: 250,
@@ -77,7 +78,13 @@ const rows = this.props.reduxState.jobs;
             dataKey: 'stage',
             //numeric: true,
           },
+          {
+            width: 200,
+            label: 'Edit',
+            dataKey: <button> edit </button>,
+          },
         ]}
+
       />
     </Paper>
     </div>

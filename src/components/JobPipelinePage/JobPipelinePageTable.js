@@ -40,6 +40,8 @@ class JobPipelinePageTable extends React.PureComponent {
   getRowClassName = ({ index }) => {
     const { classes, onRowClick } = this.props;
 
+    
+
     return clsx(classes.tableRow, classes.flexContainer, {
       [classes.tableRowHover]: index !== -1 && onRowClick != null,
     });
@@ -65,6 +67,7 @@ class JobPipelinePageTable extends React.PureComponent {
         align={(columnIndex != null && columns[columnIndex].numeric) || false ? 'right' : 'left'}
       >
         {cellData}
+      {/* <button> edit </button> */}
       </TableCell>
     );
   };
@@ -80,7 +83,8 @@ class JobPipelinePageTable extends React.PureComponent {
         style={{ height: headerHeight }}
         align={columns[columnIndex].numeric || false ? 'right' : 'left'}
       >
-        <span>{label}</span>
+      <span>{label}</span>
+      
       </TableCell>
     );
   };
@@ -105,7 +109,9 @@ class JobPipelinePageTable extends React.PureComponent {
                   cellRenderer={this.cellRenderer}
                   dataKey={dataKey}
                   {...other}
+                  
                 />
+                
               );
             })}
           </Table>
@@ -115,13 +121,13 @@ class JobPipelinePageTable extends React.PureComponent {
   }
 }
 
-// MuiVirtualizedTable.propTypes = {
-//   classes: PropTypes.object.isRequired,
-//   columns: PropTypes.arrayOf(PropTypes.object).isRequired,
-//   headerHeight: PropTypes.number,
-//   onRowClick: PropTypes.func,
-//   rowHeight: PropTypes.number,
-// };
+JobPipelinePageTable.propTypes = {
+  classes: PropTypes.object.isRequired,
+  columns: PropTypes.arrayOf(PropTypes.object).isRequired,
+  headerHeight: PropTypes.number,
+  onRowClick: PropTypes.func,
+  rowHeight: PropTypes.number,
+};
 
 const mapStateToProps = reduxState => ({
   reduxState
