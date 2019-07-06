@@ -8,9 +8,12 @@ import Requirements from './Requirements'
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import Input from '@material-ui/core/Input';
-import Link from '@material-ui/icons/Link'
-import { InputLabel, Typography, TextField, Box, withStyles } from '@material-ui/core'
+import LinkIcon from '@material-ui/icons/Link'
+import WorkIcon from '@material-ui/icons/Work'
+import CalendarIcon from '@material-ui/icons/CalendarToday'
+import NotesIcon from '@material-ui/icons/Notes'
+import PersonIcon from '@material-ui/icons/Person'
+import { InputLabel, Typography, TextField, Box, withStyles, Icon, List, ListItem, ListItemIcon } from '@material-ui/core'
 import InputAdornment from '@material-ui/core/InputAdornment';
 import './JobOpportunity.css';
 
@@ -81,48 +84,76 @@ class JobOpportunity extends Component {
                             <Grid container>
                                 <Grid container item xs={6}>
                                     <Grid container item xs={12}>
-                                        <TextField
-                                            style={{ 
-                                                minWidth: 178,
-                                                marginBottom: 10
-                                             }}
-                                            label="Company"
-                                            value={this.props.currentJob.company_name}
-                                            onChange={this.handleJobChange('company_name')}
-                                        />
-                                        <TextField
-                                            style={{
-                                                minWidth: 178,
-                                                marginBottom: 10
-                                            }}
-                                            label="Position"
-                                            value={this.props.currentJob.position}
-                                            onChange={this.handleJobChange('position')}
-                                        />
-                                        <TextField
-                                            style={{
-                                                minWidth: 178,
-                                                marginBottom: 10
-                                            }}
-                                            label="Posting Link"
-                                            value={this.props.currentJob.posting_url}
-                                            onChange={this.handleJobChange('posting_url')}
+                                        <List>
+                                            <ListItem>
+                                                <ListItemIcon>
+                                                    <WorkIcon/>
+                                                </ListItemIcon>
+                                                <TextField
+                                                    style={{
+                                                        minWidth: 178,
+                                                        marginBottom: 10
+                                                    }}
+                                                    label="Company"
+                                                    value={this.props.currentJob.company_name}
+                                                    onChange={this.handleJobChange('company_name')}
+                                                />
+                                            </ListItem>
+                                            <ListItem>
+                                                <ListItemIcon>
+                                                    <PersonIcon />
+                                                </ListItemIcon>
+                                                <TextField
+                                                    style={{
+                                                        minWidth: 178,
+                                                        marginBottom: 10
+                                                    }}
+                                                    label="Position"
+                                                    value={this.props.currentJob.position}
+                                                    onChange={this.handleJobChange('position')}
+                                                />
+                                            </ListItem>
+                                            <ListItem>
+                                                <ListItemIcon>
+                                                    <LinkIcon />
+                                                </ListItemIcon>
+                                                <TextField
+                                                    style={{
+                                                        minWidth: 178,
+                                                        marginBottom: 10
+                                                    }}
+                                                    label="Posting Link"
+                                                    value={this.props.currentJob.posting_url}
+                                                    onChange={this.handleJobChange('posting_url')}
+                                                />
+                                            </ListItem>
+                                        <ListItem>
+                                            <ListItemIcon>
+                                                <CalendarIcon />
+                                            </ListItemIcon>
+                                            <TextField
+                                                style={{
+                                                    minWidth: 178,
+                                                    marginBottom: 10
+                                                }}
+                                                label="Deadline"
+                                                type="date"
 
-                                        />
-                                        <TextField
-                                            style={{
-                                                minWidth: 178,
-                                                marginBottom: 10
-                                            }}
-                                            label="Deadline"
-                                            type="date"
+                                                value={this.props.currentJob.deadline}
+                                                onChange={this.handleJobChange('deadline')}
+                                                InputLabelProps={{
+                                                    shrink: true,
+                                                }}
+                                            />
+                                        </ListItem>
+                                        </List>
+                                       
+                                        
+                                        
                                             
-                                            value={this.props.currentJob.deadline}
-                                            onChange={this.handleJobChange('deadline')}
-                                            InputLabelProps={{
-                                                shrink: true,
-                                            }}
-                                        />
+                                    
+                                        
+                                        
                                     </Grid >
                                 </Grid>
                                 <Grid container item xs={6}>
