@@ -61,7 +61,7 @@ class ProfileRequirements extends Component {
     addRequirement() {
         console.log('in addRequirement');
         swal({
-            text: 'Add new Employment Requirement',
+            text: 'Add New Employment Requirement',
             content: "input",
             button: {
                 text: "add",
