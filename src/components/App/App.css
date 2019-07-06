@@ -1,6 +1,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
+    /* background-color: #939292; */
 }
 
 .alert {
@@ -9,7 +10,10 @@ body {
 }
 
 .app {
+    /* margin-top: 20px; */
     margin-left: 250px;
+    margin-right: 12px;
+    
 }
 
 /* form {

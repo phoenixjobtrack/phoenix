@@ -4,7 +4,11 @@ import registrationSaga from './registrationSaga';
 import requirementsSaga from './requirementsSaga';
 import tasksSaga from './tasksSaga';
 import userSaga from './userSaga';
-import contactSaga from './contactSaga'
+import contactSaga from './contactSaga';
+import jobSaga from './jobSaga';
+import interviewStagesSaga from './interviewStagesSaga';
+import jobRequirementsSaga from './jobRequirementsSaga';
+import jobStagesSaga from './jobStagesSaga'
 
 
 // rootSaga is the primary saga.
@@ -21,6 +25,11 @@ export default function* rootSaga() {
     requirementsSaga(),
     tasksSaga(),
     userSaga(),
-    contactSaga()
+    contactSaga(),
+    jobSaga(),
+    interviewStagesSaga(),
+    jobRequirementsSaga(),
+    jobStagesSaga(),
+
   ]);
 }

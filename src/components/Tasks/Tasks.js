@@ -3,23 +3,25 @@
 
 // ----- REACT ----- //
 import React, { Component } from 'react';
-import { sortableContainer, sortableElement } from 'react-sortable-hoc';
 import { connect } from 'react-redux';
 
+// ----- COMPONENTS ----- //
+import TasksFuture from '../TasksFuture/TasksFuture';
+import TasksHistory from '../TasksHistory/TasksHistory';
+import TasksLineItems from '../TasksLineItems/TasksLineItems';
+import TasksOverdue from '../TasksOverdue/TasksOverdue';
+import TasksTomorrow from '../TasksTomorrow/TasksTomorrow';
 
 // ----- STYLES ----- //
 import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import arrayMove from 'array-move';
+import './Tasks.css';
 
 
 // ----- MATERIAL UI CORE ----- // 
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -29,77 +31,15 @@ import Typography from '@material-ui/core/Typography';
 
 // ----- MATERIAL UI ICONS ----- //
 import AddIcon from '@material-ui/icons/Add';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import ClearIcon from '@material-ui/icons/Clear';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 
 // ----- TASKS SECTIONS ----- //
-const OverdueTasks = overdueTasks => <Paper><Toolbar ><Typography>Overdue Tasks Go Here (Past Today's Date - Not Yet Marked As Complete)</Typography></Toolbar></Paper>
-const TodayTasks = todayTasks => <Paper><Toolbar ><Typography>Today's Tasks Go Here</Typography></Toolbar></Paper>
-const TomorrowTasks = tomorrowTasks => <Paper><Toolbar ><Typography>Tomorrow's Tasks Go Here</Typography></Toolbar></Paper>
-const FutureTasks = tomorrowTasks => <Paper><Toolbar ><Typography>Future Tasks Go Here (Beyond Tomorrow)</Typography></Toolbar></Paper>
-const HistoryTasks = historyTasks => <Paper><Toolbar ><Typography>Task History Goes Here (Past Today's Date - Marked As Complete)</Typography></Toolbar></Paper>
+const OverdueTasks = () => <Paper className="overdueTasks" ><Toolbar ><Typography backgroundColor="#939292" color="#939292">Overdue Tasks</Typography></Toolbar></Paper>
+const TodayTasks = () => <Paper className="todayTasks"><Toolbar ><Typography>Today</Typography></Toolbar></Paper>
+const TomorrowTasks = () => <Paper className="tomorrowTasks"><Toolbar ><Typography>Tomorrow</Typography></Toolbar></Paper>
+const FutureTasks = () => <Paper className="futureTasks"><Toolbar ><Typography>Future Tasks</Typography></Toolbar></Paper>
+const HistoryTasks = () => <Paper className="historyTasks"><Toolbar ><Typography>Task History</Typography></Toolbar></Paper>
 
-// Just to make things look nice until they're cleaned up
-const DatePlaceholder = datePlaceholder => <div>7/8/2019</div>
-
-
-// Click Handlers For List Items
-const handleClickCheckBox = () => {
-    console.log('clickCheckBox');
-} // end handleClickCheckBox
-
-const handleClickMore = () => {
-    console.log('clickMore');
-} // end handleClickMore
-
-const handleClickRemove = () => {
-    console.log('clickRemove');
-} // end handleClickRemove
-
-// ----- LIST REORDER & ANIMATION ----- //
-const SortableItem = sortableElement(({ value }) =>
-    <Paper>
-        <ListItem >
-            <Tooltip title="More">
-                <IconButton
-                    onClick={() => handleClickMore()}
-                    size="small"
-                    >
-                    <MoreVertIcon />
-                </IconButton>
-            </Tooltip>
-            <Tooltip title="Mark Complete">
-                <IconButton
-                    onClick={() => handleClickCheckBox()}
-                    size="small"
-                    >
-                <CheckBoxIcon />
-                </IconButton>
-            </Tooltip>
-            <ListItemText>
-                {value}
-            </ListItemText>
-            <Tooltip title="Date Due">
-                <DatePlaceholder />
-            </Tooltip>
-            <Tooltip title="Delete">
-                <IconButton
-                    onClick={() => handleClickRemove()}
-                    size="small"
-                >
-                    <ClearIcon
-                        onClick={() => handleClickRemove()} 
-                    />
-                </IconButton>
-            </Tooltip>
-        </ ListItem>
-    </Paper>);
-
-const SortableContainer = sortableContainer(({ children }) => {
-    return <List >{children}</ List>;
-});
 
 // ----- MUI THEME ----- //
 const theme = createMuiTheme({
@@ -124,26 +64,31 @@ const useStyles = makeStyles(theme => ({
 
 // ----- CLASS ----- //
 class Tasks extends Component {
+
+    componentDidMount() {
+        this.props.dispatch({ type: 'FETCH_TASKS' })
+        this.props.dispatch({ type: 'FETCH_CONTACTS'})
+        this.props.dispatch({ type: 'FETCH_JOBS'})
+    }
+
     state = {
         task_name: '',
         due_date: null,
         contact_id: null,
         job_id: null,
-        items: [
-            'Corn 01',
-            'Horn 02',
-            'Bjorn 03',
-            'Born 04',
-            'Storn 05',
-            'Florn 06',
-            'Meorn 07',
-        ],
     };
 
     // Click Handlers For Add Task
     handleClickAddTask = (event) => {
-        console.log('clickAddTask');
-        this.props.dispatch({ type: 'ADD_TASK', payload: this.state });
+        if (this.state.task_name == '' || this.state.due_date == null) {
+            console.log('Empty Input Values');
+            alert("Please Fill In a Task & Due Date");
+        }
+        else {
+            console.log('clickAddTask');
+            this.props.dispatch({ type: 'ADD_TASK', payload: this.state });
+        }
+        this.clearInputs();
     } // end handleClickAddTask
 
     handleDateSelect = (event) => {
@@ -154,6 +99,7 @@ class Tasks extends Component {
         })
     }; // end handleDateSelect
 
+    // Change of Add Task Input Text Field
     handleTaskChange = (event) => {
         console.log('taskChange', event.target.value);
         this.setState({
@@ -162,117 +108,98 @@ class Tasks extends Component {
         })
     }; // end handleTaskChange
 
-    // ----- LIST REORDER & ANIMATION ----- //
-    onSortEnd = ({ oldIndex, newIndex }) => {
-        this.setState(({ items }) => ({
-            items: arrayMove(items, oldIndex, newIndex),
-        }));
-    }; // end onSortEnd
+    clearInputs = () => {
+        console.log('clearInputs')
+
+        this.setState({
+            task_name: '',
+            due_date: 'mm/dd/yyyy',
+            contact_id: null,
+            job_id: null,
+        })
+    }
 
     // ----- RENDER ----- //
     render() {
-        const { items } = this.state;
-        console.log('state', this.state);
 
         // ----- RETURN ----- //
         return (
 
             <div>
                 <ThemeProvider theme={theme}>
+                    {/* // ----- Add Task Input Form ----- // */}
                     <span >
-                        <Paper><Toolbar >
-                            <TextField
-                                id="add-new-task"
-                                label="Add New Task"
-                                margin="normal"
-                                onChange={this.handleTaskChange}
-                                placeholder="Send Email To CJ"
-                                position="Relative"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                variant="outlined"
-                            />
-                            <TextField
-                                id="date"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                label="Due Date"
-                                margin="normal"
-                                onChange={this.handleDateSelect}
-                                position="Relative"
-                                type="date"
-                                variant="outlined"
-                            />
-                            <Tooltip title="Add Task">
-                                <IconButton
-                                    label="Submit"
+                        <Paper variant="outlined">
+                            <Toolbar >
+                                <TextField
+                                    value={this.state.task_name}
+                                    id="add-new-task"
+                                    label="Add New Task"
                                     margin="normal"
-                                    onClick={() => this.handleClickAddTask()}
-                                    type="submit"
+                                    onChange={this.handleTaskChange}
+                                    placeholder="Send Email To CJ"
+                                    position="Relative"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
                                     variant="outlined"
-                                ><AddIcon />
-                                </IconButton>
-                            </Tooltip>
+                                />
+                                <TextField
+                                    value={this.state.due_date}
+                                    id="date"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    label="Due Date"
+                                    margin="normal"
+                                    onChange={this.handleDateSelect}
+                                    position="Relative"
+                                    type="date"
+                                    variant="outlined"
+                                />
+                                <Tooltip title="Add Task">
+                                    <IconButton
+                                        label="Submit"
+                                        margin="normal"
+                                        onClick={() => this.handleClickAddTask()}
+                                        size="medium"
+                                        type="submit"
+                                        variant="outlined"
+                                    ><AddIcon />
+                                    </IconButton>
+                                </Tooltip>
 
-                        </Toolbar ></Paper>
+                            </Toolbar >
+                        </Paper>
                     </span>
                     <Divider />
-                    <OverdueTasks />
-                    <SortableContainer onSortEnd={this.onSortEnd}>
 
-                        {items.map((value, index) => (
-                            <SortableItem key={`item-${index}`} index={index} value={value} />
-                        ))}
-
-                    </SortableContainer>
+                    {/* // ----- TASK DISPLAYS ----- // */}
+                    <OverdueTasks className="overdueTasks" />
+                    <TasksOverdue />
                     <Divider />
                     <TodayTasks />
-                    <SortableContainer onSortEnd={this.onSortEnd}>
-
-                        {items.map((value, index) => (
-                            <SortableItem key={`item-${index}`} index={index} value={value} />
-                        ))}
-
-                    </SortableContainer>
+                    <TasksLineItems />
                     <Divider />
                     <TomorrowTasks />
-                    <SortableContainer onSortEnd={this.onSortEnd}>
-
-                        {items.map((value, index) => (
-                            <SortableItem key={`item-${index}`} index={index} value={value} />
-                        ))}
-
-                    </SortableContainer>
+                    <TasksTomorrow />
                     <Divider />
                     <FutureTasks />
-                    <SortableContainer onSortEnd={this.onSortEnd}>
-
-                        {items.map((value, index) => (
-                            <SortableItem key={`item-${index}`} index={index} value={value} />
-                        ))}
-
-                    </SortableContainer>
+                    <TasksFuture />
                     <Divider />
                     <HistoryTasks />
-                    <SortableContainer onSortEnd={this.onSortEnd}>
-
-                        {items.map((value, index) => (
-                            <SortableItem key={`item-${index}`} index={index} value={value} />
-                        ))}
-
-                    </SortableContainer>
+                    <TasksHistory />
                     <Divider />
                 </ThemeProvider>
             </div>
-        );
-    }
-}
+        ); // End Return
+    } // End Render
+} // End Class
 
 
 const mapStateToProps = (reduxState) => {
     return {
+        tasks: reduxState.tasksReducer,
         reduxState
     }
 }

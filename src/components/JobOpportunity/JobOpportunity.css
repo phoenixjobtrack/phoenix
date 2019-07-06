@@ -1,0 +1,57 @@
+
+
+.jobOppForm{
+    width: 90%;
+    margin-left: 3%;
+    margin-top: 20px;
+    height: auto;
+    border: 1px solid rgb(207, 207, 207);
+    
+}
+
+.jobOppsBut{
+    display: flex;
+    align-content: flex-end;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-left: 10px;
+}
+
+.jobOppsTitle{
+    font-size: 20px;
+    text-decoration: underline;
+    font-weight: bold;
+    margin-left: 20px
+}
+
+.oppGrid1{
+    margin-left: 80px;
+    font-size: 16px;
+}
+
+.oppGrid4{
+    margin-left: 60px;
+    font-size: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px
+}
+
+.OppsRemoveIcon{
+    margin-left: 40px;
+}
+
+.oppsSubBut{
+    background-color: transparent; 
+    border: 0; 
+    padding-top: 0;
+    margin-left: 10px;
+    margin-top: 10px
+}
+
+.oppStageView{
+    text-align: center
+}
+
+.oppsCheckboxes{
+    display: flex
+}

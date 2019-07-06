@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react';
 import {connect} from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import './StickyList.css'
 
 //Material-UI stuff
 import ContactCard from './ContactCard'
-
 import { makeStyles } from '@material-ui/core/styles';
+import {Button} from '@material-ui/core'
+import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -17,9 +20,9 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
         maxWidth: 1000,
         backgroundColor: theme.palette.background.paper,
-        // position: 'relative',
         overflow: 'auto',
         maxHeight: 1000,
+        height:'75vh'
     },
     listSection: {
         backgroundColor: 'inherit',
@@ -38,10 +41,6 @@ const useStyles = makeStyles(theme => ({
     sorting: {
         position: 'sticky'
     },
-    
-        
-
-    
 }));
 
 function PinnedSubheaderList(props) {
@@ -68,23 +67,32 @@ function PinnedSubheaderList(props) {
     }
 
     const scrollToLetter = (letter) => {
-        document.getElementById(letter).scrollIntoView(false);
+        document.getElementById(letter).scrollIntoView();
     }
+
+    const addNewContact = () => {
+        console.log('in addNewContact')
+        props.dispatch({ type:'SET_TO_CREATE_MODE'})
+        props.history.push('/contact/add')
+    }
+
     return (
-        <div >
+        <div >            
             <div className={classes.sorting}>
                 <h3>Sort Alphabetically By:
-                <button onClick={() => { setSorting('first') }}>
-                        First Name
-                </button>
-                    <button onClick={() => { setSorting('last') }}>Last Name</button>
-                    <button onClick={() => { setSorting('company') }}>Company</button>
-                </h3>
+                    <Button variant="contained" color="primary" onClick={() => { setSorting('first') }}>
+                            First Name
+                    </Button>
+                    <Button variant="contained" color="primary" onClick={() => { setSorting('last') }}>Last Name</Button>
+                    <Button variant="contained" color="primary" onClick={() => { setSorting('company') }}>Company</Button>
+                    <IconButton variant="contained" color="primary" aria-label="add new contact" onClick={addNewContact} >
+                        <PersonAddIcon/>
+                    </IconButton>
+                </h3>                
                 {alphabet.map(letter => (
                     <a onClick={() => { scrollToLetter(letter) }}>{letter}</a>
                 ))}
             </div>
-            
             <List id="containerDiv" className={classes.root} subheader={<li />}>
                 {alphabet.map(sectionId => (
                     <li key={`section-${sectionId}`} className={classes.listSection}>
@@ -97,15 +105,17 @@ function PinnedSubheaderList(props) {
                             </ListSubheader>
                             {props.reduxState.contacts.map(contact => {
                                 let word
-                                if (key==='first'){
-                                    word = contact.first
+                                if (key==='first'&&contact.first_name){
+                                    word = contact.first_name
                                 }
-                                else if (key==='last'){
-                                    word=contact.last
+                                else if (key==='last'&&contact.last_name){
+                                    word=contact.last_name
                                 }
-                                else {
+                                else if (contact.company){
                                     word=contact.company
                                 }
+                                else
+                                    word='a'
                                 
                                 let firstLetter = word[0]
                                 if (firstLetter.toLowerCase() === sectionId) {
@@ -126,4 +136,4 @@ function PinnedSubheaderList(props) {
 const mapStateToProps = reduxState => ({
     reduxState
 });
-export default connect(mapStateToProps)(PinnedSubheaderList)
+export default withRouter(connect(mapStateToProps)(PinnedSubheaderList))

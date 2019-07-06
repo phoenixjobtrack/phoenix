@@ -78,7 +78,6 @@ function SignIn(props) {
     event.preventDefault();
     if (!email) return;
     if (!password) return;
-
     if (email && password) {
       props.dispatch({
         type: 'LOGIN',
@@ -87,6 +86,7 @@ function SignIn(props) {
           password: password
         }
       })
+      props.history.push('/dashboard')
     } else {
       props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
@@ -115,7 +115,7 @@ function SignIn(props) {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form onSubmit={login} className={classes.form} noValidate>
           <TextField
             autoComplete="email"
             name="email"
@@ -150,9 +150,9 @@ function SignIn(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            type="button"
+            type="submit"
             className="link-button"
-            onClick={login}
+            // onClick={login}
             // onClick={() => { props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
           >
             Sign In
