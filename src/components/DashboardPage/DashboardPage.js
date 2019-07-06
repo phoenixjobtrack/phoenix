@@ -82,7 +82,7 @@ class DashboardPage extends Component {
                     if (tasks.due_date < taskDay) {
                       return (
                         <ul>
-                          <li>{tasks.task_name}</li>
+                          <li className="overdueLabel">{tasks.task_name}</li>
                         </ul>
                       )
                     }

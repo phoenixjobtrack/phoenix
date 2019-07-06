@@ -76,7 +76,7 @@
 
 .overdueLabel{
   animation-name: overdue;
-  animation-duration: 4~s;
+  animation-duration: 6s;
   animation-direction: normal;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
@@ -84,10 +84,11 @@
 
 @keyframes overdue{
   0% {color: rgb(0, 0, 0);}
-  40% {color: rgb(0, 0, 0);}
-  63% {color: rgb(206, 27, 27);}
-  75% {color: rgb(0, 0, 0);}
-  88% {color: rgb(190, 17, 17);}
+  45% {color: rgb(0, 0, 0);}
+  60% {color: rgb(206, 27, 27);}
+  65% {color: rgb(0, 0, 0);}
+  80% {color: rgb(0, 0, 0);}
+  90% {color: rgb(190, 17, 17);}
   100% {color: rgb(0, 0, 0);}
 }
 
