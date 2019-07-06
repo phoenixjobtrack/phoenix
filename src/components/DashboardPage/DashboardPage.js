@@ -57,10 +57,12 @@ class DashboardPage extends Component {
         <Grid container>
           <Grid item sm>
             <Paper style={{ padding: 40, marginTop: 20 }}>
-              <h2>Today's Task<AddIcon className="dashAddIcon" onClick={this.addTask}/></h2>
+              <h2>Today's Task<AddIcon className="dashAddIcon" onClick={() => this.props.history.push('/tasks')}/></h2>
               <div className="todayBox">
+              <div className="todayLabel">
+                <p>{taskDay}</p>
+              </div>
               <div className="todayText">
-                  <h4>Today</h4>
                   {this.props.dayTask.map((tasks, i) => {
                     if (tasks.due_date === taskDay) {
                       return (
@@ -71,8 +73,11 @@ class DashboardPage extends Component {
                     }
                   })}
                 </div>
+                <div className="todayLabel">
+                  <p className="overdueLabel">Overdue</p>
+                </div>
                 <div className="overdueText">
-                  <h4>Overdue</h4>
+                  
                   {this.props.dayTask.map((tasks, i) => {
                     if (tasks.due_date < taskDay) {
                       return (
