@@ -33,6 +33,8 @@ import RemoveIcon from '@material-ui/icons/Remove';
 
 
 class RequirementItem extends Component {
+
+
     handleRequireChange = propertyName => (event) => {
         console.log('requireInfo', event.target.value, this.props.requirement);
         this.props.dispatch({
@@ -45,20 +47,31 @@ class RequirementItem extends Component {
             }
         })
     }
-    
-    componentDidMount(){
+
+
+    componentDidMount() {
         this.props.dispatch({ type: 'FETCH_REQUIREMENTS' })
+
     }
-    render(){
+
+
+    render() {
+        let reqValueOut
         let requirementOfferValue
         let requirementMetValue
+
         //jobs_requirements item only exists after edit so only preload data for existing entries
-        if (this.props.currentRequirements[this.props.i]){
+        if (this.props.currentRequirements[this.props.i]) {
             requirementOfferValue = this.props.currentRequirements[this.props.i].requirement_offer
             requirementMetValue = this.props.currentRequirements[this.props.i].requirement_met
+
+            console.log('Current Requirements Dot Whack Gradlew', requirementMetValue)
+            // reqMetValString = toString(this.props.currentRequirements[this.props.i].requirement_met)
         }
+
+
         console.log('in RequirementItem requirement:', this.props.requirement, this.props.i)
-        return(
+        return (
             <div className="oppGrid4">
                 <Grid container>
                     <Grid item sm={4}>
@@ -76,29 +89,18 @@ class RequirementItem extends Component {
                         />
                     </Grid>
                     <Grid item sm={3}>
-                        <FormControl component="fieldset" >
+                        <FormControl component="fieldset">
                             <FormLabel component="legend">Meets Requirement?</FormLabel>
-                            <RadioGroup >
-                                
-                                <FormControlLabel
-                                    control={
-                                        <Radio 
-                                            onChange={this.handleRequireChange('requirement_met')} 
-                                            value="true" 
-                                        />
-                                    }
-                                    label="True"
-                                />
-                                <FormControlLabel
-                                    control={
-                                        <Radio 
-                                            onChange={this.handleRequireChange('requirement_met')} 
-                                            value="false" 
-                                        />
-                                    }
-                                    label="False"
-                                />
-                            </RadioGroup>
+                            <InputLabel ></InputLabel>
+                            <Select
+                                value={requirementMetValue}
+                                onChange={this.handleRequireChange('requirement_met')}
+                                variant="outlined"
+                            >
+                                <MenuItem value={"" || null}>Select</MenuItem>
+                                <MenuItem value={true}>Yes</MenuItem>
+                                <MenuItem value={false}>No</MenuItem>
+                            </Select>
                         </FormControl>
                     </Grid>
                 </Grid>
@@ -109,8 +111,8 @@ class RequirementItem extends Component {
 
 const mapStateToProps = (reduxState) => ({
     currentJob: reduxState.currentJob,
-    currentRequirements: reduxState.currentRequirements
-
+    currentRequirements: reduxState.currentRequirements,
+    reduxState
 });
 
 export default connect(mapStateToProps)(RequirementItem)
