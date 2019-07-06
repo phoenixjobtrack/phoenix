@@ -114,7 +114,7 @@ class Profile extends Component {
             <div>
                 <h2>Profile</h2>
                 <div className="profileBox">
-                    <FaceIcon className="profileIcon" />
+                    <img className="logo" src="/images/logo3.png" alt="phoenix logo" /> 
                 </div>
                 <ProfileRequirements />
                 <UserInfo />

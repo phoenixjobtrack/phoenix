@@ -16,6 +16,7 @@ import TasksTomorrow from '../TasksTomorrow/TasksTomorrow';
 import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 import './Tasks.css';
 
 
@@ -34,7 +35,7 @@ import AddIcon from '@material-ui/icons/Add';
 
 
 // ----- TASKS SECTIONS ----- //
-const OverdueTasks = () => <Paper className="overdueTasks" ><Toolbar ><Typography backgroundColor="#939292" color="#939292">Overdue Tasks</Typography></Toolbar></Paper>
+const OverdueTasks = () => <Paper className="overdueTasks" ><Toolbar ><Typography >Overdue Tasks</Typography></Toolbar></Paper>
 const TodayTasks = () => <Paper className="todayTasks"><Toolbar ><Typography>Today</Typography></Toolbar></Paper>
 const TomorrowTasks = () => <Paper className="tomorrowTasks"><Toolbar ><Typography>Tomorrow</Typography></Toolbar></Paper>
 const FutureTasks = () => <Paper className="futureTasks"><Toolbar ><Typography>Future Tasks</Typography></Toolbar></Paper>
@@ -129,8 +130,10 @@ class Tasks extends Component {
                 <ThemeProvider theme={theme}>
                     {/* // ----- Add Task Input Form ----- // */}
                     <span >
-                        <Paper variant="outlined">
-                            <Toolbar >
+                        <Paper 
+                            
+                            variant="outlined">
+                            <Toolbar className={this.props.classes.root}>
                                 <TextField
                                     value={this.state.task_name}
                                     id="add-new-task"
@@ -204,4 +207,4 @@ const mapStateToProps = (reduxState) => {
     }
 }
 
-export default connect(mapStateToProps)(Tasks);
+export default withStyles()(connect(mapStateToProps)(Tasks));

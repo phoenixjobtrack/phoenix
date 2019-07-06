@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// ----- DEPENDENCIES ----- //
+import swal from 'sweetalert'
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Grid';
 import './DashboardPage.css';
+import './AddTaskDialog.jsx';
 import AddIcon from '@material-ui/icons/Add';
 import DashboardTable from '../DashboardTable/DashboardTable';
 import IconButton from '@material-ui/core/IconButton';
@@ -16,6 +19,33 @@ class DashboardPage extends Component {
     //temporary.  replace once Viji's query works
     this.props.dispatch({ type: 'FETCH_JOB_STAGES' })
   }
+
+      // Triggers Popup to add new Employment Requirement when + is clicked
+      addRequirement() {
+        console.log('in addRequirement');
+        swal({
+            text: 'Add New Employment Requirement',
+            content: "input",
+            button: {
+                text: "add",
+                closeModal: false,
+            },
+        })
+            .then(requirement => {
+                if (!requirement) throw null;
+                this.props.dispatch({ type: 'ADD_NEW_REQUIREMENT', payload: { requirement: `${requirement}` } })
+            })
+            .then(results => {
+                swal("New Requirement Added", {
+                    icon: "success",
+                });
+            })
+    } // End addRequirement
+
+          // Triggers Popup to add new Employment Requirement when + is clicked
+          addTask() {}
+
+
   render() {
     //this gives us today's date in mm/dd/yyyy format
     let today = new Date();
@@ -31,7 +61,7 @@ class DashboardPage extends Component {
             <Paper style={{ padding: 40, marginTop: 20 }}>
 
               <h2>
-                Today's Task
+                Today's Tasks
                 <IconButton>
                   <AddIcon
                     className="dashAddIcon"
@@ -41,8 +71,11 @@ class DashboardPage extends Component {
                 </IconButton>
               </h2>
               <div className="todayBox">
-                <div className="todayText">
-                  <h4>Today</h4>
+
+              <div className="todayLabel">
+                <p>{taskDay}</p>
+              </div>
+              <div className="todayText">
                   {this.props.dayTask.map((tasks, i) => {
                     if (tasks.due_date === taskDay) {
                       return (
@@ -53,13 +86,16 @@ class DashboardPage extends Component {
                     }
                   })}
                 </div>
+                <div className="todayLabel">
+                  <p className="overdueLabel">Overdue</p>
+                </div>
                 <div className="overdueText">
-                  <h4>Overdue</h4>
+                  
                   {this.props.dayTask.map((tasks, i) => {
                     if (tasks.due_date < taskDay) {
                       return (
                         <ul>
-                          <li>{tasks.task_name}</li>
+                          <li className="overdueLabel">{tasks.task_name}</li>
                         </ul>
                       )
                     }
@@ -78,11 +114,12 @@ class DashboardPage extends Component {
                 <IconButton>
                   <AddIcon
                     className="dashAddIcon"
-                    onClick={() => this.props.history.push('/profile')}
+                    onClick={this.addRequirement}
                     style={{ top: 0, marginRight: 5, width: 20, height: 20 }}
                   />
                 </IconButton>
               </h2></Box>
+
               <div className="requireBox">
                 <div className="requireText">
                   {this.props.require.map((user, i) => {
