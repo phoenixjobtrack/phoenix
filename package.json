@@ -34,6 +34,7 @@
     "redux-saga": "^1.0.2",
     "supertest": "^4.0.2",
     "sweetalert": "^2.1.2",
+    "typeface-roboto": "0.0.54",
     "sweetalert2": "^8.13.1"
   },
   "scripts": {

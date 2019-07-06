@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './JobOpportunity.css';
+// import './JobOpportunity.css';
 
 import TaskItem from './TaskItem'
 

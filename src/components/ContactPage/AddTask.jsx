@@ -81,6 +81,7 @@ class AddTask extends Component {
                 />
                 <TextField
                     id="date"
+                    
                     label="Date (required)"
                     onChange={ this.handleChangeFor('due_date') }
                     type="date"
