@@ -10,8 +10,11 @@ import {connect} from 'react-redux';
 
 // ========== COMPONENTS ========== //
 import AboutPage from '../AboutPage/AboutPage';
+import AddContactPage from '../ContactPage/AddContactPage';
 import ContactBookPage from '../ContactbookPage/ContactBookPage';
 import DashboardPage from '../DashboardPage/DashboardPage';
+import EditContactPage from '../ContactPage/EditContactPage';
+import EditJobOpp from '../JobOpportunity/EditJobOpp';
 import Footer from '../Footer/Footer';
 import InfoPage from '../InfoPage/InfoPage';
 import Profile from '../Profile/Profile';
@@ -20,11 +23,8 @@ import SideMenu from '../SideMenu/SideMenu';
 import Tasks from '../Tasks/Tasks';
 import JobPipelinePage from '../JobPipelinePage/JobPipelinePage';
 import JobOpportunity from '../JobOpportunity/JobOpportunity';
-import UserPage from '../UserPage/UserPage';
 import TopBar from '../TopBar/TopBar';
-import AddContactPage from '../ContactPage/AddContactPage'
-import EditContactPage from '../ContactPage/EditContactPage'
-import EditJobOpp from '../JobOpportunity/EditJobOpp'
+import UserPage from '../UserPage/UserPage';
 
 // ========== STYLE ========== //
 import './App.css';
