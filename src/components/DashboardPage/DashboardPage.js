@@ -31,7 +31,7 @@ class DashboardPage extends Component {
             <Paper style={{ padding: 40, marginTop: 20 }}>
 
               <h2>
-                Today's Task
+                Today's Tasks
                 <IconButton>
                   <AddIcon
                     className="dashAddIcon"
