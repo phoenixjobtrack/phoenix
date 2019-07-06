@@ -8,6 +8,8 @@ import {
 } from 'react-router-dom';
 import {connect} from 'react-redux';
 
+
+
 // ========== COMPONENTS ========== //
 import AboutPage from '../AboutPage/AboutPage';
 import AddContactPage from '../ContactPage/AddContactPage';
@@ -27,6 +29,8 @@ import TopBar from '../TopBar/TopBar';
 import UserPage from '../UserPage/UserPage';
 
 // ========== STYLE ========== //
+import { ThemeProvider } from '@material-ui/styles';
+import { createMuiTheme } from '@material-ui/core/styles'
 import './App.css';
 import Purple from '@material-ui/core/colors/purple';
 import { ThemeProvider } from '@material-ui/styles';
@@ -34,8 +38,10 @@ import { createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
   palette: {
+
     primary: { main: '#2196f3' },
     secondary: { main: '#e53935' },
+
   }
 })
 
@@ -50,8 +56,10 @@ class App extends Component {
   render() {
     return (
 
+
       <Router>
         <div className="app">
+
           <ThemeProvider theme={theme}>
             <TopBar />
             <SideMenu />
@@ -134,12 +142,14 @@ class App extends Component {
             <Footer />
           </ThemeProvider>
 
+
         </div>
       </Router>
 
 
     )
   }
+
 }
 
 export default connect()(App);
