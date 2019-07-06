@@ -36,10 +36,9 @@ import './App.css';
 
 const theme = createMuiTheme({
   palette: {
-
     primary: { main: '#2196f3' },
     secondary: { main: '#e53935' },
-
+    lightBlue: { main: '#e1f5fe'},
   }
 })
 
