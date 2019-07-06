@@ -1,55 +1,17 @@
 import React, { useEffect } from 'react';
 import {connect} from 'react-redux'
 
+import './StickyList.css'
+
+//Material-UI stuff
 import ContactCard from './ContactCard'
 
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
+import PersonAddIcon from '@material-ui/icons/PersonAdd'
 
 
-let contacts = [
-    // {
-    //     first: 'Andrew',
-    //     last: 'Christianson',
-    //     company: 'Target'
-    // },
-    // {
-    //     first: 'Andrew',
-    //     last: 'Christianson',
-    //     company: 'Target'
-    // },
-    // {
-    //     first: 'Andrew',
-    //     last: 'Christianson',
-    //     company: 'Target'
-    // },
-    // {
-    //     first: 'Andrew',
-    //     last: 'Christianson',
-    //     company: 'Target'
-    // },
-    // {
-    //     first: 'Bella',
-    //     last: 'Anderson',
-    //     company: 'Best Buy'  
-    // },
-    // {
-    //     first: 'Christian',
-    //     last: 'Davenport',
-    //     company: '3M'
-    // },
-    // {
-    //     first: 'Daria',
-    //     last: 'Edgerton',
-    //     company: 'Amazon'
-    // },
-    // {
-    //     first: 'Ethan',
-    //     last: 'Brown',
-    //     company: 'Comcast'
-    // }
-]
 const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
@@ -119,7 +81,7 @@ function PinnedSubheaderList(props) {
                     <button onClick={() => { setSorting('company') }}>Company</button>
                 </h3>
                 {alphabet.map(letter => (
-                    <button onClick={() => { scrollToLetter(letter) }}>{letter}</button>
+                    <a onClick={() => { scrollToLetter(letter) }}>{letter}</a>
                 ))}
             </div>
             
