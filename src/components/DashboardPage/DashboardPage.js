@@ -6,11 +6,13 @@ import Paper from '@material-ui/core/Grid';
 import './DashboardPage.css';
 import AddIcon from '@material-ui/icons/Add';
 import DashboardTable from '../DashboardTable/DashboardTable';
+import IconButton from '@material-ui/core/IconButton';
+import Box from '@material-ui/core/Box';
 
 
 
 class DashboardPage extends Component {
-  componentDidMount(){
+  componentDidMount() {
     //temporary.  replace once Viji's query works
     this.props.dispatch({ type: 'FETCH_JOB_STAGES' })
   }
@@ -27,9 +29,19 @@ class DashboardPage extends Component {
         <Grid container>
           <Grid item sm>
             <Paper style={{ padding: 40, marginTop: 20 }}>
-              <h2>Today's Task<AddIcon className="dashAddIcon" onClick={() => this.props.history.push('/tasks')}/></h2>
+
+              <h2>
+                Today's Task
+                <IconButton>
+                  <AddIcon
+                    className="dashAddIcon"
+                    onClick={() => this.props.history.push('/tasks')}
+                    style={{ top: 0, marginRight: 5, width: 20, height: 20 }}
+                  />
+                </IconButton>
+              </h2>
               <div className="todayBox">
-              <div className="todayText">
+                <div className="todayText">
                   <h4>Today</h4>
                   {this.props.dayTask.map((tasks, i) => {
                     if (tasks.due_date === taskDay) {
@@ -61,24 +73,42 @@ class DashboardPage extends Component {
               <div className="logoBox">
                 <img className="logo" src="/images/logo3.png" alt="phoenix logo" />
               </div>
-              <h2>Job Requirements<AddIcon className="dashAddIcon" onClick={() => this.props.history.push('/profile')}/></h2>
+              <Box ><h2>
+                Job Requirements
+                <IconButton>
+                  <AddIcon
+                    className="dashAddIcon"
+                    onClick={() => this.props.history.push('/profile')}
+                    style={{ top: 0, marginRight: 5, width: 20, height: 20 }}
+                  />
+                </IconButton>
+              </h2></Box>
               <div className="requireBox">
                 <div className="requireText">
-                    {this.props.require.map((user, i) => {
-                        return (
-                          <ul className="boxText">
-                            <li>{user.requirement}</li>
-                          </ul>
-                        )
-                      
-                    })}
+                  {this.props.require.map((user, i) => {
+                    return (
+                      <ul className="boxText">
+                        <li>{user.requirement}</li>
+                      </ul>
+                    )
+
+                  })}
                 </div>
               </div>
             </Paper>
           </Grid>
         </Grid>
         <div className="pipelineBox">
-          <h2>Job Pipeline<AddIcon className="dashAddIcon"  onClick={() => this.props.history.push('/jobOpportunity')}/></h2>
+          <h2>
+            Job Pipeline
+            <IconButton>
+              <AddIcon
+                className="dashAddIcon"
+                onClick={() => this.props.history.push('/jobOpportunity')}
+                style={{ top: 0, marginRight: 5, width: 20, height: 20 }}
+              />
+            </IconButton>
+          </h2>
           <DashboardTable />
         </div>
       </div>
