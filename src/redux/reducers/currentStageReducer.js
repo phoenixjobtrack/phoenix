@@ -31,18 +31,12 @@ const currentStageReducer = (state = {0:{
                 ...stageObject,
                 [i]: {
                     stage: job.stage,
-                    note: job.note,
-                    date: job.date
+                    note: job.stage_note,
+                    date: job.stage_date
                 }
             }
         })
         return stageObject
-        // {
-        //     ...state,
-        //     []:{
-
-        //     }
-        // }
     }
     else if (action.type ==='REMOVE_STAGE_FROM_REDUX'){
         console.log('in REMOVE_STAGE_FROM_REDUX', action.payload)
@@ -50,6 +44,15 @@ const currentStageReducer = (state = {0:{
         delete state[key]
 
         return state
+    }
+    else if (action.type === 'CLEAR_CURRENT_JOB'){
+        return {
+            0: {
+                stage: '',
+                note: '',
+                date: ''
+            }
+        }
     }
     else {
         return state;

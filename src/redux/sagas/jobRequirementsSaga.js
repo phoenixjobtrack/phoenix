@@ -11,20 +11,20 @@ function* fetchJobRequirements(action) {
     }
 }
 
-function* addJobRequirements() {
-    try {
-        const jobRequirements = yield axios.post('/api/job_requirements')
-        console.log('addJobRequirements', jobRequirements)
-        yield put({ type: 'FETCH_JOB_REQUIREMENTS', payload: jobRequirements.data })
-    }
-    catch (error) {
-        console.log('in fetchJobRequirements saga', error)
-    }
-}
+// function* addJobRequirements() {
+//     try {
+//         const jobRequirements = yield axios.post('/api/job_requirements')
+//         console.log('addJobRequirements', jobRequirements)
+//         yield put({ type: 'FETCH_JOB_REQUIREMENTS', payload: jobRequirements.data })
+//     }
+//     catch (error) {
+//         console.log('in fetchJobRequirements saga', error)
+//     }
+// }
 
 function* jobRequirementsSaga() {
     yield takeEvery('FETCH_JOB_REQUIREMENTS', fetchJobRequirements)
-    yield takeEvery('ADD_JOB_REQUIREMENTS', addJobRequirements)
+    // yield takeEvery('ADD_JOB_REQUIREMENTS', addJobRequirements)
 }
 
 export default jobRequirementsSaga;

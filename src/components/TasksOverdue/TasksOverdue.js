@@ -30,7 +30,7 @@ class TasksOverdue extends Component {
 
         userTasks = this.props.reduxState.tasks.map(({ id, task_name, due_date, complete, contact_id, job_id, disabled, note }) => {
             
-            if (taskDay > due_date) {
+            if (taskDay > due_date && complete == false) {
                 return (
                     <div>
                         <TasksLineItemsContent

@@ -1,7 +1,3 @@
-// ----- TASKS LINE ITEMS ----- //
-// Individual Line Item for each task and note
-// Child of Tasks
-
 // ----- REACT ----- //
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -16,9 +12,9 @@ import List from '@material-ui/core/List';
 // ----- MATERIAL UI ICONS ----- //
 
 // ----- STYLES ----- //
-import './TasksLineItems.css';
 
-class TasksLineItems extends Component {
+
+class TasksHistory extends Component {
 
     render() {
 
@@ -33,29 +29,29 @@ class TasksLineItems extends Component {
 
 
         userTasks = this.props.reduxState.tasks.map(({ id, task_name, due_date, complete, contact_id, job_id, disabled, note }) => {
-            
-            if (taskDay == due_date) {
+
+            if (complete == true) {
                 return (
                     <div>
-                    <TasksLineItemsContent 
-                        id={id}
-                        task_name={task_name}
-                        due_date={due_date}
-                        complete={complete}
-                        contact_id={contact_id}
-                        job_id={job_id}
-                        disabled={disabled}
-                    />
-                    <TasksNotes 
-                        id={id}
-                        task_name={task_name}
-                        due_date={due_date}
-                        complete={complete}
-                        contact_id={contact_id}
-                        job_id={job_id}
-                        disabled={disabled}
-                        note={note}
-                    />
+                        <TasksLineItemsContent
+                            id={id}
+                            task_name={task_name}
+                            due_date={due_date}
+                            complete={complete}
+                            contact_id={contact_id}
+                            job_id={job_id}
+                            disabled={disabled}
+                        />
+                        <TasksNotes
+                            id={id}
+                            task_name={task_name}
+                            due_date={due_date}
+                            complete={complete}
+                            contact_id={contact_id}
+                            job_id={job_id}
+                            disabled={disabled}
+                            note={note}
+                        />
                     </div>
                 ) // End Return
             }// End If Statement
@@ -63,6 +59,7 @@ class TasksLineItems extends Component {
         return (
             <List>
                 {userTasks}
+
             </List>
         ) // End Return
     } // End Render
@@ -75,4 +72,4 @@ const mapStateToProps = (reduxState) => {
     }
 }
 
-export default connect(mapStateToProps)(TasksLineItems);
+export default connect(mapStateToProps)(TasksHistory);
