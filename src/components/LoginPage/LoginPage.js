@@ -91,7 +91,7 @@ function SignIn(props) {
       component="main" 
       maxWidth="xs" 
     >
-      <Card color="lightBlue">
+      <Card >
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
