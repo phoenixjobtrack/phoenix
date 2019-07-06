@@ -78,55 +78,97 @@ class JobOpportunity extends Component {
                 
                 {/* Employment Information */}
                 <div className="jobOppForm">
-                    
-                        <Typography variant='h5' paragraph="true" align="left">Job Info</Typography>
-                        <div className="oppGrid1">
-                            <Grid container>
-                                <Grid container item xs={6}>
-                                    <Grid container item xs={12}>
-                                        <List>
-                                            <ListItem>
-                                                <ListItemIcon>
-                                                    <WorkIcon/>
-                                                </ListItemIcon>
-                                                <TextField
-                                                    style={{
-                                                        minWidth: 178,
-                                                        marginBottom: 10
-                                                    }}
-                                                    label="Company"
-                                                    value={this.props.currentJob.company_name}
-                                                    onChange={this.handleJobChange('company_name')}
-                                                />
-                                            </ListItem>
-                                            <ListItem>
-                                                <ListItemIcon>
-                                                    <PersonIcon />
-                                                </ListItemIcon>
-                                                <TextField
-                                                    style={{
-                                                        minWidth: 178,
-                                                        marginBottom: 10
-                                                    }}
-                                                    label="Position"
-                                                    value={this.props.currentJob.position}
-                                                    onChange={this.handleJobChange('position')}
-                                                />
-                                            </ListItem>
-                                            <ListItem>
-                                                <ListItemIcon>
-                                                    <LinkIcon />
-                                                </ListItemIcon>
-                                                <TextField
-                                                    style={{
-                                                        minWidth: 178,
-                                                        marginBottom: 10
-                                                    }}
-                                                    label="Posting Link"
-                                                    value={this.props.currentJob.posting_url}
-                                                    onChange={this.handleJobChange('posting_url')}
-                                                />
-                                            </ListItem>
+                    <Typography variant='h5' paragraph="true" align="left">Job Info</Typography>
+                    <div className="oppGrid1">
+                        <Grid container>
+                            <Grid container item xs={6}>
+                                <Grid container item xs={12}>
+                                    <List>
+                                        <ListItem>
+                                            <ListItemIcon>
+                                                <WorkIcon/>
+                                            </ListItemIcon>
+                                            <TextField
+                                                style={{
+                                                    minWidth: 178,
+                                                    marginBottom: 10
+                                                }}
+                                                label="Company"
+                                                value={this.props.currentJob.company_name}
+                                                onChange={this.handleJobChange('company_name')}
+                                            />
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemIcon>
+                                                <PersonIcon />
+                                            </ListItemIcon>
+                                            <TextField
+                                                style={{
+                                                    minWidth: 178,
+                                                    marginBottom: 10
+                                                }}
+                                                label="Position"
+                                                value={this.props.currentJob.position}
+                                                onChange={this.handleJobChange('position')}
+                                            />
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemIcon>
+                                                <LinkIcon />
+                                            </ListItemIcon>
+                                            <TextField
+                                                style={{
+                                                    minWidth: 178,
+                                                    marginBottom: 10
+                                                }}
+                                                label="Posting Link"
+                                                value={this.props.currentJob.posting_url}
+                                                onChange={this.handleJobChange('posting_url')}
+                                            />
+                                        </ListItem>
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <CalendarIcon />
+                                        </ListItemIcon>
+                                        <TextField
+                                            style={{
+                                                minWidth: 178,
+                                                marginBottom: 10
+                                            }}
+                                            label="Deadline"
+                                            type="date"
+
+                                            value={this.props.currentJob.deadline}
+                                            onChange={this.handleJobChange('deadline')}
+                                            InputLabelProps={{
+                                                shrink: true,
+                                            }}
+                                        />
+                                    </ListItem>
+                                    </List>     
+                                </Grid >
+                            </Grid>
+                            <Grid container item xs={6}>
+                                <Grid item xs={12}>
+                                    <List>
+                                        <ListItem>
+                                            <ListItemIcon>
+                                                <CalendarIcon />
+                                            </ListItemIcon>
+                                            <TextField
+                                                style={{
+                                                    marginBottom: 10
+                                                }}
+                                                label="Salary"
+                                                value={this.props.currentJob.compensation}
+                                                onChange={this.handleJobChange('compensation')}
+                                                InputProps={{
+                                                    startAdornment: <InputAdornment position="start">
+                                                        $
+                                            </InputAdornment>,
+                                                }}
+                                            />
+                                        </ListItem>
                                         <ListItem>
                                             <ListItemIcon>
                                                 <CalendarIcon />
@@ -136,78 +178,46 @@ class JobOpportunity extends Component {
                                                     minWidth: 178,
                                                     marginBottom: 10
                                                 }}
-                                                label="Deadline"
-                                                type="date"
-
-                                                value={this.props.currentJob.deadline}
-                                                onChange={this.handleJobChange('deadline')}
-                                                InputLabelProps={{
-                                                    shrink: true,
-                                                }}
+                                                label="Benefits"
+                                                value={this.props.currentJob.benefits}
+                                                onChange={this.handleJobChange('benefits')}
+                                                multiline
                                             />
                                         </ListItem>
-                                        </List>
-                                       
-                                        
-                                        
-                                            
-                                    
-                                        
-                                        
-                                    </Grid >
-                                </Grid>
-                                <Grid container item xs={6}>
-                                    <Grid item xs={12}>
-                                        <TextField
-                                            style={{                                           
-                                                marginBottom: 10
-                                            }}
-                                            label="Salary"
-                                            value={this.props.currentJob.compensation}
-                                            onChange={this.handleJobChange('compensation')}
-                                            InputProps={{
-                                                startAdornment: <InputAdornment position="start">
-                                                    $
-                                            </InputAdornment>,
-                                            }}
-                                        />
-                                        <TextField
-                                            style={{
-                                                minWidth: 178,
-                                                marginBottom: 10
-                                            }}
-                                            label="Benefits"
-                                            value={this.props.currentJob.benefits}
-                                            onChange={this.handleJobChange('benefits')}
-                                            multiline
-                                        />
-                                        <TextField
-                                            style={{
-                                                minWidth: 178,
-                                                marginBottom: 10
-                                            }}
-                                            label="Travel"
-                                            value={this.props.currentJob.travel}
-                                            onChange={this.handleJobChange('travel')}
-                                        />
-                                        <TextField
-                                            style={{
-                                                minWidth: 178,
-                                                marginBottom: 10
-                                            }}
-                                            label="Notes"
-                                            value={this.props.currentJob.job_notes}
-                                            onChange={this.handleJobChange('job_notes')}
-                                            multiline
-                                        />
-
-                                    </Grid>
-
+                                        <ListItem>
+                                            <ListItemIcon>
+                                                <CalendarIcon />
+                                            </ListItemIcon>
+                                            <TextField
+                                                style={{
+                                                    minWidth: 178,
+                                                    marginBottom: 10
+                                                }}
+                                                label="Travel"
+                                                value={this.props.currentJob.travel}
+                                                onChange={this.handleJobChange('travel')}
+                                            />
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemIcon>
+                                                <NotesIcon />
+                                            </ListItemIcon>
+                                            <TextField
+                                                style={{
+                                                    minWidth: 178,
+                                                    marginBottom: 10
+                                                }}
+                                                label="Notes"
+                                                value={this.props.currentJob.job_notes}
+                                                onChange={this.handleJobChange('job_notes')}
+                                                multiline
+                                            />
+                                        </ListItem>
+                                    </List>                              
                                 </Grid>
                             </Grid>
-                        
-                    </div>
-                    
+                        </Grid>                       
+                    </div>                    
                 </div>
                 <Stages />
                 <Tasks />
