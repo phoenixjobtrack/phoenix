@@ -1,4 +1,7 @@
 // ========== REACT ========== //
+// This componenet is not visible on the DOM.  
+// It is hidden by the SideMenu component, which contains its own TopBar
+
 import React from 'react';
 import { connect } from 'react-redux';
 

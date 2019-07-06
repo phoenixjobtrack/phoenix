@@ -12,8 +12,11 @@ import {connect} from 'react-redux';
 
 // ========== COMPONENTS ========== //
 import AboutPage from '../AboutPage/AboutPage';
+import AddContactPage from '../ContactPage/AddContactPage';
 import ContactBookPage from '../ContactbookPage/ContactBookPage';
 import DashboardPage from '../DashboardPage/DashboardPage';
+import EditContactPage from '../ContactPage/EditContactPage';
+import EditJobOpp from '../JobOpportunity/EditJobOpp';
 import Footer from '../Footer/Footer';
 import InfoPage from '../InfoPage/InfoPage';
 import Profile from '../Profile/Profile';
@@ -22,37 +25,41 @@ import SideMenu from '../SideMenu/SideMenu';
 import Tasks from '../Tasks/Tasks';
 import JobPipelinePage from '../JobPipelinePage/JobPipelinePage';
 import JobOpportunity from '../JobOpportunity/JobOpportunity';
-import UserPage from '../UserPage/UserPage';
 import TopBar from '../TopBar/TopBar';
-import AddContactPage from '../ContactPage/AddContactPage'
-import EditContactPage from '../ContactPage/EditContactPage'
-import EditJobOpp from '../JobOpportunity/EditJobOpp'
+import UserPage from '../UserPage/UserPage';
 
 // ========== STYLE ========== //
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles'
 import './App.css';
+import Purple from '@material-ui/core/colors/purple';
+import { ThemeProvider } from '@material-ui/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
   palette: {
-    primary: { main: '#9c27b0' },
-    secondary: { main: '#ffcc80' },
+
+    primary: { main: '#2196f3' },
+    secondary: { main: '#e53935' },
+
   }
 })
 
 class App extends Component {
-  componentDidMount () {
-    this.props.dispatch({type: 'FETCH_USER'})
-    this.props.dispatch({type: 'FETCH_TASKS'})
-    this.props.dispatch({type: 'FETCH_REQUIREMENTS'})
-    
+  componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_USER' })
+    this.props.dispatch({ type: 'FETCH_TASKS' })
+    this.props.dispatch({ type: 'FETCH_REQUIREMENTS' })
+
   }
 
   render() {
     return (
-      
-        <Router>
-          <div className="app">
+
+
+      <Router>
+        <div className="app">
+
           <ThemeProvider theme={theme}>
             <TopBar />
             <SideMenu />
@@ -134,12 +141,15 @@ class App extends Component {
             </Switch>
             <Footer />
           </ThemeProvider>
-            
-          </div>
-        </Router>
-      
-      
-  )}
+
+
+        </div>
+      </Router>
+
+
+    )
+  }
+
 }
 
 export default connect()(App);
