@@ -93,7 +93,9 @@ class UserInfo extends Component {
             profileView =
                 <div className="profileInfo">
                     <Grid container spacing={3}>
-                        <Grid item xs={12}>
+                        <Grid item xs={3}>
+                        </Grid>
+                        <Grid item xs={6}>
                             <Card>
                                 <h2>Personal Info
                                     <Tooltip title="Edit Personal Info">
@@ -110,6 +112,8 @@ class UserInfo extends Component {
                                 <p>E-mail: {this.props.profile.email}</p>
                             </Card>
                         </Grid>
+                        <Grid item xs={3}>
+                        </Grid>
                     </Grid>
                 </div>
         } else {
@@ -117,7 +121,9 @@ class UserInfo extends Component {
                 <form className="profileForm" >
                     <div>
                         <Grid container spacing={3}>
-                            <Grid item xs={12}>
+                        <Grid item xs={3}>
+                        </Grid>
+                            <Grid item xs={6}>
                                 <Card>
                                     {/* <Grid item xs={12}> */}
                                     <div className="profileInfo">
@@ -158,6 +164,8 @@ class UserInfo extends Component {
                                     {/* </Grid> */}
                                 </Card>
                             </Grid>
+                            <Grid item xs={3}>
+                        </Grid>
                         </Grid>
                     </div>
                 </form>

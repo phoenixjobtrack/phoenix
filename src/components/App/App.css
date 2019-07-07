@@ -2,7 +2,9 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
     /* background-color: #939292; */
+    background-image: url('/images/light-blue.jpg');
 }
+
 
 .alert {
     background-color: #ff4545;

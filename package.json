@@ -13,6 +13,8 @@
     "dotenv": "^4.0.0",
     "express": "^4.16.4",
     "formik": "^1.5.7",
+    "jquery": "^3.4.1",
+    "material-table": "^1.40.1",
     "material-ui-popup-state": "^1.4.0",
     "moment": "^2.24.0",
     "passport": "^0.4.0",
@@ -32,7 +34,9 @@
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.2",
     "supertest": "^4.0.2",
-    "sweetalert": "^2.1.2"
+    "sweetalert": "^2.1.2",
+    "typeface-roboto": "0.0.54",
+    "sweetalert2": "^8.13.1"
   },
   "scripts": {
     "start": "node server/server.js",

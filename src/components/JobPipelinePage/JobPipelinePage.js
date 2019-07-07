@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
-class JobPipelinePage extends Component {
+class JobPipelinePage_1 extends Component {
 
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_JOBS'})
@@ -34,7 +34,7 @@ const rows = this.props.reduxState.jobs;
               </ButtonGroup>
             </Grid>
             <Grid item sm>
-            <Button onClick={() => {this.props.history.push('/jobOpportunity');}} variant="contained" color="primary">NEW OPPORTUNITY</Button>
+            <Button style={{ width: '90%' }} onClick={() => {this.props.history.push('/jobOpportunity');}} variant="contained" color="primary">NEW OPPORTUNITY</Button>
             </Grid>
           </Grid>
     <Paper style={{ height: 335, width: '100%' }}>
@@ -57,31 +57,31 @@ const rows = this.props.reduxState.jobs;
           {
             width: 300,
             label: 'Stage',
-            dataKey: 'stage',
+            dataKey: 'currentStage',
             //numeric: true,
           },
           {
             width: 250,
             label: 'Next Activity Date',
-            dataKey: 'date',
+            dataKey: 'nextStageDate',
             numeric: true,
           },
           {
             width: 600,
             label: 'Notes',
-            dataKey: 'note',
+            dataKey: 'nextStageNote',
             //numeric: true,
           },
           {
             width: 600,
             label: 'NextStage',
-            dataKey: 'stage',
+            dataKey: 'nextstage',
             //numeric: true,
           },
           {
             width: 200,
             label: 'Edit',
-            dataKey: <button> edit </button>,
+            dataKey: 'link',
           },
         ]}
 
@@ -95,4 +95,4 @@ const rows = this.props.reduxState.jobs;
 const mapStateToProps = reduxState => ({
   reduxState
 });
-export default connect(mapStateToProps)(JobPipelinePage);
+export default connect(mapStateToProps)(JobPipelinePage_1);

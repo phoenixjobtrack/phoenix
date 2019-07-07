@@ -32,7 +32,7 @@ class TaskNoteContact extends Component {
                         <div className="taskNoteContact"> 
                             <Tooltip title="Contact">
                                 <Chip
-                                    color="primary"
+                                    color="secondary"
                                     avatar={
                                         <Avatar>
                                             <FaceIcon />

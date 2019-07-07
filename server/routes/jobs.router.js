@@ -5,6 +5,62 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 
 //-----GET for job pipeline table-------//
+router.get('/', rejectUnauthenticated, async (req, res) => {
+    console.log('this is for job', req.user.id);
+
+    getResults(req.user.id).then(results => {
+        // process results here
+        console.log(results);
+        res.send(results);
+    }).catch(err => {
+        // process error here
+        console.log(err);
+        res.sendStatus(500);
+    });
+    // console.log('finalresult: ',finalresult);
+
+})
+
+async function getResults(id0) {
+    const client = await pool.connect();
+    let results = [];
+    let table_1_data = await client.query(`SELECT job.id ,job.company_name, job.position FROM jobs job where user_id=` + id0);
+    for (let table_1_row of table_1_data.rows) {
+        let repObj = {
+            job_id: table_1_row.id,
+            company_name: table_1_row.company_name,
+            position: table_1_row.position,
+            currentStageId: '',
+            currentStageDate: '',
+            currentStageNote: '',
+            currentStage: '',
+            nextStageId: '',
+            nextStageDate: '',
+            nextStageNote: '',
+            nextstage: ''
+        };
+
+        let table_2_data = await client.query(`select currentstage.id, currentstage.stage, currentstage.date,currentstage.note from stages currentstage where job_id = ` + table_1_row.id + ` and currentstage.date <= now() order by currentstage.date desc limit 1`);
+        for (let table_2_row of table_2_data.rows) {
+            repObj.currentStageId = table_2_row.id;
+            repObj.currentStageDate = table_2_row.date;
+            repObj.currentStageNote = table_2_row.note;
+            repObj.currentStage = table_2_row.stage;
+
+        }
+        let table_3_data = await client.query(`select currentstage.id, currentstage.stage, currentstage.date,currentstage.note from stages currentstage where job_id = ` + table_1_row.id + ` and currentstage.date >= now() order by currentstage.date asc limit 1`);
+        for (let table_3_row of table_3_data.rows) {
+            repObj.nextStageId = table_3_row.id;
+            repObj.nextStageDate = table_3_row.date;
+            repObj.nextStageNote = table_3_row.note;
+            repObj.nextstage = table_3_row.stage;
+
+        }
+        results.push(repObj);
+    }
+    return results;
+}
+
 router.get('/stages', rejectUnauthenticated, (req,res)=>{
     let query = `SELECT j.id as job_id, j.user_id as job_user_id, j.position, j.company_name, j.notes as job_notes, j.posting_url, j.deadline, j.compensation, j.benefits, j.travel,
         s.id as stage_id, s.stage, s.note as stage_note, s.date as stage_date
@@ -21,25 +77,25 @@ router.get('/stages', rejectUnauthenticated, (req,res)=>{
         }) 
 })
 
-router.get('/', (req,res) => {
+// router.get('/', (req,res) => {
    
-    console.log('this is for job', req.user.id);
+//     console.log('this is for job', req.user.id);
 //     let query = `
 //     SELECT job.company_name, job.position, currentstage.id, currentstage.job_id, currentstage.stage  stage, nextstage.stage  nextstage, nextstage.date, nextstage.note FROM jobs job 
 // LEFT JOIN stages currentstage ON (job.id = currentstage.job_id)
 // LEFT JOIN (select ss.id, ss.job_id, ss.stage, ss.note  note, ss.date from stages ss) nextstage ON (job.id = nextstage.job_id)  WHERE user_id=$1 order by nextstage.date asc
 //     `
-    let query = `SELECT jobs.id, jobs.company_name, jobs.position, stages.stage, stages.date, stages.note FROM "jobs" 
-    JOIN "stages" ON jobs.id = stages.job_id WHERE "user_id" = $1;`
-    pool.query(query,[req.user.id])
-        .then( (result) => {
-            res.send(result.rows);
-        })
-        .catch( (error) => {
-            console.log(`Error on 1234 query ${error}`);
-            res.sendStatus(500);
-        })
-})
+//     let query = `SELECT jobs.id, jobs.company_name, jobs.position, stages.stage, stages.date, stages.note FROM "jobs" 
+//     JOIN "stages" ON jobs.id = stages.job_id WHERE "user_id" = $1;`
+//     pool.query(query,[req.user.id])
+//         .then( (result) => {
+//             res.send(result.rows);
+//         })
+//         .catch( (error) => {
+//             console.log(`Error on 1234 query ${error}`);
+//             res.sendStatus(500);
+//         })
+// })
 
 router.get('/tasks', rejectUnauthenticated,(req,res)=>{
     let query = 
@@ -60,20 +116,20 @@ router.get('/tasks', rejectUnauthenticated,(req,res)=>{
         })
 })
 
-router.get('/', rejectUnauthenticated, (req,res) => {
-    let query = `SELECT j.id as job_id, j.user_id as job_user_id, j.position, j.company_name, j.notes as job_notes, j.posting_url, j.deadline, j.compensation, j.benefits, j.travel,
-        s.id as stage_id, s.stage, s.note as stage_note, s.date as stage_date
-    FROM "jobs" j FULL OUTER JOIN "stages" s ON j.id = s.job_id
-    WHERE j.user_id = $1;`
-    pool.query(query, [req.user.id])
-        .then((result) => {
-            // console.log('in GET /api/jobs/stages', result.rows, req.user.id)
-            res.send(result.rows);
-        })
-        .catch((error) => {
-            console.log(`Error on query ${error}`);
-            res.sendStatus(500);
-        }) 
+// router.get('/', rejectUnauthenticated, (req,res) => {
+//     let query = `SELECT j.id as job_id, j.user_id as job_user_id, j.position, j.company_name, j.notes as job_notes, j.posting_url, j.deadline, j.compensation, j.benefits, j.travel,
+//         s.id as stage_id, s.stage, s.note as stage_note, s.date as stage_date
+//     FROM "jobs" j FULL OUTER JOIN "stages" s ON j.id = s.job_id
+//     WHERE j.user_id = $1;`
+//     pool.query(query, [req.user.id])
+//         .then((result) => {
+//             // console.log('in GET /api/jobs/stages', result.rows, req.user.id)
+//             res.send(result.rows);
+//         })
+//         .catch((error) => {
+//             console.log(`Error on query ${error}`);
+//             res.sendStatus(500);
+//         }) 
     // console.log('this is for job', req.user.id);
     // res.sendStatus(200)
     // let query = `
@@ -102,8 +158,8 @@ router.get('/', rejectUnauthenticated, (req,res) => {
     //         console.log(`Error on query ${error}`);
     //         res.sendStatus(500);
     //     })
-}
-)
+// }
+// )
 
 router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('in POST /api/jobs', req.user.id, req.body)
@@ -190,7 +246,7 @@ router.post('/stages/new', rejectUnauthenticated, (req,res)=>{
     console.log('/api/jobs/stages/new')
     // req.body is an array, numbered key followed up actual stage object, so look at req.body.stage[1]
     let query = `INSERT INTO "stages" (job_id, stage, note, date) VALUES ((SELECT MAX(id) FROM jobs),$1,$2,$3);`
-    pool.query(query, [req.body.stage, req.body.note, '2019-07-30'])
+    pool.query(query, [req.body.stage, req.body.note, req.body.date])
     .then(response=>{
         console.log('in POST /api/jobs/stages/new', response)
         res.sendStatus(201)
@@ -206,7 +262,7 @@ router.post('/tasks/new', rejectUnauthenticated, (req, res) => {
     // req.body is an array, numbered key followed up actual stage object, so look at req.body.stage[1]
     
     let query = `INSERT INTO "tasks" (user_id, task_name, due_date, job_id, note) VALUES ($1, $2, $3, (SELECT MAX(id) FROM jobs),$4);`
-    pool.query(query, [req.user.id, req.body.task_name, '2019-07-07', req.body.note])
+    pool.query(query, [req.user.id, req.body.task_name, req.body.due_date, req.body.note])
         .then(response => {
             console.log('in POST /api/jobs/tasks/new', response)
             res.sendStatus(201)
