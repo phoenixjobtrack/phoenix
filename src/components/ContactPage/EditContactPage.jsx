@@ -30,8 +30,8 @@ const styles = theme => ({
         margin: theme.spacing.unit,
     },
     card: {
-        marginTop: '50px'
-        // height: '85vh'
+        marginTop: '50px',
+        minHeight: '85vh'
     },
     avatar: {
         backgroundColor: red[500],
