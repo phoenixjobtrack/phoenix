@@ -15,7 +15,7 @@ class AddTask extends Component {
         newTask: {
             task_name: '',
             due_date: '',
-            // due_time: '',
+            note: '',
             contact_id: ''
         }
     }
@@ -60,6 +60,16 @@ class AddTask extends Component {
         event.preventDefault();
         console.log('in handleSubmit')
         this.props.dispatch({ type:'ADD_TASK',payload:this.state.newTask})
+        this.setState({
+            ...this.state,
+            newTask: {
+                task_name: '',
+                due_date: '',
+                note: '',
+                contact_id: ''
+            }
+
+        })
     }
 
 
@@ -75,6 +85,7 @@ class AddTask extends Component {
             <form onSubmit={this.handleSubmit}>
                 <Typography>Add Task</Typography>
                 <TextField
+                    value={this.state.newTask.task_name}
                     id="task"
                     label="task"
                     onChange={this.handleChangeFor('task_name')}
@@ -85,21 +96,19 @@ class AddTask extends Component {
                     label="Date (required)"
                     onChange={ this.handleChangeFor('due_date') }
                     type="date"
-                    defaultValue={this.state.today}
+                    value={this.state.newTask.due_date}
+                    // defaultValue={this.state.today}
                     InputLabelProps={{
                         shrink: true,
                     }}
 
                 />
-                {/* <TextField
-                    id="time"
-                    label="Time (optional)"
-                    type="time"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    onChange={ this.handleChangeFor('due_time') }
-                /> */}
+                <TextField
+                    value={this.state.newTask.note}
+                    id="notes"
+                    label="Note"
+                    onChange={this.handleChangeFor('note')}
+                    />
                 <IconButton
                     type="submit"
                     color="secondary"

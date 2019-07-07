@@ -65,7 +65,7 @@ class ContactPage extends Component {
     handleSubmit = () => {
         console.log('in handleSubmit')
         this.props.dispatch({type: 'UPDATE_CONTACT', payload: this.props.reduxState.currentContact})
-
+        this.props.history.push('/contact')
     }
 
 
@@ -152,10 +152,17 @@ class ContactPage extends Component {
                                         inputComponent: TextMaskCustom,
                                         value: currentContact.phone,
                                         onChange: this.handleChangeFor('phone'),
+                                        
+                                    }}
+                                    InputLabelProps={{
+                                        shrink: true
                                     }}
                                 />
                                 <TextField
                                     label="Cell"
+                                    InputLabelProps={{
+                                        shrink: true
+                                    }}
                                     InputProps={{
                                         inputComponent: TextMaskCustom,
                                         value: currentContact.cell,

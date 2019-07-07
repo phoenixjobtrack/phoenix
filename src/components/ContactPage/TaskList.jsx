@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom'
+import moment from 'moment'
 
 //Material UI
 import { Typography, List, ListItem } from '@material-ui/core'
@@ -26,10 +27,10 @@ class TaskList extends Component {
                 dueDate = new Date(task.due_date)
                 console.log('dates', today, dueDate)
                 if (dueDate>=today){
-                    upcomingTasks.push(<ListItem key={i}>{task.task_name} Due:{task.due_date}</ListItem>)
+                    upcomingTasks.push(<ListItem key={i}>{task.task_name} Due:  {moment(task.due_date).format('MM-DD-YYYY')}</ListItem>)
                 }
                 else {
-                    completedTasks.push(<ListItem key={i}>{task.task_name} Due:{task.due_date}</ListItem>)
+                    completedTasks.push(<ListItem key={i}>{task.task_name} Due:  {moment(task.due_date).format('MM-DD-YYYY')}</ListItem>)
                 }
             }
         })
