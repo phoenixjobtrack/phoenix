@@ -11,6 +11,7 @@ import AddIcon from '@material-ui/icons/Add';
 import DashboardTable from '../DashboardTable/DashboardTable';
 import IconButton from '@material-ui/core/IconButton';
 import Box from '@material-ui/core/Box';
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 
@@ -62,6 +63,7 @@ class DashboardPage extends Component {
 
               <h2 className="boxLabel">
                 Today's Tasks
+                <Tooltip title="add task">
                 <IconButton>
                   <AddIcon
                     className="dashAddIcon"
@@ -69,6 +71,7 @@ class DashboardPage extends Component {
                     style={{ top: 0, marginRight: 5, width: 20, height: 20 }}
                   />
                 </IconButton>
+                </Tooltip>
               </h2>
               <div className="todayBox">
 
@@ -110,7 +113,8 @@ class DashboardPage extends Component {
                 <img className="logo" src="/images/logo3.png" alt="phoenix logo" />
               </div>
               <Box><h2 className="boxLabel">
-                Job Requirements
+                Important Job Attributes
+                <Tooltip title="add attribute">
                 <IconButton>
                   <AddIcon
                     className="dashAddIcon"
@@ -118,6 +122,7 @@ class DashboardPage extends Component {
                     style={{ top: 0, marginRight: 5, width: 20, height: 20 }}
                   />
                 </IconButton>
+                </Tooltip>
               </h2></Box>
 
               <div className="requireBox">
@@ -142,6 +147,7 @@ class DashboardPage extends Component {
         <div className="pipelineBox">
           <h2 className="boxLabel">
             Job Pipeline
+            <Tooltip title="add new opportunity">
             <IconButton>
               <AddIcon
                 className="dashAddIcon"
@@ -149,6 +155,7 @@ class DashboardPage extends Component {
                 style={{ top: 0, marginRight: 5, width: 20, height: 20 }}
               />
             </IconButton>
+            </Tooltip>
           </h2>
           <DashboardTable />
         </div>
