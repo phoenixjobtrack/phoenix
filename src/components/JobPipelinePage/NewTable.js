@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment'
+import {withRouter} from 'react-router-dom'
 
 import {Button, IconButton, Tooltip} from '@material-ui/core'
 import OpenInNewIcon from '@material-ui/icons/OpenInNew'
@@ -10,6 +11,15 @@ import DeleteIcon from '@material-ui/icons/DeleteOutline'
 import './NewTable.css';
 
 class NewTable extends Component {
+    openJob = (id) => {
+        console.log('in openJob', id)
+        this.props.history.push(`/jobOpportunity/${id}`)
+    }
+
+    handleDelete = (id) => {
+        console.log('in handleDelete', id);
+        
+    }
 
     render() {
         return (
@@ -38,16 +48,16 @@ class NewTable extends Component {
                                         <td>{job.nextstage}</td>
                                         <td>
                                             <Tooltip title="View more and edit">
-                                                <IconButton variant="contained" color="primary">
-                                                    <OpenInNewIcon aria-label="view more and edit"/>
+                                                <IconButton color="primary" onClick={() => { this.openJob(job.job_id) }}>
+                                                    <OpenInNewIcon aria-label="view more and edit" />
                                                 </IconButton>
                                             </Tooltip>
                                             
                                         </td>
                                         <td>
                                             <Tooltip title="Remove job">
-                                                <IconButton >
-                                                    <DeleteIcon color="secondary" />
+                                                <IconButton onClick={() => { this.handleDelete(job.job_id) }}>
+                                                    <DeleteIcon color="secondary"/>
                                                 </IconButton>
                                             </Tooltip>
                                         </td> 
@@ -77,4 +87,4 @@ const mapStateToProps = (reduxState) => {
 };
 
 // this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(NewTable);
+export default withRouter(connect(mapStateToProps)(NewTable));
