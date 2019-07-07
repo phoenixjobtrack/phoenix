@@ -115,7 +115,9 @@ class ContactPage extends Component {
                 <CardContent>
                     <Grid container>
                         <Grid item xs={6}>
+                            
                             <form onSubmit={this.handleSubmit}>
+                                
                                 <TextField
                                     label="First Name"
                                     value={currentContact.first_name}
