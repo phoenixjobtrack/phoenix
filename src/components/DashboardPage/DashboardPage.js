@@ -114,7 +114,7 @@ class DashboardPage extends Component {
                 <IconButton>
                   <AddIcon
                     className="dashAddIcon"
-                    onClick={this.addRequirement}
+                    onClick={() => this.props.history.push('/profile')}
                     style={{ top: 0, marginRight: 5, width: 20, height: 20 }}
                   />
                 </IconButton>
