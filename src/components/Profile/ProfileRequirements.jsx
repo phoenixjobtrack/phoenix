@@ -131,9 +131,9 @@ class ProfileRequirements extends Component {
             requirementsView =
                 <div className="profileRequirementDisplay">
                     <Grid container spacing={3}>
-                        <Grid item xs={3}>
+                        <Grid item xs={2}>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={8}>
                             <Card>
                                 <h2>
                                     Employment Requirements
@@ -147,6 +147,7 @@ class ProfileRequirements extends Component {
                                         </IconButton>
                                     </Tooltip>
                                 </h2>
+                                <div className="profileRequireBox">
                                 {
                                     this.props.require.map((user, i) => {
                                         return (
@@ -154,9 +155,10 @@ class ProfileRequirements extends Component {
                                         )
                                     })
                                 }
+                                </div>
                             </Card>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={2}>
                         </Grid>
                     </Grid>
                 </div>
@@ -164,9 +166,9 @@ class ProfileRequirements extends Component {
             requirementsView =
                 <div >
                     <Grid container spacing={3}>
-                        <Grid item xs={3}>
+                        <Grid item xs={2}>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={8}>
                         <Card>
                             <div className="profileRequirementDisplay">
 
@@ -183,7 +185,9 @@ class ProfileRequirements extends Component {
                                             <CheckIcon />
                                         </IconButton>
                                     </Tooltip>
+                                   
                                 </h2>
+            
                                 {this.props.require.map((userReq, i) => {
                                     return (
                                         <div>
@@ -195,7 +199,7 @@ class ProfileRequirements extends Component {
                                         </div>
                                     )
                                 })}
-
+                            
                                 {/* {Object.entries(this.state.requireList).map((requirement, index) => {
                                 return (
                                     <p>
@@ -223,7 +227,7 @@ class ProfileRequirements extends Component {
                             </div>
                         </Card>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={2}>
                     </Grid>
                     </Grid>
                 </div >
