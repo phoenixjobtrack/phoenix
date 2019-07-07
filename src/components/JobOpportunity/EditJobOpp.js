@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom'
 import moment from 'moment'
 
+
 import Stages from './Stages'
 import Tasks from './Tasks'
 import Requirements from './Requirements'
@@ -38,6 +39,7 @@ class EditJobOpp extends Component {
                 tasks: this.props.tasks,
                 requirements: this.props.requirements
             }})
+        this.props.history.push('/jobpipeline')
     }
 
     componentDidMount = () =>{
