@@ -46,8 +46,7 @@ class StageItem extends Component {
                             <RemoveIcon
                                 color="secondary" />
                         </IconButton> 
-                    </Tooltip>
-                    
+                    </Tooltip>         
                 </ListItemIcon>  
                 <List>
                     <ListItem>
@@ -75,7 +74,7 @@ class StageItem extends Component {
                     <ListItem>
                         <InputLabel>Date</InputLabel>
                     </ListItem>
-                    <ListItem style={{ width: 150 }}>
+                    <ListItem style={{ width: 175 }}>
                         <TextField
                             style={{ width: '100%' }}
                             id="date"

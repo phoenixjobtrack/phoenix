@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import StageItem from './StageItem'
 
-import { List, Typography, withStyles} from '@material-ui/core'
+import { List, ListItem, ListItemIcon, Typography, withStyles} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -49,27 +49,30 @@ class Stages extends Component {
         console.log('stages state', this.props.reduxState.currentStage, Object.entries(this.props.reduxState.currentStage))
         return(
             <div className="jobOppForm">
-                <Typography variant='h5' paragraph="true" align="left">Stages of the Hiring Process</Typography>
-                {/* <p className="jobOppsTitle">Stages of the Hiring Process</p> */}
-                
+                <List>
+                <Typography variant='h5' paragraph="true" align="left">Stages of the Hiring Process</Typography>                             
                 {Object.entries(this.props.reduxState.currentStage).map((stage) => {
                     console.log('stage from Redux', stage, stage[0])
                     return (
-                        <List>
+                        
                             <StageItem stage={stage} i={stage[0]} handleForceUpdate={this.handleForceUpdate}/>
-                        </List>   
+                           
                     )
                 })}
-                <Tooltip className="addTip" title="Add Stage">
-                    <IconButton color="primary" aria-label="Add Stage" onClick={(event) => this.addStageInput(event)}>
-                        <AddIcon color="primary" />
-                    </IconButton>
-                </Tooltip>
-                
-                <div className="oppStageView">
-                    {/* <p>Current Stage:</p>
-                    <p>Next Stage:</p> */}
-                </div>
+                    <ListItem>
+                        <ListItemIcon>
+                            <Tooltip className="addTip" title="Add Stage">
+                                <IconButton color="primary" aria-label="Add Stage" onClick={(event) => this.addStageInput(event)}>
+                                    <AddIcon color="primary" />
+                                </IconButton>
+                            </Tooltip>
+                        </ListItemIcon>
+                    </ListItem>
+                {/* <div className="oppStageView">
+                    <p>Current Stage:</p>
+                    <p>Next Stage:</p>
+                </div> */}
+                </List>
             </div>
         )
     }
