@@ -95,7 +95,7 @@ class RequirementItem extends Component {
                     </List>
                     <List>
                         <ListItem>
-                            <InputLabel>Meets Requirement?</InputLabel>
+                            <InputLabel>Meets Requirements?</InputLabel>
                         </ListItem>
                         <ListItem>
                             <Select
