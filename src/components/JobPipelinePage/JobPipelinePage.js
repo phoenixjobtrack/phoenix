@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import NewTable from './NewTable';
+
 
 class JobPipelinePage_1 extends Component {
 
@@ -37,7 +39,7 @@ const rows = this.props.reduxState.jobs;
             <Button style={{ width: '90%' }} onClick={() => {this.props.history.push('/jobOpportunity');}} variant="contained" color="primary">NEW OPPORTUNITY</Button>
             </Grid>
           </Grid>
-    <Paper style={{ height: 335, width: '100%' }}>
+    {/* <Paper style={{ height: 335, width: '100%' }}>
       <JobPipelinePageTable
         rowCount={rows.length}
         rowGetter={({ index }) => rows[index]}
@@ -86,8 +88,10 @@ const rows = this.props.reduxState.jobs;
         ]}
 
       />
-    </Paper>
+    </Paper> */}
+    <NewTable />
     </div>
+    
   );
 }
 }

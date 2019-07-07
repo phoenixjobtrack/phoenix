@@ -1,0 +1,18 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+    /* width:700px; */
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 10px;
+
+  }
+  
+  tr:nth-child(even){background-color: #dce4e4}
+  
+  th {
+    background-color: rgb(90, 149, 226);
+    color: rgb(5, 5, 5);
+  }

@@ -53,7 +53,7 @@ class JobOpportunity extends Component {
     }
 
     handleCloseJob = () => {
-        this.props.dispatch({ type: 'CLOSE_JOB', payload: this.props.job.id })
+        this.props.dispatch({ type: 'CLOSE_JOB', payload: this.props.job.job_id })
     }
 
     componentDidMount = () => {
@@ -259,14 +259,11 @@ class JobOpportunity extends Component {
 }
 
 const mapStateToProps = (state) => ({
-
-    require: state.requirements,
-    job: state.jobs,
     currentJob: state.currentJob,
     stages: state.currentStage,
     tasks: state.currentTasks,
-    requirements: state.currentRequirements
-
+    requirements: state.currentRequirements,
+    job: state.jobs
 });
 
 export default withRouter(withStyles(styles)(connect(mapStateToProps)(JobOpportunity)));
