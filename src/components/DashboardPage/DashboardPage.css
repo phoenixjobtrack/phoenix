@@ -26,7 +26,7 @@
 
 /* Today's Task Scrollbar Styling */
 .todayText::-webkit-scrollbar {
-  width: 15px;
+  width: 18px;
 }
 
 .todayText::-webkit-scrollbar-thumb
@@ -35,9 +35,9 @@
 	background-image: -webkit-gradient(linear,
 									   left bottom,
 									   left top,
-									   color-stop(0.44, rgb(208, 239, 248)),
-									   color-stop(0.62, rgb(96, 138, 189)),
-									   color-stop(0.86, rgb(170, 227, 243)));
+									   color-stop(0.24, rgb(223, 245, 252)),
+									   color-stop(0.47, rgb(76, 117, 167)),
+									   color-stop(0.76, rgb(170, 227, 243)));
 }
 
 .todayText::-webkit-scrollbar-track {
@@ -49,13 +49,13 @@
 .overdueText{
   margin-left: 20px;
   margin-right: 20px;
-  height: 80px;
+  height: 85px;
   overflow-y: auto;
 }
 
 /* Today's Task Scrollbar Styling */
 .overdueText::-webkit-scrollbar {
-  width: 15px;
+  width: 18px;
 }
 
 .overdueText::-webkit-scrollbar-thumb
@@ -64,9 +64,9 @@
 	background-image: -webkit-gradient(linear,
 									   left bottom,
 									   left top,
-									   color-stop(0.44, rgb(208, 239, 248)),
-									   color-stop(0.62, rgb(96, 138, 189)),
-									   color-stop(0.86, rgb(170, 227, 243)));
+									   color-stop(0.24, rgb(223, 245, 252)),
+                     color-stop(0.47, rgb(76, 117, 167)),
+									   color-stop(0.76, rgb(170, 227, 243)));
 }
 
 .overdueText::-webkit-scrollbar-track {
@@ -76,7 +76,7 @@
 
 .overdueLabel{
   animation-name: overdue;
-  animation-duration: 6s;
+  animation-duration: 3s;
   animation-direction: normal;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
@@ -84,11 +84,9 @@
 
 @keyframes overdue{
   0% {color: rgb(0, 0, 0);}
-  45% {color: rgb(0, 0, 0);}
-  60% {color: rgb(206, 27, 27);}
-  65% {color: rgb(0, 0, 0);}
+  40% {color: rgb(0, 0, 0);}
+  50% {color: rgb(158, 27, 27);}
   80% {color: rgb(0, 0, 0);}
-  90% {color: rgb(190, 17, 17);}
   100% {color: rgb(0, 0, 0);}
 }
 
@@ -112,7 +110,7 @@
 
 /* Requirement Scrollbar Styling */
 .requireText::-webkit-scrollbar {
-  width: 15px;
+  width: 18px;
 }
 
 .requireText::-webkit-scrollbar-thumb
@@ -121,7 +119,7 @@
 	background-image: -webkit-gradient(linear,
 									   left bottom,
 									   left top,
-									   color-stop(0.24, rgb(200, 248, 228)),
+									   color-stop(0.24, rgb(221, 252, 239)),
 									   color-stop(0.47, rgb(21, 129, 57)),
 									   color-stop(0.76, rgb(173, 223, 202)));
 }
@@ -130,6 +128,14 @@
   box-shadow: inset 0 0 5px rgb(176, 230, 207); 
   border-radius: 10px;
 }
+
+ul{
+  list-style: none;
+     }
+
+ul li:before {
+  content: "\2023 \0020";
+     }
 
 .logoBox{
   display: block;

@@ -123,6 +123,7 @@ class DashboardPage extends Component {
 
 const mapStateToProps = (reduxState) => {
   return {
+    user: reduxState.user,
     dayTask: reduxState.tasks,
     require: reduxState.requirements
   }
