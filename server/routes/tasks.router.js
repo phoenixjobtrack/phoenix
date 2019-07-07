@@ -67,8 +67,10 @@ router.put('/note/:note/:id', (req, res) => {
 }); // End router.put/api/tasks/note
 
 router.put('/update/:task_name/:id/:due_date', (req, res) => {
+    console.log('in PUT /api/tasks/update', req.body);
+    
     const queryText = `UPDATE "tasks" SET "task_name" = $1, "due_date" = $2 WHERE "id" = $3;`;
-    pool.query(queryText, [req.params.task_name, req.params.due_date, req.params.id])
+    pool.query(queryText, [req.body.task_name, req.body.date, req.params.id])
         .then(response => {
             console.log('in PUT /api/tasks/update', response)
             res.sendStatus(200)
