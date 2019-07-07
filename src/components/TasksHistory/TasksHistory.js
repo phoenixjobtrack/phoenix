@@ -32,7 +32,7 @@ class TasksHistory extends Component {
 
             if (complete == true) {
                 return (
-                    <div style={{marginLeft: 20, paddingBottom: 1}}>
+                    <div style={{marginLeft: 20, paddingBottom: 3}}>
                         <TasksLineItemsContent
                             id={id}
                             task_name={task_name}

@@ -15,7 +15,7 @@ class Requirements extends Component {
                 
                     <Typography variant='h5' paragraph="true" align="left">Wish List</Typography>                             
                 <List>
-                    <Button variant="contained" color="primary">Update Personal Requirements</Button>
+                    <Button variant="contained" color="primary" >Update Personal Requirements</Button>
                     {this.props.require.map((requirement, i) => {
                         return (
                             <RequirementItem requirement={requirement} i={i} />

@@ -141,7 +141,7 @@ class Tasks extends Component {
                                     label="Add New Task"
                                     margin="normal"
                                     onChange={this.handleTaskChange}
-                                    placeholder="Describe Your Task"
+                                    placeholder="Describe This Task"
                                     position="Relative"
                                     InputLabelProps={{
                                         shrink: true,
