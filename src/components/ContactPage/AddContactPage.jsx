@@ -32,7 +32,13 @@ const styles = theme => ({
         margin: theme.spacing.unit,
     },
     card: {
-        height: '85vh'
+        marginTop: '50px',
+        height: '80vh'
+    },
+    saveBtn: {
+        position: 'absolute',
+        top: 150,
+        right: 50
     }
 });
 
@@ -119,6 +125,7 @@ class ContactPage extends Component {
                                 minWidth: '70vw'
                             }}>
                             <form onSubmit={this.handleSubmit}>
+                                <Button className={this.props.classes.saveBtn} variant="contained" color="primary" type="submit">Save</Button>
                                 <List>
                                     <ListItem>
                                         <ListItemIcon>
