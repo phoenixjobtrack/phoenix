@@ -17,7 +17,7 @@ import PhoneIcon from '@material-ui/icons/Phone'
 import CellIcon from '@material-ui/icons/PhoneAndroid'
 import NotesIcon from '@material-ui/icons/Notes'
 import PersonIcon from '@material-ui/icons/Person'
-import {Card, CardContent, Typography, Button, TextField, List, ListItem, Grid, withStyles} from '@material-ui/core'
+import {List, ListItem, ListItemIcon, Card, CardContent, Typography, Button, TextField, Grid, withStyles} from '@material-ui/core'
 
 
 const styles = theme => ({
@@ -102,29 +102,48 @@ class ContactPage extends Component {
 
                 <CardContent>
                     <Grid container>
-                        <Typography>
-                            <PersonAddIcon/>
-                            Add New Contact
+                        <Typography variant='h5'>
+                            <List>
+                                <ListItem>
+                                    <ListItemIcon>
+                                        <PersonAddIcon color="primary"/>
+                                    </ListItemIcon>
+                                    Add New Contact
+                                </ListItem>
+                            </List>
+                            
+                            
                         </Typography>                        
                         <form onSubmit={this.handleSubmit}>
-                        
-                            <Grid container item xs={8} direction="row" justify="flex-start">
-                                <Grid item xs={1} justify="center" alignContent="center">
-                                    <PersonIcon />
-                                </Grid>
-                                <Grid item xs={5}>
+                            <List>
+                                <ListItem>
+                                    <ListItemIcon>
+                                        <PersonIcon color="primary"/>
+                                    </ListItemIcon>
                                     <TextField
                                         label="First Name"
                                         onChange={this.handleChangeFor('first_name')}
                                         className={this.props.classes.inputs}
                                     />
-                                </Grid>
-                                <Grid item xs={6}>
                                     <TextField
                                         label="Last Name"
                                         onChange={this.handleChangeFor('last_name')}
                                         className={this.props.classes.inputs}
                                     />
+                                </ListItem>
+                                <ListItem>
+                                    <ListItemIcon>
+                                        <PersonIcon color="primary" />
+                                    </ListItemIcon>
+                                    
+                                </ListItem>
+                                
+                            </List>
+                            <Grid container item xs={8} direction="row" justify="flex-start">
+                                
+                                
+                                <Grid item xs={6}>
+                                    
                                 </Grid>
                                 <Grid item xs={1} justify="center" alignContent="center">
                                     <WorkIcon />

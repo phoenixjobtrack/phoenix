@@ -27,8 +27,8 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
     console.log('in POST /api/tasks', req.user.id, req.body)
-    const queryText = `INSERT INTO "tasks" (user_id, task_name, due_date, contact_id, job_id) VALUES ($1, $2, $3, $4, $5);`;
-    pool.query(queryText, [req.user.id, req.body.task_name, req.body.due_date, req.body.contact_id, req.body.job_id])
+    const queryText = `INSERT INTO "tasks" (user_id, task_name, due_date, note, contact_id, job_id) VALUES ($1, $2, $3, $4, $5, $6);`;
+    pool.query(queryText, [req.user.id, req.body.task_name, req.body.due_date, req.body.note, req.body.contact_id, req.body.job_id])
         .then(response => {
             console.log('in POST /api/tasks', response)
             res.sendStatus(201)
@@ -67,8 +67,10 @@ router.put('/note/:note/:id', (req, res) => {
 }); // End router.put/api/tasks/note
 
 router.put('/update/:task_name/:id/:due_date', (req, res) => {
+    console.log('in PUT /api/tasks/update', req.body);
+    
     const queryText = `UPDATE "tasks" SET "task_name" = $1, "due_date" = $2 WHERE "id" = $3;`;
-    pool.query(queryText, [req.params.task_name, req.params.due_date, req.params.id])
+    pool.query(queryText, [req.body.task_name, req.body.date, req.params.id])
         .then(response => {
             console.log('in PUT /api/tasks/update', response)
             res.sendStatus(200)

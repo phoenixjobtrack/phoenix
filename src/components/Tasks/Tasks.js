@@ -136,6 +136,7 @@ class Tasks extends Component {
                             variant="outlined">
                             <Toolbar className={this.props.classes.root}>
                                 <TextField
+                                    style={{ minWidth: 400 }}
                                     value={this.state.task_name}
                                     id="add-new-task"
                                     label="Add New Task"
