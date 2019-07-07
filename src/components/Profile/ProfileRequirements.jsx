@@ -40,28 +40,7 @@ class ProfileRequirements extends Component {
 
     requirementCounter = 0
 
-    // updateStateRequirelist () {
-    //     console.log('Update state.requireList 1', this.props.reduxState)
-
-    //         // let outputRequire = 
-    //         this.props.require.map(requirementOut => {
-    //             return (
-    //                 console.log('requirementOut', requirementOut.requirement)
-
-    //                 // console.log('requirementOut', requirementOut.requirement)
-    //             )
-    //         })
-    //         this.setState({
-    //             ...this.state,
-    //             requireList: {
-    //                 requirement: outputRequire
-    //             }
-    //         })
-    //         console.log('requireList updated. this.state:', this.state)
-
-
-    // }
-
+    
     addRequirementInput(event) {
         console.log('this.requirementCounter', this.requirementCounter);
         console.log('this.state.requireList', this.state.requireList);
@@ -82,7 +61,7 @@ class ProfileRequirements extends Component {
     addRequirement() {
         console.log('in addRequirement');
         swal({
-            text: 'Add new Employment Requirement',
+            text: 'Add New Employment Requirement',
             content: "input",
             button: {
                 text: "add",
