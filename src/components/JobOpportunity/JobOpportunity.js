@@ -193,17 +193,10 @@ class JobOpportunity extends Component {
 }
 
 const mapStateToProps = (state) => ({
-<<<<<<< HEAD
-    require: state.requirements,
-    jobEditMode: state.jobEditMode,
-    job: state.jobs
-
-=======
     currentJob: state.currentJob,
     stages: state.currentStage,
     tasks: state.currentTasks,
     requirements: state.currentRequirements
->>>>>>> 5cdafa140b1cf505f7ee60fe45192c56d37b4f83
 });
 
 export default withRouter(connect(mapStateToProps)(JobOpportunity));

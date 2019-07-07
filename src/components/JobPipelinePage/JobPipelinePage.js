@@ -57,25 +57,25 @@ const rows = this.props.reduxState.jobs;
           {
             width: 300,
             label: 'Stage',
-            dataKey: 'stage',
+            dataKey: 'currentStage',
             //numeric: true,
           },
           {
             width: 250,
             label: 'Next Activity Date',
-            dataKey: 'date',
+            dataKey: 'nextStageDate',
             numeric: true,
           },
           {
             width: 600,
             label: 'Notes',
-            dataKey: 'note',
+            dataKey: 'nextStageNote',
             //numeric: true,
           },
           {
             width: 600,
             label: 'NextStage',
-            dataKey: 'stage',
+            dataKey: 'nextstage',
             //numeric: true,
           },
           {
