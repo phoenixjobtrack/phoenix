@@ -33,7 +33,7 @@ class DashboardPage extends Component {
     })
       .then(requirement => {
         if (!requirement) throw null;
-        this.props.dispatch({ type: 'ADD_NEW_REQUIREMENT', payload: { requirement: `${requirement}` } })
+        this.props.dispatch({ type: 'ADD_REQUIREMENTS', payload: { requirement: `${requirement}` } })
       })
       .then(results => {
         swal("New Requirement Added", {
@@ -60,7 +60,7 @@ class DashboardPage extends Component {
           <Grid item sm>
             <Paper style={{ padding: 40, marginTop: 20 }}>
 
-              <h2>
+              <h2 className="boxLabel">
                 Today's Tasks
                 <IconButton>
                   <AddIcon
@@ -109,7 +109,7 @@ class DashboardPage extends Component {
               <div className="logoBox">
                 <img className="logo" src="/images/logo3.png" alt="phoenix logo" />
               </div>
-              <Box ><h2>
+              <Box><h2 className="boxLabel">
                 Job Requirements
                 <IconButton>
                   <AddIcon
@@ -140,7 +140,7 @@ class DashboardPage extends Component {
           </Grid>
         </Grid>
         <div className="pipelineBox">
-          <h2>
+          <h2 className="boxLabel">
             Job Pipeline
             <IconButton>
               <AddIcon
