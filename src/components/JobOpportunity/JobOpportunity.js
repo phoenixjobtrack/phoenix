@@ -10,9 +10,12 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import LinkIcon from '@material-ui/icons/Link'
 import WorkIcon from '@material-ui/icons/Work'
-import CalendarIcon from '@material-ui/icons/CalendarToday'
+import CalendarIcon from '@material-ui/icons/DateRange'
+import FlightIcon from '@material-ui/icons/Flight'
 import NotesIcon from '@material-ui/icons/Notes'
 import PersonIcon from '@material-ui/icons/Person'
+import MoneyIcon from '@material-ui/icons/AttachMoney'
+import StarIcon from '@material-ui/icons/StarBorder'
 import { InputLabel, Typography, TextField, Box, withStyles, Icon, List, ListItem, ListItemIcon } from '@material-ui/core'
 import InputAdornment from '@material-ui/core/InputAdornment';
 import './JobOpportunity.css';
@@ -70,6 +73,7 @@ class JobOpportunity extends Component {
         console.log('current job', this.props.currentJob)
         return (
             <div>
+
                 <h1>Job Opportunity</h1>
                 <div>
                     <Grid container spacing={3}>
@@ -84,6 +88,7 @@ class JobOpportunity extends Component {
                         <Grid item sm={1}>
                         </Grid>
                     </Grid>
+
                 </div>
 
                 {/* Employment Information */}
@@ -96,7 +101,9 @@ class JobOpportunity extends Component {
                                     <List>
                                         <ListItem>
                                             <ListItemIcon>
-                                                <WorkIcon />
+
+                                                <WorkIcon color="primary" />
+
                                             </ListItemIcon>
                                             <TextField
                                                 style={{
@@ -110,7 +117,7 @@ class JobOpportunity extends Component {
                                         </ListItem>
                                         <ListItem>
                                             <ListItemIcon>
-                                                <PersonIcon />
+                                                <PersonIcon color="primary" />
                                             </ListItemIcon>
                                             <TextField
                                                 style={{
@@ -124,7 +131,7 @@ class JobOpportunity extends Component {
                                         </ListItem>
                                         <ListItem>
                                             <ListItemIcon>
-                                                <LinkIcon />
+                                                <LinkIcon color="primary" />
                                             </ListItemIcon>
                                             <TextField
                                                 style={{
@@ -138,7 +145,9 @@ class JobOpportunity extends Component {
                                         </ListItem>
                                         <ListItem>
                                             <ListItemIcon>
-                                                <CalendarIcon />
+
+                                                <CalendarIcon color="primary" />
+
                                             </ListItemIcon>
                                             <TextField
                                                 style={{
@@ -163,7 +172,7 @@ class JobOpportunity extends Component {
                                     <List>
                                         <ListItem>
                                             <ListItemIcon>
-                                                <CalendarIcon />
+                                                <MoneyIcon color="primary" />
                                             </ListItemIcon>
                                             <TextField
                                                 style={{
@@ -181,7 +190,7 @@ class JobOpportunity extends Component {
                                         </ListItem>
                                         <ListItem>
                                             <ListItemIcon>
-                                                <CalendarIcon />
+                                                <StarIcon color="primary" />
                                             </ListItemIcon>
                                             <TextField
                                                 style={{
@@ -196,7 +205,7 @@ class JobOpportunity extends Component {
                                         </ListItem>
                                         <ListItem>
                                             <ListItemIcon>
-                                                <CalendarIcon />
+                                                <FlightIcon color="primary" />
                                             </ListItemIcon>
                                             <TextField
                                                 style={{
@@ -210,7 +219,7 @@ class JobOpportunity extends Component {
                                         </ListItem>
                                         <ListItem>
                                             <ListItemIcon>
-                                                <NotesIcon />
+                                                <NotesIcon color="primary" />
                                             </ListItemIcon>
                                             <TextField
                                                 style={{
@@ -232,6 +241,7 @@ class JobOpportunity extends Component {
                 <Stages />
                 <Tasks />
                 <Requirements />
+
                 <Grid container spacing={3}>
                         <Grid item sm={4}>
                         </Grid>
@@ -242,6 +252,7 @@ class JobOpportunity extends Component {
                         </Grid>
                     </Grid>
                 
+
             </div>
         )
     }

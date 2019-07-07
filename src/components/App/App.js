@@ -32,15 +32,13 @@ import UserPage from '../UserPage/UserPage';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles'
 import './App.css';
-import Purple from '@material-ui/core/colors/purple';
 
 
 const theme = createMuiTheme({
   palette: {
-
     primary: { main: '#2196f3' },
     secondary: { main: '#e53935' },
-
+    lightBlue: { main: '#e1f5fe'},
   }
 })
 

@@ -1,0 +1,22 @@
+.registerTextField {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px;
+}
+
+.registerContainer {
+    margin: 25px;
+    padding: 10px;
+}
+
+#avatar {
+    margin-bottom: 20px;
+}
+
+#formContent {
+    padding: 10px;
+}
+
+#jobRequirementForm {
+    padding: 10px;
+}
