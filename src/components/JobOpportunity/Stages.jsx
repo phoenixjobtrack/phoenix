@@ -50,15 +50,13 @@ class Stages extends Component {
         return(
             <div className="jobOppForm">
                 <List>
-                <Typography variant='h5' paragraph="true" align="left">Stages of the Hiring Process</Typography>                             
-                {Object.entries(this.props.reduxState.currentStage).map((stage) => {
-                    console.log('stage from Redux', stage, stage[0])
-                    return (
-                        
-                            <StageItem stage={stage} i={stage[0]} handleForceUpdate={this.handleForceUpdate}/>
-                           
-                    )
-                })}
+                    <Typography variant='h5' paragraph="true" align="left">Stages of the Hiring Process</Typography>                             
+                    {Object.entries(this.props.reduxState.currentStage).map((stage) => {
+                        console.log('stage from Redux', stage, stage[0])
+                        return (
+                                <StageItem stage={stage} i={stage[0]} handleForceUpdate={this.handleForceUpdate}/>    
+                        )
+                    })}
                     <ListItem>
                         <ListItemIcon>
                             <Tooltip className="addTip" title="Add Stage">
