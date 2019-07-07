@@ -47,6 +47,15 @@ const currentTasksReducer = (state = {
         delete state[key]
         return state
     }
+    else if (action.type === 'CLEAR_CURRENT_JOB') {
+        return {
+            0: {
+                task_name: '',
+                due_date: '',
+                note: ''
+            }
+        }
+    }
     else {
         return state;
     }

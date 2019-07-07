@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import {connect} from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
+import './StickyList.css'
+
 //Material-UI stuff
 import ContactCard from './ContactCard'
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,8 +11,8 @@ import {Button} from '@material-ui/core'
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
-
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -88,7 +90,7 @@ function PinnedSubheaderList(props) {
                     </IconButton>
                 </h3>                
                 {alphabet.map(letter => (
-                    <button onClick={() => { scrollToLetter(letter) }}>{letter}</button>
+                    <a onClick={() => { scrollToLetter(letter) }}>{letter}</a>
                 ))}
             </div>
             <List id="containerDiv" className={classes.root} subheader={<li />}>
