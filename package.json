@@ -14,6 +14,7 @@
     "express": "^4.16.4",
     "formik": "^1.5.7",
     "jquery": "^3.4.1",
+    "material-table": "^1.40.1",
     "material-ui-popup-state": "^1.4.0",
     "moment": "^2.24.0",
     "passport": "^0.4.0",

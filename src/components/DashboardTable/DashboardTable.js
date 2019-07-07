@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 class DashboardTable extends Component {
 
   componentDidMount() {
-    // this.props.dispatch({ type: 'FETCH_JOBS'})
+     this.props.dispatch({ type: 'FETCH_JOBS'})
 }
 
 render(){
@@ -33,19 +33,19 @@ const rows = this.props.reduxState.jobs;
           {
             width: 300,
             label: 'Stage',
-            dataKey: 'stage',
+            dataKey: 'currentStage',
             //numeric: true,
           },
           {
             width: 250,
             label: 'Next Activity Date',
-            dataKey: 'date',
+            dataKey: 'nextStageDate',
             numeric: true,
           },
           {
             width: 600,
             label: 'Notes',
-            dataKey: 'note',
+            dataKey: 'nextStageNote',
             //numeric: true,
           },
         ]}
