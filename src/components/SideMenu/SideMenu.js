@@ -16,6 +16,7 @@ import Typography from '@material-ui/core/Typography';
 // ========== STYLE ========== //
 import { makeStyles } from '@material-ui/core/styles';
 import Purple from '@material-ui/core/colors/purple';
+import PhoenixLogo from '../logo3icon.png';
 import './SideMenu.css';
 
 // ========== MUI ICONS ========== //
@@ -65,9 +66,10 @@ function SideMenu(props) {
             <CssBaseline />
             <AppBar position="fixed" className={classes.appBar} backgroundColor={Purple}>
                 <Toolbar>
-                    <Typography variant="h6" noWrap>
-                        Phoenix
+                    <Typography variant="h6" noWrap className="pageTitle">
+                        Phoenix 
                     </Typography>
+                    <img src={PhoenixLogo} className="App-logo" alt="logo" width="50" />
                 </Toolbar>
             </AppBar>
             <Drawer
