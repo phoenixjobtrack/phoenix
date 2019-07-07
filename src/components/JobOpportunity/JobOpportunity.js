@@ -196,7 +196,8 @@ const mapStateToProps = (state) => ({
     currentJob: state.currentJob,
     stages: state.currentStage,
     tasks: state.currentTasks,
-    requirements: state.currentRequirements
+    requirements: state.currentRequirements,
+    job: state.jobs
 });
 
 export default withRouter(connect(mapStateToProps)(JobOpportunity));

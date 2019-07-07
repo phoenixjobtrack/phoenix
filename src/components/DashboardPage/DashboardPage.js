@@ -12,7 +12,7 @@ import DashboardTable from '../DashboardTable/DashboardTable';
 class DashboardPage extends Component {
   componentDidMount(){
     //temporary.  replace once Viji's query works
-    this.props.dispatch({ type: 'FETCH_JOB_STAGES' })
+    this.props.dispatch({ type: 'FETCH_JOBS' })
   }
   render() {
     //this gives us today's date in mm/dd/yyyy format

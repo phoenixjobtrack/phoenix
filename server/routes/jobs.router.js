@@ -21,14 +21,9 @@ router.get('/stages', rejectUnauthenticated, (req,res)=>{
         }) 
 })
 
-router.get('/', async (req,res) => {
+router.get('/', rejectUnauthenticated, async (req,res) => {
     console.log('this is for job', req.user.id);
     
-    // aa(req.user.id).then (finalresult=>{
-    //     console.log(finalresult);
-    //     res.send(finalresult);
-    // });
-    // let finalresult=[];
     getResults(req.user.id).then(results => {
         // process results here
         console.log(results);
@@ -36,6 +31,7 @@ router.get('/', async (req,res) => {
     }).catch(err => {
         // process error here
         console.log(err);
+        res.sendStatus(500);
     });
        // console.log('finalresult: ',finalresult);
         
@@ -44,9 +40,7 @@ router.get('/', async (req,res) => {
 async function getResults(id0) {
     const client = await pool.connect();
     let results = [];
-    
     let table_1_data = await client.query(`SELECT job.id ,job.company_name, job.position FROM jobs job where user_id=`+id0);
-    //let table_2_data = await client.query(`select currentstage.id, currentstage.stage, currentstage.date,currentstage.note  stage from stages currentstage where job_id = `+table_1_data.rows[0].id+` and currentstage.date <= now() limit 1`);
     for (let table_1_row of table_1_data.rows) {
         let repObj ={
             job_id:table_1_row.id,
