@@ -104,7 +104,7 @@
 /* Requirement Scrollbar */
 .requireText{
   margin: 20px;
-  height: 120px;
+  height: 90px;
   overflow-y: auto;
 }
 

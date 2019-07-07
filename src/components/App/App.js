@@ -57,7 +57,7 @@ class App extends Component {
 
 
       <Router>
-        <div className="app">
+        <div className="app" >
 
           <ThemeProvider theme={theme}>
             <TopBar />

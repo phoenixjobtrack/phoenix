@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import './JobOpportunity.css';
 
 import TaskItem from './TaskItem'
-
+import { InputLabel, Typography, TextField, Box, withStyles, Icon, List, ListItem, ListItemIcon } from '@material-ui/core'
 import { connect } from 'react-redux';
 import {IconButton} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
@@ -41,7 +41,7 @@ class Tasks extends Component {
     render(){
         return(
             <div className="jobOppForm">
-                <p className="jobOppsTitle">Tasks</p>
+                <Typography variant='h5' paragraph="true" align="left">Tasks</Typography>
                 {Object.entries(this.props.reduxState.currentTasks).map((task, index) => {
                     return (
                         <ul>

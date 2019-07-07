@@ -36,7 +36,7 @@ class TasksLineItems extends Component {
             
             if (taskDay == due_date) {
                 return (
-                    <div>
+                    <div style={{marginLeft: 20, paddingBottom: 1}}>
                     <TasksLineItemsContent 
                         id={id}
                         task_name={task_name}

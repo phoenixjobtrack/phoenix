@@ -35,11 +35,11 @@ import AddIcon from '@material-ui/icons/Add';
 
 
 // ----- TASKS SECTIONS ----- //
-const OverdueTasks = () => <Paper className="overdueTasks" ><Toolbar ><Typography >Overdue Tasks</Typography></Toolbar></Paper>
-const TodayTasks = () => <Paper className="todayTasks"><Toolbar ><Typography>Today</Typography></Toolbar></Paper>
-const TomorrowTasks = () => <Paper className="tomorrowTasks"><Toolbar ><Typography>Tomorrow</Typography></Toolbar></Paper>
-const FutureTasks = () => <Paper className="futureTasks"><Toolbar ><Typography>Future Tasks</Typography></Toolbar></Paper>
-const HistoryTasks = () => <Paper className="historyTasks"><Toolbar ><Typography>Task History</Typography></Toolbar></Paper>
+const OverdueTasks = () => <Paper className="overdueTasks" ><Toolbar ><Typography variant="h6">Overdue Tasks</Typography></Toolbar></Paper>
+const TodayTasks = () => <Paper className="todayTasks"><Toolbar ><Typography variant="h6">Today</Typography></Toolbar></Paper>
+const TomorrowTasks = () => <Paper className="tomorrowTasks"><Toolbar ><Typography variant="h6">Tomorrow</Typography></Toolbar></Paper>
+const FutureTasks = () => <Paper className="futureTasks"><Toolbar ><Typography variant="h6">Future Tasks</Typography></Toolbar></Paper>
+const HistoryTasks = () => <Paper className="historyTasks"><Toolbar ><Typography variant="h6">Task History</Typography></Toolbar></Paper>
 
 
 // ----- MUI THEME ----- //
@@ -131,7 +131,7 @@ class Tasks extends Component {
                 <ThemeProvider theme={theme}>
                     {/* // ----- Add Task Input Form ----- // */}
                     <span >
-                        <Paper 
+                        <Paper style={{ paddingBottom: 10, marginBottom: 20}}
                             
                             variant="outlined">
                             <Toolbar className={this.props.classes.root}>
@@ -141,12 +141,13 @@ class Tasks extends Component {
                                     label="Add New Task"
                                     margin="normal"
                                     onChange={this.handleTaskChange}
-                                    placeholder="Send Email To CJ"
+                                    placeholder="Describe Your Task"
                                     position="Relative"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
                                     variant="outlined"
+                                    style={{width: 600, paddingRight: 5}}
                                 />
                                 <TextField
                                     value={this.state.due_date}
@@ -176,24 +177,23 @@ class Tasks extends Component {
                             </Toolbar >
                         </Paper>
                     </span>
-                    <Divider />
 
                     {/* // ----- TASK DISPLAYS ----- // */}
-                    <OverdueTasks className="overdueTasks" />
+                    <OverdueTasks />
                     <TasksOverdue />
-                    <Divider />
+                   
                     <TodayTasks />
                     <TasksLineItems />
-                    <Divider />
+                 
                     <TomorrowTasks />
                     <TasksTomorrow />
-                    <Divider />
+                    
                     <FutureTasks />
                     <TasksFuture />
-                    <Divider />
+                  
                     <HistoryTasks />
                     <TasksHistory />
-                    <Divider />
+                    
                 </ThemeProvider>
             </div>
         ); // End Return

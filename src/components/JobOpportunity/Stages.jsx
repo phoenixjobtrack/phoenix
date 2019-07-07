@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux';
 
 import StageItem from './StageItem'
-
+import { InputLabel, Typography, TextField, Box, withStyles, Icon, List, ListItem, ListItemIcon } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton';
 
@@ -41,7 +41,7 @@ class Stages extends Component {
         console.log('stages state', this.props.reduxState.currentStage, Object.entries(this.props.reduxState.currentStage))
         return(
             <div className="jobOppForm">
-                <p className="jobOppsTitle">Stages of the Hiring Process</p>
+                <Typography variant='h5' paragraph="true" align="left">Stages of the Hiring Process</Typography>
                 
                 {Object.entries(this.props.reduxState.currentStage).map((stage) => {
                     console.log('stage from Redux', stage, stage[0])

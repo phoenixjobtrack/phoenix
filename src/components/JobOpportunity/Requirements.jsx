@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import RequirementItem from './RequirementItem'
-
+import { InputLabel, Typography, TextField, Box, withStyles, Icon, List, ListItem, ListItemIcon } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid';
 
 class Requirements extends Component {
@@ -11,7 +11,7 @@ class Requirements extends Component {
     render(){
         return(
             <div className="jobOppForm">
-                <p className="jobOppsTitle">Employment Requirements</p>
+                <Typography variant='h5' paragraph="true" align="left">Employment Requirements</Typography>
                 <Grid container>
                     <Grid item sm={8}></Grid>
                     <Grid item sm={4}>

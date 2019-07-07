@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 import Stages from './Stages'
 import Tasks from './Tasks'
@@ -21,12 +21,12 @@ const styles = theme => ({
     jobDetails: {
         margin: '20px'
     }
-    
+
 
 });
 
 class JobOpportunity extends Component {
-    
+
     handleJobChange = propertyName => (event) => {
         console.log('jobInfo', event.target.value);
         this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: propertyName, value: event.target.value } })
@@ -43,16 +43,16 @@ class JobOpportunity extends Component {
                 stages: this.props.stages,
                 tasks: this.props.tasks,
                 requirements: this.props.requirements
-            }           
+            }
         })
         this.props.history.push('/jobpipeline')
     }
 
     handleCloseJob = () => {
-        this.props.dispatch({ type: 'CLOSE_JOB', payload: this.props.job.id})
+        this.props.dispatch({ type: 'CLOSE_JOB', payload: this.props.job.id })
     }
 
-    componentDidMount = () =>{
+    componentDidMount = () => {
         //fetch current job data, store in redux
         this.props.dispatch({ type: 'FETCH_CURRENT_JOB', payload: this.props.match.params.id })
 
@@ -63,7 +63,7 @@ class JobOpportunity extends Component {
         this.props.dispatch({ type: 'FETCH_JOB_TASKS', payload: this.props.match.params.id })
 
         //fetch requirements assessment for selected job and store in redux
-        this.props.dispatch({ type: 'FETCH_JOB_REQUIREMENTS', payload: this.props.match.params.id })  
+        this.props.dispatch({ type: 'FETCH_JOB_REQUIREMENTS', payload: this.props.match.params.id })
     }
 
     render() {
@@ -71,11 +71,21 @@ class JobOpportunity extends Component {
         return (
             <div>
                 <h1>Job Opportunity</h1>
-                <div className="jobOppsBut">
-                    <Button variant="contained" color="primary">Offer Accepted</Button>
-                    <Button variant="contained" color="primary" onClick = {this.handleCloseJob}>Close Opportunity</Button>
+                <div>
+                    <Grid container spacing={3}>
+                        <Grid item sm={5}>
+                        </Grid>
+                        <Grid item sm={3}>
+                            <Button variant="contained" color="primary" style={{width: '100%'}}>Offer Accepted</Button>
+                        </Grid>
+                        <Grid item sm={3}>
+                            <Button variant="contained" color="primary" style={{width: '100%'}} onClick={this.handleCloseJob}>Close Opportunity</Button>
+                        </Grid>
+                        <Grid item sm={1}>
+                        </Grid>
+                    </Grid>
                 </div>
-                
+
                 {/* Employment Information */}
                 <div className="jobOppForm">
                     <Typography variant='h5' paragraph="true" align="left">Job Info</Typography>
@@ -86,7 +96,7 @@ class JobOpportunity extends Component {
                                     <List>
                                         <ListItem>
                                             <ListItemIcon>
-                                                <WorkIcon/>
+                                                <WorkIcon />
                                             </ListItemIcon>
                                             <TextField
                                                 style={{
@@ -126,26 +136,26 @@ class JobOpportunity extends Component {
                                                 onChange={this.handleJobChange('posting_url')}
                                             />
                                         </ListItem>
-                                    <ListItem>
-                                        <ListItemIcon>
-                                            <CalendarIcon />
-                                        </ListItemIcon>
-                                        <TextField
-                                            style={{
-                                                minWidth: 178,
-                                                marginBottom: 10
-                                            }}
-                                            label="Deadline"
-                                            type="date"
+                                        <ListItem>
+                                            <ListItemIcon>
+                                                <CalendarIcon />
+                                            </ListItemIcon>
+                                            <TextField
+                                                style={{
+                                                    minWidth: 178,
+                                                    marginBottom: 10
+                                                }}
+                                                label="Deadline"
+                                                type="date"
 
-                                            value={this.props.currentJob.deadline}
-                                            onChange={this.handleJobChange('deadline')}
-                                            InputLabelProps={{
-                                                shrink: true,
-                                            }}
-                                        />
-                                    </ListItem>
-                                    </List>     
+                                                value={this.props.currentJob.deadline}
+                                                onChange={this.handleJobChange('deadline')}
+                                                InputLabelProps={{
+                                                    shrink: true,
+                                                }}
+                                            />
+                                        </ListItem>
+                                    </List>
                                 </Grid >
                             </Grid>
                             <Grid container item xs={6}>
@@ -213,16 +223,25 @@ class JobOpportunity extends Component {
                                                 multiline
                                             />
                                         </ListItem>
-                                    </List>                              
+                                    </List>
                                 </Grid>
                             </Grid>
-                        </Grid>                       
-                    </div>                    
+                        </Grid>
+                    </div>
                 </div>
                 <Stages />
                 <Tasks />
                 <Requirements />
-                <Button variant="contained" color="primary" onClick={this.handleSubmit} style={{ width: 350, marginTop: 30 }}>Save</Button>
+                <Grid container spacing={3}>
+                        <Grid item sm={4}>
+                        </Grid>
+                        <Grid item sm={4}>
+                        <Button variant="contained" color="primary" onClick={this.handleSubmit} style={{ width: 350, marginTop: 30 }}>Save This Job Opportunity</Button>
+                        </Grid>
+                        <Grid item sm={4}>
+                        </Grid>
+                    </Grid>
+                
             </div>
         )
     }

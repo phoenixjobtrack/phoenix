@@ -20,30 +20,30 @@ class DashboardPage extends Component {
     this.props.dispatch({ type: 'FETCH_JOB_STAGES' })
   }
 
-      // Triggers Popup to add new Employment Requirement when + is clicked
-      addRequirement() {
-        console.log('in addRequirement');
-        swal({
-            text: 'Add New Employment Requirement',
-            content: "input",
-            button: {
-                text: "add",
-                closeModal: false,
-            },
-        })
-            .then(requirement => {
-                if (!requirement) throw null;
-                this.props.dispatch({ type: 'ADD_NEW_REQUIREMENT', payload: { requirement: `${requirement}` } })
-            })
-            .then(results => {
-                swal("New Requirement Added", {
-                    icon: "success",
-                });
-            })
-    } // End addRequirement
+  // Triggers Popup to add new Employment Requirement when + is clicked
+  addRequirement() {
+    console.log('in addRequirement');
+    swal({
+      text: 'Add New Employment Requirement',
+      content: "input",
+      button: {
+        text: "add",
+        closeModal: false,
+      },
+    })
+      .then(requirement => {
+        if (!requirement) throw null;
+        this.props.dispatch({ type: 'ADD_NEW_REQUIREMENT', payload: { requirement: `${requirement}` } })
+      })
+      .then(results => {
+        swal("New Requirement Added", {
+          icon: "success",
+        });
+      })
+  } // End addRequirement
 
-          // Triggers Popup to add new Employment Requirement when + is clicked
-          addTask() {}
+  // Triggers Popup to add new Employment Requirement when + is clicked
+  addTask() { }
 
 
   render() {
@@ -72,10 +72,10 @@ class DashboardPage extends Component {
               </h2>
               <div className="todayBox">
 
-              <div className="todayLabel">
-                <p>{taskDay}</p>
-              </div>
-              <div className="todayText">
+                <div className="todayLabel">
+                  <p>{taskDay}</p>
+                </div>
+                <div className="todayText">
                   {this.props.dayTask.map((tasks, i) => {
                     if (tasks.due_date === taskDay) {
                       return (
@@ -90,7 +90,7 @@ class DashboardPage extends Component {
                   <p className="overdueLabel">Overdue</p>
                 </div>
                 <div className="overdueText">
-                  
+
                   {this.props.dayTask.map((tasks, i) => {
                     if (tasks.due_date < taskDay) {
                       return (
@@ -121,7 +121,11 @@ class DashboardPage extends Component {
               </h2></Box>
 
               <div className="requireBox">
+                <div className="todayLabel">
+                  <p>Priorities</p>
+                </div>
                 <div className="requireText">
+
                   {this.props.require.map((user, i) => {
                     return (
                       <ul className="boxText">
