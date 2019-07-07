@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import RequirementItem from './RequirementItem'
-import { InputLabel, Typography, TextField, Box, withStyles, Icon, List, ListItem, ListItemIcon } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid';
 import {Button, List, ListItem, ListItemIcon, Typography} from '@material-ui/core'
 

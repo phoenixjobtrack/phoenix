@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 // import './JobOpportunity.css';
 
 import TaskItem from './TaskItem'
-import { InputLabel, Typography, TextField, Box, withStyles, Icon, List, ListItem, ListItemIcon } from '@material-ui/core'
 import { connect } from 'react-redux';
 import { IconButton, List, Typography, Tooltip, ListItemIcon, ListItem} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';

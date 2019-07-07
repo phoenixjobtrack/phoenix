@@ -18,7 +18,7 @@ import Card from '@material-ui/core/Card'
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
-
+import Grid from '@material-ui/core/Grid';
 
 // ----- MATERIAL UI ICONS ----- //
 import AddIcon from '@material-ui/icons/Add';
@@ -40,7 +40,7 @@ class ProfileRequirements extends Component {
 
     requirementCounter = 0
 
-    
+
     addRequirementInput(event) {
         console.log('this.requirementCounter', this.requirementCounter);
         console.log('this.state.requireList', this.state.requireList);
@@ -130,61 +130,73 @@ class ProfileRequirements extends Component {
         if (this.state.editMode === false) {
             requirementsView =
                 <div className="profileRequirementDisplay">
-                    <Card>
-                        <h2>
-                            Employment Requirements
+                    <Grid container spacing={3}>
+                        <Grid item xs={3}>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Card>
+                                <h2>
+                                    Employment Requirements
                             <Tooltip title="Edit Employment Requirements">
-                                <IconButton
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={this.handleEdit}
-                                >
-                                    <EditIcon />
-                                </IconButton>
-                            </Tooltip>
-                        </h2>
-                        {
-                            this.props.require.map((user, i) => {
-                                return (
-                                    <p>{user.requirement}</p>
-                                )
-                            })
-                        }
-                    </Card>
+                                        <IconButton
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={this.handleEdit}
+                                        >
+                                            <EditIcon />
+                                        </IconButton>
+                                    </Tooltip>
+                                </h2>
+                                {
+                                    this.props.require.map((user, i) => {
+                                        return (
+                                            <p>{user.requirement}</p>
+                                        )
+                                    })
+                                }
+                            </Card>
+                        </Grid>
+                        <Grid item xs={3}>
+                        </Grid>
+                    </Grid>
                 </div>
         } else {
             requirementsView =
                 <div >
-                    <Card>
-                        <div className="profileRequirementDisplay">
+                    <Grid container spacing={3}>
+                        <Grid item xs={3}>
+                        </Grid>
+                        <Grid item xs={6}>
+                        <Card>
+                            <div className="profileRequirementDisplay">
 
-                            <h2>
-                                Edit Employment Requirements
+                                <h2>
+                                    Edit Employment Requirements
                                 <Tooltip
-                                    title="Submit Change"
-                                >
-                                    <IconButton
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={this.submitNewRequirements}
+                                        title="Submit Change"
                                     >
-                                        <CheckIcon />
-                                    </IconButton>
-                                </Tooltip>
-                            </h2>
-                            {this.props.require.map((userReq, i) => {
-                                return (
-                                    <div>
-                                        <SavedRequirements
-                                            key={userReq.id}
-                                            id={i}
-                                            userReq={userReq}
-                                        />
-                                    </div>
-                                )
-                            })}
+                                        <IconButton
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={this.submitNewRequirements}
+                                        >
+                                            <CheckIcon />
+                                        </IconButton>
+                                    </Tooltip>
+                                </h2>
+                                {this.props.require.map((userReq, i) => {
+                                    return (
+                                        <div>
+                                            <SavedRequirements
+                                                key={userReq.id}
+                                                id={i}
+                                                userReq={userReq}
+                                            />
+                                        </div>
+                                    )
+                                })}
 
-                            {/* {Object.entries(this.state.requireList).map((requirement, index) => {
+                                {/* {Object.entries(this.state.requireList).map((requirement, index) => {
                                 return (
                                     <p>
                                         <TextField
@@ -198,19 +210,23 @@ class ProfileRequirements extends Component {
                                     </p>
                                 )
                             })} */}
-                            <p ><Tooltip
-                                title="Add New Employment Requirement"
-                            >
-                                <IconButton>
-                                    <AddIcon
-                                        className="profileAddIcon"
-                                        onClick={(event) => this.addRequirement(event)}
-                                    />
-                                </IconButton>
-                            </Tooltip></p>
-                        </div>
-                    </Card>
-                </div>
+                                <p ><Tooltip
+                                    title="Add New Employment Requirement"
+                                >
+                                    <IconButton>
+                                        <AddIcon
+                                            className="profileAddIcon"
+                                            onClick={(event) => this.addRequirement(event)}
+                                        />
+                                    </IconButton>
+                                </Tooltip></p>
+                            </div>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={3}>
+                    </Grid>
+                    </Grid>
+                </div >
         }
 
         return (
