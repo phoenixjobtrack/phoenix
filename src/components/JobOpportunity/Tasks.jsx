@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import './JobOpportunity.css';
 
 import TaskItem from './TaskItem'
-
+import { InputLabel, Typography, TextField, Box, withStyles, Icon, List, ListItem, ListItemIcon } from '@material-ui/core'
 import { connect } from 'react-redux';
 import { IconButton, List, Typography, Tooltip, ListItemIcon, ListItem} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
@@ -34,7 +34,9 @@ class Tasks extends Component {
         return(
             <div className="jobOppForm">
                 <Typography variant='h5' paragraph="true" align="left">Tasks</Typography>
+
                 <List>
+
                 {Object.entries(this.props.reduxState.currentTasks).map((task, index) => {
                     return (   
                         <TaskItem task={task} i={task[0]} handleForceUpdate={this.handleForceUpdate}/>

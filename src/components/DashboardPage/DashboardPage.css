@@ -76,7 +76,7 @@
 
 .overdueLabel{
   animation-name: overdue;
-  animation-duration: 1.5s;
+  animation-duration: 2.5s;
   animation-direction: normal;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
@@ -104,7 +104,7 @@
 /* Requirement Scrollbar */
 .requireText{
   margin: 20px;
-  height: 120px;
+  height: 90px;
   overflow-y: auto;
 }
 
