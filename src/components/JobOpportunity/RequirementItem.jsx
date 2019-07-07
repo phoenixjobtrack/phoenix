@@ -8,6 +8,7 @@ import Stages from './Stages'
 import Tasks from './Tasks'
 
 // ----- MATERIAL UI CORE ----- //
+import {List, ListItemIcon, ListItem, TextField, Typography} from '@material-ui/core'
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -68,40 +69,50 @@ class RequirementItem extends Component {
 
         console.log('in RequirementItem requirement:', this.props.requirement, this.props.i)
         return (
-            <div className="oppGrid4">
-                <Box >
-                    <Grid container>
-                        <Grid item sm={4}>
-                            <span> Requirement: {this.props.requirement.requirement} </span>
-                        </Grid>
-                        <Grid item sm={5}>
-                            <Input
-                                // style={{ width: 350 }}
-                                placeholder="Offer Details"
+            <div >
+                <ListItem>
+                    <ListItem style={{ maxWidth: 200 }}>
+                        <Typography variant="h6">
+                            {this.props.requirement.requirement}
+                        </Typography>
+                        
+                    </ListItem>
+                    <List>
+                        <ListItem>
+                            <InputLabel>Offer Details</InputLabel>
+                        </ListItem>
+                        <ListItem>
+                            <TextField
+                                style={{ width: 400 }}
+                                multiline
                                 onChange={this.handleRequireChange('requirement_offer')}
                                 inputProps={{
                                     'aria-label': 'Description',
                                 }}
                                 value={requirementOfferValue}
                             />
-                        </Grid>
-                        <Grid item sm={3}>
-                            <FormControl component="fieldset">
-                                <FormLabel component="legend">Meets Requirement?</FormLabel>
-                                <InputLabel ></InputLabel>
-                                <Select
-                                    value={requirementMetValue}
-                                    onChange={this.handleRequireChange('requirement_met')}
-                                    variant="outlined"
-                                >
-                                    <MenuItem value={"" || null}>Select</MenuItem>
-                                    <MenuItem value={true}>Yes</MenuItem>
-                                    <MenuItem value={false}>No</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </Grid>
-                    </Grid>
-                </Box>
+                        </ListItem>
+                    </List>
+                    <List>
+                        <ListItem>
+                            <InputLabel>Meets Requirement?</InputLabel>
+                        </ListItem>
+                        <ListItem>
+                            <Select
+                                style={{ minWidth: '100%' }}
+                                value={requirementMetValue}
+                                onChange={this.handleRequireChange('requirement_met')}
+                                variant="outlined"
+                            >
+                                <MenuItem value={"" || null}>Select</MenuItem>
+                                <MenuItem value={true}>Yes</MenuItem>
+                                <MenuItem value={false}>No</MenuItem>
+                            </Select>
+                        </ListItem>
+                    </List>
+                </ListItem>
+                
+                
             </div>
         )
     }

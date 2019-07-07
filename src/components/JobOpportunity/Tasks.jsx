@@ -4,20 +4,15 @@ import React, { Component } from 'react';
 import TaskItem from './TaskItem'
 
 import { connect } from 'react-redux';
-import {IconButton} from '@material-ui/core'
+import { IconButton, List, Typography, Tooltip, ListItemIcon, ListItem} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
 
 class Tasks extends Component {
     taskCounter = Object.entries(this.props.reduxState.currentTasks).length - 1
     taskCounter = 0
-    state = {
-        tasks: [{}],
-    }
 
     addTaskInput() {
         this.taskCounter = this.taskCounter+1
-        console.log('taskCounter', this.taskCounter)
-        // this.setState({ tasks: [...this.state.tasks, ''] })
         this.props.dispatch({
             type: 'ADD_TO_REDUX_TASKS',
             payload: {
@@ -31,28 +26,31 @@ class Tasks extends Component {
         })
     }
 
-    
-
     handleForceUpdate = () => {
         this.forceUpdate()
     }
 
-
     render(){
         return(
             <div className="jobOppForm">
-                <p className="jobOppsTitle">Tasks</p>
+                <Typography variant='h5' paragraph="true" align="left">Tasks</Typography>
+                <List>
                 {Object.entries(this.props.reduxState.currentTasks).map((task, index) => {
-                    return (
-                        <ul>
-                            <TaskItem task={task} i={task[0]} handleForceUpdate={this.handleForceUpdate}/>
-                        </ul>
+                    return (   
+                        <TaskItem task={task} i={task[0]} handleForceUpdate={this.handleForceUpdate}/>
                     )
                 })}
-                <IconButton onClick={()=>{this.addTaskInput()}}>
-                    <AddIcon />
-                </IconButton>
-                <p>Add Task</p>
+                <ListItem>
+                        <ListItemIcon>
+                            <Tooltip className="addTip" title="Add Task">
+                                <IconButton color="primary" aria-label="Add Task" onClick={() => { this.addTaskInput() }}>
+                                    <AddIcon color="primary" />
+                                </IconButton>
+                            </Tooltip>
+                        </ListItemIcon>
+                </ListItem>
+                
+                </List>
             </div>
         )
     }

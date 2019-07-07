@@ -3,10 +3,18 @@ import { connect } from 'react-redux';
 
 import StageItem from './StageItem'
 
+import { List, ListItem, ListItemIcon, Typography, withStyles} from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 
-
+const styles = theme => ({
+    
+    
+    addTip: {
+        backgroundColor: theme.palette.primary.main
+    }
+});
 
 class Stages extends Component {
     stageCounter = Object.entries(this.props.reduxState.currentStage).length-1
@@ -41,24 +49,28 @@ class Stages extends Component {
         console.log('stages state', this.props.reduxState.currentStage, Object.entries(this.props.reduxState.currentStage))
         return(
             <div className="jobOppForm">
-                <p className="jobOppsTitle">Stages of the Hiring Process</p>
-                
-                {Object.entries(this.props.reduxState.currentStage).map((stage) => {
-                    console.log('stage from Redux', stage, stage[0])
-                    return (
-                        <ul>
-                            <StageItem stage={stage} i={stage[0]} handleForceUpdate={this.handleForceUpdate}/>
-                        </ul>   
-                    )
-                })}
-                <IconButton onClick={(event) => this.addStageInput(event)}>
-                    <AddIcon/>
-                </IconButton>
-                <p>Add Stage</p>
-                <div className="oppStageView">
+                <List>
+                    <Typography variant='h5' paragraph="true" align="left">Stages of the Hiring Process</Typography>                             
+                    {Object.entries(this.props.reduxState.currentStage).map((stage) => {
+                        console.log('stage from Redux', stage, stage[0])
+                        return (
+                                <StageItem stage={stage} i={stage[0]} handleForceUpdate={this.handleForceUpdate}/>    
+                        )
+                    })}
+                    <ListItem>
+                        <ListItemIcon>
+                            <Tooltip className="addTip" title="Add Stage">
+                                <IconButton color="primary" aria-label="Add Stage" onClick={(event) => this.addStageInput(event)}>
+                                    <AddIcon color="primary" />
+                                </IconButton>
+                            </Tooltip>
+                        </ListItemIcon>
+                    </ListItem>
+                {/* <div className="oppStageView">
                     <p>Current Stage:</p>
                     <p>Next Stage:</p>
-                </div>
+                </div> */}
+                </List>
             </div>
         )
     }
@@ -68,4 +80,4 @@ const mapStateToProps = reduxState => ({
     reduxState
 });
 
-export default connect(mapStateToProps)(Stages)
+export default withStyles(styles)(connect(mapStateToProps)(Stages))
