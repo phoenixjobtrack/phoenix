@@ -55,7 +55,7 @@ class DashboardPage extends Component {
     let taskDay = mm + '/' + dd + '/' + yyyy;
     return (
       <div>
-        <h1>DashBoard</h1>
+        <h1>Dashboard</h1>
         <Grid container>
           <Grid item sm>
             <Paper style={{ padding: 40, marginTop: 20 }}>
@@ -155,7 +155,6 @@ class DashboardPage extends Component {
 
 const mapStateToProps = (reduxState) => {
   return {
-    user: reduxState.user,
     dayTask: reduxState.tasks,
     require: reduxState.requirements
   }

@@ -33,8 +33,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles'
 import './App.css';
 import Purple from '@material-ui/core/colors/purple';
-import { ThemeProvider } from '@material-ui/styles';
-import { createMuiTheme } from '@material-ui/core/styles';
+
 
 const theme = createMuiTheme({
   palette: {
