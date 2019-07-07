@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 import TextField from '@material-ui/core/TextField';
 import RemoveIcon from '@material-ui/icons/Remove';
@@ -80,7 +81,7 @@ class StageItem extends Component {
                             id="date"
                             onChange={this.handleStageChange('date')}
                             type="date"
-                            value={this.props.reduxState.currentStage[this.props.i].date}
+                            value={moment(this.props.reduxState.currentStage[this.props.i].date).format('YYYY-MM-DD')}
                             InputLabelProps={{
                                 shrink: true,
                             }}

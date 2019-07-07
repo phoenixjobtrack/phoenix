@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom'
+import moment from 'moment'
 
 import Stages from './Stages'
 import Tasks from './Tasks'
@@ -126,8 +127,7 @@ class EditJobOpp extends Component {
                                                 }}
                                                 label="Deadline"
                                                 type="date"
-
-                                                value={this.props.currentJob.deadline}
+                                                value={moment(this.props.currentJob.deadline).format("YYYY-MM-DD")}
                                                 onChange={this.handleJobChange('deadline')}
                                                 InputLabelProps={{
                                                     shrink: true,

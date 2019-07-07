@@ -17,7 +17,7 @@ import Box from '@material-ui/core/Box';
 class DashboardPage extends Component {
   componentDidMount() {
     //temporary.  replace once Viji's query works
-    this.props.dispatch({ type: 'FETCH_JOB_STAGES' })
+    this.props.dispatch({ type: 'FETCH_JOBS' })
   }
 
   // Triggers Popup to add new Employment Requirement when + is clicked

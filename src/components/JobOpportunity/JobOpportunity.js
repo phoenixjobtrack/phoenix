@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
+import moment from 'moment'
 
 import Stages from './Stages'
 import Tasks from './Tasks'
@@ -156,8 +157,7 @@ class JobOpportunity extends Component {
                                                 }}
                                                 label="Deadline"
                                                 type="date"
-
-                                                value={this.props.currentJob.deadline}
+                                                value={moment(this.props.currentJob.deadline).format("YYYY-MM-DD")}
                                                 onChange={this.handleJobChange('deadline')}
                                                 InputLabelProps={{
                                                     shrink: true,
@@ -259,13 +259,14 @@ class JobOpportunity extends Component {
 }
 
 const mapStateToProps = (state) => ({
+
     require: state.requirements,
-    jobEditMode: state.jobEditMode,
     job: state.jobs,
     currentJob: state.currentJob,
     stages: state.currentStage,
     tasks: state.currentTasks,
     requirements: state.currentRequirements
+
 });
 
 export default withRouter(withStyles(styles)(connect(mapStateToProps)(JobOpportunity)));
