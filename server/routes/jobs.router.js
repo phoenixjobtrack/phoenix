@@ -77,61 +77,80 @@ router.get('/stages', rejectUnauthenticated, (req,res)=>{
         }) 
 })
 
-router.get('/', rejectUnauthenticated, async (req,res) => {
-    console.log('this is for job', req.user.id);
-    
-    getResults(req.user.id).then(results => {
-        // process results here
-        console.log(results);
-        res.send(results);
-    }).catch(err => {
-        // process error here
-        console.log(err);
-        res.sendStatus(500);
-    });
-       // console.log('finalresult: ',finalresult);
-        
+router.get('/tasks', rejectUnauthenticated, (req, res) => {
+    let query =
+        `SELECT
+        j.id as job_id, j.user_id as job_user_id, j.position, j.company_name, j.notes as job_notes, j.posting_url, j.deadline, j.compensation, j.benefits, j.travel,
+        t.id as task_id, t.user_id as task_user_id, t.task_name, t.due_date as task_due_date, t.complete, t.contact_id as task_contact_id, t.note as task_note
+    FROM "jobs" j JOIN "tasks" t on j.id = t.job_id
+    WHERE j.user_id = $1;`
+
+    pool.query(query, [req.user.id])
+        .then((result) => {
+            // console.log('in GET /api/jobs/tasks', result.rows, req.user.id)
+            res.send(result.rows)
+        })
+        .catch((error) => {
+            console.log('error in /api/jobs/tasks', error)
+            res.sendStatus(500);
+        })
 })
 
-async function getResults(id0) {
-    const client = await pool.connect();
-    let results = [];
-    let table_1_data = await client.query(`SELECT job.id ,job.company_name, job.position FROM jobs job where user_id=`+id0);
-    for (let table_1_row of table_1_data.rows) {
-        let repObj ={
-            job_id:table_1_row.id,
-            company_name:table_1_row.company_name,
-            position:table_1_row.position,
-            currentStageId:'',
-            currentStageDate:'',
-            currentStageNote:'',
-            currentStage:'',
-            nextStageId:'',
-            nextStageDate:'',
-            nextStageNote:'',
-            nextstage:''
-        };
+// router.get('/', rejectUnauthenticated, async (req,res) => {
+//     console.log('this is for job', req.user.id);
+    
+//     getResults(req.user.id).then(results => {
+//         // process results here
+//         console.log(results);
+//         res.send(results);
+//     }).catch(err => {
+//         // process error here
+//         console.log(err);
+//         res.sendStatus(500);
+//     });
+//        // console.log('finalresult: ',finalresult);
+        
+// })
+
+// async function getResults(id0) {
+//     const client = await pool.connect();
+//     let results = [];
+//     let table_1_data = await client.query(`SELECT job.id ,job.company_name, job.position FROM jobs job where user_id=`+id0);
+//     for (let table_1_row of table_1_data.rows) {
+//         let repObj ={
+//             job_id:table_1_row.id,
+//             company_name:table_1_row.company_name,
+//             position:table_1_row.position,
+//             currentStageId:'',
+//             currentStageDate:'',
+//             currentStageNote:'',
+//             currentStage:'',
+//             nextStageId:'',
+//             nextStageDate:'',
+//             nextStageNote:'',
+//             nextstage:''
+//         };
        
-         let table_2_data = await client.query(`select currentstage.id, currentstage.stage, currentstage.date,currentstage.note from stages currentstage where job_id = `+table_1_row.id+` and currentstage.date <= now() order by currentstage.date desc limit 1`);
-         for (let table_2_row of table_2_data.rows) {
-            repObj.currentStageId=table_2_row.id;
-            repObj.currentStageDate=table_2_row.date;
-            repObj.currentStageNote=table_2_row.note;
-            repObj.currentStage=table_2_row.stage;
+//          let table_2_data = await client.query(`select currentstage.id, currentstage.stage, currentstage.date,currentstage.note from stages currentstage where job_id = `+table_1_row.id+` and currentstage.date <= now() order by currentstage.date desc limit 1`);
+//          for (let table_2_row of table_2_data.rows) {
+//             repObj.currentStageId=table_2_row.id;
+//             repObj.currentStageDate=table_2_row.date;
+//             repObj.currentStageNote=table_2_row.note;
+//             repObj.currentStage=table_2_row.stage;
             
-        }
-        let table_3_data = await client.query(`select currentstage.id, currentstage.stage, currentstage.date,currentstage.note from stages currentstage where job_id = `+table_1_row.id+` and currentstage.date >= now() order by currentstage.date asc limit 1`);
-        for (let table_3_row of table_3_data.rows) {
-           repObj.nextStageId=table_3_row.id;
-           repObj.nextStageDate=table_3_row.date;
-           repObj.nextStageNote=table_3_row.note;
-           repObj.nextstage=table_3_row.stage;
+//         }
+//         let table_3_data = await client.query(`select currentstage.id, currentstage.stage, currentstage.date,currentstage.note from stages currentstage where job_id = `+table_1_row.id+` and currentstage.date >= now() order by currentstage.date asc limit 1`);
+//         for (let table_3_row of table_3_data.rows) {
+//            repObj.nextStageId=table_3_row.id;
+//            repObj.nextStageDate=table_3_row.date;
+//            repObj.nextStageNote=table_3_row.note;
+//            repObj.nextstage=table_3_row.stage;
           
-       }
-        results.push(repObj);
-    }
-    return results;
-}
+//        }
+//         results.push(repObj);
+//     }
+//     return results;
+// }
 
 router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('in POST /api/jobs', req.user.id, req.body)

@@ -102,12 +102,11 @@ class JobOpportunity extends Component {
                                     <List>
                                         <ListItem>
                                             <ListItemIcon>
-
                                                 <WorkIcon color="primary" />
-
                                             </ListItemIcon>
                                             <TextField
                                                 style={{
+                                                    
                                                     minWidth: 178,
                                                     marginBottom: 10
                                                 }}
