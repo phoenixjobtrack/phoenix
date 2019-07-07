@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
     "job_id",
     "note",
     "disabled" FROM "tasks" WHERE "user_id"=$1
-    ORDER BY "id" DESC;`;
+    ORDER BY "due_date" ASC;`;
     pool.query(query, [req.user.id])
         .then((result) => {
             res.send(result.rows);

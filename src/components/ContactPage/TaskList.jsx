@@ -26,7 +26,7 @@ class TaskList extends Component {
                 //put a line in here to compare current date to due date
                 dueDate = new Date(task.due_date)
                 console.log('dates', today, dueDate)
-                if (dueDate>=today){
+                if (!task.complete){
                     upcomingTasks.push(
                         <div key={i}>
                             <ListItem >
@@ -37,6 +37,18 @@ class TaskList extends Component {
                             </ListItem>
                         <Divider/>
                     </div>)
+                }
+                else if (task.complete) {
+                    completedTasks.push(
+                        <div key={i}>
+                            <ListItem >
+                                <Typography variant="body1" >{task.task_name}</Typography>
+                            </ListItem>
+                            <ListItem>
+                                <Typography variant="caption">  Due:  {moment(task.due_date).format('MM-DD-YYYY')}</Typography>
+                            </ListItem>
+                            <Divider />
+                        </div>)
                 }
                 else {
                     completedTasks.push(
