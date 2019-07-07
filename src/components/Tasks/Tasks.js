@@ -127,6 +127,7 @@ class Tasks extends Component {
         return (
 
             <div>
+                <h1>Tasks</h1>
                 <ThemeProvider theme={theme}>
                     {/* // ----- Add Task Input Form ----- // */}
                     <span >
