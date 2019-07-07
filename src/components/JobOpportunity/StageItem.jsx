@@ -1,15 +1,14 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux';
 
-
-import Grid from '@material-ui/core/Grid';
-import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
 import RemoveIcon from '@material-ui/icons/Remove';
 import InputLabel from '@material-ui/core/InputLabel';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
+import {List, ListItem, ListItemIcon} from '@material-ui/core'
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 
@@ -40,19 +39,20 @@ class StageItem extends Component {
     render(){
         console.log('value', this.props.i)
         return(
-            <div >
-                <Grid container>
-                    <Grid item xs={1}>
-                        <IconButton className="oppsSubBut" onClick={this.handleRemove}>
-                            <RemoveIcon />
-                        </IconButton>
-                        {/* <span>
-                            Stage:
-                        </span> */}
-                        
-                    </Grid>
-                    <Grid item xs={4}>
+            <ListItem >
+                <ListItemIcon>
+                    <Tooltip title="Remove Stage">
+                        <IconButton className="oppsSubBut" onClick={this.handleRemove} color="secondary">
+                            <RemoveIcon
+                                color="secondary" />
+                        </IconButton> 
+                    </Tooltip>         
+                </ListItemIcon>  
+                <List>
+                    <ListItem>
                         <InputLabel>Choose Your Stage</InputLabel>
+                    </ListItem>
+                    <ListItem>
                         <Select
                             style={{ minWidth: 230 }}
                             onChange={this.handleStageChange('stage')}
@@ -64,7 +64,74 @@ class StageItem extends Component {
                         >
                             {this.props.reduxState.interviewStages.map((interviewStage) => {
                                 return (
-                                    <MenuItem value={interviewStage.stage} primaryText={interviewStage.stage}>{interviewStage.stage}</MenuItem>
+                                    <MenuItem value={interviewStage.stage}>{interviewStage.stage}</MenuItem>
+                                )
+                            })}
+                        </Select> 
+                    </ListItem>
+                </List>
+                <List>
+                    <ListItem>
+                        <InputLabel>Date</InputLabel>
+                    </ListItem>
+                    <ListItem style={{ width: 175 }}>
+                        <TextField
+                            style={{ width: '100%' }}
+                            id="date"
+                            onChange={this.handleStageChange('date')}
+                            type="date"
+                            value={this.props.reduxState.currentStage[this.props.i].date}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                    </ListItem>
+                </List>
+                <List style={{ width: 300 }}>
+                    <ListItem>
+                        <InputLabel>Notes</InputLabel>
+                    </ListItem>
+                    <ListItem >
+                        <TextField
+                            style={{ width: '100%'}}
+                            onChange={this.handleStageChange('note')}
+                            value={this.props.reduxState.currentStage[this.props.i].note}
+                            inputProps={{
+                                'aria-label': 'Description',
+                            }}
+                        />
+                    </ListItem>
+                </List>
+                
+                    
+                      
+                    
+                    
+                    
+                       
+                {/* <Grid container>
+
+                    <Grid item xs={1}>
+                        <IconButton className="oppsSubBut" onClick={this.handleRemove}>
+                            <RemoveIcon />
+                        </IconButton>                 
+                    </Grid>
+                    <Grid item xs={4}>
+
+                        <InputLabel>Choose Your Stage</InputLabel>
+                        <Select
+                            
+                            style={{ minWidth: 230 }}
+                            onChange={this.handleStageChange('stage')}
+                            value={this.props.reduxState.currentStage[this.props.i].stage}
+                            inputProps={{
+                                name: 'stage',
+                                id: 'stage-simple',
+                            }}
+                        >
+                            {this.props.reduxState.interviewStages.map((interviewStage) => {
+                                return (
+                                    <MenuItem value={interviewStage.stage}>{interviewStage.stage}</MenuItem>
                                 )
                             })}
                         </Select>
@@ -97,8 +164,8 @@ class StageItem extends Component {
                             }}
                         />
                     </Grid>
-                </Grid>
-            </div>
+                </Grid> */}
+            </ListItem>
         )
     }
 }

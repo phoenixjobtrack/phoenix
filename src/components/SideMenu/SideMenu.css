@@ -2,3 +2,8 @@
     padding-right: 30px;
     box-sizing: content-box
 }
+
+.pageTitle {
+    vertical-align: center;
+    padding-right: 15px;
+}

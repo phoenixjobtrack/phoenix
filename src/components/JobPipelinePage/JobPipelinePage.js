@@ -34,7 +34,7 @@ const rows = this.props.reduxState.jobs;
               </ButtonGroup>
             </Grid>
             <Grid item sm>
-            <Button onClick={() => {this.props.history.push('/jobOpportunity');}} variant="contained" color="primary">NEW OPPORTUNITY</Button>
+            <Button style={{ width: '90%' }} onClick={() => {this.props.history.push('/jobOpportunity');}} variant="contained" color="primary">NEW OPPORTUNITY</Button>
             </Grid>
           </Grid>
     <Paper style={{ height: 335, width: '100%' }}>
