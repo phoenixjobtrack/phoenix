@@ -27,6 +27,7 @@ import JobPipelinePage from '../JobPipelinePage/JobPipelinePage';
 import JobOpportunity from '../JobOpportunity/JobOpportunity';
 import TopBar from '../TopBar/TopBar';
 import UserPage from '../UserPage/UserPage';
+import ScrollToTop from '../ScrollToTop/ScrollToTop'
 
 // ========== STYLE ========== //
 import { ThemeProvider } from '@material-ui/styles';
@@ -55,6 +56,7 @@ class App extends Component {
 
 
       <Router>
+        <ScrollToTop>
         <div className="app" >
 
           <ThemeProvider theme={theme}>
@@ -141,6 +143,7 @@ class App extends Component {
 
 
         </div>
+        </ScrollToTop>
       </Router>
 
 
