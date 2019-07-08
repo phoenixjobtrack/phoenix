@@ -18,12 +18,13 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd'
 const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
-        maxWidth: 1000,
+        // maxWidth: 1000,
         backgroundColor: theme.palette.background.paper,
         borderRadius: '5px',
         overflow: 'auto',
         maxHeight: 1000,
-        height:'75vh'
+        height:'72vh',
+        margin: 0
     },
     container: {
         backgroundColor: theme.palette.background.paper,
@@ -38,6 +39,7 @@ const useStyles = makeStyles(theme => ({
     ul: {
         backgroundColor: 'inherit',
         padding: 0,
+        margin:0,
         position: 'relative',
         width:'100%'
 
