@@ -79,6 +79,7 @@ class Tasks extends Component {
         due_date: null,
         contact_id: null,
         job_id: null,
+        demoMode: false,
     };
 
     // Click Handlers For Add Task
@@ -128,8 +129,7 @@ class Tasks extends Component {
         this.setState({
             task_name: 'Attend a meetup tomorrow',
             due_date: '07/10/2019',
-            contact_id: null,
-            job_id: null,
+            demoMode: true,
         })
     }
 
@@ -163,12 +163,14 @@ class Tasks extends Component {
                                     variant="outlined"
                                     style={{width: 600, paddingRight: 5}}
                                 />
+                                {this.state.demoMode ?
                                 <TextField
                                     value={this.state.due_date}
                                     id="date"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
+                                    value="07/10/2019"
                                     label="Due Date"
                                     margin="normal"
                                     onChange={this.handleDateSelect}
@@ -176,6 +178,21 @@ class Tasks extends Component {
                                     type="date"
                                     variant="outlined"
                                 />
+                                :
+                                    <TextField
+                                        value={this.state.due_date}
+                                        id="date"
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        label="Due Date"
+                                        margin="normal"
+                                        onChange={this.handleDateSelect}
+                                        position="Relative"
+                                        type="date"
+                                        variant="outlined"
+                                    />
+                                }
                                 <Tooltip title="Add Task">
                                     <IconButton
                                         label="Submit"
