@@ -46,10 +46,7 @@ class RequirementItem extends Component {
     }
 
 
-    componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_REQUIREMENTS' })
-
-    }
+    
 
 
     render() {

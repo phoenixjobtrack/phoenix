@@ -106,7 +106,7 @@ class AddTask extends Component {
 
     componentDidMount(){
         this.getDate()
-        this.props.dispatch({ type: 'FETCH_CURRENT_CONTACT'})
+        this.props.dispatch({ type: 'FETCH_CURRENT_CONTACT', payload: this.props.match.params.id})
     }
     render(){
         console.log('AddTask state', this.state)
@@ -169,4 +169,4 @@ const mapStateToProps = reduxState => ({
     reduxState
 });
 
-export default connect(mapStateToProps)(AddTask)
+export default withRouter(connect(mapStateToProps)(AddTask))

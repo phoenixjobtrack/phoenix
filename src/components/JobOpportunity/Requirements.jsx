@@ -7,6 +7,10 @@ import {Button, List, ListItem, ListItemIcon, Typography} from '@material-ui/cor
 
 class Requirements extends Component {
 
+    componentDidMount() {
+        this.props.dispatch({ type: 'FETCH_REQUIREMENTS' })
+
+    }
     
     render(){
         return(
