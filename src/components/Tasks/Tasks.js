@@ -78,6 +78,7 @@ class Tasks extends Component {
         due_date: null,
         contact_id: null,
         job_id: null,
+        complete: false
     };
 
     // Click Handlers For Add Task

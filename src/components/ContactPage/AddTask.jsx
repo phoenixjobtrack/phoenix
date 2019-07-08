@@ -16,7 +16,8 @@ class AddTask extends Component {
             task_name: '',
             due_date: '',
             note: '',
-            contact_id: ''
+            contact_id: '',
+            complete: false
         }
     }
 
@@ -43,16 +44,30 @@ class AddTask extends Component {
 
     // save task inputs to local state 
     handleChangeFor = key => event =>{
-        console.log('key', key, 'contactId', this.props.reduxState.currentContact.id)
-        this.setState({
-            ...this.state,
-            newTask:{
-                ...this.state.newTask,
-                contact_id: this.props.reduxState.currentContact.id,
-                [key]: event.target.value
-
-            }
-        })
+        console.log('key', key, 'contactId', this.props.reduxState.currentContact.id, this.state.today, event.target.value)
+        //if user adds task with past date, auto set as complete - 
+            //this is how they can record history of interactions with a contact
+        if (key ==='due_date'&& event.target.value<this.state.today){
+            this.setState({
+                ...this.state,
+                newTask: {
+                    ...this.state.newTask,
+                    contact_id: this.props.reduxState.currentContact.id,
+                    complete: true,
+                    [key]: event.target.value,
+                }
+            })
+        }
+        else {
+            this.setState({
+                ...this.state,
+                newTask: {
+                    ...this.state.newTask,
+                    contact_id: this.props.reduxState.currentContact.id,
+                    [key]: event.target.value,
+                }
+            })
+        }
     }
 
     //send new task to saga
@@ -68,20 +83,16 @@ class AddTask extends Component {
                 note: '',
                 contact_id: ''
             }
-
         })
     }
-
 
     componentDidMount(){
         this.getDate()
         this.props.dispatch({ type: 'FETCH_CURRENT_CONTACT'})
     }
     render(){
-        // this.props.dispatch({type: 'FETCH_TASKS'})
         console.log('AddTask state', this.state)
         return(
-            
             <form onSubmit={this.handleSubmit}>
                 <Typography variant="h6">Add Task</Typography>
                 <Grid container spacing={2}>

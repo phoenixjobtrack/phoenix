@@ -7,7 +7,7 @@ import './StickyList.css'
 //Material-UI stuff
 import ContactCard from './ContactCard'
 import { makeStyles } from '@material-ui/core/styles';
-import {Button} from '@material-ui/core'
+import {Button, ListItem, Fab, Tooltip, InputLabel, MenuItem, Input, Select} from '@material-ui/core'
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
@@ -20,27 +20,65 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
         maxWidth: 1000,
         backgroundColor: theme.palette.background.paper,
+        borderRadius: '5px',
         overflow: 'auto',
         maxHeight: 1000,
         height:'75vh'
     },
+    container: {
+        backgroundColor: theme.palette.background.paper,
+        width: '80%',
+        // padding: '10px',
+        borderRadius: '5px'
+    },
     listSection: {
         backgroundColor: 'inherit',
+        padding: 0
     },
     ul: {
         backgroundColor: 'inherit',
         padding: 0,
-        position: 'relative'
+        position: 'relative',
+        width:'100%'
+
     },
     card: {
         borderWidth:'2px',
         borderColor: 'black',
-        borderStyle: 'solid'
+        borderStyle: 'solid',
+        width: '100%'
 
     },
     sorting: {
-        position: 'sticky'
+        position: 'sticky',
+        textAlign: 'right',
+        paddingTop: '15px',
+        paddingRight: '15px'
     },
+    manageOrder: {
+        display: 'inline'
+    },
+    search: {
+        // maxWidth: 200,
+        // marginRight: 0,
+        fontSize: '20pt',
+        textAlign: 'center',
+        color: theme.palette.primary.main
+    },
+    listSubheader: {
+        color: theme.palette.primary.main
+    },
+    contactCard: {
+        width: '100%',
+        paddingLeft:'5px',
+        paddingRight: '5px'
+        // padding: 0
+    },
+    addNewBtn: {
+        position: 'absolute',
+        right: 100,
+        
+    }
 }));
 
 function PinnedSubheaderList(props) {
@@ -56,12 +94,12 @@ function PinnedSubheaderList(props) {
     const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
     //function defines what word to sort by, sets local state 'key' to that word
-    const setSorting = (param) =>{
-        setKey(param)
+    const setSorting = (event) =>{
+        setKey(event.target.value)
         console.log('doc', document)
         var myDiv = document.getElementById('containerDiv');
         myDiv.scrollTop = 0;
-        console.log(param)
+        console.log(event.target.value)
         console.log('key', key)
 
     }
@@ -77,31 +115,42 @@ function PinnedSubheaderList(props) {
     }
 
     return (
-        <div >            
-            <div className={classes.sorting}>
-                <h3>Sort Alphabetically By:
-                    <Button variant="contained" color="primary" onClick={() => { setSorting('first') }}>
-                            First Name
-                    </Button>
-                    <Button variant="contained" color="primary" onClick={() => { setSorting('last') }}>Last Name</Button>
-                    <Button variant="contained" color="primary" onClick={() => { setSorting('company') }}>Company</Button>
-                    <IconButton variant="contained" color="primary" aria-label="add new contact" onClick={addNewContact} >
-                        <PersonAddIcon/>
-                    </IconButton>
-                </h3>                
-                {alphabet.map(letter => (
-                    <a onClick={() => { scrollToLetter(letter) }}>{letter}</a>
-                ))}
-            </div>
+        <>
+        <Tooltip title="Add a new contact">
+            <Fab className={classes.addNewBtn} color="primary" aria-label="add new contact" onClick={addNewContact} >
+                <PersonAddIcon />
+            </Fab>
+        </Tooltip>
+        <div className={classes.container}>        
+            <div className={classes.manageOrder}>
+                    <div className={classes.sorting}>
+                        <InputLabel htmlFor="sort by:">Sort by</InputLabel>
+                        <Select
+                            value={key}
+                            onChange={setSorting}
+                            input={<Input name="sorting" id="sorting" />}
+                        >
+                            <MenuItem value={'first'}>First Name</MenuItem>
+                            <MenuItem value={'last'}>Last Name</MenuItem>
+                            <MenuItem value={'company'}>Company</MenuItem>
+                        </Select>
+                    </div>
+                    <div className={classes.search}>
+                        {alphabet.map(letter => (
+                            <a onClick={() => { scrollToLetter(letter) }}>{letter}</a>
+                        ))}
+                    </div>
+                    
+            </div>    
+            
             <List id="containerDiv" className={classes.root} subheader={<li />}>
                 {alphabet.map(sectionId => (
-                    <li key={`section-${sectionId}`} className={classes.listSection}>
-                        <ul className={classes.ul}>
+                    <ListItem key={`section-${sectionId}`} className={classes.listSection}>
+                        <List className={classes.ul}>
                             <ListSubheader className={classes.listSubheader}>
-                                <a id={sectionId}>
-                                    {sectionId}
-                                </a>
-                            
+                                    <a id={sectionId}>
+                                        {sectionId}
+                                    </a>
                             </ListSubheader>
                             {props.reduxState.contacts.map(contact => {
                                 let word
@@ -121,15 +170,16 @@ function PinnedSubheaderList(props) {
                                 if (firstLetter.toLowerCase() === sectionId) {
                                     console.log('alphabetize', contact)
                                     return (
-                                        <ContactCard contact={contact}/>                                
+                                        <ListItem className={classes.contactCard}><ContactCard contact={contact} /> </ListItem>                               
                                     )
                                 }
                             })}
-                        </ul>
-                    </li>
+                        </List>
+                    </ListItem>
                 ))}
             </List>
         </div>
+    </>
         
     );
 }

@@ -60,6 +60,7 @@ const TextMaskCustom = (props) => {
     const { inputRef, ...other } = props;
 
     return (
+        //phone# inputs auto format to look like phone numbers
         <MaskedInput
             {...other}
             ref={inputRef}
@@ -78,33 +79,30 @@ class ContactPage extends Component {
     contactId = this.props.match.params.id
     currentContact = {}
 
-
-
+    //function updates redux on change of input fields
     handleChangeFor = key => event => {
         console.log('in handleChangeFor', key, event)
         this.props.dispatch({type:'UPDATE_REDUX_CONTACT', payload: {key:key, value: event.target.value}})
 
     }
 
+    //sends contact to saga
     handleSubmit = () => {
-        console.log('in handleSubmit')
         this.props.dispatch({type: 'UPDATE_CONTACT', payload: this.props.reduxState.currentContact})
         this.props.history.push('/contact')
     }
 
-
+    //fetch data for currently selected contact
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_CURRENT_CONTACT', payload: this.contactId })
     }
 
 
     render() {
-         
-        console.log('currentContact', this.props.reduxState.currentContact)
         let currentContact = this.props.reduxState.currentContact
         let avatar 
 
-        //define avatar depending on what text fields are filled
+        //define avatar depending on which text fields are filled
         if (currentContact.first_name && currentContact.last_name){
             avatar = 
                 <Avatar aria-label="Contact" className={this.props.classes.avatar}>
@@ -130,14 +128,12 @@ class ContactPage extends Component {
                 </Avatar>
         
         return (
-            
                 <Card className={this.props.classes.card}>
                     <CardHeader
                         avatar={avatar}
                         title={`${currentContact.first_name} ${currentContact.last_name}`}
                         subheader={currentContact.company}
                     />
-                    
                     <CardContent>
                         <Grid container>
                             <Grid item xs={12}
