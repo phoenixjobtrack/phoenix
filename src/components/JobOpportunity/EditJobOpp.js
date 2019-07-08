@@ -21,8 +21,23 @@ import StarIcon from '@material-ui/icons/StarBorder'
 import { InputLabel, Typography, TextField, Box, withStyles, Icon, List, ListItem, ListItemIcon } from '@material-ui/core'
 import InputAdornment from '@material-ui/core/InputAdornment';
 
+const config = {
+    angle: "90",
+    spread: "70",
+    startVelocity: "67",
+    elementCount: 50,
+    dragFriction: 0.1,
+    duration: "7890",
+    stagger: "30",
+    width: "10px",
+    height: "43px",
+    colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"]
+};
+
 
 class EditJobOpp extends Component {
+
+    someProp;
 
     handleJobChange = propertyName => (event) => {
         console.log('jobInfo', event.target.value);
@@ -58,13 +73,22 @@ class EditJobOpp extends Component {
         this.props.dispatch({ type: 'FETCH_JOB_REQUIREMENTS', payload: this.props.match.params.id })
     }
 
+    demoSalary = () => {
+        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'compensation', value: '$75,000' } })
+    }
+
+    demoBenefits = () => {
+        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'benefits', value: '401K & 3 Weeks PTO' } })
+    }
+
+
     render() {
         console.log('current job', this.props.currentJob)
         return (
             <div>
                 <h2><Box>Job Opportunity</Box></h2>
                 <div className="jobOppsBut">
-                    <Button variant="contained" color="primary">Offer Accepted</Button>
+                    <Button variant="contained" >Offer Accepted</Button>
                     <Button variant="contained" color="secondary" onClick={this.handleCloseJob}>Close Opportunity</Button>
                 </div>
 
@@ -143,9 +167,14 @@ class EditJobOpp extends Component {
                                 <Grid item xs={12}>
                                     <List>
                                         <ListItem>
-                                            <ListItemIcon>
-                                                <MoneyIcon color="primary" />
-                                            </ListItemIcon>
+                                            <Box onClick={() => this.demoSalary()}>
+                                                <ListItemIcon>
+                                                    <MoneyIcon
+                                                        color="primary"
+
+                                                    />
+                                                </ListItemIcon>
+                                            </Box>
                                             <TextField
                                                 style={{
                                                     marginBottom: 10
@@ -161,9 +190,14 @@ class EditJobOpp extends Component {
                                             />
                                         </ListItem>
                                         <ListItem>
-                                            <ListItemIcon>
-                                                <StarIcon color="primary" />
-                                            </ListItemIcon>
+                                            <Box onClick={() => this.demoBenefits()}>
+                                                <ListItemIcon>
+                                                    <StarIcon
+                                                        color="primary"
+
+                                                    />
+                                                </ListItemIcon>
+                                            </Box>
                                             <TextField
                                                 style={{
                                                     minWidth: 178,

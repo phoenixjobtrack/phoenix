@@ -13,9 +13,9 @@ class Requirements extends Component {
             <div className="jobOppForm">
 
                 
-                    <Typography variant='h5' paragraph="true" align="left">Wish List</Typography>                             
+                    <Typography variant='h5' paragraph="true" align="left">Important Job Attributes</Typography>                             
                 <List>
-                    <Button variant="contained" color="primary" >Update Personal Requirements</Button>
+                    <Button variant="contained" color="primary" >Update Important Attributes</Button>
                     {this.props.require.map((requirement, i) => {
                         return (
                             <RequirementItem requirement={requirement} i={i} />

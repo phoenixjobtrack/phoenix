@@ -128,7 +128,7 @@ class Tasks extends Component {
         console.log('demo button pressed');
         this.setState({
             task_name: 'Attend a meetup tomorrow',
-            due_date: '07/10/2019',
+            due_date: '2019-07-11',
             demoMode: true,
         })
     }
@@ -170,7 +170,7 @@ class Tasks extends Component {
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
-                                    value="07/10/2019"
+                                    value="2019-07-11"
                                     label="Due Date"
                                     margin="normal"
                                     onChange={this.handleDateSelect}

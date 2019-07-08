@@ -31,6 +31,8 @@ const styles = theme => ({
 
 class JobOpportunity extends Component {
 
+
+
     handleJobChange = propertyName => (event) => {
         console.log('jobInfo', event.target.value);
         this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: propertyName, value: event.target.value } })
@@ -70,12 +72,31 @@ class JobOpportunity extends Component {
         this.props.dispatch({ type: 'FETCH_JOB_REQUIREMENTS', payload: this.props.match.params.id })
     }
 
+    // Demo Functions
+    demoFunction = () => {
+        console.log('demo button pressed');
+        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'company_name', value: 'Craymill' } })
+        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'position', value: 'Jr. Project Manager' } })
+        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'posting_url', value: 'http://craymillsolutions.com/jobs/1234' } })
+        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'deadline', value: '2019-07-15' } })
+        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'job_notes', value: 'Heard about position from Melissa' } })
+
+    }
+
+    demoSalary = () => {
+        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'compensation', value: '$75,000' } })
+    }
+
+    demoBenefits = () => {
+        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'benefits', value: '401K & 3 Weeks PTO' } })
+    }
+
     render() {
         console.log('current job', this.props.currentJob)
         return (
             <div>
 
-                <h2><Box>Job Opportunity</Box></h2>
+                <h2><Box onClick={() => this.demoFunction()}>Job Opportunity</Box></h2>
                 <div>
                     <Grid container spacing={3}>
                         <Grid item sm={5}>
@@ -106,7 +127,7 @@ class JobOpportunity extends Component {
                                             </ListItemIcon>
                                             <TextField
                                                 style={{
-                                                    
+
                                                     minWidth: 178,
                                                     marginBottom: 10
                                                 }}
@@ -170,9 +191,14 @@ class JobOpportunity extends Component {
                                 <Grid item xs={12}>
                                     <List>
                                         <ListItem>
-                                            <ListItemIcon>
-                                                <MoneyIcon color="primary" />
-                                            </ListItemIcon>
+                                            <Box onClick={() => this.demoSalary()}>
+                                                <ListItemIcon>
+                                                    <MoneyIcon
+                                                        color="primary"
+
+                                                    />
+                                                </ListItemIcon>
+                                            </Box>
                                             <TextField
                                                 style={{
                                                     marginBottom: 10
@@ -188,9 +214,14 @@ class JobOpportunity extends Component {
                                             />
                                         </ListItem>
                                         <ListItem>
-                                            <ListItemIcon>
-                                                <StarIcon color="primary" />
-                                            </ListItemIcon>
+                                            <Box onClick={() => this.demoBenefits()}>
+                                                <ListItemIcon>
+                                                    <StarIcon
+                                                        color="primary"
+
+                                                    />
+                                                </ListItemIcon>
+                                            </Box>
                                             <TextField
                                                 style={{
                                                     minWidth: 178,
