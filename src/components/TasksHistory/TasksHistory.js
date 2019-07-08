@@ -30,7 +30,7 @@ class TasksHistory extends Component {
 
         userTasks = this.props.reduxState.tasks.map(({ id, task_name, due_date, complete, contact_id, job_id, disabled, note }) => {
 
-            if (complete == true) {
+            if (taskDay > due_date && complete == true) {
                 return (
                     <div style={{marginLeft: 20, paddingBottom: 3}}>
                         <TasksLineItemsContent

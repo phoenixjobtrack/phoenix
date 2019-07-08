@@ -17,7 +17,7 @@ import PhoneIcon from '@material-ui/icons/Phone'
 import CellIcon from '@material-ui/icons/PhoneAndroid'
 import NotesIcon from '@material-ui/icons/Notes'
 import PersonIcon from '@material-ui/icons/Person'
-import {List, ListItem, ListItemIcon, Card, CardContent, Typography, Button, TextField, Grid, withStyles} from '@material-ui/core'
+import {List, ListItem, ListItemIcon, Card, CardContent, Typography, Button, TextField, Grid, withStyles, Box} from '@material-ui/core'
 
 
 const styles = theme => ({
@@ -99,6 +99,24 @@ class ContactPage extends Component {
         
     }
 
+    // Demo Functions
+    demoFunction = () => {
+        console.log('demo button pressed');
+        this.setState({
+            contact: {
+                first_name: 'Melissa',
+                last_name: 'White',
+                company: 'Craymill Solutions',
+                position: 'Product Manager',
+                email: 'mwhite@craymillsolutions.com',
+                linkedin_url: 'http://linkedin.com/mwhite_craymill',
+                phone: '612-555-6789',
+                cell: '952-555-1234',
+                notes: 'Met at Jr Devs Meetup'
+            },
+        })
+    }
+
 
     render(){
         console.log('this.state', this.state)
@@ -115,7 +133,7 @@ class ContactPage extends Component {
                                         <ListItemIcon>
                                             <PersonAddIcon color="primary" />
                                         </ListItemIcon>
-                                        Add New Contact
+                                        <Box onClick={() => this.demoFunction()}>Add New Contact</Box>
                                     </ListItem>
                                 </List>
                             </Typography> 
