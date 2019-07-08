@@ -35,8 +35,8 @@ class TaskList extends Component {
                             <ListItem>   
                                 <Typography variant="caption">  Due:  {moment(task.due_date).format('MM-DD-YYYY')}</Typography>                          
                             </ListItem>
-                        <Divider/>
-                    </div>)
+                            <Divider/>
+                        </div>)
                 }
                 else if (task.complete) {
                     completedTasks.push(

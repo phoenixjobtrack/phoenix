@@ -115,7 +115,7 @@ function ContactCard(props) {
                     <Grid item sm={6}>
                         <Typography >
                             Tasks:
-                            <CompletedTasks contactId={contact.id}/>
+                            <UpcomingTasks contactId={contact.id}/>
                         </Typography>
                     </Grid>  
                 </Grid>               
@@ -138,7 +138,6 @@ function ContactCard(props) {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                    
                         <Typography paragraph>
                             {/* insert task history here */}
                             <CompletedTasks contactId={contact.id} />

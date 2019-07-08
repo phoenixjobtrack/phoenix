@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
+import moment from 'moment'
 
 //Material UI
-import { Typography, List, ListItem } from '@material-ui/core'
+import { Typography, List, ListItem, Divider } from '@material-ui/core'
 
 class CompletedTasks extends Component {
 
@@ -24,12 +25,21 @@ class CompletedTasks extends Component {
             if (task.contact_id == this.props.contactId) {
                 //put a line in here to compare current date to due date
                 dueDate = new Date(task.due_date)
-                console.log('dates', today, dueDate)
-                if (!task.complete) {
-                    upcomingTasks.push(<ListItem key={i}>{task.task_name} Due:{task.due_date}</ListItem>)
-                }
-                else {
-                    completedTasks.push(<ListItem key={i}>{task.task_name} Due:{task.due_date}</ListItem>)
+                console.log('dates', today, dueDate, task)
+                if (task.complete) {
+                    completedTasks.push(
+                        <div key={i}>
+                            <ListItem >
+                                <Typography variant="body1" >{task.task_name}</Typography>
+                            </ListItem>
+                            <ListItem>
+                                <Typography variant="caption">  Date:  {moment(task.due_date).format('MM-DD-YYYY')}</Typography>
+                            </ListItem>
+                            <Divider />
+                        </div>
+                    )
+                    
+                    // <ListItem key={i}>{task.task_name} Due:{task.due_date}</ListItem>)
                 }
             }
         })
