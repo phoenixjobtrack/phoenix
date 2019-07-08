@@ -11,6 +11,7 @@ import AddIcon from '@material-ui/icons/Add';
 import DashboardTable from '../DashboardTable/DashboardTable';
 import IconButton from '@material-ui/core/IconButton';
 import Box from '@material-ui/core/Box';
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 
@@ -55,13 +56,13 @@ class DashboardPage extends Component {
     let taskDay = mm + '/' + dd + '/' + yyyy;
     return (
       <div>
-        <h1>Dashboard</h1>
+        <h2>Dashboard</h2>
         <Grid container>
           <Grid item sm>
-            <Paper style={{ padding: 40, marginTop: 20 }}>
-
+            <Paper style={{  marginTop: 20 }}>
               <h2 className="boxLabel">
                 Today's Tasks
+                <Tooltip title="add task">
                 <IconButton>
                   <AddIcon
                     className="dashAddIcon"
@@ -69,9 +70,9 @@ class DashboardPage extends Component {
                     style={{ top: 0, marginRight: 5, width: 20, height: 20 }}
                   />
                 </IconButton>
+                </Tooltip>
               </h2>
               <div className="todayBox">
-
                 <div className="todayLabel">
                   <p>{taskDay}</p>
                 </div>
@@ -90,7 +91,6 @@ class DashboardPage extends Component {
                   <p className="overdueLabel">Overdue</p>
                 </div>
                 <div className="overdueText">
-
                   {this.props.dayTask.map((tasks, i) => {
                     if (tasks.due_date < taskDay) {
                       return (
@@ -107,17 +107,20 @@ class DashboardPage extends Component {
           <Grid item sm>
             <Paper >
               <div className="logoBox">
-                <img className="logo" src="/images/logo3.png" alt="phoenix logo" />
+                {/* <img className="logo" src="/images/logo3.png" alt="phoenix logo" /> */}
+                
               </div>
               <Box><h2 className="boxLabel">
-                Job Requirements
+                Important Job Attributes
+                <Tooltip title="add attribute">
                 <IconButton>
                   <AddIcon
                     className="dashAddIcon"
-                    onClick={this.addRequirement}
+                    onClick={() => this.props.history.push('/profile')}
                     style={{ top: 0, marginRight: 5, width: 20, height: 20 }}
                   />
                 </IconButton>
+                </Tooltip>
               </h2></Box>
 
               <div className="requireBox">
@@ -142,6 +145,7 @@ class DashboardPage extends Component {
         <div className="pipelineBox">
           <h2 className="boxLabel">
             Job Pipeline
+            <Tooltip title="add new opportunity">
             <IconButton>
               <AddIcon
                 className="dashAddIcon"
@@ -149,6 +153,7 @@ class DashboardPage extends Component {
                 style={{ top: 0, marginRight: 5, width: 20, height: 20 }}
               />
             </IconButton>
+            </Tooltip>
           </h2>
           <DashboardTable />
         </div>

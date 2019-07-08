@@ -21,6 +21,7 @@ import './Tasks.css';
 
 
 // ----- MATERIAL UI CORE ----- // 
+import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
@@ -78,6 +79,7 @@ class Tasks extends Component {
         due_date: null,
         contact_id: null,
         job_id: null,
+        demoMode: false,
         complete: false
     };
 
@@ -122,6 +124,16 @@ class Tasks extends Component {
         })
     }
 
+    // Demo Functions
+    demoFunction = ()  => {
+        console.log('demo button pressed');
+        this.setState({
+            task_name: 'Attend a meetup tomorrow',
+            due_date: '2019-07-11',
+            demoMode: true,
+        })
+    }
+
     // ----- RENDER ----- //
     render() {
 
@@ -129,7 +141,7 @@ class Tasks extends Component {
         return (
 
             <div>
-                <h1>Tasks</h1>
+                <h2><Box onClick={() => this.demoFunction()}>Tasks</Box></h2>
                 <ThemeProvider theme={theme}>
                     {/* // ----- Add Task Input Form ----- // */}
                     <span >
@@ -144,7 +156,7 @@ class Tasks extends Component {
                                     label="Add New Task"
                                     margin="normal"
                                     onChange={this.handleTaskChange}
-                                    placeholder="Describe This Task"
+                                    placeholder="Describe This Task (ex: Send Email to CJ)"
                                     position="Relative"
                                     InputLabelProps={{
                                         shrink: true,
@@ -152,12 +164,14 @@ class Tasks extends Component {
                                     variant="outlined"
                                     style={{width: 600, paddingRight: 5}}
                                 />
+                                {this.state.demoMode ?
                                 <TextField
                                     value={this.state.due_date}
                                     id="date"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
+                                    value="2019-07-11"
                                     label="Due Date"
                                     margin="normal"
                                     onChange={this.handleDateSelect}
@@ -165,6 +179,21 @@ class Tasks extends Component {
                                     type="date"
                                     variant="outlined"
                                 />
+                                :
+                                    <TextField
+                                        value={this.state.due_date}
+                                        id="date"
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        label="Due Date"
+                                        margin="normal"
+                                        onChange={this.handleDateSelect}
+                                        position="Relative"
+                                        type="date"
+                                        variant="outlined"
+                                    />
+                                }
                                 <Tooltip title="Add Task">
                                     <IconButton
                                         label="Submit"

@@ -8,7 +8,7 @@ const router = express.Router();
 
 
 // // GET route
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('in GET /api/job_requirements user:', req.user.id)
     const queryText = 
         `
@@ -31,7 +31,7 @@ router.get('/', (req, res) => {
 
 
 // POST route
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('in POST /api/job_requirements', req.body)
     const queryText ='INSERT INTO "jobs_requirements" (requirement_offer, job_id, requirement_id, requirement_met) VALUES ($1, (SELECT MAX(id) FROM jobs), $2, $3)'
     pool.query(queryText, [req.body.requirement_offer, req.body.requirement_id, req.body.requirement_met])

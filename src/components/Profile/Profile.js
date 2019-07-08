@@ -15,6 +15,7 @@ import TextField from '@material-ui/core/TextField';
 
 // ----- MATERIAL UI ICONS ----- //
 import AddIcon from '@material-ui/icons/Add';
+import Box from '@material-ui/core/Box';
 import CheckIcon from '@material-ui/icons/Check';
 import EditIcon from '@material-ui/icons/Edit';
 import FaceIcon from '@material-ui/icons/Face';
@@ -112,7 +113,7 @@ class Profile extends Component {
         
         return (
             <div>
-                <h1>Profile</h1>
+                <h2><Box>Profile</Box></h2>
                 <div className="profileBox">
                     <img className="logo" src="/images/logo3.png" alt="phoenix logo" /> 
                 </div>

@@ -1,5 +1,5 @@
 // ----- PROFILE REQUIREMENTS ----- //
-// The Employment Requirements section of the Profile View
+// The Important Job Attributes section of the Profile View (formerly called Important Job Requirements)
 // Child of Profile
 
 // ----- REACT ----- //
@@ -61,7 +61,7 @@ class ProfileRequirements extends Component {
     addRequirement() {
         console.log('in addRequirement');
         swal({
-            text: 'Add New Employment Requirement',
+            text: 'Add New Important Job Attribute',
             content: "input",
             button: {
                 text: "add",
@@ -73,7 +73,7 @@ class ProfileRequirements extends Component {
                 this.props.dispatch({ type: 'ADD_NEW_REQUIREMENT', payload: { requirement: `${requirement}` } })
             })
             .then(results => {
-                swal("New Requirement Added", {
+                swal("New Attribute Added", {
                     icon: "success",
                 });
             })
@@ -136,8 +136,8 @@ class ProfileRequirements extends Component {
                         <Grid item xs={8}>
                             <Card>
                                 <h2>
-                                    Employment Requirements
-                            <Tooltip title="Edit Employment Requirements">
+                                    Important Job Attributes
+                            <Tooltip title="Edit Attributes">
                                         <IconButton
                                             variant="contained"
                                             color="primary"
@@ -173,7 +173,7 @@ class ProfileRequirements extends Component {
                             <div className="profileRequirementDisplay">
 
                                 <h2>
-                                    Edit Employment Requirements
+                                    Edit Important Job Attributes
                                 <Tooltip
                                         title="Submit Change"
                                     >
@@ -215,7 +215,7 @@ class ProfileRequirements extends Component {
                                 )
                             })} */}
                                 <p ><Tooltip
-                                    title="Add New Employment Requirement"
+                                    title="Add New Attribute"
                                 >
                                     <IconButton>
                                         <AddIcon
