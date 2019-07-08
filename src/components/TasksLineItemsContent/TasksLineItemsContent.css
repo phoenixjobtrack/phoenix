@@ -1,0 +1,4 @@
+.taskNameTextComplete {
+    color: gray;
+    text-decoration: line-through;
+}

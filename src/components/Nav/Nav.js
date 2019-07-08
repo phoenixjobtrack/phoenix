@@ -28,8 +28,14 @@ const Nav = (props) => (
           <Link className="nav-link" to="/profile">
            Profile
           </Link>
+          <Link className="nav-link" to="/jobpipeline">
+           Job Pipeline
+          </Link>
           <Link className="nav-link" to="/tasks">
             Tasks
+          </Link>
+          <Link className="nav-link" to="/contact">
+            Contacts
           </Link>
           <LogOutButton className="nav-link"/>
         </>

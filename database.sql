@@ -9,7 +9,7 @@ CREATE TABLE "users" (
     "last_name" VARCHAR (255) NOT NULL,
     "email" VARCHAR (255) NOT NULL,
     "password" VARCHAR (255) NOT NULL,
-    "disabled" BOOLEAN
+    "disabled" BOOLEAN DEFAULT 'false'
 );
 
 INSERT INTO "users" ("first_name", "last_name", "email", "password") 
@@ -27,7 +27,7 @@ CREATE TABLE "jobs" (
     "compensation" VARCHAR (255),
     "benefits" VARCHAR (500),
     "travel" VARCHAR (500),
-    "closed" BOOLEAN
+    "closed" BOOLEAN DEFAULT 'false'
 );
 
 INSERT INTO "jobs" ("user_id", "position", "company_name", "notes", "posting_url", "deadline", "compensation", "benefits", "travel", "closed")
@@ -43,16 +43,16 @@ CREATE TABLE "contacts" (
     "first_name" VARCHAR (255) NOT NULL,
     "last_name" VARCHAR (255) NOT NULL,
     "company" VARCHAR (255) NOT NULL,
-    "postion" VARCHAR (255),
+    "position" VARCHAR (255),
     "email" VARCHAR (255),
     "linkedin_url" VARCHAR (200),
     "cell" VARCHAR (30),
     "phone" VARCHAR (30),
     "notes" VARCHAR (255),
-    "disabled" BOOLEAN
+    "disabled" BOOLEAN DEFAULT 'false'
 );
 
-INSERT INTO "contacts" ("user_id", "first_name", "last_name", "company", "postion", "email", "linkedin_url", 
+INSERT INTO "contacts" ("user_id", "first_name", "last_name", "company", "position", "email", "linkedin_url", 
 "cell", "phone", "notes", "disabled")
 VALUES 
 ('1', 'Karen', 'Wickleberg', 'Orbit', 'Sales Lead', 'Karen.Wickleberg@gmail.com', 
@@ -69,13 +69,13 @@ CREATE TABLE "stages" (
 INSERT INTO "stages" ("job_id", "stage", "note", "date")
 VALUES 
 ('1', 'Hiring Manager Interview', 'Talk to Karen for advice', '7/13/2019'),
-('2', 'Phone Screening', 'Review the postion information on their website', '7/13/2019');
+('2', 'Phone Screening', 'Review the position information on their website', '7/13/2019');
 
 CREATE TABLE "requirements" (
     "id" SERIAL PRIMARY KEY,
     "requirement" VARCHAR (255) NOT NULL,
     "user_id" INTEGER REFERENCES "users" ON DELETE CASCADE,
-    "disabled" BOOLEAN
+    "disabled" BOOLEAN DEFAULT 'false'
 );
 
 INSERT INTO "requirements" ("requirement", "user_id", "disabled")
@@ -86,23 +86,25 @@ CREATE TABLE "jobs_requirements" (
     "id" SERIAL PRIMARY KEY,
     "job_id" INTEGER REFERENCES "jobs" ON DELETE CASCADE,
     "requirement_id" INTEGER REFERENCES "requirements" ON DELETE CASCADE,
+    "requirement_offer" VARCHAR (255),
     "requirement_met" BOOLEAN
 );
 
-INSERT INTO "jobs_requirements" ("job_id", "requirement_id", "requirement_met")
-VALUES 
-('1', '1', 'true'),
-('1', '1', 'false');
+INSERT INTO "jobs_requirements"
+    ("job_id", "requirement_id", "requirement_offer", "requirement_met")
+VALUES
+    ('1', '1', '68k salary', 'false');
 
 CREATE TABLE "tasks" (
     "id" SERIAL PRIMARY KEY,
     "user_id" INTEGER REFERENCES "users" ON DELETE CASCADE,
     "task_name" VARCHAR (255) NOT NULL,
     "due_date" DATE,
-    "complete" BOOLEAN,
+    "complete" BOOLEAN DEFAULT 'false',
     "contact_id" INTEGER REFERENCES "contacts" ON DELETE CASCADE,
     "job_id" INTEGER REFERENCES "jobs" ON DELETE CASCADE,
-    "disabled" BOOLEAN
+    "note" VARCHAR (255),
+    "disabled" BOOLEAN DEFAULT 'false'
 );
 
 INSERT INTO "tasks" ("user_id", "task_name", "due_date", "complete", "contact_id", "job_id", "disabled")

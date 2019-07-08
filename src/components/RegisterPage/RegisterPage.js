@@ -4,16 +4,18 @@ import { connect } from 'react-redux';
 //MaterialUI stuff
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import {Add} from '@material-ui/icons'
+import {Add} from '@material-ui/icons';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Chip } from '@material-ui/core'
+import { Chip } from '@material-ui/core';
+import './RegisterPage.css';
 
 
 const useStyles = makeStyles(theme => ({
@@ -89,9 +91,11 @@ function SignUp(props) {
   let requirementsArray = []
   const handleRequirementSubmit = (event) => {
     event.preventDefault()
-    console.log('in handleRequirementSubmit, requirement:', newRequirement)
+    
     requirementsArray = [...requirements, newRequirement];
+    
     setRequirements(requirementsArray)
+    console.log('in handleRequirementSubmit, requirement:', newRequirement, requirementsArray)
     //reset state to clear input
     setNewRequirement([]);
 
@@ -127,18 +131,23 @@ function SignUp(props) {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container 
+      className="registerContainer"
+      component="main" 
+      maxWidth="xs">
+      <Card>
       <CssBaseline />
-      <div className={classes.paper}>
+      <div className={classes.paper} id="avatar">
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" id="avatar">
           Sign up
                 </Typography>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} id="formContent">
           <Grid item xs={12} sm={6}>
             <TextField
+              
               autoComplete="fname"
               name="firstName"
               variant="outlined"
@@ -202,7 +211,7 @@ function SignUp(props) {
         <Grid container>
           <Grid item xs={12}>
             
-              <form onSubmit={handleRequirementSubmit}>
+              <form onSubmit={handleRequirementSubmit} id="jobRequirementForm">
 
                 <Grid item xs={2}>
                   <Button
@@ -225,14 +234,8 @@ function SignUp(props) {
                     onChange={handleRequirementChange}
                   />
                 </Grid>
-
-
-
               </form>
-            
-            
-          </Grid>
-          
+          </Grid>          
         </Grid>
         <Grid container>
           <Grid item>
@@ -258,119 +261,18 @@ function SignUp(props) {
           className={classes.submit}
         >
           Sign Up
-                    </Button>
+        </Button>
         <Grid container justify="center">
           <Grid item>
             <Link href="#" variant="body2" onClick={() => { props.dispatch({ type: 'SET_TO_LOGIN_MODE' }) }}>
               Already have an account? Sign in
-                            </Link>
+            </Link>
           </Grid>
         </Grid>
       </div>
+      </Card>
     </Container>
   );
 }
 
 export default connect()(SignUp)
-
-// import React, { Component } from 'react';
-// import {connect} from 'react-redux';
-// import SignUp from '../SignUp/SignUp'
-
-// class RegisterPage extends Component {
-//   state = {
-//     email: '',
-//     password: '',
-//   };
-
-//   registerUser = (event) => {
-//     event.preventDefault();
-
-//     if (this.state.email && this.state.password) {
-//       this.props.dispatch({
-//         type: 'REGISTER',
-//         payload: {
-//           email: this.state.email,
-//           password: this.state.password,
-//         },
-//       });
-//     } else {
-//       this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
-//     }
-//   } // end registerUser
-
-//   handleInputChangeFor = propertyName => (event) => {
-//     this.setState({
-//       [propertyName]: event.target.value,
-//     });
-//   }
-
-//   render() {
-//     return (
-      
-//       <div>
-//         <SignUp />
-//         {this.props.errors.registrationMessage && (
-//           <h2
-//             className="alert"
-//             role="alert"
-//           >
-//             {this.props.errors.registrationMessage}
-//           </h2>
-//         )}
-//         <form onSubmit={this.registerUser}>
-//           <h1>Register User</h1>
-//           <div>
-//             <label htmlFor="email">
-//               Email:
-//               <input
-//                 type="text"
-//                 name="email"
-//                 value={this.state.email}
-//                 onChange={this.handleInputChangeFor('email')}
-//               />
-//             </label>
-//           </div>
-//           <div>
-//             <label htmlFor="password">
-//               Password:
-//               <input
-//                 type="password"
-//                 name="password"
-//                 value={this.state.password}
-//                 onChange={this.handleInputChangeFor('password')}
-//               />
-//             </label>
-//           </div>
-//           <div>
-//             <input
-//               className="register"
-//               type="submit"
-//               name="submit"
-//               value="Register"
-//             />
-//           </div>
-//         </form>
-//         <center>
-//           <button
-//             type="button"
-//             className="link-button"
-//             onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
-//           >
-//             Login
-//           </button>
-//         </center>
-//       </div>
-//     );
-//   }
-// }
-
-// // Instead of taking everything from state, we just want the error messages.
-// // if you wanted you could write this code like this:
-// // const mapStateToProps = ({errors}) => ({ errors });
-// const mapStateToProps = state => ({
-//   errors: state.errors,
-// });
-
-// export default connect(mapStateToProps)(RegisterPage);
-
