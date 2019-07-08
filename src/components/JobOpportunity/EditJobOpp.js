@@ -90,10 +90,10 @@ class EditJobOpp extends Component {
         return (
             <div>
                 <h2><Box>Job Opportunity</Box></h2>
-                <div className="jobOppsBut">
+                {/* <div className="jobOppsBut">
                     <Button variant="contained" >Offer Accepted</Button>
                     <Button variant="contained" color="secondary" onClick={this.handleCloseJob}>Close Opportunity</Button>
-                </div>
+                </div> */}
 
                 {/* Employment Information */}
                 <div className="jobOppForm">

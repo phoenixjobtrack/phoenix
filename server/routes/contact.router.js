@@ -1,8 +1,9 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-router.get('/', (req,res) => {
+router.get('/', rejectUnauthenticated, (req,res) => {
     console.log('in GET /api/contact',req.user.id);
     let query = `SELECT * FROM "contacts"
     WHERE "user_id" = $1 `;
@@ -18,7 +19,7 @@ router.get('/', (req,res) => {
 )
 
 //route to get selected contact only
-router.get('/current/:id', (req,res)=>{
+router.get('/current/:id', rejectUnauthenticated, (req,res)=>{
     console.log('in GET /api/contact/current', req.params.id)
     let query = `SELECT * FROM "contacts" WHERE "user_id" = $1 AND "id"=$2`
     pool.query(query,[req.user.id,req.params.id])
@@ -31,7 +32,7 @@ router.get('/current/:id', (req,res)=>{
         })
 })
 
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('in POST /api/contact', req.user.id, req.body)
     const queryText = `INSERT INTO "contacts" (user_id, first_name, last_name, company, position, email, linkedin_url, cell, phone, notes ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`;
     pool.query(queryText, [req.user.id, req.body.first_name, req.body.last_name, req.body.company, req.body.position, req.body.email, req.body.linkedin_url,
@@ -46,7 +47,7 @@ router.post('/', (req, res) => {
         })
 });
 
-router.put('/:id', (req,res)=>{
+router.put('/:id', rejectUnauthenticated, (req,res)=>{
     console.log('in PUT /api/contact', req.params.id, req.body)
     const queryText = 
         `
