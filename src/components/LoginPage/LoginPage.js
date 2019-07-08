@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 // ----- MATERIAL UI ----- //
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -16,20 +17,10 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-// import { setActionValue } from 'sweetalert/typings/modules/state';
+import './LoginPage.css';
 
 
-function MadeWithLove() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Built with love by the '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Material-UI
-      </Link>
-      {' team.'}
-    </Typography>
-  );
-}
+
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -90,23 +81,17 @@ function SignIn(props) {
     } else {
       props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
-    // setActionValue('');
-    // if (this.state.email && this.state.password) {
-    //   this.props.dispatch({
-    //     type: 'LOGIN',
-    //     payload: {
-    //       email: state.email,
-    //       password: state.password,
-    //     },
-    //   });
-    // } else {
-    //   this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
-    // }
+    
   } // end login
 
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container 
+      className="loginContainer"
+      component="main" 
+      maxWidth="xs" 
+    >
+      <Card >
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -115,8 +100,9 @@ function SignIn(props) {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form onSubmit={login} className={classes.form} noValidate>
+          <form onSubmit={login} className={classes.form} id="loginTextField" noValidate>
           <TextField
+            className="loginTextField"
             autoComplete="email"
             name="email"
             variant="outlined"
@@ -129,6 +115,7 @@ function SignIn(props) {
             autoFocus
           />
           <TextField
+            className="loginTextField"
             autoComplete="current-password"
             name="password"
             variant="outlined"
@@ -176,103 +163,13 @@ function SignIn(props) {
         </form>
       </div>
       <Box mt={5}>
-        <MadeWithLove />
+       
       </Box>
+      </Card>
     </Container>
   );
 }
 
-// ----- STARTER REPO ----- //
-
-// class LoginPage extends Component {
-//   state = {
-//     email: '',
-//     password: '',
-//   };
-
-//   login = (event) => {
-//     event.preventDefault();
-
-//     if (this.state.email && this.state.password) {
-//       this.props.dispatch({
-//         type: 'LOGIN',
-//         payload: {
-//           email: this.state.email,
-//           password: this.state.password,
-//         },
-//       });
-//     } else {
-//       this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
-//     }
-//   } // end login
-
-//   handleInputChangeFor = propertyName => (event) => {
-//     this.setState({
-//       [propertyName]: event.target.value,
-//     });
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         {this.props.errors.loginMessage && (
-//           <h2
-//             className="alert"
-//             role="alert"
-//           >
-//             {this.props.errors.loginMessage}
-//           </h2>
-//         )}
-//         <form onSubmit={this.login}>
-//           <h1>Login</h1>
-//           <div>
-//             <label htmlFor="email">
-//               email:
-//               <input
-//                 type="text"
-//                 name="email"
-//                 value={this.state.email}
-//                 onChange={this.handleInputChangeFor('email')}
-//               />
-//             </label>
-//           </div>
-//           <div>
-//             <label htmlFor="password">
-//               Password:
-//               <input
-//                 type="password"
-//                 name="password"
-//                 value={this.state.password}
-//                 onChange={this.handleInputChangeFor('password')}
-//               />
-//             </label>
-//           </div>
-//           <div>
-//             <input
-//               className="log-in"
-//               type="submit"
-//               name="submit"
-//               value="Log In"
-//             />
-//           </div>
-//         </form>
-//         <center>
-//           <button
-//             type="button"
-//             className="link-button"
-//             onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
-//           >
-//             Register
-//           </button>
-//         </center>
-//       </div>
-//     );
-//   }
-// }
-
-// Instead of taking everything from state, we just want the error messages.
-// if you wanted you could write this code like this:
-// const mapStateToProps = ({errors}) => ({ errors });
 const mapStateToProps = state => ({
   errors: state.errors,
 });

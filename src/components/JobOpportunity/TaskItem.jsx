@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import moment from 'moment'
 
-
-import Grid from '@material-ui/core/Grid';
-import Input from '@material-ui/core/Input';
+//Material UI
+import { List, ListItem, ListItemIcon, Tooltip } from '@material-ui/core'
 import TextField from '@material-ui/core/TextField';
 import RemoveIcon from '@material-ui/icons/Remove';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -41,53 +41,66 @@ class TaskItem extends Component {
     }
     render() {
         return(
-            <Grid container>
-                <Grid item xs={1}>
-                    <IconButton className="oppsSubBut" onClick={this.handleRemove}>
-                        <RemoveIcon />
-                    </IconButton>
-                    {/* <span style={{ fontSize: 20 }}>
-                        Tasks:
-                    </span> */}
-
-                </Grid>
-                <Grid item xs={4}>
-                    <InputLabel>Task</InputLabel>
-                    <Input
-                        // style={{ width: 415, paddingTop: 16 }}
-                        placeholder="Task Details"
-                        value={this.props.reduxState.currentTasks[this.props.i].task_name}
-                        onChange={this.handleTaskChange('task_name')}
-                        inputProps={{
-                            'aria-label': 'Task Name',
-                        }}
-                    />
-                </Grid>
-                <Grid item xs={3} >
-                    <InputLabel>Due Date</InputLabel>
-                    <TextField
-                        id="date"
-                        type="date"
-                        // style={{ paddingTop: 16 }}
-                        value={this.props.reduxState.currentTasks[this.props.i].due_date}
-                        onChange={this.handleTaskChange('due_date')}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
-                </Grid>
-                <Grid item xs={4}>
-                    <InputLabel>Notes</InputLabel>
-                    <Input
-                        placeholder="Task Note"
-                        value={this.props.reduxState.currentTasks[this.props.i].note}
-                        onChange={this.handleTaskChange('note')}
-                        inputProps={{
-                            'aria-label': 'Task Note',
-                        }}
-                    />
-                </Grid>
-            </Grid>
+            <ListItem>
+                <ListItemIcon>
+                    <Tooltip title="Remove Stage">
+                        <IconButton className="oppsSubBut" onClick={this.handleRemove} color="secondary">
+                            <RemoveIcon
+                                color="secondary" />
+                        </IconButton>
+                    </Tooltip>
+                </ListItemIcon> 
+                <List>
+                    <ListItem>
+                        <InputLabel>Task</InputLabel>
+                    </ListItem>
+                    <ListItem>
+                        <TextField
+                            style={{ minWidth: 230 }}
+                            // style={{ width: 415, paddingTop: 16 }}
+                            // placeholder="Task Details"
+                            value={this.props.reduxState.currentTasks[this.props.i].task_name}
+                            onChange={this.handleTaskChange('task_name')}
+                            inputProps={{
+                                'aria-label': 'Task Name',
+                            }}
+                        />
+                    </ListItem>
+                </List>
+                <List>
+                    <ListItem>
+                        <InputLabel>Due Date</InputLabel>
+                    </ListItem>
+                    <ListItem style={{ width: 175 }}>
+                        <TextField
+                            style={{ width: '100%' }}
+                            id="date"
+                            type="date"
+                            value={moment(this.props.reduxState.currentTasks[this.props.i].due_date).format('YYYY-MM-DD')}
+                            onChange={this.handleTaskChange('due_date')}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                    </ListItem>
+                </List>
+                <List style={{ width: 300 }}>
+                    <ListItem>
+                        <InputLabel>Notes</InputLabel>
+                    </ListItem>
+                    <ListItem>
+                        <TextField
+                            style={{ width: '100%' }}
+                            value={this.props.reduxState.currentTasks[this.props.i].note}
+                            onChange={this.handleTaskChange('note')}
+                            inputProps={{
+                                'aria-label': 'Task Note',
+                            }}
+                        />
+                    </ListItem>
+                </List>
+            </ListItem>
+        
         )
     }
 }

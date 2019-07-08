@@ -17,7 +17,7 @@ import PhoneIcon from '@material-ui/icons/Phone'
 import CellIcon from '@material-ui/icons/PhoneAndroid'
 import NotesIcon from '@material-ui/icons/Notes'
 import PersonIcon from '@material-ui/icons/Person'
-import {Card, CardContent, Typography, Button, TextField, List, ListItem, Grid, withStyles} from '@material-ui/core'
+import {List, ListItem, ListItemIcon, Card, CardContent, Typography, Button, TextField, Grid, withStyles} from '@material-ui/core'
 
 
 const styles = theme => ({
@@ -32,7 +32,13 @@ const styles = theme => ({
         margin: theme.spacing.unit,
     },
     card: {
-        height: '85vh'
+        marginTop: '50px',
+        height: '80vh'
+    },
+    saveBtn: {
+        position: 'absolute',
+        top: 150,
+        right: 50
     }
 });
 
@@ -102,113 +108,157 @@ class ContactPage extends Component {
 
                 <CardContent>
                     <Grid container>
-                        <Typography>
-                            <PersonAddIcon/>
-                            Add New Contact
-                        </Typography>                        
-                        <form onSubmit={this.handleSubmit}>
+                        <Grid item xs={12}>
+                            <Typography variant='h5'>
+                                <List>
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <PersonAddIcon color="primary" />
+                                        </ListItemIcon>
+                                        Add New Contact
+                                    </ListItem>
+                                </List>
+                            </Typography> 
+                        </Grid>
+                        <Grid item xs={12}
+                            style={{
+                                minWidth: '70vw'
+                            }}>
+                            <form onSubmit={this.handleSubmit}>
+                                <Button className={this.props.classes.saveBtn} variant="contained" color="primary" type="submit">Save</Button>
+                                <List>
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <PersonIcon color="primary" />
+                                        </ListItemIcon>
+                                        <TextField
+                                            style={{
+                                                width: '50%'
+                                            }}
+                                            label="First Name"
+                                            onChange={this.handleChangeFor('first_name')}
+                                            className={this.props.classes.inputs}
+                                        />
+                                        <ListItemIcon></ListItemIcon>
+                                        <TextField
+                                            style={{
+                                                width: '50%'
+                                            }}
+                                            label="Last Name"
+                                            onChange={this.handleChangeFor('last_name')}
+                                            className={this.props.classes.inputs}
+                                        />
+                                    </ListItem>
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <WorkIcon color="primary" />
+                                        </ListItemIcon>
+                                        <TextField
+                                            style={{
+                                                width: '50%'
+                                            }}
+                                            label="Company"
+                                            onChange={this.handleChangeFor('company')}
+                                            className={this.props.classes.inputs}
+                                        />
+                                        <ListItemIcon></ListItemIcon>
+                                        <TextField
+                                            style={{
+                                                width: '50%'
+                                            }}
+                                            label="Position"
+                                            onChange={this.handleChangeFor('position')}
+                                            className={this.props.classes.inputs}
+                                        />
+                                    </ListItem>
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <EmailIcon color="primary" />
+                                        </ListItemIcon>
+                                        <TextField
+                                            style={{
+                                                width: '50%'
+                                            }}
+                                            label="Email"
+                                            onChange={this.handleChangeFor('email')}
+                                            className={this.props.classes.inputs}
+                                        />
+                                        <ListItemIcon>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="24"
+                                                height="24"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    fill="#2196f3"
+                                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                                                />
+                                            </svg>
+                                        </ListItemIcon>
+                                        <TextField
+                                            style={{
+                                                width: '50%'
+                                            }}
+                                            label="LinkedIn"
+                                            onChange={this.handleChangeFor('linkedin_url')}
+                                            className={this.props.classes.inputs}
+                                        />
+                                    </ListItem>
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <PhoneIcon color="primary" />
+                                        </ListItemIcon>
+                                        <TextField
+                                            style={{
+                                                width: '50%'
+                                            }}
+                                            label="Phone"
+                                            onChange={this.handleChangeFor('phone')}
+                                            className={this.props.classes.inputs}
+                                            InputProps={{
+                                                inputComponent: TextMaskCustom,
+                                                value: this.state.contact.phone,
+                                                onChange: this.handleChangeFor('phone'),
+                                            }}
+                                        />
+                                        <ListItemIcon>
+                                            <CellIcon color="primary"/>
+                                        </ListItemIcon>
+                                        <TextField
+                                            style={{
+                                                width: '50%'
+                                            }}
+                                            label="Cell"
+                                            className={this.props.classes.inputs}
+                                            InputProps={{
+                                                inputComponent: TextMaskCustom,
+                                                value: this.state.contact.cell,
+                                                onChange: this.handleChangeFor('cell'),
+                                            }}
+                                        />
+                                    </ListItem>
+                                    <ListItem>
+                                        <ListItemIcon>
+                                            <NotesIcon color="primary" />
+                                        </ListItemIcon>
+                                        <TextField
+                                            style={{
+                                                width: '100%'
+                                            }}
+                                            id="notes"
+                                            label="Notes"
+                                            multiline
+                                            // rows="4"
+                                            margin="normal"
+                                            onChange={this.handleChangeFor('notes')}
+                                            className={this.props.classes.inputs}
+                                        />
+                                    </ListItem>
+                                </List>
+                            </form>
+                        </Grid>                   
                         
-                            <Grid container item xs={8} direction="row" justify="flex-start">
-                                <Grid item xs={1} justify="center" alignContent="center">
-                                    <PersonIcon />
-                                </Grid>
-                                <Grid item xs={5}>
-                                    <TextField
-                                        label="First Name"
-                                        onChange={this.handleChangeFor('first_name')}
-                                        className={this.props.classes.inputs}
-                                    />
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <TextField
-                                        label="Last Name"
-                                        onChange={this.handleChangeFor('last_name')}
-                                        className={this.props.classes.inputs}
-                                    />
-                                </Grid>
-                                <Grid item xs={1} justify="center" alignContent="center">
-                                    <WorkIcon />
-                                </Grid>
-                                <Grid item xs={5}>
-                                    <TextField
-                                        label="Company"
-                                        onChange={this.handleChangeFor('company')}
-                                        className={this.props.classes.inputs}
-                                    />
-                                </Grid>  
-                                <Grid item xs={6}>                             
-                                    <TextField
-                                        label="Position"
-                                        onChange={this.handleChangeFor('position')}
-                                        className={this.props.classes.inputs}
-                                    />
-                                </Grid>
-                                <Grid item xs={1} justify="center" alignContent="center">
-                                    <EmailIcon />
-                                </Grid>
-                                <Grid item xs={4}>                                    
-                                    <TextField
-                                        label="Email"
-                                        onChange={this.handleChangeFor('email')}
-                                        className={this.props.classes.inputs}
-                                    />
-                                </Grid>
-                                <Grid item xs={1} justify="center" alignContent="center">
-                                    <img src="https://img.icons8.com/material/24/000000/linkedin.png"></img>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <TextField
-                                        label="LinkedIn"
-                                        onChange={this.handleChangeFor('linkedin_url')}
-                                        className={this.props.classes.inputs}
-                                    />
-                                </Grid>
-                                <Grid item xs={1} justify="center" alignContent="center">
-                                    <PhoneIcon />
-                                </Grid>
-                                <Grid item xs={4}>
-                                    <TextField
-                                        label="Phone"
-                                        onChange={this.handleChangeFor('phone')}
-                                        className={this.props.classes.inputs}
-                                        InputProps={{
-                                            inputComponent: TextMaskCustom,
-                                            value: this.state.contact.phone,
-                                            onChange: this.handleChangeFor('phone'),
-                                        }}
-                                    />
-                                </Grid>
-                                <Grid item xs={1} justify="center" alignContent="center">
-                                    <CellIcon />
-                                </Grid>
-                                <Grid item xs={6}> 
-                                    <TextField
-                                        label="Cell"
-                                        className={this.props.classes.inputs}
-                                        InputProps={{
-                                            inputComponent: TextMaskCustom,
-                                            value: this.state.contact.cell,
-                                            onChange: this.handleChangeFor('cell'),
-                                        }}
-                                    />
-                                </Grid>                         
-                                <Grid item xs={6}>
-                                    <NotesIcon/>
-                                    <TextField
-                                        id="notes"
-                                        label="Notes"
-                                        multiline
-                                        rows="4"
-                                        margin="normal"
-                                        onChange={this.handleChangeFor('notes')}
-                                        className={this.props.classes.inputs}
-                                    />
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <Button variant="contained" color="primary" type="submit">Save</Button>
-                                </Grid>   
-                            </Grid>
-                        </form>
                     </Grid>                        
                 </CardContent>
             </Card>

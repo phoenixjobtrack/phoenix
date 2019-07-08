@@ -2,7 +2,9 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
     /* background-color: #939292; */
+    background-image: url('/images/light-blue.jpg');
 }
+
 
 .alert {
     background-color: #ff4545;
@@ -16,14 +18,19 @@ body {
     
 }
 
-/* form {
-    background-color: #dbd5d5;
-    width: 30%;
-    height: 250px;
-    margin: 20px auto;
-    padding: 25px;
-    border-radius: 2px;
-} */
+
+h1 {
+    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+    text-transform: uppercase;
+    text-rendering: optimizeLegibility;
+      color: #1e1e83;
+      font-weight: bolder;
+      letter-spacing: .07em;
+      text-shadow: 
+        2px 2px 0px #b2c0bf, 
+        2px 2px 0px rgba(39, 37, 53, 0.2);
+    
+}
 
 input {
     margin: 5px;

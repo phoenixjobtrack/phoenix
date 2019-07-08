@@ -8,9 +8,17 @@ import MaskedInput from 'react-text-mask'
 import AddTask from './AddTask'
 import TaskList from './TaskList'
 
+import WorkIcon from '@material-ui/icons/Work'
+import EmailIcon from '@material-ui/icons/Email'
+import PersonAddIcon from '@material-ui/icons/PersonAdd'
+import PhoneIcon from '@material-ui/icons/Phone'
+import CellIcon from '@material-ui/icons/PhoneAndroid'
+import NotesIcon from '@material-ui/icons/Notes'
+import PersonIcon from '@material-ui/icons/Person'
+
 import Avatar from '@material-ui/core/Avatar';
 import { red } from '@material-ui/core/colors';
-import { Card, CardContent, CardHeader, Button, TextField, Grid, withStyles } from '@material-ui/core'
+import { Divider, List, ListItem, ListItemIcon, Card, CardContent, CardHeader, Button, TextField, Grid, withStyles } from '@material-ui/core'
 
 const styles = theme => ({
 
@@ -22,13 +30,29 @@ const styles = theme => ({
         margin: theme.spacing.unit,
     },
     card: {
-        height: '85vh'
+        marginTop: '50px',
+        minHeight: '85vh'
     },
     avatar: {
         backgroundColor: red[500],
-        height: '100px',
-        width: '100px'
+        height: '70px',
+        width: '70px'
     },
+    contactInput : {
+        width: '50%',
+        marginRight: '30px'
+    },
+    division: {
+        marginBottom: '40px',
+        marginTop: '30px'
+    },
+    saveBtn: {
+        position: 'absolute',
+        top: 150,
+        right: 50
+    }
+    
+    
 
 });
 
@@ -65,7 +89,7 @@ class ContactPage extends Component {
     handleSubmit = () => {
         console.log('in handleSubmit')
         this.props.dispatch({type: 'UPDATE_CONTACT', payload: this.props.reduxState.currentContact})
-
+        this.props.history.push('/contact')
     }
 
 
@@ -106,82 +130,156 @@ class ContactPage extends Component {
                 </Avatar>
         
         return (
-            <Card className={this.props.classes.card}>
-                <CardHeader
-                    avatar={avatar}
-                    title={`${currentContact.first_name} ${currentContact.last_name}`}
-                    subheader={currentContact.company}
-                />
-                <CardContent>
-                    <Grid container>
-                        <Grid item xs={6}>
+            
+                <Card className={this.props.classes.card}>
+                    <CardHeader
+                        avatar={avatar}
+                        title={`${currentContact.first_name} ${currentContact.last_name}`}
+                        subheader={currentContact.company}
+                    />
+                    
+                    <CardContent>
+                        <Grid container>
+                            <Grid item xs={12}
+                                style={{
+                                    minWidth: '70vw'
+                                }}>
                             <form onSubmit={this.handleSubmit}>
-                                <TextField
-                                    label="First Name"
-                                    value={currentContact.first_name}
-                                    onChange={this.handleChangeFor('first_name')}
-                                />
-                                <TextField
-                                    label="Last Name"
-                                    value={currentContact.last_name}
-                                    onChange={this.handleChangeFor('last_name')}
-                                />
-                                <TextField
-                                    label="Company"
-                                    value={currentContact.company}
-                                    onChange={this.handleChangeFor('company')}
-                                />
-                                <TextField
-                                    label="Position"
-                                    value={currentContact.position}
-                                    onChange={this.handleChangeFor('position')}
-                                />
-                                <TextField
-                                    label="Email"
-                                    value={currentContact.email}
-                                    onChange={this.handleChangeFor('email')}
-                                />
-                                <TextField
-                                    label="LinkedIn"
-                                    value={currentContact.linkedin_url}
-                                    onChange={this.handleChangeFor('linkedin_url')}
-                                />
-                                <TextField
-                                    label="Phone"
-                                    InputProps={{
-                                        inputComponent: TextMaskCustom,
-                                        value: currentContact.phone,
-                                        onChange: this.handleChangeFor('phone'),
-                                    }}
-                                />
-                                <TextField
-                                    label="Cell"
-                                    InputProps={{
-                                        inputComponent: TextMaskCustom,
-                                        value: currentContact.cell,
-                                        onChange: this.handleChangeFor('cell'),
-                                    }}
-                                />
-                                <TextField
-                                    id="notes"
-                                    label="Notes"
-                                    multiline
-                                    rows="4"
-                                    margin="normal"
-                                    value={currentContact.notes}
-                                    onChange={this.handleChangeFor('notes')}
-                                />
-                                <Button variant="contained" color="primary" type="submit">Save</Button>
-                            </form>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <AddTask />
-                            <TaskList contactId={this.currentContact.id}/>
-                        </Grid>
-                    </Grid>
+                                <Button className={this.props.classes.saveBtn} variant="contained" color="primary" type="submit">Save</Button>
+                                    <List>
+                                        <ListItem >
+                                        <ListItemIcon className={this.props.classes.inputIcon}>
+                                                <PersonIcon color="primary" />
+                                            </ListItemIcon>
+                                            <TextField
+                                                className={this.props.classes.contactInput}
+                                                label="First Name"
+                                                value={currentContact.first_name}
+                                                onChange={this.handleChangeFor('first_name')}
+                                            />
+                                            <ListItemIcon></ListItemIcon>
+                                            <TextField
+                                                className={this.props.classes.contactInput}
+                                                label="Last Name"
+                                                value={currentContact.last_name}
+                                                onChange={this.handleChangeFor('last_name')}
+                                            />
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemIcon>
+                                                <WorkIcon color="primary" />
+                                            </ListItemIcon>
+                                            <TextField
+                                                className={this.props.classes.contactInput}
+                                                label="Company"
+                                                value={currentContact.company}
+                                                onChange={this.handleChangeFor('company')}
+                                            />
+                                            <ListItemIcon></ListItemIcon>
+                                            <TextField
+                                                className={this.props.classes.contactInput}
+                                                label="Position"
+                                                value={currentContact.position}
+                                                onChange={this.handleChangeFor('position')}
+                                            />
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemIcon>
+                                                <EmailIcon color="primary" />
+                                            </ListItemIcon>
+                                            <TextField
+                                                className={this.props.classes.contactInput}
+                                                label="Email"
+                                                value={currentContact.email}
+                                                onChange={this.handleChangeFor('email')}
+                                            />
+                                            <ListItemIcon>
+                                                <svg 
+                                                    xmlns="http://www.w3.org/2000/svg" 
+                                                    width="24" 
+                                                    height="24" 
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path 
+                                                        fill="#2196f3" 
+                                                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" 
+                                                    />
+                                                </svg>
+                                            </ListItemIcon>
+                                            <TextField
+                                                className={this.props.classes.contactInput}
+                                                label="LinkedIn"
+                                                value={currentContact.linkedin_url}
+                                                onChange={this.handleChangeFor('linkedin_url')}
+                                            />
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemIcon>
+                                                <PhoneIcon color="primary" />
+                                            </ListItemIcon>
+                                            <TextField
+                                                className={this.props.classes.contactInput}
+                                                label="Phone"
+                                                InputProps={{
+                                                    inputComponent: TextMaskCustom,
+                                                    value: currentContact.phone,
+                                                    onChange: this.handleChangeFor('phone'),
 
-                </CardContent>
-            </Card>
+                                                }}
+                                                InputLabelProps={{
+                                                    shrink: true
+                                                }}
+                                            />
+                                            <ListItemIcon>
+                                                <CellIcon color="primary" />
+                                            </ListItemIcon>
+                                            <TextField
+                                                className={this.props.classes.contactInput}
+                                                label="Cell"
+                                                InputLabelProps={{
+                                                    shrink: true
+                                                }}
+                                                InputProps={{
+                                                    inputComponent: TextMaskCustom,
+                                                    value: currentContact.cell,
+                                                    onChange: this.handleChangeFor('cell'),
+                                                }}
+                                            />
+                                        </ListItem>
+                                        <ListItem>
+                                            <ListItemIcon>
+                                                <NotesIcon color="primary" />
+                                            </ListItemIcon>
+                                            <TextField
+                                                style={{
+                                                    width: '100%'
+                                                }}
+                                                id="notes"
+                                                label="Notes"
+                                                multiline
+                                                margin="normal"
+                                                value={currentContact.notes}
+                                                onChange={this.handleChangeFor('notes')}
+                                            />
+                                        </ListItem> 
+                                    </List>
+                                </form >
+                                <Divider className={this.props.classes.division}/>
+                            </Grid>
+                            <Grid container item xs={12}>
+                            
+                                <Grid item xs={7}>
+                                    <AddTask />
+                                </Grid>
+                                <Grid item xs={5}>
+                                    <TaskList contactId={this.currentContact.id} />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </CardContent>
+                </Card>
+            
+        
         )
     }
 }

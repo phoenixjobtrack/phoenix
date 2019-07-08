@@ -4,16 +4,18 @@ import { connect } from 'react-redux';
 //MaterialUI stuff
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import {Add} from '@material-ui/icons'
+import {Add} from '@material-ui/icons';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Chip } from '@material-ui/core'
+import { Chip } from '@material-ui/core';
+import './RegisterPage.css';
 
 
 const useStyles = makeStyles(theme => ({
@@ -129,18 +131,23 @@ function SignUp(props) {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container 
+      className="registerContainer"
+      component="main" 
+      maxWidth="xs">
+      <Card>
       <CssBaseline />
-      <div className={classes.paper}>
+      <div className={classes.paper} id="avatar">
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h5" id="avatar">
           Sign up
                 </Typography>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} id="formContent">
           <Grid item xs={12} sm={6}>
             <TextField
+              
               autoComplete="fname"
               name="firstName"
               variant="outlined"
@@ -204,7 +211,7 @@ function SignUp(props) {
         <Grid container>
           <Grid item xs={12}>
             
-              <form onSubmit={handleRequirementSubmit}>
+              <form onSubmit={handleRequirementSubmit} id="jobRequirementForm">
 
                 <Grid item xs={2}>
                   <Button
@@ -263,6 +270,7 @@ function SignUp(props) {
           </Grid>
         </Grid>
       </div>
+      </Card>
     </Container>
   );
 }

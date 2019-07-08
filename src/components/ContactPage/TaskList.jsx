@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom'
+import moment from 'moment'
 
 //Material UI
-import { Typography, List, ListItem } from '@material-ui/core'
+import { Divider, Grid, Typography, List, ListItem } from '@material-ui/core'
 
 class TaskList extends Component {
     
@@ -25,26 +26,65 @@ class TaskList extends Component {
                 //put a line in here to compare current date to due date
                 dueDate = new Date(task.due_date)
                 console.log('dates', today, dueDate)
-                if (dueDate>=today){
-                    upcomingTasks.push(<ListItem key={i}>{task.task_name} Due:{task.due_date}</ListItem>)
+                if (!task.complete){
+                    upcomingTasks.push(
+                        <div key={i}>
+                            <ListItem >
+                                <Typography variant="body1" >{task.task_name}</Typography>
+                            </ListItem>
+                            <ListItem>   
+                                <Typography variant="caption">  Due:  {moment(task.due_date).format('MM-DD-YYYY')}</Typography>                          
+                            </ListItem>
+                        <Divider/>
+                    </div>)
+                }
+                else if (task.complete) {
+                    completedTasks.push(
+                        <div key={i}>
+                            <ListItem >
+                                <Typography variant="body1" >{task.task_name}</Typography>
+                            </ListItem>
+                            <ListItem>
+                                <Typography variant="caption">  Due:  {moment(task.due_date).format('MM-DD-YYYY')}</Typography>
+                            </ListItem>
+                            <Divider />
+                        </div>)
                 }
                 else {
-                    completedTasks.push(<ListItem key={i}>{task.task_name} Due:{task.due_date}</ListItem>)
+                    completedTasks.push(
+                        <div key={i}>
+                            <ListItem >
+                                <Typography variant="body1" >{task.task_name}</Typography>
+                            </ListItem>
+                            <ListItem>
+                                <Typography variant="caption">  Due:  {moment(task.due_date).format('MM-DD-YYYY')}</Typography>
+                            </ListItem>
+                            <Divider />
+                        </div>)
                 }
             }
         })
         
         return(
-            <>
-                <Typography>Upcoming Tasks:</Typography>
-                <List>
-                    {upcomingTasks}
-                </List>
-                <Typography>History:</Typography>
-                <List>
-                    {completedTasks}
-                </List>
-            </>
+         
+            <Grid container spacing={3}>
+                <Grid item xs={6}>
+                    <Typography variant="h6">Upcoming Tasks</Typography>
+                    <List>
+                        {upcomingTasks}
+                    </List>
+                </Grid>
+                <Grid item xs={6}>
+                    <Typography variant="h6">History</Typography>
+                    <List>
+                        {completedTasks}
+                    </List>
+                </Grid>
+            </Grid>
+            
+                
+                
+            
         )
     }
 }
