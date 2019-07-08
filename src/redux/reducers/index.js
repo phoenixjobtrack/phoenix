@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import errors from './errorsReducer';
 import loginMode from './loginModeReducer';
 import tasks from './tasksReducer';
+import tasksByDate from './tasksByDateReducer'
 import user from './userReducer';
 import contacts from './contactReducer';
 import requirements from './requirementsReducer';
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   loginMode, // will have a value of 'login' or 'registration' to control which screen is shown
   tasks, 
+  tasksByDate, //stores tasks sorted by date
   user, // will have an id and email if someone is logged in
   contacts, //will store all of the user's contacts
   requirements, //will store all of the user's job requirements

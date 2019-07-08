@@ -10,18 +10,18 @@ class CompletedTasks extends Component {
 
 
     componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_TASKS' })
+        this.props.dispatch({ type: 'FETCH_TASKS_BY_DATE' })
     }
 
     render() {
 
         //load tasks associated with contact
-        let upcomingTasks = []
+        let sortedTasks = []
         let completedTasks = []
         let today = new Date()
         let dueDate = ''
 
-        this.props.reduxState.tasks.map((task, i) => {
+        this.props.reduxState.tasksByDate.map((task, i) => {
             if (task.contact_id == this.props.contactId) {
                 //put a line in here to compare current date to due date
                 dueDate = new Date(task.due_date)
@@ -43,11 +43,12 @@ class CompletedTasks extends Component {
                 }
             }
         })
+        
 
         return (
             <>
                 <List>
-                    {completedTasks}
+                    {completedTasks.sort()}
                 </List>
             </>
         )

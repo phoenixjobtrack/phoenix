@@ -7,7 +7,7 @@ import './StickyList.css'
 //Material-UI stuff
 import ContactCard from './ContactCard'
 import { makeStyles } from '@material-ui/core/styles';
-import {Button, ListItem, CardContent, Card} from '@material-ui/core'
+import {Button, ListItem, Fab, Tooltip, InputLabel, MenuItem, Input, Select} from '@material-ui/core'
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
@@ -17,13 +17,19 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd'
 
 const useStyles = makeStyles(theme => ({
     root: {
-        width: '80%',
+        width: '100%',
         maxWidth: 1000,
         backgroundColor: theme.palette.background.paper,
         borderRadius: '5px',
         overflow: 'auto',
         maxHeight: 1000,
         height:'75vh'
+    },
+    container: {
+        backgroundColor: theme.palette.background.paper,
+        width: '80%',
+        // padding: '10px',
+        borderRadius: '5px'
     },
     listSection: {
         backgroundColor: 'inherit',
@@ -44,7 +50,8 @@ const useStyles = makeStyles(theme => ({
 
     },
     sorting: {
-        position: 'sticky'
+        position: 'sticky',
+        justify: 'right'
     },
     listSubheader: {
         color: theme.palette.primary.main
@@ -54,6 +61,11 @@ const useStyles = makeStyles(theme => ({
         paddingLeft:'5px',
         paddingRight: '5px'
         // padding: 0
+    },
+    addNewBtn: {
+        position: 'absolute',
+        right: 100,
+        
     }
 }));
 
@@ -70,12 +82,12 @@ function PinnedSubheaderList(props) {
     const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
     //function defines what word to sort by, sets local state 'key' to that word
-    const setSorting = (param) =>{
-        setKey(param)
+    const setSorting = (event) =>{
+        setKey(event.target.value)
         console.log('doc', document)
         var myDiv = document.getElementById('containerDiv');
         myDiv.scrollTop = 0;
-        console.log(param)
+        console.log(event.target.value)
         console.log('key', key)
 
     }
@@ -91,22 +103,28 @@ function PinnedSubheaderList(props) {
     }
 
     return (
-        <div >            
+        <>
+        <Tooltip title="Add a new contact">
+            <Fab className={classes.addNewBtn} color="primary" aria-label="add new contact" onClick={addNewContact} >
+                <PersonAddIcon />
+            </Fab>
+        </Tooltip>
+        <div className={classes.container}>            
             <div className={classes.sorting}>
-                <h3>Sort Alphabetically By:
-                    <Button variant="contained" color="primary" onClick={() => { setSorting('first') }}>
-                            First Name
-                    </Button>
-                    <Button variant="contained" color="primary" onClick={() => { setSorting('last') }}>Last Name</Button>
-                    <Button variant="contained" color="primary" onClick={() => { setSorting('company') }}>Company</Button>
-                    <IconButton variant="contained" color="primary" aria-label="add new contact" onClick={addNewContact} >
-                        <PersonAddIcon/>
-                    </IconButton>
-                </h3>                
-                {alphabet.map(letter => (
-                    <a onClick={() => { scrollToLetter(letter) }}>{letter}</a>
-                ))}
-            </div>
+                <InputLabel htmlFor="sort by:">Sort by</InputLabel>
+                <Select
+                    value={key}
+                    onChange={setSorting}
+                    input={<Input name="sorting" id="sorting" />}
+                >
+                    <MenuItem value={'first'}>First Name</MenuItem>
+                    <MenuItem value={'last'}>Last Name</MenuItem>
+                    <MenuItem value={'company'}>Company</MenuItem>
+                </Select>
+            </div>                 
+            {alphabet.map(letter => (
+                <a onClick={() => { scrollToLetter(letter) }}>{letter}</a>
+            ))}
             <List id="containerDiv" className={classes.root} subheader={<li />}>
                 {alphabet.map(sectionId => (
                     <ListItem key={`section-${sectionId}`} className={classes.listSection}>
@@ -143,6 +161,7 @@ function PinnedSubheaderList(props) {
                 ))}
             </List>
         </div>
+    </>
         
     );
 }
