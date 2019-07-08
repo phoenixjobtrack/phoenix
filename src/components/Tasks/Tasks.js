@@ -122,6 +122,17 @@ class Tasks extends Component {
         })
     }
 
+    // Demo Functions
+    demoFunction = ()  => {
+        console.log('demo button pressed');
+        this.setState({
+            task_name: 'Attend a meetup tomorrow',
+            due_date: '07/10/2019',
+            contact_id: null,
+            job_id: null,
+        })
+    }
+
     // ----- RENDER ----- //
     render() {
 
@@ -129,7 +140,7 @@ class Tasks extends Component {
         return (
 
             <div>
-                <h2><Box>Tasks</Box></h2>
+                <h2><Box onClick={() => this.demoFunction()}>Tasks</Box></h2>
                 <ThemeProvider theme={theme}>
                     {/* // ----- Add Task Input Form ----- // */}
                     <span >
