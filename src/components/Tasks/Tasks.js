@@ -80,6 +80,7 @@ class Tasks extends Component {
         contact_id: null,
         job_id: null,
         demoMode: false,
+        complete: false
     };
 
     // Click Handlers For Add Task

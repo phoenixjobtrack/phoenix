@@ -88,10 +88,9 @@ class ContactPage extends Component {
         })
     }
 
-    handleSubmit = () => {
-        console.log('in handleSubmit')
+    handleSubmit = () =>{
         this.props.dispatch({ type: 'SUBMIT_CONTACT', payload: this.state.contact })
-
+        this.props.history.push('/contact')
     }
 
 

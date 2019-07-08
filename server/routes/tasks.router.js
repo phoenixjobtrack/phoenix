@@ -25,10 +25,32 @@ router.get('/', (req, res) => {
         })
 }); // End router.get/api/tasks/:id
 
+router.get('/date', (req, res) => {
+    console.log('in /tasks router.get');
+    let query = `SELECT "id", 
+    "user_id",
+    "task_name",
+    to_char("due_date", 'MM/DD/YYYY') AS "due_date", 
+    "complete",
+    "contact_id",
+    "job_id",
+    "note",
+    "disabled" FROM "tasks" WHERE "user_id"=$1
+    ORDER BY "due_date";`;
+    pool.query(query, [req.user.id])
+        .then((result) => {
+            res.send(result.rows);
+        })
+        .catch((error) => {
+            console.log(`Error on query ${error}`);
+            res.sendStatus(500)
+        })
+}); // End router.get/api/tasks/:id
+
 router.post('/', (req, res) => {
     console.log('in POST /api/tasks', req.user.id, req.body)
-    const queryText = `INSERT INTO "tasks" (user_id, task_name, due_date, note, contact_id, job_id) VALUES ($1, $2, $3, $4, $5, $6);`;
-    pool.query(queryText, [req.user.id, req.body.task_name, req.body.due_date, req.body.note, req.body.contact_id, req.body.job_id])
+    const queryText = `INSERT INTO "tasks" (user_id, task_name, due_date, note, contact_id, job_id, complete) VALUES ($1, $2, $3, $4, $5, $6, $7);`;
+    pool.query(queryText, [req.user.id, req.body.task_name, req.body.due_date, req.body.note, req.body.contact_id, req.body.job_id, req.body.complete])
         .then(response => {
             console.log('in POST /api/tasks', response)
             res.sendStatus(201)

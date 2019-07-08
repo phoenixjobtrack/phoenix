@@ -81,6 +81,9 @@ class EditJobOpp extends Component {
         this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'benefits', value: '401K & 3 Weeks PTO' } })
     }
 
+    componentWillUnmount() {
+        this.props.dispatch({ type: 'CLEAR_CURRENT_JOB' })
+    }
 
     render() {
         console.log('current job', this.props.currentJob)

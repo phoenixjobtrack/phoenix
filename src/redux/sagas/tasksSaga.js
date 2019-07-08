@@ -26,7 +26,7 @@ function* addTaskNote(action) {
     }
 }
 
-// Fetch all tasks from the database in the "tasks" table
+// Fetch all tasks from the database in the "tasks" table (sorted by id)
 function* fetchTasks(action) {
     console.log('in fetchTasks Saga', action.payload);
     // Do or Do Not. There is no
@@ -35,6 +35,18 @@ function* fetchTasks(action) {
         yield put({type: 'STORE_TASKS', payload: tasks.data})
     } catch (error) {
         console.log('error in fetchTasks saga', error);
+    }
+}
+
+//fetch tasks sorted by date
+function* fetchTasksByDate() {
+    console.log('in fetchTasksByDate saga');
+    try {
+        const tasks = yield axios.get('/api/tasks/date')
+        yield put ({type: 'STORE_TASKS_BY_DATE', payload: tasks.data})
+    }
+    catch(err){
+        console.log('error in fetchTasksByDate', err)
     }
 }
 
@@ -87,6 +99,7 @@ function* tasksSaga() {
     yield takeEvery('ADD_TASK_NOTE', addTaskNote)
     yield takeEvery('CHECK_TASK_BOX', toggleTaskCheck);
     yield takeEvery('FETCH_TASKS', fetchTasks);
+    yield takeEvery('FETCH_TASKS_BY_DATE', fetchTasksByDate)
     yield takeEvery('REMOVE_TASK_NOTE', removeTaskNote);
     yield takeEvery('REMOVE_TASK', removeTask);
     yield takeEvery('UPDATE_TASK', updateTask);
