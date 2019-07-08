@@ -26,7 +26,7 @@ class JobPipelinePage_1 extends Component {
         <h2><Box>Job Pipeline</Box></h2>
         <Grid container spacing={3}>
           <Grid item sm={9}>
-            <ButtonGroup
+            {/* <ButtonGroup
               variant="contained"
               color="primary"
               aria-label="Full-width contained primary button group"
@@ -34,62 +34,12 @@ class JobPipelinePage_1 extends Component {
               <Button>ACTIVE</Button>
               <Button>CLOSED</Button>
               <Button>SHOW ALL</Button>
-            </ButtonGroup>
+            </ButtonGroup> */}
           </Grid>
           <Grid item sm>
-            <Button style={{ width: '90%' }} onClick={() => { this.props.history.push('/jobOpportunity'); }} variant="contained" color="primary">NEW OPPORTUNITY</Button>
+            <Button style={{ width: '90%', marginBottom: '20px' }} onClick={() => { this.props.history.push('/jobOpportunity'); }} variant="contained" color="primary">NEW OPPORTUNITY</Button>
           </Grid>
         </Grid>
-        {/* <Paper style={{ height: 335, width: '100%' }}>
-      <JobPipelinePageTable
-        rowCount={rows.length}
-        rowGetter={({ index }) => rows[index]}
-        columns={[
-          {
-            width: 250,
-            label: 'Company',
-            dataKey: 'company_name',
-
-          },
-          {
-            width: 250,
-            label: 'Position',
-            dataKey: 'position',
-            //numeric: true,
-          },
-          {
-            width: 300,
-            label: 'Stage',
-            dataKey: 'currentStage',
-            //numeric: true,
-          },
-          {
-            width: 250,
-            label: 'Next Activity Date',
-            dataKey: 'nextStageDate',
-            numeric: true,
-          },
-          {
-            width: 600,
-            label: 'Notes',
-            dataKey: 'nextStageNote',
-            //numeric: true,
-          },
-          {
-            width: 600,
-            label: 'NextStage',
-            dataKey: 'nextstage',
-            //numeric: true,
-          },
-          {
-            width: 200,
-            label: 'Edit',
-            dataKey: 'link',
-          },
-        ]}
-
-      />
-    </Paper> */}
         <NewTable />
       </div>
 

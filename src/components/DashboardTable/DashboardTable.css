@@ -12,7 +12,7 @@ table {
   
   tr:nth-child(even){background-color: #dce4e4}
   
-  .header {
+  th {
     background-color: rgb(43, 150, 243);
     color: white;
   }
