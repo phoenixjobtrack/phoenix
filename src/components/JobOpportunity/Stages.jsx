@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import StageItem from './StageItem'
 
-import { List, ListItem, ListItemIcon, Typography, withStyles} from '@material-ui/core'
+import { List, ListItem, ListItemIcon, Typography, withStyles, Box } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -45,13 +45,32 @@ class Stages extends Component {
         // this.props.dispatch({type:'FETCH_JOB_STAGES'})
     }
 
+    // Demo Functions
+    demoFunction = () => {
+        console.log('demo button pressed');
+        this.stageCounter = this.stageCounter + 1
+        console.log('stageCounter', this.stageCounter)
+        // this.setState({ stages: [...this.state.stages, {}] })
+        this.props.dispatch({
+            type: 'ADD_TO_REDUX_STAGE',
+            payload: {
+                key: this.stageCounter,
+                stage: {
+                    stage: 'Phone Screen',
+                    note: 'with Bethany',
+                    date: '2019-07-11',
+                }
+            }
+        })
+    }
+
     render() {
         console.log('stages state', this.props.reduxState.currentStage, Object.entries(this.props.reduxState.currentStage))
         return(
             <div className="jobOppForm">
 
                 <List>
-                    <Typography variant='h5' paragraph="true" align="left">Stages of the Hiring Process</Typography>                             
+                    <Typography variant='h5' paragraph="true" align="left"><Box onClick={() => this.demoFunction()}>Stages of the Hiring Process</Box></Typography>                             
                     {Object.entries(this.props.reduxState.currentStage).map((stage) => {
                         console.log('stage from Redux', stage, stage[0])
                         return (

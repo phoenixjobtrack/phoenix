@@ -31,6 +31,8 @@ const styles = theme => ({
 
 class JobOpportunity extends Component {
 
+
+
     handleJobChange = propertyName => (event) => {
         console.log('jobInfo', event.target.value);
         this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: propertyName, value: event.target.value } })
@@ -70,21 +72,40 @@ class JobOpportunity extends Component {
         this.props.dispatch({ type: 'FETCH_JOB_REQUIREMENTS', payload: this.props.match.params.id })
     }
 
+    // Demo Functions
+    demoFunction = () => {
+        console.log('demo button pressed');
+        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'company_name', value: 'Craymill' } })
+        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'position', value: 'Jr. Project Manager' } })
+        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'posting_url', value: 'http://craymillsolutions.com/jobs/1234' } })
+        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'deadline', value: '2019-07-15' } })
+        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'job_notes', value: 'Heard about position from Melissa' } })
+
+    }
+
+    demoSalary = () => {
+        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'compensation', value: '$75,000' } })
+    }
+
+    demoBenefits = () => {
+        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'benefits', value: '401K & 3 Weeks PTO' } })
+    }
+
     render() {
         console.log('current job', this.props.currentJob)
         return (
             <div>
 
-                <h1>Job Opportunity</h1>
+                <h2><Box onClick={() => this.demoFunction()}>Job Opportunity</Box></h2>
                 <div>
                     <Grid container spacing={3}>
                         <Grid item sm={5}>
                         </Grid>
                         <Grid item sm={3}>
-                            <Button variant="contained" color="primary" style={{width: '100%'}}>Offer Accepted</Button>
+                            <Button variant="contained" color="primary" style={{ width: '100%' }}>Offer Accepted</Button>
                         </Grid>
                         <Grid item sm={3}>
-                            <Button variant="contained" color="primary" style={{width: '100%'}} onClick={this.handleCloseJob}>Close Opportunity</Button>
+                            <Button variant="contained" color="primary" style={{ width: '100%' }} onClick={this.handleCloseJob}>Close Opportunity</Button>
                         </Grid>
                         <Grid item sm={1}>
                         </Grid>
@@ -106,7 +127,7 @@ class JobOpportunity extends Component {
                                             </ListItemIcon>
                                             <TextField
                                                 style={{
-                                                    
+
                                                     minWidth: 178,
                                                     marginBottom: 10
                                                 }}
@@ -170,9 +191,14 @@ class JobOpportunity extends Component {
                                 <Grid item xs={12}>
                                     <List>
                                         <ListItem>
-                                            <ListItemIcon>
-                                                <MoneyIcon color="primary" />
-                                            </ListItemIcon>
+                                            <Box onClick={() => this.demoSalary()}>
+                                                <ListItemIcon>
+                                                    <MoneyIcon
+                                                        color="primary"
+
+                                                    />
+                                                </ListItemIcon>
+                                            </Box>
                                             <TextField
                                                 style={{
                                                     marginBottom: 10
@@ -188,9 +214,14 @@ class JobOpportunity extends Component {
                                             />
                                         </ListItem>
                                         <ListItem>
-                                            <ListItemIcon>
-                                                <StarIcon color="primary" />
-                                            </ListItemIcon>
+                                            <Box onClick={() => this.demoBenefits()}>
+                                                <ListItemIcon>
+                                                    <StarIcon
+                                                        color="primary"
+
+                                                    />
+                                                </ListItemIcon>
+                                            </Box>
                                             <TextField
                                                 style={{
                                                     minWidth: 178,
@@ -242,15 +273,15 @@ class JobOpportunity extends Component {
                 <Requirements />
 
                 <Grid container spacing={3}>
-                        <Grid item sm={4}>
-                        </Grid>
-                        <Grid item sm={4}>
-                        <Button variant="contained" color="primary" onClick={this.handleSubmit} style={{ width: 350, marginTop: 30 }}>Save This Job Opportunity</Button>
-                        </Grid>
-                        <Grid item sm={4}>
-                        </Grid>
+                    <Grid item sm={4}>
                     </Grid>
-                
+                    <Grid item sm={4}>
+                        <Button variant="contained" color="primary" onClick={this.handleSubmit} style={{ width: 350, marginTop: 30 }}>Save This Job Opportunity</Button>
+                    </Grid>
+                    <Grid item sm={4}>
+                    </Grid>
+                </Grid>
+
 
             </div>
         )

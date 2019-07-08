@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 
@@ -17,7 +17,7 @@ import PhoneIcon from '@material-ui/icons/Phone'
 import CellIcon from '@material-ui/icons/PhoneAndroid'
 import NotesIcon from '@material-ui/icons/Notes'
 import PersonIcon from '@material-ui/icons/Person'
-import {List, ListItem, ListItemIcon, Card, CardContent, Typography, Button, TextField, Grid, withStyles} from '@material-ui/core'
+import { List, ListItem, ListItemIcon, Card, CardContent, Typography, Button, TextField, Grid, withStyles, Box } from '@material-ui/core'
 
 
 const styles = theme => ({
@@ -61,28 +61,29 @@ TextMaskCustom.propTypes = {
 
 class ContactPage extends Component {
 
-    state={
-        contact:{
+    state = {
+        contact: {
             first_name: '',
             last_name: '',
             company: '',
-            position:'',
-            email:'',
+            position: '',
+            email: '',
             linkedin_url: '',
             phone: '',
             cell: '',
             notes: ''
         },
         textmask: '',
+        demoMode: false,
     }
 
 
-    handleChangeFor = key => event =>{
+    handleChangeFor = key => event => {
         console.log('in handleChangeFor', key, event)
         this.setState({
             contact: {
                 ...this.state.contact,
-                [key]:event.target.value
+                [key]: event.target.value
             }
         })
     }
@@ -93,16 +94,35 @@ class ContactPage extends Component {
     }
 
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.dispatch({ type: 'FETCH_CONTACTS' })
-        
+
+    }
+
+    // Demo Functions
+    demoFunction = () => {
+        console.log('demo button pressed');
+        this.setState({
+            contact: {
+                first_name: 'Melissa',
+                last_name: 'White',
+                company: 'Craymill Solutions',
+                position: 'Product Manager',
+                email: 'mwhite@craymillsolutions.com',
+                linkedin_url: 'http://linkedin.com/mwhite_craymill',
+                phone: '612-555-6789',
+                cell: '952-555-1234',
+                notes: 'Met at Jr Devs Meetup'
+            },
+            demoMode: true,
+        })
     }
 
 
-    render(){
+    render() {
         console.log('this.state', this.state)
-        
-        return(
+
+        return (
             <Card className={this.props.classes.card}>
 
                 <CardContent>
@@ -114,10 +134,10 @@ class ContactPage extends Component {
                                         <ListItemIcon>
                                             <PersonAddIcon color="primary" />
                                         </ListItemIcon>
-                                        Add New Contact
+                                        <Box onClick={() => this.demoFunction()}>Add New Contact</Box>
                                     </ListItem>
                                 </List>
-                            </Typography> 
+                            </Typography>
                         </Grid>
                         <Grid item xs={12}
                             style={{
@@ -130,58 +150,118 @@ class ContactPage extends Component {
                                         <ListItemIcon>
                                             <PersonIcon color="primary" />
                                         </ListItemIcon>
-                                        <TextField
-                                            style={{
-                                                width: '50%'
-                                            }}
-                                            label="First Name"
-                                            onChange={this.handleChangeFor('first_name')}
-                                            className={this.props.classes.inputs}
-                                        />
+                                        {this.state.demoMode ?
+                                            <TextField
+                                                style={{
+                                                    width: '50%'
+                                                }}
+                                                label="First Name"
+                                                value="Melissa"
+                                                onChange={this.handleChangeFor('first_name')}
+                                                className={this.props.classes.inputs}
+                                            />
+                                            :
+                                            <TextField
+                                                style={{
+                                                    width: '50%'
+                                                }}
+                                                label="First Name"
+                                                onChange={this.handleChangeFor('first_name')}
+                                                className={this.props.classes.inputs}
+                                            />
+                                        }
                                         <ListItemIcon></ListItemIcon>
-                                        <TextField
-                                            style={{
-                                                width: '50%'
-                                            }}
-                                            label="Last Name"
-                                            onChange={this.handleChangeFor('last_name')}
-                                            className={this.props.classes.inputs}
-                                        />
+                                        {this.state.demoMode ?
+                                            <TextField
+                                                style={{
+                                                    width: '50%'
+                                                }}
+                                                value="White"
+                                                label="Last Name"
+                                                onChange={this.handleChangeFor('last_name')}
+                                                className={this.props.classes.inputs}
+                                            />
+                                            :
+                                            <TextField
+                                                style={{
+                                                    width: '50%'
+                                                }}
+                                                label="Last Name"
+                                                onChange={this.handleChangeFor('last_name')}
+                                                className={this.props.classes.inputs}
+                                            />
+                                        }
                                     </ListItem>
                                     <ListItem>
                                         <ListItemIcon>
                                             <WorkIcon color="primary" />
                                         </ListItemIcon>
-                                        <TextField
-                                            style={{
-                                                width: '50%'
-                                            }}
-                                            label="Company"
-                                            onChange={this.handleChangeFor('company')}
-                                            className={this.props.classes.inputs}
-                                        />
+                                        {this.state.demoMode ?
+                                            <TextField
+                                                style={{
+                                                    width: '50%'
+                                                }}
+                                                value="Craymill Solutions"
+                                                label="Company"
+                                                onChange={this.handleChangeFor('company')}
+                                                className={this.props.classes.inputs}
+                                            />
+                                            :
+                                            <TextField
+                                                style={{
+                                                    width: '50%'
+                                                }}
+                                                label="Company"
+                                                onChange={this.handleChangeFor('company')}
+                                                className={this.props.classes.inputs}
+                                            />
+                                        }
                                         <ListItemIcon></ListItemIcon>
-                                        <TextField
-                                            style={{
-                                                width: '50%'
-                                            }}
-                                            label="Position"
-                                            onChange={this.handleChangeFor('position')}
-                                            className={this.props.classes.inputs}
-                                        />
+                                        {this.state.demoMode ?
+                                            <TextField
+                                                style={{
+                                                    width: '50%'
+                                                }}
+                                                value="Product Manager"
+                                                label="Position"
+                                                onChange={this.handleChangeFor('position')}
+                                                className={this.props.classes.inputs}
+                                            />
+                                            :
+                                            <TextField
+                                                style={{
+                                                    width: '50%'
+                                                }}
+                                                label="Position"
+                                                onChange={this.handleChangeFor('position')}
+                                                className={this.props.classes.inputs}
+                                            />
+                                        }
                                     </ListItem>
                                     <ListItem>
                                         <ListItemIcon>
                                             <EmailIcon color="primary" />
                                         </ListItemIcon>
-                                        <TextField
-                                            style={{
-                                                width: '50%'
-                                            }}
-                                            label="Email"
-                                            onChange={this.handleChangeFor('email')}
-                                            className={this.props.classes.inputs}
-                                        />
+                                        {this.state.demoMode ?
+                                            <TextField
+                                                style={{
+                                                    width: '50%'
+                                                }}
+                                                value="mwhite@craymillsolutions.com"
+                                                label="Email"
+                                                onChange={this.handleChangeFor('email')}
+                                                className={this.props.classes.inputs}
+                                            />
+                                            :
+                                            <TextField
+                                                style={{
+                                                    width: '50%'
+                                                }}
+                                                label="Email"
+                                                onChange={this.handleChangeFor('email')}
+                                                className={this.props.classes.inputs}
+                                            />
+                                        }
                                         <ListItemIcon>
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -195,70 +275,131 @@ class ContactPage extends Component {
                                                 />
                                             </svg>
                                         </ListItemIcon>
-                                        <TextField
-                                            style={{
-                                                width: '50%'
-                                            }}
-                                            label="LinkedIn"
-                                            onChange={this.handleChangeFor('linkedin_url')}
-                                            className={this.props.classes.inputs}
-                                        />
+                                        {this.state.demoMode ?
+                                            <TextField
+                                                style={{
+                                                    width: '50%'
+                                                }}
+                                                value="http://linkedin.com/mwhite_craymill"
+                                                label="LinkedIn"
+                                                onChange={this.handleChangeFor('linkedin_url')}
+                                                className={this.props.classes.inputs}
+                                            />
+                                            :
+                                            <TextField
+                                                style={{
+                                                    width: '50%'
+                                                }}
+                                                label="LinkedIn"
+                                                onChange={this.handleChangeFor('linkedin_url')}
+                                                className={this.props.classes.inputs}
+                                            />
+                                        }
                                     </ListItem>
                                     <ListItem>
                                         <ListItemIcon>
                                             <PhoneIcon color="primary" />
                                         </ListItemIcon>
-                                        <TextField
-                                            style={{
-                                                width: '50%'
-                                            }}
-                                            label="Phone"
-                                            onChange={this.handleChangeFor('phone')}
-                                            className={this.props.classes.inputs}
-                                            InputProps={{
-                                                inputComponent: TextMaskCustom,
-                                                value: this.state.contact.phone,
-                                                onChange: this.handleChangeFor('phone'),
-                                            }}
-                                        />
+                                        {this.state.demoMode ?
+                                            <TextField
+                                                style={{
+                                                    width: '50%'
+                                                }}
+                                                value="612-555-6789"
+                                                label="Phone"
+                                                onChange={this.handleChangeFor('phone')}
+                                                className={this.props.classes.inputs}
+                                                InputProps={{
+                                                    inputComponent: TextMaskCustom,
+                                                    value: this.state.contact.phone,
+                                                    onChange: this.handleChangeFor('phone'),
+                                                }}
+                                            />
+                                            :
+                                            <TextField
+                                                style={{
+                                                    width: '50%'
+                                                }}
+                                                label="Phone"
+                                                onChange={this.handleChangeFor('phone')}
+                                                className={this.props.classes.inputs}
+                                                InputProps={{
+                                                    inputComponent: TextMaskCustom,
+                                                    value: this.state.contact.phone,
+                                                    onChange: this.handleChangeFor('phone'),
+                                                }}
+                                            />
+                                        }
                                         <ListItemIcon>
-                                            <CellIcon color="primary"/>
+                                            <CellIcon color="primary" />
                                         </ListItemIcon>
-                                        <TextField
-                                            style={{
-                                                width: '50%'
-                                            }}
-                                            label="Cell"
-                                            className={this.props.classes.inputs}
-                                            InputProps={{
-                                                inputComponent: TextMaskCustom,
-                                                value: this.state.contact.cell,
-                                                onChange: this.handleChangeFor('cell'),
-                                            }}
-                                        />
+                                        {this.state.demoMode ?
+                                            <TextField
+                                                style={{
+                                                    width: '50%'
+                                                }}
+                                                value="952-555-1234"
+                                                label="Cell"
+                                                className={this.props.classes.inputs}
+                                                InputProps={{
+                                                    inputComponent: TextMaskCustom,
+                                                    value: this.state.contact.cell,
+                                                    onChange: this.handleChangeFor('cell'),
+                                                }}
+                                            />
+                                            :
+                                            <TextField
+                                                style={{
+                                                    width: '50%'
+                                                }}
+                                                label="Cell"
+                                                className={this.props.classes.inputs}
+                                                InputProps={{
+                                                    inputComponent: TextMaskCustom,
+                                                    value: this.state.contact.cell,
+                                                    onChange: this.handleChangeFor('cell'),
+                                                }}
+                                            />
+                                        }
                                     </ListItem>
                                     <ListItem>
                                         <ListItemIcon>
                                             <NotesIcon color="primary" />
                                         </ListItemIcon>
-                                        <TextField
-                                            style={{
-                                                width: '100%'
-                                            }}
-                                            id="notes"
-                                            label="Notes"
-                                            multiline
-                                            // rows="4"
-                                            margin="normal"
-                                            onChange={this.handleChangeFor('notes')}
-                                            className={this.props.classes.inputs}
-                                        />
+                                        {this.state.demoMode ?
+                                            <TextField
+                                                style={{
+                                                    width: '100%'
+                                                }}
+                                                value="Met at Metro Meetup"
+                                                id="notes"
+                                                label="Notes"
+                                                multiline
+                                                // rows="4"
+                                                margin="normal"
+                                                onChange={this.handleChangeFor('notes')}
+                                                className={this.props.classes.inputs}
+                                            />
+                                            :
+                                            <TextField
+                                                style={{
+                                                    width: '100%'
+                                                }}
+                                                id="notes"
+                                                label="Notes"
+                                                multiline
+                                                // rows="4"
+                                                margin="normal"
+                                                onChange={this.handleChangeFor('notes')}
+                                                className={this.props.classes.inputs}
+                                            />
+                                        }
                                     </ListItem>
                                 </List>
                             </form>
-                        </Grid>                   
-                        
-                    </Grid>                        
+                        </Grid>
+
+                    </Grid>
                 </CardContent>
             </Card>
         )

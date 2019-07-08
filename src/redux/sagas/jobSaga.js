@@ -148,6 +148,7 @@ function* saveJobUpdates(action){
             console.log('in saveJobUpdates saga requirement:', requirement)
             axios.put('/api/jobs/requirements', requirement)
         })
+        yield put({ type: 'CLEAR_CURRENT_JOB' })
     }
     catch(err) {
         console.log('error in PUT /api/jobs', err)

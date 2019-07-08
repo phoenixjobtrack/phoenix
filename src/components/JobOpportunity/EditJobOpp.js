@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import moment from 'moment'
 
 
@@ -21,8 +21,23 @@ import StarIcon from '@material-ui/icons/StarBorder'
 import { InputLabel, Typography, TextField, Box, withStyles, Icon, List, ListItem, ListItemIcon } from '@material-ui/core'
 import InputAdornment from '@material-ui/core/InputAdornment';
 
+const config = {
+    angle: "90",
+    spread: "70",
+    startVelocity: "67",
+    elementCount: 50,
+    dragFriction: 0.1,
+    duration: "7890",
+    stagger: "30",
+    width: "10px",
+    height: "43px",
+    colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"]
+};
+
 
 class EditJobOpp extends Component {
+
+    someProp;
 
     handleJobChange = propertyName => (event) => {
         console.log('jobInfo', event.target.value);
@@ -32,7 +47,7 @@ class EditJobOpp extends Component {
     handleSave = (event) => {
         event.preventDefault();
         this.props.dispatch({
-            type: 'SAVE_JOB_UPDATES', 
+            type: 'SAVE_JOB_UPDATES',
             payload: {
                 job: this.props.currentJob,
                 stages: this.props.stages,
@@ -42,31 +57,43 @@ class EditJobOpp extends Component {
         this.props.history.push('/jobpipeline')
     }
 
-    componentDidMount = () =>{
+    componentDidMount = () => {
         // this.props.dispatch({ type: 'FETCH_JOBS' })
 
         //fetch current job data, store in redux
         this.props.dispatch({ type: 'FETCH_CURRENT_JOB', payload: this.props.match.params.id })
-        
+
         //fetch job stages for selected job and store in redux
-        this.props.dispatch({type: 'FETCH_JOB_STAGES', payload: this.props.match.params.id}) 
+        this.props.dispatch({ type: 'FETCH_JOB_STAGES', payload: this.props.match.params.id })
 
         //fetch job tasks for selected job and store in redux
-        this.props.dispatch({type: 'FETCH_JOB_TASKS', payload: this.props.match.params.id})
+        this.props.dispatch({ type: 'FETCH_JOB_TASKS', payload: this.props.match.params.id })
 
         //fetch requirements assessment for selected job and store in redux
         this.props.dispatch({ type: 'FETCH_JOB_REQUIREMENTS', payload: this.props.match.params.id })
     }
-    
+
+    demoSalary = () => {
+        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'compensation', value: '$75,000' } })
+    }
+
+    demoBenefits = () => {
+        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'benefits', value: '401K & 3 Weeks PTO' } })
+    }
+
+    componentWillUnmount() {
+        this.props.dispatch({ type: 'CLEAR_CURRENT_JOB' })
+    }
+
     render() {
         console.log('current job', this.props.currentJob)
         return (
             <div>
-                <h1>Job Opportunity</h1>
-                <div className="jobOppsBut">
-                    <Button variant="contained" color="primary">Offer Accepted</Button>
+                <h2><Box>Job Opportunity</Box></h2>
+                {/* <div className="jobOppsBut">
+                    <Button variant="contained" >Offer Accepted</Button>
                     <Button variant="contained" color="secondary" onClick={this.handleCloseJob}>Close Opportunity</Button>
-                </div>
+                </div> */}
 
                 {/* Employment Information */}
                 <div className="jobOppForm">
@@ -78,7 +105,7 @@ class EditJobOpp extends Component {
                                     <List>
                                         <ListItem>
                                             <ListItemIcon>
-                                                <WorkIcon color="primary"/>
+                                                <WorkIcon color="primary" />
                                             </ListItemIcon>
                                             <TextField
                                                 style={{
@@ -92,7 +119,7 @@ class EditJobOpp extends Component {
                                         </ListItem>
                                         <ListItem>
                                             <ListItemIcon>
-                                                <PersonIcon color="primary"/>
+                                                <PersonIcon color="primary" />
                                             </ListItemIcon>
                                             <TextField
                                                 style={{
@@ -106,7 +133,7 @@ class EditJobOpp extends Component {
                                         </ListItem>
                                         <ListItem>
                                             <ListItemIcon>
-                                                <LinkIcon color="primary"/>
+                                                <LinkIcon color="primary" />
                                             </ListItemIcon>
                                             <TextField
                                                 style={{
@@ -120,7 +147,7 @@ class EditJobOpp extends Component {
                                         </ListItem>
                                         <ListItem>
                                             <ListItemIcon>
-                                                <CalendarIcon color="primary"/>
+                                                <CalendarIcon color="primary" />
                                             </ListItemIcon>
                                             <TextField
                                                 style={{
@@ -143,9 +170,14 @@ class EditJobOpp extends Component {
                                 <Grid item xs={12}>
                                     <List>
                                         <ListItem>
-                                            <ListItemIcon>
-                                                <MoneyIcon color="primary"/>
-                                            </ListItemIcon>
+                                            <Box onClick={() => this.demoSalary()}>
+                                                <ListItemIcon>
+                                                    <MoneyIcon
+                                                        color="primary"
+
+                                                    />
+                                                </ListItemIcon>
+                                            </Box>
                                             <TextField
                                                 style={{
                                                     marginBottom: 10
@@ -161,9 +193,14 @@ class EditJobOpp extends Component {
                                             />
                                         </ListItem>
                                         <ListItem>
-                                            <ListItemIcon>
-                                                <StarIcon color="primary"/>
-                                            </ListItemIcon>
+                                            <Box onClick={() => this.demoBenefits()}>
+                                                <ListItemIcon>
+                                                    <StarIcon
+                                                        color="primary"
+
+                                                    />
+                                                </ListItemIcon>
+                                            </Box>
                                             <TextField
                                                 style={{
                                                     minWidth: 178,
@@ -177,7 +214,7 @@ class EditJobOpp extends Component {
                                         </ListItem>
                                         <ListItem>
                                             <ListItemIcon>
-                                                <FlightIcon color="primary"/>
+                                                <FlightIcon color="primary" />
                                             </ListItemIcon>
                                             <TextField
                                                 style={{
@@ -191,7 +228,7 @@ class EditJobOpp extends Component {
                                         </ListItem>
                                         <ListItem>
                                             <ListItemIcon>
-                                                <NotesIcon color="primary"/>
+                                                <NotesIcon color="primary" />
                                             </ListItemIcon>
                                             <TextField
                                                 style={{
@@ -209,11 +246,11 @@ class EditJobOpp extends Component {
                             </Grid>
                         </Grid>
                     </div>
-                </div> 
-                <Stages/>
-                <Tasks/>                          
-                <Requirements/>
-                <Button variant="contained" color="primary" onClick = {this.handleSave} style={{ width: 350, marginTop: 30 }}>Save</Button>
+                </div>
+                <Stages />
+                <Tasks />
+                <Requirements />
+                <Button variant="contained" color="primary" onClick={this.handleSave} style={{ width: 350, marginTop: 30 }}>Save</Button>
             </div>
         )
     }

@@ -2,7 +2,21 @@ import React, { Component } from 'react';
 import Paper from '@material-ui/core/Paper';
 import MuiVirtualizedTable from './MuiVirtualizedTable';
 import {connect} from 'react-redux';
+import moment from 'moment'
 
+import {withStyles} from '@material-ui/core'
+
+import NewTable from './NewTable'
+
+
+const styles = theme => ({
+  header: {
+    backgroundColor: '#2196f3',
+    color: 'white'
+  }
+
+
+});
 class DashboardTable extends Component {
 
   componentDidMount() {
@@ -14,8 +28,38 @@ render(){
 const rows = this.props.reduxState.jobs;
 
   return (
-    <Paper style={{ height: 335, width: '100%' }}>
-      <MuiVirtualizedTable
+    <Paper style={{ width: '100%' }}>
+      <table>
+        <thead className={this.props.classes.header}>
+          <tr>
+            <th>COMPANY</th>
+            <th>POSITION</th>
+            <th>STAGE</th>
+            <th>NEXT ACTIVITY DATE</th>
+            <th>NOTES</th>
+
+          </tr>
+        </thead>
+        <tbody>
+
+          {this.props.reduxState.jobs.map(job => {
+            return (
+              //  <p>{event.id}</p>
+              <tr key={job.id}>
+                <td >{job.company_name}</td>
+                <td>{job.position}</td>
+                <td>{job.currentStage}</td>
+                <td>{job.nextStageDate && moment(job.nextStageDate).format('MM-DD-YYYY')}</td>
+                <td>{job.notes}</td>
+
+
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+      {/* <NewTable/> */}
+      {/* <MuiVirtualizedTable
          rowCount={rows.length}
         rowGetter={({ index }) => rows[index]}
         columns={[
@@ -49,7 +93,7 @@ const rows = this.props.reduxState.jobs;
             //numeric: true,
           },
         ]}
-      />
+      /> */}
     </Paper>
   );
 }
@@ -58,4 +102,4 @@ const rows = this.props.reduxState.jobs;
 const mapStateToProps = reduxState => ({
   reduxState
 });
-export default connect(mapStateToProps)(DashboardTable);
+export default withStyles(styles)(connect(mapStateToProps)(DashboardTable));
