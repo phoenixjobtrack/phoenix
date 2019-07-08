@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.background.paper,
         borderRadius: '5px',
         overflow: 'auto',
-        maxHeight: 1000,
+        // maxHeight: 1000,
         height:'72vh',
         margin: 0
     },
