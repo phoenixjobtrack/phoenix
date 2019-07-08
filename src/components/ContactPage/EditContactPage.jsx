@@ -94,7 +94,7 @@ class ContactPage extends Component {
 
     //fetch data for currently selected contact
     componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_CURRENT_CONTACT', payload: this.contactId })
+        this.props.dispatch({ type: 'FETCH_CURRENT_CONTACT', payload: this.props.match.params.id })
     }
 
 
