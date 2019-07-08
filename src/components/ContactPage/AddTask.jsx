@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardContent, Input, Typography, Button, TextField, List, ListItem } from '@material-ui/core'
+import { Grid, Typography, TextField, Tooltip } from '@material-ui/core'
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add'
 
@@ -83,39 +83,52 @@ class AddTask extends Component {
         return(
             
             <form onSubmit={this.handleSubmit}>
-                <Typography>Add Task</Typography>
-                <TextField
-                    value={this.state.newTask.task_name}
-                    id="task"
-                    label="task"
-                    onChange={this.handleChangeFor('task_name')}
-                />
-                <TextField
-                    id="date"
-                    
-                    label="Date (required)"
-                    onChange={ this.handleChangeFor('due_date') }
-                    type="date"
-                    value={this.state.newTask.due_date}
-                    // defaultValue={this.state.today}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-
-                />
-                <TextField
-                    value={this.state.newTask.note}
-                    id="notes"
-                    label="Note"
-                    onChange={this.handleChangeFor('note')}
-                    />
-                <IconButton
-                    type="submit"
-                    color="secondary"
-                    variant="filled"
-                >
-                    <AddIcon />
-                </IconButton>
+                <Typography variant="h6">Add Task</Typography>
+                <Grid container spacing={2}>
+                    <Grid item xs={4}>
+                        <TextField
+                            style={{
+                                marginRight: '20px%',
+                                width: '100%'
+                            }}
+                            value={this.state.newTask.task_name}
+                            id="task"
+                            label="Task"
+                            onChange={this.handleChangeFor('task_name')}
+                        />
+                    </Grid>
+                    <Grid item xs={3}>
+                        <TextField
+                            id="date"
+                            label="Date (required)"
+                            onChange={this.handleChangeFor('due_date')}
+                            type="date"
+                            value={this.state.newTask.due_date}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                    </Grid>
+                    <Grid item xs={3}>
+                        <TextField
+                            value={this.state.newTask.note}
+                            id="notes"
+                            label="Note"
+                            onChange={this.handleChangeFor('note')}
+                        />
+                    </Grid>
+                    <Grid item xs={2}>
+                        <Tooltip title="Add task for this contact">
+                            <IconButton
+                                type="submit"
+                                color="primary"
+                            >
+                                <AddIcon />
+                            </IconButton>
+                        </Tooltip>
+                        
+                    </Grid>  
+                </Grid>   
             </form>
         )
     }

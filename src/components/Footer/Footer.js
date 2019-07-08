@@ -8,7 +8,7 @@ import './Footer.css'
 
 const Footer = () => (
   <footer>
-    &copy; Phoenix 
+    &copy; Phoenix (Demo Branch)
   </footer>
 );
 
