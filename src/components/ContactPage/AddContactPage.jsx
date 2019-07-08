@@ -372,7 +372,7 @@ class ContactPage extends Component {
                                                 style={{
                                                     width: '100%'
                                                 }}
-                                                value="Met at Jr Devs Meetup"
+                                                value="Met at Metro Meetup"
                                                 id="notes"
                                                 label="Notes"
                                                 multiline

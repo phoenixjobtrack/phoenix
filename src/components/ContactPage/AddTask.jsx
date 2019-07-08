@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Typography, TextField, Tooltip } from '@material-ui/core'
+import { Grid, Typography, TextField, Tooltip, Box } from '@material-ui/core'
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add'
 
@@ -17,7 +17,8 @@ class AddTask extends Component {
             due_date: '',
             note: '',
             contact_id: ''
-        }
+        },
+        demoMode: false,
     }
 
     //get today's date for default selection.
@@ -72,6 +73,21 @@ class AddTask extends Component {
         })
     }
 
+    // Demo Functions
+    demoFunction = () => {
+        console.log('demo button pressed');
+        let melissasId = this.props.reduxState.currentContact.id;
+        this.setState({
+            newTask: {
+                task_name: 'Send "Thank You" email',
+                due_date: '07/10/2019',
+                note: 'Met on 7/7/2019',
+                contact_id: melissasId,
+            },
+            demoMode: true,
+        })
+    }
+
 
     componentDidMount(){
         this.getDate()
@@ -81,9 +97,9 @@ class AddTask extends Component {
         // this.props.dispatch({type: 'FETCH_TASKS'})
         console.log('AddTask state', this.state)
         return(
-            
+            <>
             <form onSubmit={this.handleSubmit}>
-                <Typography variant="h6">Add Task</Typography>
+                <Box onClick={() => this.demoFunction()}><Typography variant="h6">Add Task</Typography></Box>
                 <Grid container spacing={2}>
                     <Grid item xs={4}>
                         <TextField
@@ -130,6 +146,7 @@ class AddTask extends Component {
                     </Grid>  
                 </Grid>   
             </form>
+            </>
         )
     }
 }
