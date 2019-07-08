@@ -25,7 +25,7 @@ class CompletedTasks extends Component {
                 //put a line in here to compare current date to due date
                 dueDate = new Date(task.due_date)
                 console.log('dates', today, dueDate)
-                if (dueDate >= today) {
+                if (!task.complete) {
                     upcomingTasks.push(<ListItem key={i}>{task.task_name} Due:{task.due_date}</ListItem>)
                 }
                 else {

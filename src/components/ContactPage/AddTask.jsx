@@ -16,7 +16,8 @@ class AddTask extends Component {
             task_name: '',
             due_date: '',
             note: '',
-            contact_id: ''
+            contact_id: '',
+            complete: true
         }
     }
 
@@ -49,8 +50,8 @@ class AddTask extends Component {
             newTask:{
                 ...this.state.newTask,
                 contact_id: this.props.reduxState.currentContact.id,
-                [key]: event.target.value
-
+                [key]: event.target.value,
+                
             }
         })
     }

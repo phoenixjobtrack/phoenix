@@ -6,7 +6,7 @@ import UpcomingTasks from './UpcomingTasks'
 import CompletedTasks from './CompletedTasks'
 
 //Material UI
-import {Grid} from '@material-ui/core'
+import {Grid, Tooltip} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -25,7 +25,7 @@ import OpenInNewIcon from '@material-ui/icons/OpenInNew'
 
 const useStyles = makeStyles(theme => ({
     card: {
-        maxWidth: '80%',
+        width: '100%',
     },
     expand: {
         transform: 'rotate(0deg)',
@@ -55,13 +55,9 @@ function ContactCard(props) {
     }
 
     function handleOpenContact(){
-        console.log('in handleContactSelect', contact)
-        props.dispatch({ type: 'SET_TO_EDIT_MODE'})
+        //route to view page with id in URL params
         props.history.push(`/contact/view/${contact.id}`)
-
     }
-
-    
 
     return (
         <Card className={classes.card}>
@@ -74,12 +70,12 @@ function ContactCard(props) {
                 title={`${contact.first_name} ${contact.last_name}`}
                 subheader={contact.company}
                 action={
-                    <IconButton aria-label="View More and Edit" onClick={handleOpenContact}>
-                        <OpenInNewIcon />
-                        <EditIcon />                        
-                    </IconButton>
+                    <Tooltip title="View and edit contact">
+                        <IconButton aria-label="View More and Edit" color="primary" onClick={handleOpenContact}>
+                            <OpenInNewIcon />
+                        </IconButton>
+                    </Tooltip>
                 }
-                
             />
             <CardContent>
                 <Grid container spacing={2}>
@@ -119,7 +115,6 @@ function ContactCard(props) {
                     <Grid item sm={6}>
                         <Typography >
                             Tasks:
-                            {/* insert tasks here */}
                             <CompletedTasks contactId={contact.id}/>
                         </Typography>
                     </Grid>  
@@ -127,23 +122,28 @@ function ContactCard(props) {
             </CardContent>
             <CardActions disableSpacing>
                 History
-                <IconButton
-                    className={clsx(classes.expand, {
-                        [classes.expandOpen]: expanded,
-                    })}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="Show more"
-                >
-                    <ExpandMoreIcon />
-                </IconButton>
+                <Tooltip title="Expand to see past tasks involving this contact.">
+                    <IconButton
+                        color="primary"
+                        className={clsx(classes.expand, {
+                            [classes.expandOpen]: expanded,
+                        })}
+                        onClick={handleExpandClick}
+                        aria-expanded={expanded}
+                        aria-label="Show more"
+                    >
+                        <ExpandMoreIcon />
+                    </IconButton>
+                </Tooltip> 
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                    <Typography paragraph>
-                        {/* insert task history here */}
-                        <CompletedTasks contactId={contact.id}/>                       
-                    </Typography>                    
+                    
+                        <Typography paragraph>
+                            {/* insert task history here */}
+                            <CompletedTasks contactId={contact.id} />
+                        </Typography> 
+                                   
                 </CardContent>
             </Collapse>
         </Card>

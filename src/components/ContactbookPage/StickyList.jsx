@@ -7,7 +7,7 @@ import './StickyList.css'
 //Material-UI stuff
 import ContactCard from './ContactCard'
 import { makeStyles } from '@material-ui/core/styles';
-import {Button} from '@material-ui/core'
+import {Button, ListItem, CardContent, Card} from '@material-ui/core'
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
@@ -17,30 +17,44 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd'
 
 const useStyles = makeStyles(theme => ({
     root: {
-        width: '100%',
+        width: '80%',
         maxWidth: 1000,
         backgroundColor: theme.palette.background.paper,
+        borderRadius: '5px',
         overflow: 'auto',
         maxHeight: 1000,
         height:'75vh'
     },
     listSection: {
         backgroundColor: 'inherit',
+        padding: 0
     },
     ul: {
         backgroundColor: 'inherit',
         padding: 0,
-        position: 'relative'
+        position: 'relative',
+        width:'100%'
+
     },
     card: {
         borderWidth:'2px',
         borderColor: 'black',
-        borderStyle: 'solid'
+        borderStyle: 'solid',
+        width: '100%'
 
     },
     sorting: {
         position: 'sticky'
     },
+    listSubheader: {
+        color: theme.palette.primary.main
+    },
+    contactCard: {
+        width: '100%',
+        paddingLeft:'5px',
+        paddingRight: '5px'
+        // padding: 0
+    }
 }));
 
 function PinnedSubheaderList(props) {
@@ -95,13 +109,12 @@ function PinnedSubheaderList(props) {
             </div>
             <List id="containerDiv" className={classes.root} subheader={<li />}>
                 {alphabet.map(sectionId => (
-                    <li key={`section-${sectionId}`} className={classes.listSection}>
-                        <ul className={classes.ul}>
+                    <ListItem key={`section-${sectionId}`} className={classes.listSection}>
+                        <List className={classes.ul}>
                             <ListSubheader className={classes.listSubheader}>
-                                <a id={sectionId}>
-                                    {sectionId}
-                                </a>
-                            
+                                    <a id={sectionId}>
+                                        {sectionId}
+                                    </a>
                             </ListSubheader>
                             {props.reduxState.contacts.map(contact => {
                                 let word
@@ -121,12 +134,12 @@ function PinnedSubheaderList(props) {
                                 if (firstLetter.toLowerCase() === sectionId) {
                                     console.log('alphabetize', contact)
                                     return (
-                                        <ContactCard contact={contact}/>                                
+                                        <ListItem className={classes.contactCard}><ContactCard contact={contact} /> </ListItem>                               
                                     )
                                 }
                             })}
-                        </ul>
-                    </li>
+                        </List>
+                    </ListItem>
                 ))}
             </List>
         </div>
