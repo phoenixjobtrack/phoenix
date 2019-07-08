@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import StickyList from'./StickyList';
 import {connect} from 'react-redux'
-
+import Box from '@material-ui/core/Box';
 
 
 class ContactBookPage extends Component {
@@ -13,7 +13,7 @@ class ContactBookPage extends Component {
     render () {
         return(
             <div>
-                <h1>Contacts</h1>
+                <h2><Box>Contacts</Box></h2>
                 <StickyList / >
             </div>
         )

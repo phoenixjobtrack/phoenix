@@ -56,7 +56,7 @@ class DashboardPage extends Component {
     let taskDay = mm + '/' + dd + '/' + yyyy;
     return (
       <div>
-        <h1>Dashboard</h1>
+        <h2>Dashboard</h2>
         <Grid container>
           <Grid item sm>
             <Paper style={{ padding: 40, marginTop: 20 }}>

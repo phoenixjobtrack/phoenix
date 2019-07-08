@@ -75,16 +75,16 @@ class JobOpportunity extends Component {
         return (
             <div>
 
-                <h1>Job Opportunity</h1>
+                <h2><Box>Job Opportunity</Box></h2>
                 <div>
                     <Grid container spacing={3}>
                         <Grid item sm={5}>
                         </Grid>
                         <Grid item sm={3}>
-                            <Button variant="contained" color="primary" style={{width: '100%'}}>Offer Accepted</Button>
+                            <Button variant="contained" color="primary" style={{ width: '100%' }}>Offer Accepted</Button>
                         </Grid>
                         <Grid item sm={3}>
-                            <Button variant="contained" color="primary" style={{width: '100%'}} onClick={this.handleCloseJob}>Close Opportunity</Button>
+                            <Button variant="contained" color="primary" style={{ width: '100%' }} onClick={this.handleCloseJob}>Close Opportunity</Button>
                         </Grid>
                         <Grid item sm={1}>
                         </Grid>
@@ -243,15 +243,15 @@ class JobOpportunity extends Component {
                 <Requirements />
 
                 <Grid container spacing={3}>
-                        <Grid item sm={4}>
-                        </Grid>
-                        <Grid item sm={4}>
-                        <Button variant="contained" color="primary" onClick={this.handleSubmit} style={{ width: 350, marginTop: 30 }}>Save This Job Opportunity</Button>
-                        </Grid>
-                        <Grid item sm={4}>
-                        </Grid>
+                    <Grid item sm={4}>
                     </Grid>
-                
+                    <Grid item sm={4}>
+                        <Button variant="contained" color="primary" onClick={this.handleSubmit} style={{ width: 350, marginTop: 30 }}>Save This Job Opportunity</Button>
+                    </Grid>
+                    <Grid item sm={4}>
+                    </Grid>
+                </Grid>
+
 
             </div>
         )

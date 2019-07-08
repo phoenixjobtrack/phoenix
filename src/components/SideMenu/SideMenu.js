@@ -21,6 +21,7 @@ import './SideMenu.css';
 
 // ========== MUI ICONS ========== //
 import AccountIcon from '@material-ui/icons/AccountCircle';
+import AddIcon from '@material-ui/icons/Add';
 import ContactsIcon from '@material-ui/icons/Contacts'
 import HomeIcon from '@material-ui/icons/Home';
 import InfoIcon from '@material-ui/icons/Info';
@@ -87,7 +88,12 @@ function SideMenu(props) {
                         <ListItem component={Link} to="/dashboard" button><HomeIcon className="icon" /> Home</ListItem>
                         <ListItem component={Link} to="/tasks" button><ListAltIcon className="icon" /> Tasks</ListItem>
                         <ListItem component={Link} to="/jobpipeline" button><ViewAgendaIcon className="icon" /> Job Pipeline</ListItem>
-                        <ListItem component={Link} to="/jobOpportunity" button><ViewAgendaIcon className="icon" /> Job Opportunity </ListItem>
+                        <ListItem component={Link} to="/jobOpportunity" button>
+                            <AddIcon 
+                                className="icon" 
+                            /> 
+                            Job Opportunity 
+                        </ListItem>
                         <ListItem component={Link} to="/contact" button><ContactsIcon className="icon" /> Contacts</ListItem>
                         <ListItem component={Link} to="/profile" button><AccountIcon className="icon" /> Profile</ListItem>
                     </List>

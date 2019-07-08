@@ -21,6 +21,7 @@ import './Tasks.css';
 
 
 // ----- MATERIAL UI CORE ----- // 
+import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
@@ -127,7 +128,7 @@ class Tasks extends Component {
         return (
 
             <div>
-                <h1>Tasks</h1>
+                <h2><Box>Tasks</Box></h2>
                 <ThemeProvider theme={theme}>
                     {/* // ----- Add Task Input Form ----- // */}
                     <span >
