@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
         })
         .catch((error) => {
             console.log(`Error on query ${error}`);
-            res.sendStatus
+            res.sendStatus(500)
         })
 })
 

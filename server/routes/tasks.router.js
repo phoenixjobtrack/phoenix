@@ -14,14 +14,14 @@ router.get('/', (req, res) => {
     "job_id",
     "note",
     "disabled" FROM "tasks" WHERE "user_id"=$1
-    ORDER BY "due_date" ASC;`;
+    ORDER BY "id" DESC;`;
     pool.query(query, [req.user.id])
         .then((result) => {
             res.send(result.rows);
         })
         .catch((error) => {
             console.log(`Error on query ${error}`);
-            res.sendStatus
+            res.sendStatus(500)
         })
 }); // End router.get/api/tasks/:id
 
@@ -63,6 +63,7 @@ router.put('/note/:note/:id', (req, res) => {
         })
         .catch(err => {
             console.log('error in PUT /api/tasks/note', err)
+            res.sendStatus(500)
         })
 }); // End router.put/api/tasks/note
 
@@ -88,6 +89,7 @@ router.delete('/:id', (req, res) => {
         .then(() => {res.sendStatus(200);})
         .catch((err) => {
             console.log('Error completing DELETE task:', err)
+            res.sendStatus(500)
         })
 }); // End router.delete/api/tasks/:id
 
