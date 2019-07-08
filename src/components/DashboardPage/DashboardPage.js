@@ -59,8 +59,7 @@ class DashboardPage extends Component {
         <h2>Dashboard</h2>
         <Grid container>
           <Grid item sm>
-            <Paper style={{ padding: 40, marginTop: 20 }}>
-
+            <Paper style={{  marginTop: 20 }}>
               <h2 className="boxLabel">
                 Today's Tasks
                 <Tooltip title="add task">
@@ -74,7 +73,6 @@ class DashboardPage extends Component {
                 </Tooltip>
               </h2>
               <div className="todayBox">
-
                 <div className="todayLabel">
                   <p>{taskDay}</p>
                 </div>
@@ -93,7 +91,6 @@ class DashboardPage extends Component {
                   <p className="overdueLabel">Overdue</p>
                 </div>
                 <div className="overdueText">
-
                   {this.props.dayTask.map((tasks, i) => {
                     if (tasks.due_date < taskDay) {
                       return (
@@ -110,7 +107,8 @@ class DashboardPage extends Component {
           <Grid item sm>
             <Paper >
               <div className="logoBox">
-                <img className="logo" src="/images/logo3.png" alt="phoenix logo" />
+                {/* <img className="logo" src="/images/logo3.png" alt="phoenix logo" /> */}
+                
               </div>
               <Box><h2 className="boxLabel">
                 Important Job Attributes
