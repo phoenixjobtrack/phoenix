@@ -51,7 +51,19 @@ const useStyles = makeStyles(theme => ({
     },
     sorting: {
         position: 'sticky',
-        justify: 'right'
+        textAlign: 'right',
+        paddingTop: '15px',
+        paddingRight: '15px'
+    },
+    manageOrder: {
+        display: 'inline'
+    },
+    search: {
+        // maxWidth: 200,
+        // marginRight: 0,
+        fontSize: '20pt',
+        textAlign: 'center',
+        color: theme.palette.primary.main
     },
     listSubheader: {
         color: theme.palette.primary.main
@@ -109,22 +121,28 @@ function PinnedSubheaderList(props) {
                 <PersonAddIcon />
             </Fab>
         </Tooltip>
-        <div className={classes.container}>            
-            <div className={classes.sorting}>
-                <InputLabel htmlFor="sort by:">Sort by</InputLabel>
-                <Select
-                    value={key}
-                    onChange={setSorting}
-                    input={<Input name="sorting" id="sorting" />}
-                >
-                    <MenuItem value={'first'}>First Name</MenuItem>
-                    <MenuItem value={'last'}>Last Name</MenuItem>
-                    <MenuItem value={'company'}>Company</MenuItem>
-                </Select>
-            </div>                 
-            {alphabet.map(letter => (
-                <a onClick={() => { scrollToLetter(letter) }}>{letter}</a>
-            ))}
+        <div className={classes.container}>        
+            <div className={classes.manageOrder}>
+                    <div className={classes.sorting}>
+                        <InputLabel htmlFor="sort by:">Sort by</InputLabel>
+                        <Select
+                            value={key}
+                            onChange={setSorting}
+                            input={<Input name="sorting" id="sorting" />}
+                        >
+                            <MenuItem value={'first'}>First Name</MenuItem>
+                            <MenuItem value={'last'}>Last Name</MenuItem>
+                            <MenuItem value={'company'}>Company</MenuItem>
+                        </Select>
+                    </div>
+                    <div className={classes.search}>
+                        {alphabet.map(letter => (
+                            <a onClick={() => { scrollToLetter(letter) }}>{letter}</a>
+                        ))}
+                    </div>
+                    
+            </div>    
+            
             <List id="containerDiv" className={classes.root} subheader={<li />}>
                 {alphabet.map(sectionId => (
                     <ListItem key={`section-${sectionId}`} className={classes.listSection}>
