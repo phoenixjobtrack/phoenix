@@ -29,6 +29,8 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    paddingLeft: '30px',
+    paddingRight: '30px'
   },
   avatar: {
     margin: theme.spacing(1),
@@ -40,10 +42,16 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+
   },
   chip: {
     margin: theme.spacing(1),
   },
+  add: {
+    margin: 'auto',
+    top:'20%',
+    
+  }
 }));
 
 function SignUp(props) {
@@ -128,6 +136,7 @@ function SignUp(props) {
     } else {
       props.dispatch({ type: 'REGISTRATION_INPUT_ERROR' });
     }
+    props.history.push('/dashboard')
   }
 
   return (
@@ -208,20 +217,12 @@ function SignUp(props) {
                             </p>
           </Grid>
         </Grid>
-        <Grid container>
-          <Grid item xs={12}>
+        
+          <Grid container>
             
               <form onSubmit={handleRequirementSubmit} id="jobRequirementForm">
-
-                <Grid item xs={2}>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    type="submit"
-                  >
-                    <Add />
-                  </Button>
-                </Grid>
+              <Grid container item xs={12} spacing={2} row>
+                
                 <Grid item xs={10}>
                   <TextField
                     variant="outlined"
@@ -234,9 +235,20 @@ function SignUp(props) {
                     onChange={handleRequirementChange}
                   />
                 </Grid>
+                <Grid item xs={2}>
+                  <Button
+                    className={classes.add}
+                    variant="contained"
+                    color="secondary"
+                    type="submit"
+                  >
+                    <Add />
+                  </Button>
+                </Grid>
+                </Grid>
               </form>
           </Grid>          
-        </Grid>
+        
         <Grid container>
           <Grid item>
             {requirements.map((requirement, i) => {
