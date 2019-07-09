@@ -73,7 +73,7 @@ class Stages extends Component {
                     <Typography variant='h5' paragraph="true" align="left"><Box 
                     onClick={() => this.demoFunction()}
                     >
-                        {/* Stages of the Hiring Process */}
+                        Stages of the Hiring Process
                     </Box></Typography>                             
                     {Object.entries(this.props.reduxState.currentStage).map((stage) => {
                         console.log('stage from Redux', stage, stage[0])
