@@ -62,7 +62,7 @@ function* addJob(action) {
         //create tasks for new job
         yield Object.values(action.payload.tasks).map(task=>{
             //filter out blank tasks
-            if (task.task_name){
+            if (task.due_date){
                 console.log('in addJob saga task:', task)
                 axios.post('/api/jobs/tasks/new', task)
             }  
@@ -139,7 +139,10 @@ function* saveJobUpdates(action){
         // send task data
         yield Object.entries(action.payload.tasks).map(task => {
             console.log('in saveJobUpdates saga task:', task)
-            axios.post('/api/jobs/tasks', {task: task, job_id: action.payload.job.job_id})
+            if (task.due_date) {
+                axios.post('/api/jobs/tasks', { task: task, job_id: action.payload.job.job_id })
+            }
+            
         })
         // //delete requirements assessments associated with job before adding all from redux
         // yield axios.delete(`api/jobs/requirements/${action.payload.job.job_id}`)

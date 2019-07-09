@@ -94,7 +94,7 @@ class DashboardPage extends Component {
                 </div>
                 <div className="overdueText">
                   {this.props.dayTask.map((tasks, i) => {
-                    if (tasks.due_date < taskDay) {
+                    if (tasks.due_date < taskDay && !tasks.complete) {
                       return (
                         <ul>
                           <li className="overdueLabel">{tasks.task_name}</li>
@@ -137,7 +137,6 @@ class DashboardPage extends Component {
                         <li>{user.requirement}</li>
                       </ul>
                     )
-
                   })}
                 </div>
               </div>

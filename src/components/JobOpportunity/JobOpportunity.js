@@ -92,7 +92,7 @@ class JobOpportunity extends Component {
     }
 
     render() {
-        console.log('current job', this.props.currentJob)
+        console.log('current job', this.props)
         return (
             <div>
 

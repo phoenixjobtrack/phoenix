@@ -82,6 +82,7 @@ class EditJobOpp extends Component {
     }
 
     componentWillUnmount() {
+        console.log('componentWillUnmount')
         this.props.dispatch({ type: 'CLEAR_CURRENT_JOB' })
     }
 
