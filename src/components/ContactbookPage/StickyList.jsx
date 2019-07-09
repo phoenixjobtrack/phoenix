@@ -86,7 +86,8 @@ const useStyles = makeStyles(theme => ({
         // minHeight: '25px'
     },
     listSubheader: {
-        color: theme.palette.primary.main
+        color: theme.palette.primary.main,
+        fontWeight: 'bold'
     },
     contactCard: {
         width: '100%',
