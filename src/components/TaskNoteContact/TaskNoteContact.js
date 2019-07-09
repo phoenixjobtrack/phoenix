@@ -11,6 +11,7 @@ import Chip from '@material-ui/core/Chip';
 import Tooltip from '@material-ui/core/Tooltip';
 
 
+
 // ----- MATERIAL UI ICONS ----- //
 import FaceIcon from '@material-ui/icons/Face';
 
@@ -35,11 +36,13 @@ class TaskNoteContact extends Component {
                                     color="secondary"
                                     avatar={
                                         <Avatar>
-                                            <FaceIcon />
+                                            <FaceIcon
+                                            style={{color: 'white'}}/>
                                         </Avatar>
                                     }
                                     label={contact.first_name}
                                     variant="outlined"
+                                    style={{ fontWeight: 900 }}
                                 />
                             </Tooltip>
                         </div>

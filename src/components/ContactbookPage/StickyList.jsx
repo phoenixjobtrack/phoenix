@@ -7,7 +7,7 @@ import './StickyList.css'
 //Material-UI stuff
 import ContactCard from './ContactCard'
 import { makeStyles } from '@material-ui/core/styles';
-import {Button, ListItem, Fab, Tooltip, InputLabel, MenuItem, Input, Select} from '@material-ui/core'
+import {Button, ListItem, Fab, Tooltip, InputLabel, MenuItem, Input, Select, Grid} from '@material-ui/core'
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
@@ -18,18 +18,15 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd'
 const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
-        // maxWidth: 1000,
         backgroundColor: theme.palette.background.paper,
         borderRadius: '5px',
         overflow: 'auto',
-        maxHeight: 1000,
-        height:'72vh',
+        height:'65vh',
         margin: 0
     },
     container: {
         backgroundColor: theme.palette.background.paper,
         width: '80%',
-        // padding: '10px',
         borderRadius: '5px'
     },
     listSection: {
@@ -55,20 +52,42 @@ const useStyles = makeStyles(theme => ({
         position: 'sticky',
         textAlign: 'right',
         paddingTop: '15px',
-        paddingRight: '15px'
+        paddingRight: '15px',
+        
     },
     manageOrder: {
-        display: 'inline'
+        paddingTop: '20px' 
     },
     search: {
-        // maxWidth: 200,
-        // marginRight: 0,
-        fontSize: '20pt',
+        fontSize: '16pt',
         textAlign: 'center',
-        color: theme.palette.primary.main
+        height: '30px',
+        verticalAlign: 'bottom'
+        
+
+    },
+    letter: {
+        '&:active': {
+            fontSize: '20pt',
+            // margin: 0,
+            // padding: 0
+        },
+        '&:hover': {
+            fontSize: '20pt',
+            margin: 0,
+            height: 25,
+            verticalAlign: 'top'
+        },
+        paddingLeft: '5px',
+        paddingRight: '5px',
+        color: theme.palette.primary.main,
+        cursor: 'pointer',
+        verticalAlign: 'top'
+        // minHeight: '25px'
     },
     listSubheader: {
-        color: theme.palette.primary.main
+        color: theme.palette.primary.main,
+        fontWeight: 'bold'
     },
     contactCard: {
         width: '100%',
@@ -123,27 +142,29 @@ function PinnedSubheaderList(props) {
                 <PersonAddIcon />
             </Fab>
         </Tooltip>
-        <div className={classes.container}>        
-            <div className={classes.manageOrder}>
-                    <div className={classes.sorting}>
-                        <InputLabel htmlFor="sort by:">Sort by</InputLabel>
-                        <Select
-                            value={key}
-                            onChange={setSorting}
-                            input={<Input name="sorting" id="sorting" />}
-                        >
-                            <MenuItem value={'first'}>First Name</MenuItem>
-                            <MenuItem value={'last'}>Last Name</MenuItem>
-                            <MenuItem value={'company'}>Company</MenuItem>
-                        </Select>
-                    </div>
-                    <div className={classes.search}>
-                        {alphabet.map(letter => (
-                            <a onClick={() => { scrollToLetter(letter) }}>{letter}</a>
-                        ))}
-                    </div>
-                    
-            </div>    
+        <div className={classes.container}>  
+              
+            <div className={classes.sorting}>
+                <InputLabel htmlFor="sort by:">Sort by</InputLabel>
+                <Select
+                    value={key}
+                    onChange={setSorting}
+                    input={<Input name="sorting" id="sorting" />}
+                >
+                    <MenuItem value={'first'}>First Name</MenuItem>
+                    <MenuItem value={'last'}>Last Name</MenuItem>
+                    <MenuItem value={'company'}>Company</MenuItem>
+                </Select> 
+            </div>  
+            <div className={classes.search}>
+                {alphabet.map(letter => (
+                    <>
+                        <a className={classes.letter} onClick={() => { scrollToLetter(letter) }}>{letter}</a>
+                    </>
+                ))} 
+            </div>
+              
+            
             
             <List id="containerDiv" className={classes.root} subheader={<li />}>
                 {alphabet.map(sectionId => (

@@ -57,7 +57,7 @@ class NewTable extends Component {
                                         <td>
                                             <Tooltip title="Remove job">
                                                 <IconButton onClick={() => { this.handleDelete(job.job_id) }}>
-                                                    <DeleteIcon color="secondary"/>
+                                                    <DeleteIcon color="error"/>
                                                 </IconButton>
                                             </Tooltip>
                                         </td> 

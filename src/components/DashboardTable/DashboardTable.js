@@ -6,12 +6,12 @@ import moment from 'moment'
 
 import {withStyles} from '@material-ui/core'
 
-import NewTable from './NewTable'
+
 
 
 const styles = theme => ({
   header: {
-    backgroundColor: '#2196f3',
+    backgroundColor: theme.palette.primary.main,
     color: 'white'
   }
 

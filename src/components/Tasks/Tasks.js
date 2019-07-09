@@ -44,12 +44,12 @@ const HistoryTasks = () => <Paper className="historyTasks"><Toolbar ><Typography
 
 
 // ----- MUI THEME ----- //
-const theme = createMuiTheme({
-    spacing: 8,
-    palette: {
-        primary: { main: '#e61610' },
-    },
-});
+// const theme = createMuiTheme({
+//     spacing: 8,
+//     palette: {
+//         primary: { main: '#e61610' },
+//     },
+// });
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -142,7 +142,7 @@ class Tasks extends Component {
 
             <div>
                 <h2><Box onClick={() => this.demoFunction()}>Tasks</Box></h2>
-                <ThemeProvider theme={theme}>
+                {/* <ThemeProvider theme={theme}> */}
                     {/* // ----- Add Task Input Form ----- // */}
                     <span >
                         <Paper style={{ paddingBottom: 10, marginBottom: 20}}
@@ -202,6 +202,8 @@ class Tasks extends Component {
                                         size="medium"
                                         type="submit"
                                         variant="outlined"
+                                    
+                                        
                                     ><AddIcon />
                                     </IconButton>
                                 </Tooltip>
@@ -226,7 +228,7 @@ class Tasks extends Component {
                     <HistoryTasks />
                     <TasksHistory />
                     
-                </ThemeProvider>
+                {/* </ThemeProvider> */}
             </div>
         ); // End Return
     } // End Render
