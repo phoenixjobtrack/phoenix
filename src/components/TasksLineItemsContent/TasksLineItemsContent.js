@@ -203,7 +203,7 @@ class TasksLineItemsContent extends Component {
                             <IconButton
                                 onClick={() => this.removeAlert(this.props.id)}
                                 size="small"
-                                // style={{ color: "#c2185b" }}
+
                             >
                                 <ClearIcon color="error"/>
                             </IconButton>
