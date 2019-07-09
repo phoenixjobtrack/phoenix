@@ -109,10 +109,10 @@ class DashboardPage extends Component {
           <Grid item sm>
             <Paper >
               <div className="logoBox">
-                {/* <img className="logo" src="/images/logo3.png" alt="phoenix logo" /> */}
+                <img className="logo" src="/images/logo3.png" alt="phoenix logo" />
                 
               </div>
-              <Box><h2 className="boxLabel">
+              <Box><h2 className="boxIJALabel">
                 Important Job Attributes
                 <Tooltip title="add attribute">
                 <IconButton>
