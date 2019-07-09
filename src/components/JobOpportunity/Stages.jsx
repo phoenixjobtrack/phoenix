@@ -46,23 +46,23 @@ class Stages extends Component {
     }
 
     // Demo Functions
-    demoFunction = () => {
-        console.log('demo button pressed');
-        this.stageCounter = this.stageCounter + 1
-        console.log('stageCounter', this.stageCounter)
-        // this.setState({ stages: [...this.state.stages, {}] })
-        this.props.dispatch({
-            type: 'ADD_TO_REDUX_STAGE',
-            payload: {
-                key: this.stageCounter,
-                stage: {
-                    stage: 'Phone Screen',
-                    note: 'with Bethany',
-                    date: '2019-07-11',
-                }
-            }
-        })
-    }
+    // demoFunction = () => {
+    //     console.log('demo button pressed');
+    //     this.stageCounter = this.stageCounter + 1
+    //     console.log('stageCounter', this.stageCounter)
+    //     // this.setState({ stages: [...this.state.stages, {}] })
+    //     this.props.dispatch({
+    //         type: 'ADD_TO_REDUX_STAGE',
+    //         payload: {
+    //             key: this.stageCounter,
+    //             stage: {
+    //                 stage: 'Phone Screen',
+    //                 note: 'with Bethany',
+    //                 date: '2019-07-11',
+    //             }
+    //         }
+    //     })
+    // }
 
     render() {
         console.log('stages state', this.props.reduxState.currentStage, Object.entries(this.props.reduxState.currentStage))
@@ -70,7 +70,11 @@ class Stages extends Component {
             <div className="jobOppForm">
 
                 <List>
-                    <Typography variant='h5' paragraph="true" align="left"><Box onClick={() => this.demoFunction()}>Stages of the Hiring Process</Box></Typography>                             
+                    <Typography variant='h5' paragraph="true" align="left"><Box 
+                    onClick={() => this.demoFunction()}
+                    >
+                        {/* Stages of the Hiring Process */}
+                    </Box></Typography>                             
                     {Object.entries(this.props.reduxState.currentStage).map((stage) => {
                         console.log('stage from Redux', stage, stage[0])
                         return (
