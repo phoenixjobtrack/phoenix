@@ -20,6 +20,7 @@ class DashboardPage extends Component {
     //temporary.  replace once Viji's query works
     // this.props.dispatch({ type: 'FETCH_JOBS' })
     this.props.dispatch({type: 'FETCH_TASKS'})
+    this.props.dispatch({ type: 'FETCH_REQUIREMENTS' })
   }
 
   // Triggers Popup to add new Employment Requirement when + is clicked

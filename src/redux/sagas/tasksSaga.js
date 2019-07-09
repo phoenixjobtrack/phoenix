@@ -13,6 +13,7 @@ function* addTask(action) {
     } catch (error) {
         console.log('error in addTask saga', error);
     }
+    yield put({ type: 'FETCH_TASKS_BY_DATE'})
 }
 
 // Adds a note to a task in the "tasks" table
