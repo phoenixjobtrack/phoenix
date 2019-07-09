@@ -18,6 +18,8 @@ class NewTable extends Component {
 
     handleDelete = (id) => {
         console.log('in handleDelete', id);
+    }
+    componentDidMount() {
         
     }
 
