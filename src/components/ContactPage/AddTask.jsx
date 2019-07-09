@@ -95,7 +95,7 @@ class AddTask extends Component {
         this.setState({
             newTask: {
                 task_name: 'Send "Thank You" email',
-                due_date: '07/10/2019',
+                due_date: '2019-07-10',
                 note: 'Met on 7/7/2019',
                 contact_id: melissasId,
             },

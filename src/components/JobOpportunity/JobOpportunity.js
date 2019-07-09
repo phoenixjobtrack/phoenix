@@ -97,7 +97,7 @@ class JobOpportunity extends Component {
             <div>
 
                 <h2><Box onClick={() => this.demoFunction()}>Job Opportunity</Box></h2>
-                <div>
+                {/* <div>
                     <Grid container spacing={3}>
                         <Grid item sm={5}>
                         </Grid>
@@ -111,7 +111,7 @@ class JobOpportunity extends Component {
                         </Grid>
                     </Grid>
 
-                </div>
+                </div> */}
 
                 {/* Employment Information */}
                 <div className="jobOppForm">
