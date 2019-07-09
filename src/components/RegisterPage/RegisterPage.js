@@ -228,7 +228,7 @@ function SignUp(props) {
                     variant="outlined"
                     fullWidth
                     name="requirements"
-                    label="Job Requirements"
+                    label="Important Job Attributes"
                     value={newRequirement}
                     placeholder="ex. Unlimited PTO, close to home, Salary $80k"
                     id="requirements"
