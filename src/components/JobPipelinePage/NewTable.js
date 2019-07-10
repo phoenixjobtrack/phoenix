@@ -34,8 +34,8 @@ class NewTable extends Component {
         return (
             <div>
                 <table>
-                    <tbody>
-                        <tr className="header">
+                    <thead className={this.props.classes.header}>
+                        <tr>
                             <th>COMPANY</th>
                             <th>POSITION</th>
                             <th>STAGE</th>
@@ -45,6 +45,8 @@ class NewTable extends Component {
                             <th>UPDATE</th>
                             <th>DELETE</th>
                         </tr>
+                    </thead>
+                    <tbody>
                          {this.props.reduxState.jobs.map(job => {
                                 return (
                                     //  <p>{event.id}</p>
@@ -96,4 +98,4 @@ const mapStateToProps = (reduxState) => {
 };
 
 // this allows us to use <App /> in index.js
-export default withRouter(connect(mapStateToProps)(NewTable));
+export default withRouter(withStyles(styles)(connect(mapStateToProps)(NewTable)));
