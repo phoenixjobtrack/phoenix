@@ -50,8 +50,7 @@ class NewTable extends Component {
                     <tbody>
                          {this.props.reduxState.jobs.map(job => {
                                 return (
-                                    //  <p>{event.id}</p>
-                                    <tr key={job.id}>
+                                    <tr key={job.user_id}>
                                         <td >{job.company_name}</td>
                                         <td>{job.position}</td>
                                         <td>{job.currentStage}</td>
