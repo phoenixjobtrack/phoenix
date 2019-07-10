@@ -6,9 +6,16 @@ import {withRouter} from 'react-router-dom'
 import {Button, IconButton, Tooltip} from '@material-ui/core'
 import OpenInNewIcon from '@material-ui/icons/OpenInNew'
 import DeleteIcon from '@material-ui/icons/DeleteOutline'
-
+import { withStyles } from '@material-ui/core'
 
 import './NewTable.css';
+
+const styles = theme => ({
+    header: {
+        backgroundColor: theme.palette.primary.main,
+        color: 'white'
+    }
+});
 
 class NewTable extends Component {
     openJob = (id) => {
