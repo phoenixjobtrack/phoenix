@@ -40,15 +40,16 @@ async function getResults(id0) {
             nextstage: ''
         };
 
-        let table_2_data = await client.query(`select currentstage.id, currentstage.stage, currentstage.date,currentstage.note from stages currentstage where job_id = ` + table_1_row.id + ` and currentstage.date <= now() order by currentstage.date desc limit 1`);
+        let table_2_data = await client.query(`select currentstage.id, currentstage.stage, currentstage.date, currentstage.note from stages currentstage where job_id = ` + table_1_row.id + ` and currentstage.date >= now() order by currentstage.date asc limit 1`);
         for (let table_2_row of table_2_data.rows) {
             repObj.currentStageId = table_2_row.id;
             repObj.currentStageDate = table_2_row.date;
             repObj.currentStageNote = table_2_row.note;
             repObj.currentStage = table_2_row.stage;
+            
 
         }
-        let table_3_data = await client.query(`select currentstage.id, currentstage.stage, currentstage.date,currentstage.note from stages currentstage where job_id = ` + table_1_row.id + ` and currentstage.date >= now() order by currentstage.date asc limit 1`);
+        let table_3_data = await client.query(`select currentstage.id, currentstage.stage, currentstage.date,currentstage.note from stages currentstage where job_id = ` + table_1_row.id + ` and currentstage.date >= now() order by currentstage.date asc limit 2`);
         for (let table_3_row of table_3_data.rows) {
             repObj.nextStageId = table_3_row.id;
             repObj.nextStageDate = table_3_row.date;
