@@ -1,7 +1,15 @@
-# Prime Project
+# Phoenix - Job Hunting Application
+
+Phoenix is a desktop web application which helps job seekers approach their job search as they would their daily work. With a focus on mid-career professionals, Phoenix allows registered users to identify goals and daily tasks, while tracking their progress through the application and interview process.  The simple interface displays upcoming tasks, job related contacts, and career goals  in one place so users can stay organized and motivated.
+
 This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
 
 We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
+
+## Built With
+This version uses React, Redux, Express, Passport, and PostgreSQL.
+ Additional Technologies listed below (see "Additional Technologies Used"), and a full list of dependencies can be found in `package.json`.
+
 
 ## Download (Don't Clone) This Repository
 
@@ -9,7 +17,9 @@ We **STRONGLY** recommend following these instructions carefully. It's a lot, an
 * Unzip the project and start with the code in that folder.
 * Create a new GitHub project and push this code to the new repository.
 
-## Prerequisites
+## Getting Started
+
+### Prerequisites
 
 Before you get started, make sure you have the following software installed on your computer:
 
@@ -17,21 +27,15 @@ Before you get started, make sure you have the following software installed on y
 - [PostrgeSQL](https://www.postgresql.org/)
 - [Nodemon](https://nodemon.io/)
 
-## Create database and table
 
-Create a new database called `prime_app` and create a `user` table:
+### Create database and table
 
-```SQL
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "email" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
-```
+Create a new database called `phoenix` and create tables using the SQL commands located in the database.sql file
 
-If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
+If you would like to name your database something else, you will need to change `phoenix` to the name of your new database name in `server/modules/pool.js`
 
-## Development Setup Instructions
+
+### Installation Instructions
 
 * Run `npm install`
 * Create a `.env` file at the root of the project and paste this line into the file:
@@ -44,7 +48,7 @@ If you would like to name your database something else, you will need to change 
 * Run `npm run client`
 * Navigate to `localhost:3000`
 
-## Debugging
+### Debugging
 
 To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
 
@@ -55,7 +59,7 @@ Then make sure `Launch Program` is selected from the dropdown, then click the gr
 ![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
 
 
-## Testing Routes with Postman
+### Testing Routes with Postman
 
 To use Postman with this repo, you will need to set up requests in Postman to register a user and login a user at a minimum. 
 
@@ -69,6 +73,15 @@ Keep in mind that once you using the login route, Postman will manage your sessi
     3. `GET /api/user` will get user information, by default it's not very much
 
 After running the login route above, you can try any other route you've created that requires a logged in user!
+
+### Screen Shots
+![VSCode Toolbar](documentation/wireframes/ScreenShot2019-07-10at2.36.45PM.png)
+![VSCode Toolbar](documentation/wireframes/ScreenShot2019-07-10at2.39.40PM.png)
+![VSCode Toolbar](documentation/wireframes/ScreenShot2019-07-10at2.39.52PM.png)
+![VSCode Toolbar](documentation/wireframes/ScreenShot2019-07-10at2.40.14PM.png)
+![VSCode Toolbar](documentation/wireframes/ScreenShot2019-07-10at2.40.40PM.png)
+![VSCode Toolbar](documentation/wireframes/ScreenShot2019-07-10at2.43.24PM.png)
+
 
 
 ## Production Build
