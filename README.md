@@ -75,12 +75,23 @@ Keep in mind that once you using the login route, Postman will manage your sessi
 After running the login route above, you can try any other route you've created that requires a logged in user!
 
 ### Screen Shots
-![VSCode Toolbar](documentation/wireframes/ScreenShot2019-07-10at2.36.45PM.png)
-![VSCode Toolbar](documentation/wireframes/ScreenShot2019-07-10at2.39.40PM.png)
-![VSCode Toolbar](documentation/wireframes/ScreenShot2019-07-10at2.39.52PM.png)
-![VSCode Toolbar](documentation/wireframes/ScreenShot2019-07-10at2.40.14PM.png)
-![VSCode Toolbar](documentation/wireframes/ScreenShot2019-07-10at2.40.40PM.png)
-![VSCode Toolbar](documentation/wireframes/ScreenShot2019-07-10at2.43.24PM.png)
+Dashboard View
+![Dashboard](documentation/wireframes/ScreenShot2019-07-10at2.36.45PM.png)
+
+Tasks View
+![Tasks](documentation/wireframes/ScreenShot2019-07-10at2.39.40PM.png)
+
+Job Pipeline View
+![Job Pipeline](documentation/wireframes/ScreenShot2019-07-10at2.39.52PM.png)
+
+Add New Job Opportunity View
+![Job Opportunity](documentation/wireframes/ScreenShot2019-07-10at2.40.14PM.png)
+
+Contact Book
+![Contacts](documentation/wireframes/ScreenShot2019-07-10at2.40.40PM.png)
+
+Profile & Important Job Attributes
+![Profile](documentation/wireframes/ScreenShot2019-07-10at2.43.24PM.png)
 
 
 
