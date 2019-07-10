@@ -11,11 +11,7 @@ This version uses React, Redux, Express, Passport, and PostgreSQL.
  Additional Technologies listed below (see "Additional Technologies Used"), and a full list of dependencies can be found in `package.json`.
 
 
-## Download (Don't Clone) This Repository
 
-* Don't Fork or Clone. Instead, click the `Clone or Download` button and select `Download Zip`.
-* Unzip the project and start with the code in that folder.
-* Create a new GitHub project and push this code to the new repository.
 
 ## Getting Started
 
@@ -134,6 +130,19 @@ This code is also heavily commented. We recommend reading through the comments, 
 1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
 1. In the deploy section, select manual deploy
 
-## Update Documentation
 
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+### Authors
+Viji Mano
+Meyer H. Meyer
+Pete St. Martin
+Johnnie Walters
+
+### Acknowledgements
+Dane Smith
+Dev Jana
+Ally Boyd
+Chris Black
+Luke Schlangen
+Kris Szafranski
+Mary Mosman
+Baconian Cohort
