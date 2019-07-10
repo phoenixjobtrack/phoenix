@@ -74,16 +74,16 @@ After running the login route above, you can try any other route you've created 
 Dashboard View
 ![Dashboard](documentation/wireframes/ScreenShot2019-07-10at2.36.45PM.png)
 
-Tasks View
+####Tasks View
 ![Tasks](documentation/wireframes/ScreenShot2019-07-10at2.39.40PM.png)
 
-Job Pipeline View
+####Job Pipeline View
 ![Job Pipeline](documentation/wireframes/ScreenShot2019-07-10at2.39.52PM.png)
 
-Add New Job Opportunity View
+####Add New Job Opportunity View
 ![Job Opportunity](documentation/wireframes/ScreenShot2019-07-10at2.40.14PM.png)
 
-Contact Book
+####Contact Book
 ![Contacts](documentation/wireframes/ScreenShot2019-07-10at2.40.40PM.png)
 
 Profile & Important Job Attributes
