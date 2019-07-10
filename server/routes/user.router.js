@@ -9,7 +9,6 @@ const router = express.Router();
 // Handles Ajax request for user information if user is authenticated
 router.get('/', rejectUnauthenticated, (req, res) => {
   // Send back user object from the session (previously queried from the database)
-  console.log('in GET /user')
   res.send(req.user);
 });
 
@@ -25,11 +24,9 @@ router.post('/register', (req, res, next) => {
   const queryText = 'INSERT INTO "users" (first_name, last_name, email, password) VALUES ($1, $2, $3, $4) RETURNING id';
   pool.query(queryText, [firstName, lastName, email, password])
     .then(() => {
-      console.log('in POST /register', req.body)
       res.sendStatus(201)
     })
     .catch((err) => {
-      console.log('error in POST /register', err)
       res.sendStatus(500)
     });
 });
@@ -51,7 +48,6 @@ router.put('/:id', (req, res) => {
   ];
   pool.query(queryText, queryValues).then(() => { res.sendStatus(200); })
   .catch((err) => {
-    console.log('Error in PUT /api/user/:id', err);
     res.sendStatus(500);
   });
 });
@@ -61,7 +57,6 @@ router.put('/:id', (req, res) => {
 // this middleware will run our POST if successful
 // this middleware will send a 404 if not successful
 router.post('/login', userStrategy.authenticate('local'), (req, res) => {
-  console.log('in /login', req.body)
   res.sendStatus(200);
 });
 

@@ -1,8 +1,9 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
-    /* background-color: #939292; */
     background-image: url('/images/light-blue.jpg');
+    width: 100%;
+    z-index: 0;
 }
 
 
@@ -12,7 +13,6 @@ body {
 }
 
 .app {
-    /* margin-top: 20px; */
     margin-left: 250px;
     margin-right: 12px;
     

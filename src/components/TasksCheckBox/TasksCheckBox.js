@@ -17,10 +17,8 @@ class TasksCheckBox extends Component {
         } else {
             checkBox = <CheckBoxOutlineBlank />
         }
-
         return (
             <div>{checkBox}</div>
-            
         )
     }
 }

@@ -8,12 +8,6 @@ import TasksNotes from '../TasksNotes/TasksNotes';
 
 // ----- MATERIAL UI CORE ----- //
 import List from '@material-ui/core/List';
-
-// ----- MATERIAL UI ICONS ----- //
-
-// ----- STYLES ----- //
-
-
 class TasksTomorrow extends Component {
 
     render() {

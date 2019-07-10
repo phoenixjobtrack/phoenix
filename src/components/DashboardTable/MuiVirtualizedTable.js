@@ -108,17 +108,7 @@ class MuiVirtualizedTable extends React.PureComponent {
   }
 }
 
-// MuiVirtualizedTable.propTypes = {
-//   classes: PropTypes.object.isRequired,
-//   columns: PropTypes.arrayOf(PropTypes.object).isRequired,
-//   headerHeight: PropTypes.number,
-//   onRowClick: PropTypes.func,
-//   rowHeight: PropTypes.number,
-// };
-
 const mapStateToProps = reduxState => ({
   reduxState
 });
 export default withRouter(connect(mapStateToProps)(withStyles(styles)(MuiVirtualizedTable)));
-// export default withRouter(connect()(withStyles(styles)(FirstPage)))
-//---

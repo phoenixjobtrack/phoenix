@@ -7,8 +7,6 @@ import moment from 'moment'
 import { Divider, Grid, Typography, List, ListItem } from '@material-ui/core'
 
 class TaskList extends Component {
-    
-    
     componentDidMount(){
         this.props.dispatch({ type: 'FETCH_TASKS_BY_DATE' })
     }
@@ -25,7 +23,6 @@ class TaskList extends Component {
             if(task.contact_id==this.props.match.params.id){
                 //put a line in here to compare current date to due date
                 dueDate = new Date(task.due_date)
-                console.log('dates', today, dueDate)
                 if (!task.complete){
                     upcomingTasks.push(
                         <div key={i}>
@@ -80,11 +77,7 @@ class TaskList extends Component {
                         {completedTasks}
                     </List>
                 </Grid>
-            </Grid>
-            
-                
-                
-            
+            </Grid> 
         )
     }
 }

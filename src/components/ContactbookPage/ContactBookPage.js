@@ -7,7 +7,6 @@ import Box from '@material-ui/core/Box';
 class ContactBookPage extends Component {
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_CONTACTS'})
-        //this.props.dispatch({type: 'SHOW_CONTACTS'})
     }
     
     render () {

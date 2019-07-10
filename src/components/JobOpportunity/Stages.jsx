@@ -9,8 +9,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = theme => ({
-    
-    
     addTip: {
         backgroundColor: theme.palette.primary.main
     }
@@ -66,11 +64,6 @@ class Stages extends Component {
                             </Tooltip>
                         </ListItemIcon>
                     </ListItem>
-                {/* <div className="oppStageView">
-
-                    <p>Current Stage:</p>
-                    <p>Next Stage:</p>
-                </div> */}
                 </List>
             </div>
         )

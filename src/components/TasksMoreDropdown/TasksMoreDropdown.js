@@ -45,12 +45,10 @@ class TasksMoreDropdown extends Component {
     }; // End addNoteToTask
 
     addContactToTask(popupState) {
-        console.log('in addContactToTask');
         popupState();
     }; // End addContactToTask
 
     addJobToTask(popupState) {
-        console.log('in addJobToTask');
         popupState();
     }; // End addJobToTask
 

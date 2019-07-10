@@ -74,20 +74,21 @@
   border-radius: 10px;
 }
 
+/* overdue animation */
 .overdueLabel{
   animation-name: overdue;
-  animation-duration: 2.5s;
+  animation-duration: 2s;
   animation-direction: normal;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 }
 
 @keyframes overdue{
-  0% {color: rgb(0, 0, 0);}
-  35% {color: rgb(0, 0, 0);}
+  0% {color: rgb(105, 9, 9);}
+  35% {color: rgb(105, 9, 9);}
   50% {color: rgb(180, 32, 32);}
-  85% {color: rgb(0, 0, 0);}
-  100% {color: rgb(0, 0, 0);}
+  85% {color: rgb(105, 9, 9);}
+  100% {color: rgb(105, 9, 9);}
 }
 
 /* Requirement's Box Styling */
@@ -152,7 +153,6 @@
   margin-left: 30%;
   margin-right: auto;
   width: 50%;
-  /* margin-top: 20px */
 }
 
 .logo{

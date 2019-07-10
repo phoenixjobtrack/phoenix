@@ -13,10 +13,6 @@ import TasksNotes from '../TasksNotes/TasksNotes';
 // ----- MATERIAL UI CORE ----- //
 import List from '@material-ui/core/List';
 
-// ----- MATERIAL UI ICONS ----- //
-
-// ----- STYLES ----- //
-import './TasksLineItems.css';
 
 class TasksLineItems extends Component {
 

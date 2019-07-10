@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-
 import AddTask from './AddTask'
 import TaskList from './TaskList'
 
 import PropTypes from 'prop-types';
 import MaskedInput from 'react-text-mask'
-
 
 import WorkIcon from '@material-ui/icons/Work'
 import EmailIcon from '@material-ui/icons/Email'
@@ -79,7 +77,6 @@ class ContactPage extends Component {
 
 
     handleChangeFor = key => event => {
-        console.log('in handleChangeFor', key, event)
         this.setState({
             contact: {
                 ...this.state.contact,
@@ -101,8 +98,6 @@ class ContactPage extends Component {
 
 
     render() {
-        console.log('this.state', this.state)
-
         return (
             <Card className={this.props.classes.card}>
 

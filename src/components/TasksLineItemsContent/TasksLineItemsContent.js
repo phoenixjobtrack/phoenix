@@ -36,7 +36,6 @@ import moment from 'moment';
 import swal from 'sweetalert';
 
 class TasksLineItemsContent extends Component {
-
     state = {
         taskIsEditable: false,
         editableTaskId: null,
@@ -44,7 +43,6 @@ class TasksLineItemsContent extends Component {
 
     // Triggers an Alert to Confirm Deletion of a Task
     removeAlert(id) {
-        console.log('Remove Alert', id);
         swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover this task",
@@ -78,7 +76,6 @@ class TasksLineItemsContent extends Component {
 
     handleChangeDate = (event) => {
         let newDate = event.target.value;
-        console.log('newDate', newDate);
         this.setState({
             due_date: newDate,
         })
@@ -92,7 +89,6 @@ class TasksLineItemsContent extends Component {
     }; // end handleChange
 
     postTask = (id) => {
-        console.log('postTask:', this.state.task)
         let task = this.state.task_name;
         let date = this.state.due_date;
         this.props.dispatch({ type: 'UPDATE_TASK', payload: { task_name: task, id: this.state.editableTaskId, date: date } })
@@ -107,12 +103,10 @@ class TasksLineItemsContent extends Component {
 
     // Click Listeners For Icons on Line Items
     handleClickCheckBox(id) {
-        console.log('Checkbox Clicked', id);
         this.props.dispatch({ type: 'CHECK_TASK_BOX', payload: id })
     }; // end handleClickCheckBox
 
     handleClickRemove(id) {
-        console.log('Remove Clicked', id);
         this.props.dispatch({ type: 'REMOVE_TASK', payload: id })
     }; // end handleClickRemove
 
@@ -121,7 +115,6 @@ class TasksLineItemsContent extends Component {
             <Paper key={this.props.id}>
                 <Toolbar>
                     <ListItem>
-                        {/* See component: TasksMoreDropdown */}
                         <TasksMoreDropdown
                             id={this.props.id}
                             task_name={this.props.task_name}
@@ -133,7 +126,6 @@ class TasksLineItemsContent extends Component {
                                 size="small"
                                 color="primary"
                             >
-                                {/* See component: TasksCheckBox */}
                                 <TasksCheckBox
                                     complete={this.props.complete}
                                 />
@@ -156,7 +148,6 @@ class TasksLineItemsContent extends Component {
                                         format={'YYYY-MM-DD'}
                                         formatDate={(date) => moment(new Date()).format('YYYY-MM-DD')}
                                         variant="outlined"
-                                    // label="update due date"
                                     />
                                     <IconButton
                                         onClick={() => this.saveTask(this.props.id)}

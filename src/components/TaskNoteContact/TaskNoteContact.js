@@ -2,24 +2,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-// ----- COMPONENTS ----- //
-
-
 // ----- MATERIAL UI CORE ----- //
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import Tooltip from '@material-ui/core/Tooltip';
 
-
-
 // ----- MATERIAL UI ICONS ----- //
 import FaceIcon from '@material-ui/icons/Face';
-
-
-// ----- STYLES ----- //
-
-
-
 class TaskNoteContact extends Component {
 
     render() {

@@ -103,7 +103,6 @@ function SignUp(props) {
     requirementsArray = [...requirements, newRequirement];
     
     setRequirements(requirementsArray)
-    console.log('in handleRequirementSubmit, requirement:', newRequirement, requirementsArray)
     //reset state to clear input
     setNewRequirement([]);
 
@@ -111,7 +110,6 @@ function SignUp(props) {
 
   //function to handle removing chip
   const handleDelete = (requirement) => {
-    console.log('in handleDelete', requirement)
     requirementsArray = [...requirements]
     requirementsArray.splice(requirementsArray.indexOf(requirement), 1);
     setRequirements(requirementsArray)
@@ -120,9 +118,7 @@ function SignUp(props) {
   //function to handle submit
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log('in handleSubmit', firstName, lastName, email, password, newRequirement)
     if (firstName && lastName && email && password) {
-      console.log('in handleSubmit', firstName, lastName, email, password, requirements)
       props.dispatch({
         type: 'REGISTER',
         payload: {
@@ -210,11 +206,9 @@ function SignUp(props) {
         <Grid container justify="center">
           <Grid item>
             <p> Tell us a bit about what you're looking for.
-                This will help you measure how well your job opportunities match the attributes of your ideal job.
-                            </p>
+                This will help you measure how well your job opportunities match the attributes of your ideal job.</p>
             <p>
-              (You can skip this step now and edit this section later from your profile page).
-                            </p>
+              (You can skip this step now and edit this section later from your profile page).</p>
           </Grid>
         </Grid>
         

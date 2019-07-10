@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import {connect} from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import './StickyList.css'
-
 //Material-UI stuff
 import ContactCard from './ContactCard'
 import { makeStyles } from '@material-ui/core/styles';
@@ -69,8 +67,6 @@ const useStyles = makeStyles(theme => ({
     letter: {
         '&:active': {
             fontSize: '20pt',
-            // margin: 0,
-            // padding: 0
         },
         '&:hover': {
             fontSize: '20pt',
@@ -83,7 +79,6 @@ const useStyles = makeStyles(theme => ({
         color: theme.palette.primary.main,
         cursor: 'pointer',
         verticalAlign: 'top'
-        // minHeight: '25px'
     },
     listSubheader: {
         color: theme.palette.primary.main,
@@ -93,7 +88,6 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
         paddingLeft:'5px',
         paddingRight: '5px'
-        // padding: 0
     },
     addNewBtn: {
         position: 'absolute',
@@ -105,7 +99,6 @@ const useStyles = makeStyles(theme => ({
 function PinnedSubheaderList(props) {
     const classes = useStyles();
     useEffect(()=>{
-        console.log('props', props)
     })
 
     //define 'key' in local state.  default sort is by last name
@@ -117,12 +110,8 @@ function PinnedSubheaderList(props) {
     //function defines what word to sort by, sets local state 'key' to that word
     const setSorting = (event) =>{
         setKey(event.target.value)
-        console.log('doc', document)
         var myDiv = document.getElementById('containerDiv');
         myDiv.scrollTop = 0;
-        console.log(event.target.value)
-        console.log('key', key)
-
     }
 
     const scrollToLetter = (letter) => {
@@ -130,7 +119,6 @@ function PinnedSubheaderList(props) {
     }
 
     const addNewContact = () => {
-        console.log('in addNewContact')
         props.dispatch({ type:'SET_TO_CREATE_MODE'})
         props.history.push('/contact/add')
     }
@@ -163,9 +151,6 @@ function PinnedSubheaderList(props) {
                     </>
                 ))} 
             </div>
-              
-            
-            
             <List id="containerDiv" className={classes.root} subheader={<li />}>
                 {alphabet.map(sectionId => (
                     <ListItem key={`section-${sectionId}`} className={classes.listSection}>
@@ -191,7 +176,6 @@ function PinnedSubheaderList(props) {
                                 
                                 let firstLetter = word[0]
                                 if (firstLetter.toLowerCase() === sectionId) {
-                                    console.log('alphabetize', contact)
                                     return (
                                         <ListItem className={classes.contactCard}><ContactCard contact={contact} /> </ListItem>                               
                                     )

@@ -9,14 +9,11 @@ class Requirements extends Component {
 
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_REQUIREMENTS' })
-
     }
     
     render(){
         return(
             <div className="jobOppForm">
-
-                
                     <Typography variant='h5' paragraph="true" align="left">Important Job Attributes</Typography>                             
                 <List>
                     <Button variant="contained" color="primary" >Update Important Attributes</Button>
@@ -26,9 +23,6 @@ class Requirements extends Component {
                         )
                     })}
                 </List>
- 
-                
-
             </div>
         )
     }

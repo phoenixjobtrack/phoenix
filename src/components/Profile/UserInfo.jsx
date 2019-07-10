@@ -35,7 +35,6 @@ class UserInfo extends Component {
     }
 
     handleEdit = (event) => {
-        console.log('handleEdit UserInfo:', this.props.profile.first_name, this.props.profile.last_name, this.props.profile.email)
         event.preventDefault();
         let id = this.props.profile.id;
         let first_name = this.props.profile.first_name;
@@ -54,7 +53,6 @@ class UserInfo extends Component {
     }
 
     handleEditChange = propertyName => (event) => {
-        console.log('edit old Requirement info', event.target.value);
         this.setState({
             ...this.state,
             oldRequirement: {
@@ -67,7 +65,6 @@ class UserInfo extends Component {
     }
 
     handleProfileChange = propertyName => (event) => {
-        console.log('new Profile Info', event.target.value);
         this.setState({
             profileInfo: {
                 ...this.state.profileInfo,
@@ -77,7 +74,6 @@ class UserInfo extends Component {
     }
 
     handleUpdateProfile = () => {
-        console.log('handleUpdateProfile', this.state.profileInfo);
         this.setState({
             ...this.state,
             editMode: false,

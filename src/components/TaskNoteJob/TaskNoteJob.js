@@ -2,9 +2,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-// ----- COMPONENTS ----- //
-
-
 // ----- MATERIAL UI CORE ----- //
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
@@ -26,7 +23,6 @@ class TaskNoteContact extends Component {
         if (this.props.job_id !== null) {
             this.props.reduxState.jobs.map((job, i) => {
                 if (job.id == this.props.job_id) {
-                    console.log('It is a match', this.props.job_id, job.id);
                     jobChip =
                         <div className="taskNoteJob">
                             <Tooltip title="Job">

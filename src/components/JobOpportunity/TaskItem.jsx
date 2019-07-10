@@ -8,8 +8,6 @@ import TextField from '@material-ui/core/TextField';
 import RemoveIcon from '@material-ui/icons/Remove';
 import InputLabel from '@material-ui/core/InputLabel';
 import IconButton from '@material-ui/core/IconButton';
-
-
 class TaskItem extends Component {
     state = {
         task: {
@@ -20,7 +18,6 @@ class TaskItem extends Component {
         },
     }
     handleRemove = () => {
-        console.log('handleRemove task', this.props.i)
         this.props.dispatch({
             type: 'REMOVE_TASK_FROM_REDUX',
             payload: this.props.i
@@ -29,7 +26,6 @@ class TaskItem extends Component {
     }
 
     handleTaskChange = propertyName => (event) => {
-        console.log('taskInfo', event.target.value);
         this.props.dispatch({
             type: 'UPDATE_REDUX_TASKS',
             payload: {
@@ -57,8 +53,6 @@ class TaskItem extends Component {
                     <ListItem>
                         <TextField
                             style={{ minWidth: 230 }}
-                            // style={{ width: 415, paddingTop: 16 }}
-                            // placeholder="Task Details"
                             value={this.props.reduxState.currentTasks[this.props.i].task_name}
                             onChange={this.handleTaskChange('task_name')}
                             inputProps={{

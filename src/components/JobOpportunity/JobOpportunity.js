@@ -29,13 +29,11 @@ const styles = theme => ({
 
 class JobOpportunity extends Component {
     handleJobChange = propertyName => (event) => {
-        console.log('jobInfo', event.target.value);
         this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: propertyName, value: event.target.value } })
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log('in handleSubmit')
         this.props.dispatch({
             type: 'ADD_JOB',
             payload: {
@@ -69,28 +67,12 @@ class JobOpportunity extends Component {
     }
 
     render() {
-        console.log('current job', this.props)
         return (
             <div>
 
                 <h2>
                     Job Opportunity
                 </h2>
-                {/* <div>
-                    <Grid container spacing={3}>
-                        <Grid item sm={5}>
-                        </Grid>
-                        <Grid item sm={3}>
-                            <Button variant="contained" color="primary" style={{ width: '100%' }}>Offer Accepted</Button>
-                        </Grid>
-                        <Grid item sm={3}>
-                            <Button variant="contained" color="primary" style={{ width: '100%' }} onClick={this.handleCloseJob}>Close Opportunity</Button>
-                        </Grid>
-                        <Grid item sm={1}>
-                        </Grid>
-                    </Grid>
-
-                </div> */}
 
                 {/* Employment Information */}
                 <div className="jobOppForm">

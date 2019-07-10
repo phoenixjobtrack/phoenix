@@ -20,20 +20,10 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 
-
-// ----- MATERIAL UI ICONS ----- //
-
-
-
-
-
-
-
 class RequirementItem extends Component {
 
 
     handleRequireChange = propertyName => (event) => {
-        console.log('requireInfo', event.target.value, this.props.requirement);
         this.props.dispatch({
             type: 'UPDATE_REDUX_REQUIREMENT',
             payload: {
@@ -45,10 +35,6 @@ class RequirementItem extends Component {
         })
     }
 
-
-    
-
-
     render() {
         let reqValueOut
         let requirementOfferValue
@@ -58,13 +44,8 @@ class RequirementItem extends Component {
         if (this.props.currentRequirements[this.props.i]) {
             requirementOfferValue = this.props.currentRequirements[this.props.i].requirement_offer
             requirementMetValue = this.props.currentRequirements[this.props.i].requirement_met
-
-            console.log('Current Requirements Dot Whack Gradlew', requirementMetValue)
-            // reqMetValString = toString(this.props.currentRequirements[this.props.i].requirement_met)
         }
 
-
-        console.log('in RequirementItem requirement:', this.props.requirement, this.props.i)
         return (
             <div >
                 <ListItem>
@@ -108,8 +89,6 @@ class RequirementItem extends Component {
                         </ListItem>
                     </List>
                 </ListItem>
-                
-                
             </div>
         )
     }

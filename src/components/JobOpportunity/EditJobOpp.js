@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import moment from 'moment'
 
-
 import Stages from './Stages'
 import Tasks from './Tasks'
 import Requirements from './Requirements'
@@ -33,13 +32,10 @@ const config = {
     height: "43px",
     colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"]
 };
-
-
 class EditJobOpp extends Component {
     someProp;
 
     handleJobChange = propertyName => (event) => {
-        console.log('jobInfo', event.target.value);
         this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: propertyName, value: event.target.value } })
     }
 
@@ -71,19 +67,13 @@ class EditJobOpp extends Component {
     }
 
     componentWillUnmount() {
-        console.log('componentWillUnmount')
         this.props.dispatch({ type: 'CLEAR_CURRENT_JOB' })
     }
 
     render() {
-        console.log('current job', this.props.currentJob)
         return (
             <div>
                 <h2><Box>Job Opportunity</Box></h2>
-                {/* <div className="jobOppsBut">
-                    <Button variant="contained" >Offer Accepted</Button>
-                    <Button variant="contained" color="secondary" onClick={this.handleCloseJob}>Close Opportunity</Button>
-                </div> */}
 
                 {/* Employment Information */}
                 <div className="jobOppForm">
