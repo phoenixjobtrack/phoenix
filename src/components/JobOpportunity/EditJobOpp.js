@@ -71,7 +71,7 @@ class EditJobOpp extends Component {
         //fetch requirements assessment for selected job and store in redux
         this.props.dispatch({ type: 'FETCH_JOB_REQUIREMENTS', payload: this.props.match.params.id })
     }
-
+    
     componentWillUnmount() {
         console.log('componentWillUnmount')
         this.props.dispatch({ type: 'CLEAR_CURRENT_JOB' })
