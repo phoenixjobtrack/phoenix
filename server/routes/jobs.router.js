@@ -58,6 +58,7 @@ async function getResults(id0) {
         }
         results.push(repObj);
     }
+    client.release()
     return results;
 }
 
