@@ -24,12 +24,13 @@ router.get('/', rejectUnauthenticated, async (req, res) => {
 async function getResults(id0) {
     const client = await pool.connect();
     let results = [];
-    let table_1_data = await client.query(`SELECT job.id ,job.company_name, job.position FROM jobs job where user_id=` + id0);
+    let table_1_data = await client.query(`SELECT job.id ,job.company_name, job.position, job.deactivated FROM jobs job WHERE job.deactivated=FALSE AND user_id=` + id0);
     for (let table_1_row of table_1_data.rows) {
         let repObj = {
             job_id: table_1_row.id,
             company_name: table_1_row.company_name,
             position: table_1_row.position,
+            deactivated: table_1_row.deactivated,
             currentStageId: '',
             currentStageDate: '',
             currentStageNote: '',
@@ -37,18 +38,20 @@ async function getResults(id0) {
             nextStageId: '',
             nextStageDate: '',
             nextStageNote: '',
-            nextstage: ''
+            nextstage: '',
+
         };
 
-        let table_2_data = await client.query(`select currentstage.id, currentstage.stage, currentstage.date,currentstage.note from stages currentstage where job_id = ` + table_1_row.id + ` and currentstage.date <= now() order by currentstage.date desc limit 1`);
+        let table_2_data = await client.query(`select currentstage.id, currentstage.stage, currentstage.date, currentstage.note from stages currentstage where job_id = ` + table_1_row.id + ` and currentstage.date >= now() order by currentstage.date asc limit 1`);
         for (let table_2_row of table_2_data.rows) {
             repObj.currentStageId = table_2_row.id;
             repObj.currentStageDate = table_2_row.date;
             repObj.currentStageNote = table_2_row.note;
             repObj.currentStage = table_2_row.stage;
+            
 
         }
-        let table_3_data = await client.query(`select currentstage.id, currentstage.stage, currentstage.date,currentstage.note from stages currentstage where job_id = ` + table_1_row.id + ` and currentstage.date >= now() order by currentstage.date asc limit 1`);
+        let table_3_data = await client.query(`select currentstage.id, currentstage.stage, currentstage.date,currentstage.note from stages currentstage where job_id = ` + table_1_row.id + ` and currentstage.date >= now() order by currentstage.date asc limit 2`);
         for (let table_3_row of table_3_data.rows) {
             repObj.nextStageId = table_3_row.id;
             repObj.nextStageDate = table_3_row.date;
@@ -113,46 +116,6 @@ router.get('/', rejectUnauthenticated, async (req,res) => {
         
 })
 
-// async function getResults(id0) {
-//     const client = await pool.connect();
-//     let results = [];
-//     let table_1_data = await client.query(`SELECT job.id ,job.company_name, job.position FROM jobs job where user_id=`+id0);
-//     for (let table_1_row of table_1_data.rows) {
-//         let repObj ={
-//             job_id:table_1_row.id,
-//             company_name:table_1_row.company_name,
-//             position:table_1_row.position,
-//             currentStageId:'',
-//             currentStageDate:'',
-//             currentStageNote:'',
-//             currentStage:'',
-//             nextStageId:'',
-//             nextStageDate:'',
-//             nextStageNote:'',
-//             nextstage:''
-//         };
-       
-//          let table_2_data = await client.query(`select currentstage.id, currentstage.stage, currentstage.date,currentstage.note from stages currentstage where job_id = `+table_1_row.id+` and currentstage.date <= now() order by currentstage.date desc limit 1`);
-//          for (let table_2_row of table_2_data.rows) {
-//             repObj.currentStageId=table_2_row.id;
-//             repObj.currentStageDate=table_2_row.date;
-//             repObj.currentStageNote=table_2_row.note;
-//             repObj.currentStage=table_2_row.stage;
-            
-//         }
-//         let table_3_data = await client.query(`select currentstage.id, currentstage.stage, currentstage.date,currentstage.note from stages currentstage where job_id = `+table_1_row.id+` and currentstage.date >= now() order by currentstage.date asc limit 1`);
-//         for (let table_3_row of table_3_data.rows) {
-//            repObj.nextStageId=table_3_row.id;
-//            repObj.nextStageDate=table_3_row.date;
-//            repObj.nextStageNote=table_3_row.note;
-//            repObj.nextstage=table_3_row.stage;
-          
-//        }
-//         results.push(repObj);
-//     }
-//     return results;
-// }
-
 router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('in POST /api/jobs', req.user.id, req.body)
     const queryText = `INSERT INTO "jobs" (user_id, position, company_name, notes, posting_url, deadline,
@@ -200,6 +163,19 @@ router.put('/', rejectUnauthenticated, (req,res)=>{
     })
     .catch(err=>{
         console.log('error in PUT /api/jobs', err)
+        res.sendStatus(500)
+    })
+})
+
+router.put('/deactivate/:id', rejectUnauthenticated, (req,res)=>{
+    const query = `UPDATE "jobs" SET deactivated=true WHERE id=$1`
+    pool.query(query,[req.params.id])
+    .then(response=>{
+        console.log('in PUT /api/job/deactivate', response);
+        res.sendStatus(200)
+    })
+    .catch(err=>{
+        console.log('error in PUT /api/job/deactivate', err)
         res.sendStatus(500)
     })
 })

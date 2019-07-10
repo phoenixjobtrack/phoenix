@@ -25,6 +25,7 @@ class NewTable extends Component {
 
     handleDelete = (id) => {
         console.log('in handleDelete', id);
+        this.props.dispatch({type: 'DEACTIVATE_JOB', payload: id})
     }
     componentDidMount() {
         
@@ -39,7 +40,7 @@ class NewTable extends Component {
                             <th>COMPANY</th>
                             <th>POSITION</th>
                             <th>STAGE</th>
-                            <th>NEXT ACTIVITY DATE</th>
+                            <th>DATE</th>
                             <th>NOTES</th>
                             <th>NEXT STAGE</th>
                             <th>UPDATE</th>
@@ -49,13 +50,12 @@ class NewTable extends Component {
                     <tbody>
                          {this.props.reduxState.jobs.map(job => {
                                 return (
-                                    //  <p>{event.id}</p>
-                                    <tr key={job.id}>
+                                    <tr key={job.user_id}>
                                         <td >{job.company_name}</td>
                                         <td>{job.position}</td>
                                         <td>{job.currentStage}</td>
-                                        <td>{job.nextStageDate && moment(job.nextStageDate).format('MM-DD-YYYY')}</td>
-                                        <td>{job.nextStageNote}</td>
+                                        <td>{job.currentStageDate && moment(job.currentStageDate).format('MM-DD-YYYY')}</td>
+                                        <td>{job.currentStageNote}</td>
                                         <td>{job.nextstage}</td>
                                         <td>
                                             <Tooltip title="View more and edit">

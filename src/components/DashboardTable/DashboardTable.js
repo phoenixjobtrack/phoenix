@@ -35,7 +35,7 @@ const rows = this.props.reduxState.jobs;
             <th>COMPANY</th>
             <th>POSITION</th>
             <th>STAGE</th>
-            <th>NEXT ACTIVITY DATE</th>
+            <th>DATE</th>
             <th>NOTES</th>
 
           </tr>
@@ -49,7 +49,7 @@ const rows = this.props.reduxState.jobs;
                 <td >{job.company_name}</td>
                 <td>{job.position}</td>
                 <td>{job.currentStage}</td>
-                <td>{job.nextStageDate && moment(job.nextStageDate).format('MM-DD-YYYY')}</td>
+                <td>{job.currentStageDate && moment(job.currentStageDate).format('MM-DD-YYYY')}</td>
                 <td>{job.notes}</td>
 
 

@@ -2,6 +2,18 @@ import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_USER" actions
+function* deactivateJob(action) {
+    console.log('in deactivateJobSaga', action.payload);
+    try {
+        yield axios.put(`/api/jobs/deactivate/${action.payload}`)
+        yield put({type: 'FETCH_JOBS'})
+    }
+    catch (error) {
+        console.log('error in deactivateJob', error);
+    }
+    
+}
+
 function* fetchJobs(action) {
     console.log('in fetchjobs saga', action.payload)
     
@@ -172,6 +184,7 @@ function* jobSaga() {
     yield takeEvery('FETCH_JOB_TASKS', fetchJobTasks)
     yield takeEvery('SAVE_JOB_UPDATES', saveJobUpdates)
     yield takeEvery('FETCH_JOB_REQUIREMENTS', fetchJobRequirements)
+    yield takeEvery('DEACTIVATE_JOB', deactivateJob)
 
 }
 
