@@ -72,6 +72,7 @@ function* addJob(action) {
             console.log('in addJob saga requirement:', requirement)
             axios.post('/api/job_requirements', requirement)
         })
+        yield put({type: 'FETCH_JOBS'})
         yield put({type: 'CLEAR_CURRENT_JOB'})
         
 
