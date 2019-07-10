@@ -5,6 +5,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+
 // ========== MATERIAL UI CORE ========== //
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -13,6 +14,13 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+
+
+// ========== MATERIAL UI ICONS ========== //
+
+const theme = createMuiTheme({
+    
+});
 
 const useStyles = makeStyles(theme => ({
     root: {
