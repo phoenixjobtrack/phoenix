@@ -57,6 +57,8 @@ class EditJobOpp extends Component {
     }
 
     componentDidMount = () => {
+        console.log('EditJobOpp componentDidMount');
+        
         //fetch current job data, store in redux
         this.props.dispatch({ type: 'FETCH_CURRENT_JOB', payload: this.props.match.params.id })
 

@@ -51,8 +51,11 @@ class JobOpportunity extends Component {
     handleCloseJob = () => {
         this.props.dispatch({ type: 'CLOSE_JOB', payload: this.props.job.job_id })
     }
-
+    componentWillUnmount() {
+        this.props.dispatch({ type: 'CLEAR_CURRENT_JOB' })
+    }
     componentDidMount = () => {
+        console.log('in JobOpp componentDidMount')
         //make sure redux is cleared (fixes bug when navigating from edit to create job)
         this.props.dispatch({ type: 'CLEAR_CURRENT_JOB' })
         //fetch current job data, store in redux
@@ -110,7 +113,6 @@ class JobOpportunity extends Component {
                                                     marginBottom: 10
                                                 }}
                                                 label="Company"
-                                                value={this.props.currentJob.company_name}
                                                 onChange={this.handleJobChange('company_name')}
                                             />
                                         </ListItem>
@@ -124,7 +126,6 @@ class JobOpportunity extends Component {
                                                     marginBottom: 10
                                                 }}
                                                 label="Position"
-                                                value={this.props.currentJob.position}
                                                 onChange={this.handleJobChange('position')}
                                             />
                                         </ListItem>
@@ -138,7 +139,6 @@ class JobOpportunity extends Component {
                                                     marginBottom: 10
                                                 }}
                                                 label="Posting Link"
-                                                value={this.props.currentJob.posting_url}
                                                 onChange={this.handleJobChange('posting_url')}
                                             />
                                         </ListItem>
@@ -153,7 +153,6 @@ class JobOpportunity extends Component {
                                                 }}
                                                 label="Deadline"
                                                 type="date"
-                                                value={moment(this.props.currentJob.deadline).format("YYYY-MM-DD")}
                                                 onChange={this.handleJobChange('deadline')}
                                                 InputLabelProps={{
                                                     shrink: true,
@@ -179,7 +178,6 @@ class JobOpportunity extends Component {
                                                     marginBottom: 10
                                                 }}
                                                 label="Salary"
-                                                value={this.props.currentJob.compensation}
                                                 onChange={this.handleJobChange('compensation')}
                                                 InputProps={{
                                                     startAdornment: <InputAdornment position="start">
@@ -202,7 +200,6 @@ class JobOpportunity extends Component {
                                                     marginBottom: 10
                                                 }}
                                                 label="Benefits"
-                                                value={this.props.currentJob.benefits}
                                                 onChange={this.handleJobChange('benefits')}
                                                 multiline
                                             />
@@ -217,7 +214,6 @@ class JobOpportunity extends Component {
                                                     marginBottom: 10
                                                 }}
                                                 label="Travel"
-                                                value={this.props.currentJob.travel}
                                                 onChange={this.handleJobChange('travel')}
                                             />
                                         </ListItem>
@@ -231,7 +227,6 @@ class JobOpportunity extends Component {
                                                     marginBottom: 10
                                                 }}
                                                 label="Notes"
-                                                value={this.props.currentJob.job_notes}
                                                 onChange={this.handleJobChange('job_notes')}
                                                 multiline
                                             />
