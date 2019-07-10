@@ -1,12 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 import UpcomingTasks from './UpcomingTasks'
 import CompletedTasks from './CompletedTasks'
 
 //Material UI
-import {Grid, Tooltip} from '@material-ui/core'
+import { Grid, Tooltip } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -54,7 +54,7 @@ function ContactCard(props) {
         setExpanded(!expanded);
     }
 
-    function handleOpenContact(){
+    function handleOpenContact() {
         //route to view page with id in URL params
         props.history.push(`/contact/view/${contact.id}`)
     }
@@ -92,7 +92,7 @@ function ContactCard(props) {
                             Phone: {contact.phone}
                         </Typography>
                     </Grid>
-                    <Grid item sm={4}>                       
+                    <Grid item sm={4}>
                     </Grid>
                     <Grid item sm={4}>
                         <Typography >
@@ -106,19 +106,19 @@ function ContactCard(props) {
                     </Grid>
                     <Grid item sm={6}>
                         <Typography >
-                            Notes: 
+                            Notes:
                         </Typography>
                         <Typography>
                             {contact.notes}
                         </Typography>
-                    </Grid>  
+                    </Grid>
                     <Grid item sm={6}>
                         <Typography >
                             Tasks:
-                            <UpcomingTasks contactId={contact.id}/>
+                            <UpcomingTasks contactId={contact.id} />
                         </Typography>
-                    </Grid>  
-                </Grid>               
+                    </Grid>
+                </Grid>
             </CardContent>
             <CardActions disableSpacing>
                 History
@@ -134,15 +134,15 @@ function ContactCard(props) {
                     >
                         <ExpandMoreIcon />
                     </IconButton>
-                </Tooltip> 
+                </Tooltip>
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                        <Typography paragraph>
-                            {/* insert task history here */}
-                            <CompletedTasks contactId={contact.id} />
-                        </Typography> 
-                                   
+                    <Typography paragraph>
+                        {/* insert task history here */}
+                        <CompletedTasks contactId={contact.id} />
+                    </Typography>
+
                 </CardContent>
             </Collapse>
         </Card>

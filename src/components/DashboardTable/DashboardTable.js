@@ -6,16 +6,11 @@ import moment from 'moment'
 
 import {withStyles} from '@material-ui/core'
 
-
-
-
 const styles = theme => ({
   header: {
     backgroundColor: theme.palette.primary.main,
     color: 'white'
   }
-
-
 });
 class DashboardTable extends Component {
 
@@ -25,7 +20,6 @@ class DashboardTable extends Component {
 
 render(){
 // Getting the value from the jobs reducer
-const rows = this.props.reduxState.jobs;
 
   return (
     <Paper style={{ width: '100%' }}>
@@ -37,14 +31,12 @@ const rows = this.props.reduxState.jobs;
             <th>STAGE</th>
             <th>DATE</th>
             <th>NOTES</th>
-
           </tr>
         </thead>
         <tbody>
 
           {this.props.reduxState.jobs.map(job => {
             return (
-              //  <p>{event.id}</p>
               <tr key={job.id}>
                 <td >{job.company_name}</td>
                 <td>{job.position}</td>
@@ -58,42 +50,6 @@ const rows = this.props.reduxState.jobs;
           })}
         </tbody>
       </table>
-      {/* <NewTable/> */}
-      {/* <MuiVirtualizedTable
-         rowCount={rows.length}
-        rowGetter={({ index }) => rows[index]}
-        columns={[
-          {
-            width: 250,
-            label: 'Company',
-            dataKey: 'company_name',
-          },
-          {
-            width: 250,
-            label: 'Position',
-            dataKey: 'position',
-            //numeric: true,
-          },
-          {
-            width: 300,
-            label: 'Stage',
-            dataKey: 'currentStage',
-            //numeric: true,
-          },
-          {
-            width: 250,
-            label: 'Next Activity Date',
-            dataKey: 'nextStageDate',
-            numeric: true,
-          },
-          {
-            width: 600,
-            label: 'Notes',
-            dataKey: 'nextStageNote',
-            //numeric: true,
-          },
-        ]}
-      /> */}
     </Paper>
   );
 }

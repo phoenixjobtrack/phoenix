@@ -1,7 +1,5 @@
 const currentRequirementsReducer = (state = {}, action) => {
-
     if (action.type === 'UPDATE_REDUX_REQUIREMENT') {
-        console.log('UPDATE_REDUX_REQUIREMENT', action.payload)
         return {
             ...state,
             [action.payload.key]: {
@@ -25,9 +23,7 @@ const currentRequirementsReducer = (state = {}, action) => {
     }
     else if (action.type === 'LOAD_REQUIREMENTS') {
         let requirementObject = state
-        console.log('in currentRequirementsReducer', action.payload)
         action.payload.map((requirement, i) => {
-            console.log('mapping in currentRequirementsReducer', requirement, i)
             requirementObject = {
                 ...requirementObject,
                 [i]: {

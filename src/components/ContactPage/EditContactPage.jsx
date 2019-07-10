@@ -17,7 +17,6 @@ import NotesIcon from '@material-ui/icons/Notes'
 import PersonIcon from '@material-ui/icons/Person'
 
 import Avatar from '@material-ui/core/Avatar';
-import { red } from '@material-ui/core/colors';
 import { Divider, List, ListItem, ListItemIcon, Card, CardContent, CardHeader, Button, TextField, Grid, withStyles } from '@material-ui/core'
 
 const styles = theme => ({
@@ -81,9 +80,7 @@ class ContactPage extends Component {
 
     //function updates redux on change of input fields
     handleChangeFor = key => event => {
-        console.log('in handleChangeFor', key, event)
         this.props.dispatch({type:'UPDATE_REDUX_CONTACT', payload: {key:key, value: event.target.value}})
-
     }
 
     //sends contact to saga

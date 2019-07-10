@@ -1,7 +1,6 @@
 table {
     border-collapse: collapse;
     width: 100%;
-    /* width:700px; */
   }
   
   th, td {
@@ -14,6 +13,5 @@ table {
   
   .header {
     background-color: #0d47a1;
-    /* background-color: rgb(43, 150, 243); */
     color: white;
   }

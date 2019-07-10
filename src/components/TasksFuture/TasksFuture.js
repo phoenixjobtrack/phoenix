@@ -8,12 +8,6 @@ import TasksNotes from '../TasksNotes/TasksNotes';
 
 // ----- MATERIAL UI CORE ----- //
 import List from '@material-ui/core/List';
-
-// ----- MATERIAL UI ICONS ----- //
-
-// ----- STYLES ----- //
-
-
 class TasksTomorrow extends Component {
 
     render() {
@@ -34,7 +28,6 @@ class TasksTomorrow extends Component {
         let taskTomorrow = nn + '/' + ee + '/' + zzzz;
 
         userTasks = this.props.reduxState.tasks.map(({ id, task_name, due_date, complete, contact_id, job_id, disabled, note }) => {
-            console.log('taskTomorrow', taskTomorrow);
             if (taskTomorrow < due_date) {
                 return (
                     <div style={{marginLeft: 20, paddingBottom: 3}}>

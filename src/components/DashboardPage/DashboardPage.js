@@ -17,15 +17,12 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 class DashboardPage extends Component {
   componentDidMount() {
-    //temporary.  replace once Viji's query works
-    // this.props.dispatch({ type: 'FETCH_JOBS' })
     this.props.dispatch({type: 'FETCH_TASKS'})
     this.props.dispatch({ type: 'FETCH_REQUIREMENTS' })
   }
 
   // Triggers Popup to add new Employment Requirement when + is clicked
   addRequirement() {
-    console.log('in addRequirement');
     swal({
       text: 'Add New Employment Requirement',
       content: "input",
@@ -124,7 +121,6 @@ class DashboardPage extends Component {
                 </IconButton>
                 </Tooltip>
               </h2></Box>
-
               <div className="requireBox">
                 <div className="todayLabel">
                   <p>Priorities</p>

@@ -34,7 +34,6 @@ class TasksNotes extends Component {
 
     // Triggers an Alert to Confirm Deletion of a Task
     removeAlert(id) {
-        console.log('Remove Alert', id);
         swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover this note",
@@ -70,7 +69,6 @@ class TasksNotes extends Component {
     }; // end handleChange
 
     postNote = (id) => {
-        console.log('postNote:', this.state.note)
         let note = this.state.note;
         this.props.dispatch({ type: 'ADD_TASK_NOTE', payload: { note: note, id: this.state.editableNoteId } })
     }
@@ -83,7 +81,6 @@ class TasksNotes extends Component {
     }; // end saveTask
 
     handleClickRemove(id) {
-        console.log('Remove Clicked', id);
         this.props.dispatch({ type: 'REMOVE_TASK_NOTE', payload: { note: null, id: id } })
     }; // end handleClickRemove
 

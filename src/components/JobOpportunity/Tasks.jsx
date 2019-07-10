@@ -33,9 +33,7 @@ class Tasks extends Component {
         return(
             <div className="jobOppForm">
                 <Typography variant='h5' paragraph="true" align="left">Tasks</Typography>
-
                 <List>
-
                 {Object.entries(this.props.reduxState.currentTasks).map((task, index) => {
                     return (   
                         <TaskItem task={task} i={task[0]} handleForceUpdate={this.handleForceUpdate}/>

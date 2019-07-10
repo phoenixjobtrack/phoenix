@@ -27,9 +27,7 @@ const currentTasksReducer = (state = {
     }
     else if (action.type === 'LOAD_TASKS') {
         let taskObject = state
-        console.log('in currentTasksReducer', action.payload)
         action.payload.map((job, i) => {
-            console.log('mapping in currentTasksReducer', job, i)
             taskObject = {
                 ...taskObject,
                 [i]: {
@@ -42,7 +40,6 @@ const currentTasksReducer = (state = {
         return taskObject
     }
     else if (action.type === 'REMOVE_TASK_FROM_REDUX') {
-        console.log('in REMOVE_TASK_FROM_REDUX', action.payload)
         let key = action.payload
         delete state[key]
         return state

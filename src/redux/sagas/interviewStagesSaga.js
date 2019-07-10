@@ -5,7 +5,6 @@ import { put, takeEvery } from 'redux-saga/effects';
 function* fetchInterviewStages() {
     try {
         const stages = yield axios.get('/api/interviewStages')
-        console.log('in fetchStages saga', stages)
         yield put({ type: 'STORE_INTERVIEW_STAGES', payload: stages.data })
     }
     catch (error) {

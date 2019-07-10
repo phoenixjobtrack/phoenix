@@ -25,10 +25,8 @@ import AddIcon from '@material-ui/icons/Add';
 import CheckIcon from '@material-ui/icons/Check';
 import EditIcon from '@material-ui/icons/Edit';
 
-
 // ----- STYLES ----- //
 import './Profile.css';
-
 class ProfileRequirements extends Component {
 
 
@@ -42,9 +40,6 @@ class ProfileRequirements extends Component {
 
 
     addRequirementInput(event) {
-        console.log('this.requirementCounter', this.requirementCounter);
-        console.log('this.state.requireList', this.state.requireList);
-        console.log('this.state.oldRequirement', this.state.oldRequirement);
         this.setState({
             ...this.state,
             requireList: {
@@ -59,7 +54,6 @@ class ProfileRequirements extends Component {
 
     // Triggers Popup to add new Employment Requirement when + is clicked
     addRequirement() {
-        console.log('in addRequirement');
         swal({
             text: 'Add New Important Job Attribute',
             content: "input",
@@ -83,14 +77,11 @@ class ProfileRequirements extends Component {
         event.preventDefault();
         this.setState({
             ...this.state,
-            // oldRequirement: 'doodaaa',
             editMode: !this.state.editMode
         });
-        // this.updateStateRequirelist()
     }
 
     handleEditChange = propertyName => (event) => {
-        console.log('edit old Requirement info', event.target.value);
         this.setState({
             ...this.state,
             oldRequirement: {
@@ -103,7 +94,6 @@ class ProfileRequirements extends Component {
     }
 
     handleNewReqChange = (index) => (event) => {
-        console.log('edit NewReq info', this.state.requireList);
         this.setState({
             requireList: {
                 ...this.state.requireList,
@@ -120,7 +110,6 @@ class ProfileRequirements extends Component {
             ...this.state,
             editMode: false,
         });
-        console.log('this.state', this.state);
     }
 
     render() {
@@ -199,21 +188,6 @@ class ProfileRequirements extends Component {
                                         </div>
                                     )
                                 })}
-                            
-                                {/* {Object.entries(this.state.requireList).map((requirement, index) => {
-                                return (
-                                    <p>
-                                        <TextField
-                                            id="standard-dense"
-                                            label="New Requirement"
-                                            className="profileInput"
-                                            margin="dense"
-                                            onChange={this.handleNewReqChange(index)}
-                                            variant="outlined"
-                                        />
-                                    </p>
-                                )
-                            })} */}
                                 <p ><Tooltip
                                     title="Add New Attribute"
                                 >

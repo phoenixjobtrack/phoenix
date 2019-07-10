@@ -17,8 +17,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { withStyles } from '@material-ui/core/styles';
-import './Tasks.css';
-
 
 // ----- MATERIAL UI CORE ----- // 
 import Box from '@material-ui/core/Box';
@@ -42,15 +40,6 @@ const TomorrowTasks = () => <Paper className="tomorrowTasks"><Toolbar ><Typograp
 const FutureTasks = () => <Paper className="futureTasks"><Toolbar ><Typography variant="h6">Future Tasks</Typography></Toolbar></Paper>
 const HistoryTasks = () => <Paper className="historyTasks"><Toolbar ><Typography variant="h6">Task History</Typography></Toolbar></Paper>
 
-
-// ----- MUI THEME ----- //
-// const theme = createMuiTheme({
-//     spacing: 8,
-//     palette: {
-//         primary: { main: '#e61610' },
-//     },
-// });
-
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
@@ -64,7 +53,6 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-// ----- CLASS ----- //
 class Tasks extends Component {
 
     componentDidMount() {
@@ -86,18 +74,15 @@ class Tasks extends Component {
     // Click Handlers For Add Task
     handleClickAddTask = (event) => {
         if (this.state.task_name == '' || this.state.due_date == null) {
-            console.log('Empty Input Values');
             alert("Please Fill In a Task & Due Date");
         }
         else {
-            console.log('clickAddTask');
             this.props.dispatch({ type: 'ADD_TASK', payload: this.state });
         }
         this.clearInputs();
     } // end handleClickAddTask
 
     handleDateSelect = (event) => {
-        console.log('dateChange', event.target.value);
         this.setState({
             ...this.state,
             due_date: event.target.value,
@@ -106,7 +91,6 @@ class Tasks extends Component {
 
     // Change of Add Task Input Text Field
     handleTaskChange = (event) => {
-        console.log('taskChange', event.target.value);
         this.setState({
             ...this.state,
             task_name: event.target.value,
@@ -114,8 +98,6 @@ class Tasks extends Component {
     }; // end handleTaskChange
 
     clearInputs = () => {
-        console.log('clearInputs')
-
         this.setState({
             task_name: '',
             due_date: 'mm/dd/yyyy',
@@ -132,11 +114,9 @@ class Tasks extends Component {
 
             <div>
                 <h2>Tasks</h2>
-                {/* <ThemeProvider theme={theme}> */}
                     {/* // ----- Add Task Input Form ----- // */}
                     <span >
                         <Paper style={{ paddingBottom: 10, marginBottom: 20}}
-                            
                             variant="outlined">
                             <Toolbar className={this.props.classes.root}>
                                 <TextField
@@ -198,8 +178,6 @@ class Tasks extends Component {
                   
                     <HistoryTasks />
                     <TasksHistory />
-                    
-                {/* </ThemeProvider> */}
             </div>
         ); // End Return
     } // End Render

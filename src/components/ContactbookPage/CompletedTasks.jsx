@@ -23,9 +23,7 @@ class CompletedTasks extends Component {
 
         this.props.reduxState.tasksByDate.map((task, i) => {
             if (task.contact_id == this.props.contactId) {
-                //put a line in here to compare current date to due date
                 dueDate = new Date(task.due_date)
-                console.log('dates', today, dueDate, task)
                 if (task.complete) {
                     completedTasks.push(
                         <div key={i}>
@@ -38,8 +36,6 @@ class CompletedTasks extends Component {
                             <Divider />
                         </div>
                     )
-                    
-                    // <ListItem key={i}>{task.task_name} Due:{task.due_date}</ListItem>)
                 }
             }
         })

@@ -45,7 +45,6 @@ class Profile extends Component {
     requirementCounter = 1
 
     addRequirementInput(event) {
-        console.log('add requirement', this.requirementCounter);
         this.setState({
             ...this.state,
             requireList: {
@@ -67,7 +66,6 @@ class Profile extends Component {
     }
 
     handleProfileChange = propertyName => (event) => {
-        console.log('new Profile Info', event.target.value);
         this.setState({
             profileInfo: {
                 ...this.state.profileInfo,
@@ -77,7 +75,6 @@ class Profile extends Component {
     }
 
     handleEditChange = propertyName => (event) => {
-        console.log('edit old Requirement info', event.target.value);
         this.setState({
             ...this.state,
             oldRequirement: {
@@ -90,7 +87,6 @@ class Profile extends Component {
     }
 
     handleNewReqChange = (index) => (event) => {
-        console.log('edit NewReq info', this.state.requireList);
         this.setState({
             requireList: {
                 ...this.state.requireList,

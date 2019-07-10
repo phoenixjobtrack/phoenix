@@ -4,7 +4,6 @@ import { put, takeEvery } from 'redux-saga/effects';
 
 // Adds a task to the database "tasks" table
 function* addTask(action) {
-    console.log('in addTask Saga', action.payload);
     // Do or Do Not. There is no
     try {
         yield axios.post('api/tasks', action.payload)
@@ -18,7 +17,6 @@ function* addTask(action) {
 
 // Adds a note to a task in the "tasks" table
 function* addTaskNote(action) {
-    console.log('in addTaskNote Saga', action.payload);
     try {
         yield axios.put(`api/tasks/note/${action.payload.note}/${action.payload.id}`, action.payload)
         yield put({ type: 'FETCH_TASKS'})
@@ -29,7 +27,6 @@ function* addTaskNote(action) {
 
 // Fetch all tasks from the database in the "tasks" table (sorted by id)
 function* fetchTasks(action) {
-    console.log('in fetchTasks Saga', action.payload);
     // Do or Do Not. There is no
     try {
         const tasks = yield axios.get('api/tasks', action.payload)
@@ -41,7 +38,6 @@ function* fetchTasks(action) {
 
 //fetch tasks sorted by date
 function* fetchTasksByDate() {
-    console.log('in fetchTasksByDate saga');
     try {
         const tasks = yield axios.get('/api/tasks/date')
         yield put ({type: 'STORE_TASKS_BY_DATE', payload: tasks.data})
@@ -53,7 +49,6 @@ function* fetchTasksByDate() {
 
 // Removes note from a task in the the "tasks" table in the database at id of selected task
 function* removeTaskNote(action) {
-    console.log('in removeTaskNote Saga', action.payload);
     try {
         yield axios.put(`api/tasks/note/${action.payload.note}/${action.payload.id}`, action.payload)
         yield put({ type: 'FETCH_TASKS'})
@@ -64,7 +59,6 @@ function* removeTaskNote(action) {
 
 // Removes task from the "tasks" table in the database at id of selected task
 function* removeTask(action) {
-    console.log('in removeTask', action.payload);
     try {
         yield axios.delete(`api/tasks/${action.payload}`, action.payload)
         yield put({ type: 'FETCH_TASKS' })
@@ -75,7 +69,6 @@ function* removeTask(action) {
 
 // Toggles the "complete" column boolean in the "tasks" table in the database at id of selected task
 function* toggleTaskCheck(action) {
-    console.log('in toggleTaskCheck', action.payload);
     try {
         yield axios.put(`api/tasks/${action.payload}`, action.payload)
         yield put({ type: 'FETCH_TASKS' })
@@ -85,7 +78,6 @@ function* toggleTaskCheck(action) {
 }
 
 function* updateTask(action) {
-    console.log('in updateTask', action.payload);
     try {
         yield axios.put(`api/tasks/update/${action.payload.task_name}/${action.payload.id}/${action.payload.due_date}`, action.payload)
         yield put({ type: 'FETCH_TASKS' })

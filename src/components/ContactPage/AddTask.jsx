@@ -30,13 +30,10 @@ class AddTask extends Component {
         if (dd < 10) {
             dd = '0' + dd
         }
-
         if (mm < 10) {
             mm = '0' + mm
         }
-
         today = `${yyyy}-${mm}-${dd}`;
-        // console.log('today', today)
         this.setState({
             today: today
         })
@@ -44,7 +41,6 @@ class AddTask extends Component {
 
     // save task inputs to local state 
     handleChangeFor = key => event =>{
-        console.log('key', key, 'contactId', this.props.reduxState.currentContact.id, this.state.today, event.target.value)
         //if user adds task with past date, auto set as complete - 
             //this is how they can record history of interactions with a contact
         if (key ==='due_date'&& event.target.value<this.state.today){
@@ -73,7 +69,6 @@ class AddTask extends Component {
     //send new task to saga
     handleSubmit = (event) =>{
         event.preventDefault();
-        console.log('in handleSubmit')
         this.props.dispatch({ type:'ADD_TASK',payload:this.state.newTask})
         this.setState({
             ...this.state,
@@ -91,7 +86,6 @@ class AddTask extends Component {
         this.props.dispatch({ type: 'FETCH_CURRENT_CONTACT', payload: this.props.match.params.id})
     }
     render(){
-        console.log('AddTask state', this.state)
         return(
             <>
             <form onSubmit={this.handleSubmit}>

@@ -18,13 +18,9 @@ import RemoveIcon from '@material-ui/icons/Remove';
 
 // ----- STYLES ----- //
 import './Profile.css';
-
-
-
 class SavedRequirements extends Component {
 
     componentDidMount() {
-        console.log('requirementName', this.props.userReq.requirement)
         let requirementName = this.props.userReq.requirement;
         this.setState({
             requirementName: requirementName,
@@ -41,25 +37,19 @@ class SavedRequirements extends Component {
     }
 
     handleEditChange = (event) => {
-        console.log('edit saved Requirement', event.target.value);
         this.setState({
             requirementName: event.target.value,
         });
     }
 
     handleRemoveRequirement = (id) => {
-        console.log('in handleRemoveRequirement', this.props.userReq.id)
         let removeId = this.props.userReq.id;
         this.props.dispatch({ type: 'REMOVE_REQUIREMENT', payload: removeId })
     }
 
     updateChange = () => {
         if (this.state.requirementName !== this.props.userReq.requirement) {
-            console.log('in updateChange', this.props.id, this.props.userReq.requirement, 'to', this.state.requirementName);
             this.props.dispatch({ type: 'UPDATE_REQUIREMENT', payload: { id: this.props.userReq.id, requirement: this.state.requirementName } })
-        }
-        else {
-            console.log('in updateChange - NO CHANGE', this.props.id, this.state.requirementName);
         }
     }
 
