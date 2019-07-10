@@ -25,6 +25,7 @@ class NewTable extends Component {
 
     handleDelete = (id) => {
         console.log('in handleDelete', id);
+        this.props.dispatch({type: 'DEACTIVATE_JOB', payload: id})
     }
     componentDidMount() {
         
