@@ -25,19 +25,13 @@ const styles = theme => ({
     jobDetails: {
         margin: '20px'
     }
-
-
 });
 
 class JobOpportunity extends Component {
-
-
-
     handleJobChange = propertyName => (event) => {
         console.log('jobInfo', event.target.value);
         this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: propertyName, value: event.target.value } })
     }
-
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -59,6 +53,8 @@ class JobOpportunity extends Component {
     }
 
     componentDidMount = () => {
+        //make sure redux is cleared (fixes bug when navigating from edit to create job)
+        this.props.dispatch({ type: 'CLEAR_CURRENT_JOB' })
         //fetch current job data, store in redux
         this.props.dispatch({ type: 'FETCH_CURRENT_JOB', payload: this.props.match.params.id })
 
@@ -72,31 +68,14 @@ class JobOpportunity extends Component {
         this.props.dispatch({ type: 'FETCH_JOB_REQUIREMENTS', payload: this.props.match.params.id })
     }
 
-    // Demo Functions
-    demoFunction = () => {
-        console.log('demo button pressed');
-        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'company_name', value: 'Craymill' } })
-        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'position', value: 'Jr. Project Manager' } })
-        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'posting_url', value: 'http://craymillsolutions.com/jobs/1234' } })
-        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'deadline', value: '2019-07-15' } })
-        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'job_notes', value: 'Heard about position from Melissa' } })
-
-    }
-
-    demoSalary = () => {
-        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'compensation', value: '$75,000' } })
-    }
-
-    demoBenefits = () => {
-        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'benefits', value: '401K & 3 Weeks PTO' } })
-    }
-
     render() {
         console.log('current job', this.props)
         return (
             <div>
 
-                <h2><Box onClick={() => this.demoFunction()}>Job Opportunity</Box></h2>
+                <h2>
+                    Job Opportunity
+                </h2>
                 {/* <div>
                     <Grid container spacing={3}>
                         <Grid item sm={5}>
@@ -127,7 +106,6 @@ class JobOpportunity extends Component {
                                             </ListItemIcon>
                                             <TextField
                                                 style={{
-
                                                     minWidth: 178,
                                                     marginBottom: 10
                                                 }}
@@ -166,9 +144,7 @@ class JobOpportunity extends Component {
                                         </ListItem>
                                         <ListItem>
                                             <ListItemIcon>
-
                                                 <CalendarIcon color="primary" />
-
                                             </ListItemIcon>
                                             <TextField
                                                 style={{
@@ -195,7 +171,6 @@ class JobOpportunity extends Component {
                                                 <ListItemIcon>
                                                     <MoneyIcon
                                                         color="primary"
-
                                                     />
                                                 </ListItemIcon>
                                             </Box>
@@ -218,7 +193,6 @@ class JobOpportunity extends Component {
                                                 <ListItemIcon>
                                                     <StarIcon
                                                         color="primary"
-
                                                     />
                                                 </ListItemIcon>
                                             </Box>
@@ -271,7 +245,6 @@ class JobOpportunity extends Component {
                 <Stages />
                 <Tasks />
                 <Requirements />
-
                 <Grid container spacing={3}>
                     <Grid item sm={4}>
                     </Grid>
@@ -281,8 +254,6 @@ class JobOpportunity extends Component {
                     <Grid item sm={4}>
                     </Grid>
                 </Grid>
-
-
             </div>
         )
     }

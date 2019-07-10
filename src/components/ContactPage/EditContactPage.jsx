@@ -274,8 +274,6 @@ class ContactPage extends Component {
                         </Grid>
                     </CardContent>
                 </Card>
-            
-        
         )
     }
 }
