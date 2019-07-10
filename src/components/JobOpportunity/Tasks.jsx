@@ -45,7 +45,7 @@ class Tasks extends Component {
                         <ListItemIcon>
                             <Tooltip className="addTip" title="Add Task">
                                 <IconButton color="primary" aria-label="Add Task" onClick={() => { this.addTaskInput() }}>
-                                    <AddIcon color="primary" />
+                                    <AddIcon  />
                                 </IconButton>
                             </Tooltip>
                         </ListItemIcon>

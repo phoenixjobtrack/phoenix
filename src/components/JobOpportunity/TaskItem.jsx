@@ -43,7 +43,7 @@ class TaskItem extends Component {
         return(
             <ListItem>
                 <ListItemIcon>
-                    <Tooltip title="Remove Stage">
+                    <Tooltip title="Remove Task">
                         <IconButton className="oppsSubBut" onClick={this.handleRemove} color="secondary">
                             <RemoveIcon
                                 color="secondary" />

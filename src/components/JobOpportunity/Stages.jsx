@@ -21,7 +21,6 @@ class Stages extends Component {
     addStageInput() {
         this.stageCounter = this.stageCounter+1
         console.log('stageCounter', this.stageCounter)
-        // this.setState({ stages: [...this.state.stages, {}] })
         this.props.dispatch({
             type: 'ADD_TO_REDUX_STAGE', 
             payload: {
@@ -41,27 +40,6 @@ class Stages extends Component {
 
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_INTERVIEW_STAGES'})
-        // this.fetchJobStages()
-        // this.props.dispatch({type:'FETCH_JOB_STAGES'})
-    }
-
-    // Demo Functions
-    demoFunction = () => {
-        console.log('demo button pressed');
-        this.stageCounter = this.stageCounter + 1
-        console.log('stageCounter', this.stageCounter)
-        // this.setState({ stages: [...this.state.stages, {}] })
-        this.props.dispatch({
-            type: 'ADD_TO_REDUX_STAGE',
-            payload: {
-                key: this.stageCounter,
-                stage: {
-                    stage: 'Phone Screen',
-                    note: 'with Bethany',
-                    date: '2019-07-11',
-                }
-            }
-        })
     }
 
     render() {
@@ -70,11 +48,13 @@ class Stages extends Component {
             <div className="jobOppForm">
 
                 <List>
-                    <Typography variant='h5' paragraph="true" align="left"><Box onClick={() => this.demoFunction()}>Stages of the Hiring Process</Box></Typography>                             
+                    <Typography variant='h5' paragraph="true" align="left">
+                        Stages of the Hiring Process
+                    </Typography>                             
                     {Object.entries(this.props.reduxState.currentStage).map((stage) => {
                         console.log('stage from Redux', stage, stage[0])
                         return (
-                                <StageItem stage={stage} i={stage[0]} handleForceUpdate={this.handleForceUpdate}/>    
+                            <StageItem stage={stage} i={stage[0]} handleForceUpdate={this.handleForceUpdate}/>    
                         )
                     })}
                     <ListItem>

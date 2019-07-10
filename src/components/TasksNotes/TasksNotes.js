@@ -94,7 +94,7 @@ class TasksNotes extends Component {
                     {this.state.noteIsEditable ?
                         <Paper key={this.props.id}>
                             <Toolbar>
-                                <NotesIcon className="notesIcon" />
+                                <NotesIcon className="notesIcon" color="secondary"/>
                                 <TextField
                                     className="editTasksNotesText"
                                     placeholder={this.props.note}
@@ -104,6 +104,7 @@ class TasksNotes extends Component {
                                 />
                                 <IconButton
                                     onClick={() => this.saveNote(this.props.id)}
+                                    color="secondary"
                                 >
                                     <CheckIcon />
                                 </IconButton>
@@ -113,7 +114,7 @@ class TasksNotes extends Component {
                         <Paper key={this.props.id}>
                             <Toolbar>
                                 <ListItem>
-                                    <NotesIcon className="notesIcon" />
+                                    <NotesIcon className="notesIcon" color="secondary"/>
                                     <ListItemText>
                                         {this.props.complete ?
                                             <span className="taskNoteTextComplete">
@@ -127,6 +128,7 @@ class TasksNotes extends Component {
                                     <Tooltip title="Edit Note">
                                         <IconButton
                                             onClick={() => this.editNote(this.props.id, this.props.note)}
+                                            color="secondary"
                                         >
                                             <EditIcon />
                                         </IconButton>
@@ -135,8 +137,9 @@ class TasksNotes extends Component {
                                         <IconButton
                                             onClick={() => this.removeAlert(this.props.id)}
                                             size="small"
+                                        
                                         >
-                                            <ClearIcon />
+                                            <ClearIcon color="error"/>
                                         </IconButton>
                                     </Tooltip>
                                     <Divider />

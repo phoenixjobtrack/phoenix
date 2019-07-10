@@ -18,9 +18,7 @@ class AddTask extends Component {
             note: '',
             contact_id: '',
             complete: false
-        },
-        demoMode: false,
-
+        }
     }
 
     //get today's date for default selection.
@@ -88,22 +86,6 @@ class AddTask extends Component {
         })
     }
 
-    // Demo Functions
-    demoFunction = () => {
-        console.log('demo button pressed');
-        let melissasId = this.props.reduxState.currentContact.id;
-        this.setState({
-            newTask: {
-                task_name: 'Send "Thank You" email',
-                due_date: '07/10/2019',
-                note: 'Met on 7/7/2019',
-                contact_id: melissasId,
-            },
-            demoMode: true,
-        })
-    }
-
-
     componentDidMount(){
         this.getDate()
         this.props.dispatch({ type: 'FETCH_CURRENT_CONTACT', payload: this.props.match.params.id})
@@ -113,7 +95,7 @@ class AddTask extends Component {
         return(
             <>
             <form onSubmit={this.handleSubmit}>
-                <Box onClick={() => this.demoFunction()}><Typography variant="h6">Add Task</Typography></Box>
+                <Typography variant="h6">Add Task</Typography>
                 <Grid container spacing={2}>
                     <Grid item xs={4}>
                         <TextField

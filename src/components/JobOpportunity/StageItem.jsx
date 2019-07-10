@@ -44,8 +44,7 @@ class StageItem extends Component {
                 <ListItemIcon>
                     <Tooltip title="Remove Stage">
                         <IconButton className="oppsSubBut" onClick={this.handleRemove} color="secondary">
-                            <RemoveIcon
-                                color="secondary" />
+                            <RemoveIcon/>
                         </IconButton> 
                     </Tooltip>         
                 </ListItemIcon>  

@@ -36,7 +36,6 @@ const config = {
 
 
 class EditJobOpp extends Component {
-
     someProp;
 
     handleJobChange = propertyName => (event) => {
@@ -58,8 +57,6 @@ class EditJobOpp extends Component {
     }
 
     componentDidMount = () => {
-        // this.props.dispatch({ type: 'FETCH_JOBS' })
-
         //fetch current job data, store in redux
         this.props.dispatch({ type: 'FETCH_CURRENT_JOB', payload: this.props.match.params.id })
 
@@ -73,15 +70,8 @@ class EditJobOpp extends Component {
         this.props.dispatch({ type: 'FETCH_JOB_REQUIREMENTS', payload: this.props.match.params.id })
     }
 
-    demoSalary = () => {
-        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'compensation', value: '$75,000' } })
-    }
-
-    demoBenefits = () => {
-        this.props.dispatch({ type: 'UPDATE_CURRENT_JOB', payload: { key: 'benefits', value: '401K & 3 Weeks PTO' } })
-    }
-
     componentWillUnmount() {
+        console.log('componentWillUnmount')
         this.props.dispatch({ type: 'CLEAR_CURRENT_JOB' })
     }
 
@@ -170,14 +160,11 @@ class EditJobOpp extends Component {
                                 <Grid item xs={12}>
                                     <List>
                                         <ListItem>
-                                            <Box onClick={() => this.demoSalary()}>
-                                                <ListItemIcon>
-                                                    <MoneyIcon
-                                                        color="primary"
-
-                                                    />
-                                                </ListItemIcon>
-                                            </Box>
+                                            <ListItemIcon>
+                                                <MoneyIcon
+                                                    color="primary"
+                                                />
+                                            </ListItemIcon>
                                             <TextField
                                                 style={{
                                                     marginBottom: 10
@@ -193,14 +180,11 @@ class EditJobOpp extends Component {
                                             />
                                         </ListItem>
                                         <ListItem>
-                                            <Box onClick={() => this.demoBenefits()}>
-                                                <ListItemIcon>
-                                                    <StarIcon
-                                                        color="primary"
-
-                                                    />
-                                                </ListItemIcon>
-                                            </Box>
+                                            <ListItemIcon>
+                                                <StarIcon
+                                                    color="primary"
+                                                />
+                                            </ListItemIcon>
                                             <TextField
                                                 style={{
                                                     minWidth: 178,

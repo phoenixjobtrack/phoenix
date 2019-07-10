@@ -125,11 +125,13 @@ class TasksLineItemsContent extends Component {
                         <TasksMoreDropdown
                             id={this.props.id}
                             task_name={this.props.task_name}
+                            
                         />
                         <Tooltip title="Mark Complete">
                             <IconButton
                                 onClick={() => this.handleClickCheckBox(this.props.id)}
                                 size="small"
+                                color="primary"
                             >
                                 {/* See component: TasksCheckBox */}
                                 <TasksCheckBox
@@ -158,6 +160,7 @@ class TasksLineItemsContent extends Component {
                                     />
                                     <IconButton
                                         onClick={() => this.saveTask(this.props.id)}
+                                        color="primary"
                                     >
                                         <CheckIcon />
                                     </IconButton>
@@ -174,6 +177,7 @@ class TasksLineItemsContent extends Component {
                                     <Tooltip title="Edit Task">
                                         <IconButton
                                             onClick={() => this.editTask(this.props.id, this.props.task_name, this.props.due_date)}
+                                            color="secondary"
                                         >
                                             <EditIcon />
                                         </IconButton>
@@ -199,8 +203,9 @@ class TasksLineItemsContent extends Component {
                             <IconButton
                                 onClick={() => this.removeAlert(this.props.id)}
                                 size="small"
+
                             >
-                                <ClearIcon />
+                                <ClearIcon color="error"/>
                             </IconButton>
                         </Tooltip>
                     </ListItem>

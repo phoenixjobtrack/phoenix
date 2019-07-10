@@ -20,6 +20,7 @@ class DashboardPage extends Component {
     //temporary.  replace once Viji's query works
     // this.props.dispatch({ type: 'FETCH_JOBS' })
     this.props.dispatch({type: 'FETCH_TASKS'})
+    this.props.dispatch({ type: 'FETCH_REQUIREMENTS' })
   }
 
   // Triggers Popup to add new Employment Requirement when + is clicked
@@ -93,7 +94,7 @@ class DashboardPage extends Component {
                 </div>
                 <div className="overdueText">
                   {this.props.dayTask.map((tasks, i) => {
-                    if (tasks.due_date < taskDay) {
+                    if (tasks.due_date < taskDay && !tasks.complete) {
                       return (
                         <ul>
                           <li className="overdueLabel">{tasks.task_name}</li>
@@ -108,10 +109,10 @@ class DashboardPage extends Component {
           <Grid item sm>
             <Paper >
               <div className="logoBox">
-                {/* <img className="logo" src="/images/logo3.png" alt="phoenix logo" /> */}
+                <img className="logo" src="/images/logo3.png" alt="phoenix logo" />
                 
               </div>
-              <Box><h2 className="boxLabel">
+              <Box><h2 className="boxIJALabel">
                 Important Job Attributes
                 <Tooltip title="add attribute">
                 <IconButton>
@@ -136,7 +137,6 @@ class DashboardPage extends Component {
                         <li>{user.requirement}</li>
                       </ul>
                     )
-
                   })}
                 </div>
               </div>

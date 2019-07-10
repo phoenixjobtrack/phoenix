@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
         transform: 'rotate(180deg)',
     },
     avatar: {
-        backgroundColor: red[500],
+        backgroundColor: theme.palette.secondary.main,
     },
 }));
 
@@ -124,7 +124,7 @@ function ContactCard(props) {
                 History
                 <Tooltip title="Expand to see past tasks involving this contact.">
                     <IconButton
-                        color="primary"
+                        color="secondary"
                         className={clsx(classes.expand, {
                             [classes.expandOpen]: expanded,
                         })}

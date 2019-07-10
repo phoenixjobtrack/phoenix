@@ -44,12 +44,12 @@ const HistoryTasks = () => <Paper className="historyTasks"><Toolbar ><Typography
 
 
 // ----- MUI THEME ----- //
-const theme = createMuiTheme({
-    spacing: 8,
-    palette: {
-        primary: { main: '#e61610' },
-    },
-});
+// const theme = createMuiTheme({
+//     spacing: 8,
+//     palette: {
+//         primary: { main: '#e61610' },
+//     },
+// });
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -124,16 +124,6 @@ class Tasks extends Component {
         })
     }
 
-    // Demo Functions
-    demoFunction = ()  => {
-        console.log('demo button pressed');
-        this.setState({
-            task_name: 'Attend a meetup tomorrow',
-            due_date: '2019-07-11',
-            demoMode: true,
-        })
-    }
-
     // ----- RENDER ----- //
     render() {
 
@@ -141,8 +131,8 @@ class Tasks extends Component {
         return (
 
             <div>
-                <h2><Box onClick={() => this.demoFunction()}>Tasks</Box></h2>
-                <ThemeProvider theme={theme}>
+                <h2>Tasks</h2>
+                {/* <ThemeProvider theme={theme}> */}
                     {/* // ----- Add Task Input Form ----- // */}
                     <span >
                         <Paper style={{ paddingBottom: 10, marginBottom: 20}}
@@ -164,14 +154,12 @@ class Tasks extends Component {
                                     variant="outlined"
                                     style={{width: 600, paddingRight: 5}}
                                 />
-                                {this.state.demoMode ?
                                 <TextField
                                     value={this.state.due_date}
                                     id="date"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
-                                    value="2019-07-11"
                                     label="Due Date"
                                     margin="normal"
                                     onChange={this.handleDateSelect}
@@ -179,21 +167,6 @@ class Tasks extends Component {
                                     type="date"
                                     variant="outlined"
                                 />
-                                :
-                                    <TextField
-                                        value={this.state.due_date}
-                                        id="date"
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        label="Due Date"
-                                        margin="normal"
-                                        onChange={this.handleDateSelect}
-                                        position="Relative"
-                                        type="date"
-                                        variant="outlined"
-                                    />
-                                }
                                 <Tooltip title="Add Task">
                                     <IconButton
                                         label="Submit"
@@ -201,7 +174,7 @@ class Tasks extends Component {
                                         onClick={() => this.handleClickAddTask()}
                                         size="medium"
                                         type="submit"
-                                        variant="outlined"
+                                        variant="outlined"                                
                                     ><AddIcon />
                                     </IconButton>
                                 </Tooltip>
@@ -226,7 +199,7 @@ class Tasks extends Component {
                     <HistoryTasks />
                     <TasksHistory />
                     
-                </ThemeProvider>
+                {/* </ThemeProvider> */}
             </div>
         ); // End Return
     } // End Render

@@ -37,17 +37,18 @@ import './App.css';
 
 const theme = createMuiTheme({
   palette: {
-    primary: { main: '#2196f3' },
-    secondary: { main: '#e53935' },
+    primary: { main: '#2196f3'},
+    secondary: { main: '#00bcd4' },
     lightBlue: { main: '#e1f5fe'},
+    error: { main: '#c2185b'}
   }
 })
 
 class App extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_USER' })
-    this.props.dispatch({ type: 'FETCH_TASKS' })
-    this.props.dispatch({ type: 'FETCH_REQUIREMENTS' })
+    // this.props.dispatch({ type: 'FETCH_TASKS' })
+    
 
   }
 

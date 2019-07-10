@@ -62,7 +62,10 @@ class TasksMoreDropdown extends Component {
                         {popupState => (
                             <React.Fragment>
                                 <Tooltip title="More">
-                                    <IconButton variant="contained" {...bindTrigger(popupState)} >
+                                    <IconButton 
+                                        variant="contained" 
+                                        {...bindTrigger(popupState)} 
+                                        color="secondary">
                                         <MoreVertIcon />
                                     </ IconButton>
                                 </Tooltip>
