@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import Paper from '@material-ui/core/Paper';
-import JobPipelinePageTable from './JobPipelinePageTable';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import NewTable from './NewTable';
 import Box from '@material-ui/core/Box';
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
-import moment from 'moment'
 
 import Stages from './Stages'
 import Tasks from './Tasks'
@@ -17,7 +16,7 @@ import NotesIcon from '@material-ui/icons/Notes'
 import PersonIcon from '@material-ui/icons/Person'
 import MoneyIcon from '@material-ui/icons/AttachMoney'
 import StarIcon from '@material-ui/icons/StarBorder'
-import { InputLabel, Typography, TextField, Box, withStyles, Icon, List, ListItem, ListItemIcon } from '@material-ui/core'
+import { Typography, TextField, Box, withStyles, List, ListItem, ListItemIcon } from '@material-ui/core'
 import InputAdornment from '@material-ui/core/InputAdornment';
 import './JobOpportunity.css';
 

@@ -12,10 +12,8 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 
 // ----- MATERIAL UI ICONS ----- //
-import AddIcon from '@material-ui/icons/Add';
 import CheckIcon from '@material-ui/icons/Check';
 import EditIcon from '@material-ui/icons/Edit';
-import FaceIcon from '@material-ui/icons/Face';
 
 // ----- STYLES ----- //
 import './Profile.css';
