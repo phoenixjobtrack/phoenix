@@ -1,22 +1,10 @@
 // ----- REACT ----- //
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom'
-
-// ----- COMPONENTS ----- //
-import Stages from './Stages'
-import Tasks from './Tasks'
 
 // ----- MATERIAL UI CORE ----- //
-import {List, ListItemIcon, ListItem, TextField, Typography} from '@material-ui/core'
-import Box from '@material-ui/core/Box';
-import Card from '@material-ui/core/Card';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import Grid from '@material-ui/core/Grid';
+import {List, ListItem, TextField, Typography} from '@material-ui/core'
 import MenuItem from '@material-ui/core/MenuItem';
-import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 

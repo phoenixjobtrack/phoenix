@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Paper from '@material-ui/core/Paper';
-import MuiVirtualizedTable from './MuiVirtualizedTable';
 import {connect} from 'react-redux';
 import moment from 'moment'
 

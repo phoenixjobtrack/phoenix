@@ -6,19 +6,8 @@ import { connect } from 'react-redux';
 import ProfileRequirements from './ProfileRequirements';
 import UserInfo from './UserInfo';
 
-// ----- MATERIAL UI CORE ----- //
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card'
-import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import TextField from '@material-ui/core/TextField';
-
 // ----- MATERIAL UI ICONS ----- //
-import AddIcon from '@material-ui/icons/Add';
 import Box from '@material-ui/core/Box';
-import CheckIcon from '@material-ui/icons/Check';
-import EditIcon from '@material-ui/icons/Edit';
-import FaceIcon from '@material-ui/icons/Face';
 
 // ----- STYLES ----- //
 import './Profile.css';
