@@ -72,11 +72,12 @@
 .overdueText::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px rgb(170, 227, 243); 
   border-radius: 10px;
+  color: rgb(180, 32, 32);
 }
 
 .overdueLabel{
   animation-name: overdue;
-  animation-duration: 2.5s;
+  /* animation-duration: 2.5s; */
   animation-direction: normal;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
@@ -93,7 +94,7 @@
 /* Requirement's Box Styling */
 .requireBox{
   width: 400px;
-  height: 175px;
+  height: 275px;
   border: 1px solid rgb(8, 107, 41);
   background: linear-gradient(to right, rgb(255, 255, 255), rgb(208, 248, 231)), rgb(223, 239, 252);
   box-shadow: 1.5px 2px rgb(183, 189, 186);
@@ -105,7 +106,7 @@
 /* Requirement Scrollbar */
 .requireText{
   margin: 20px;
-  height: 90px;
+  height: 190px;
   overflow-y: auto;
   
 }
