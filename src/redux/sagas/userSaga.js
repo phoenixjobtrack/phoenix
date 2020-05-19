@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
+import { apiUrl } from './apiUrl';
 
 // worker Saga: will be fired on "FETCH_USER" actions
 function* fetchUser() {
@@ -13,7 +14,7 @@ function* fetchUser() {
     // allow the server session to recognize the user
     // If a user is logged in, this will return their information
     // from the server session (req.user)
-    const response = yield axios.get('/api/user', config);
+    const response = yield axios.get(`${apiUrl}/api/user`, config);
 
     // now that the session has given us a user object
     // with an id and email set the client-side user object to let
@@ -25,8 +26,8 @@ function* fetchUser() {
 }
 
 function* updateUser(action){
-    try{    
-      yield axios.put(`/api/user/${action.payload.id}`, action.payload)
+    try{
+      yield axios.put(`${apiUrl}/api/user/${action.payload.id}`, action.payload)
       yield put({type: 'FETCH_USER'})
     }catch(err){
       console.log('Error in UPDATE USER SAGA request:', err);

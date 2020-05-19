@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
+import { apiUrl } from './apiUrl';
 
 // Used for adding additional requirements from the Profile View
 function* addNewRequirement(action) {
     try {
-        yield axios.post(`api/requirements`, action.payload )
+        yield axios.post(`${apiUrl}api/requirements`, action.payload )
         yield put({ type: 'FETCH_REQUIREMENTS' })
     } catch (error) {
         console.log('error in addNewRequirement saga', error);
@@ -15,8 +16,8 @@ function* addNewRequirement(action) {
 function* addRequirements(action) {
     try {
         yield action.payload.requirements.map(requirement=>{
-            axios.post('api/requirements', {requirement: requirement})
-        })       
+            axios.post(`${apiUrl}api/requirements`, {requirement: requirement})
+        })
     } catch (error) {
         console.log('error in addRequirements saga', error);
     }
@@ -25,7 +26,7 @@ function* addRequirements(action) {
 //SAGA to GET requirements from database
 function* fetchRequirements(action) {
     try {
-        const requirements = yield axios.get('/api/requirements')
+        const requirements = yield axios.get(`${apiUrl}/api/requirements`)
         yield put({type:'STORE_REQUIREMENTS', payload: requirements.data})
     }
     catch (error){
@@ -35,7 +36,7 @@ function* fetchRequirements(action) {
 
 function* removeRequirement(action) {
     try {
-        yield axios.delete(`api/requirements/${action.payload}`, action.payload)
+        yield axios.delete(`${apiUrl}/api/requirements/${action.payload}`, action.payload)
         yield put({ type: 'FETCH_REQUIREMENTS'})
     } catch (error) {
         console.log('error in removeRequirement', error);
@@ -46,7 +47,7 @@ function* removeRequirement(action) {
 // This is updateRequirement NOT updateRequirementS with an "S"
 function* updateRequirement(action) {
     try {
-        yield axios.put(`api/requirements/${action.payload.id}`, action.payload)
+        yield axios.put(`${apiUrl}/api/requirements/${action.payload.id}`, action.payload)
         yield put({type: 'FETCH_REQUIREMENTS' })
     } catch (error) {
         console.log('error in updateRequiremenT saga', error);
@@ -58,9 +59,9 @@ function* updateRequirement(action) {
 function* updateRequirements(action) {
     try {
         yield action.payload.requirements.map(requirement=>{
-            axios.put(`api/requirements/${action.payload.id}`, action.payload)
+            axios.put(`${apiUrl}/api/requirements/${action.payload.id}`, action.payload)
             put({ type: 'FETCH_REQUIREMENTS' })
-        })       
+        })
     } catch (error) {
         console.log('error in updateRequirements saga', error);
     }
