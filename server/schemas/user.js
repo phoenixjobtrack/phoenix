@@ -11,19 +11,19 @@ User.init(
       autoIncrement: true,
     },
     firstName: {
-      type: Sequelize.DataTypes.STRING(45),
+      type: Sequelize.DataTypes.STRING(255),
       field: 'first_name',
     },
     lastName: {
-      type: Sequelize.DataTypes.STRING(45),
+      type: Sequelize.DataTypes.STRING(255),
       field: 'last_name',
     },
     email: {
-      type: Sequelize.DataTypes.STRING(100),
+      type: Sequelize.DataTypes.STRING(255),
       unique: true,
     },
     password: {
-      type: Sequelize.DataTypes.STRING(45),
+      type: Sequelize.DataTypes.STRING(255),
       validate: {
         max: 45,
       },
