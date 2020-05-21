@@ -22,7 +22,7 @@ JobRequirment.init(
       type: Sequelize.DataTypes.BOOLEAN,
     },
   },
-  { sequelize, tableName: 'jobrequirment' },
+  { sequelize, tableName: 'jobs_requirment' },
 )
 
 module.exports = { JobRequirment }

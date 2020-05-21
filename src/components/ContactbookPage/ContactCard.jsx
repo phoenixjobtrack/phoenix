@@ -62,10 +62,10 @@ function ContactCard(props) {
             <CardHeader
                 avatar={
                     <Avatar aria-label="Contact" className={classes.avatar}>
-                        {contact.first_name[0]}{contact.last_name[0]}
+                        {contact.firstName[0]}{contact.lastName[0]}
                     </Avatar>
                 }
-                title={`${contact.first_name} ${contact.last_name}`}
+                title={`${contact.firstName} ${contact.lastName}`}
                 subheader={contact.company}
                 action={
                     <Tooltip title="View and edit contact">

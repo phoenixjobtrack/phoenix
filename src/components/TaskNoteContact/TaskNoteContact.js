@@ -12,14 +12,14 @@ import FaceIcon from '@material-ui/icons/Face';
 class TaskNoteContact extends Component {
 
     render() {
-        
+
             let contactChip;
-        
+
             if (this.props.contact_id !== null) {
             this.props.reduxState.contacts.map((contact, i) => {
                 if (contact.id == this.props.contact_id) {
                     contactChip=
-                        <div className="taskNoteContact"> 
+                        <div className="taskNoteContact">
                             <Tooltip title="Contact">
                                 <Chip
                                     color="secondary"
@@ -29,13 +29,13 @@ class TaskNoteContact extends Component {
                                             style={{color: 'white'}}/>
                                         </Avatar>
                                     }
-                                    label={contact.first_name}
+                                    label={contact.firstName}
                                     variant="outlined"
                                     style={{ fontWeight: 900 }}
                                 />
                             </Tooltip>
                         </div>
-                    
+
                 }
             })
 

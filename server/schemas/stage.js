@@ -24,7 +24,7 @@ Stage.init(
       type: Sequelize.DataTypes.DATE,
     },
   },
-  { sequelize, tableName: 'stage' },
+  { sequelize, tableName: 'stages' },
 )
 
 module.exports = { Stage }

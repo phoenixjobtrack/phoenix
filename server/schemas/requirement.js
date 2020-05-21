@@ -23,7 +23,7 @@ Requirement.init(
       defaultValue: false,
     },
   },
-  { sequelize, tableName: 'requirement' },
+  { sequelize, tableName: 'requirements' },
 )
 
 module.exports = { Requirement }

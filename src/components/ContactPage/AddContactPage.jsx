@@ -58,12 +58,12 @@ class ContactPage extends Component {
 
     state = {
         contact: {
-            first_name: '',
-            last_name: '',
+            firstName: '',
+            lastName: '',
             company: '',
             position: '',
             email: '',
-            linkedin_url: '',
+            linkedinUrl: '',
             phone: '',
             cell: '',
             notes: ''
@@ -128,7 +128,7 @@ class ContactPage extends Component {
                                                 width: '50%'
                                             }}
                                             label="First Name"
-                                            onChange={this.handleChangeFor('first_name')}
+                                            onChange={this.handleChangeFor('firstName')}
                                             className={this.props.classes.inputs}
                                         />
                                         <ListItemIcon></ListItemIcon>
@@ -137,7 +137,7 @@ class ContactPage extends Component {
                                                 width: '50%'
                                             }}
                                             label="Last Name"
-                                            onChange={this.handleChangeFor('last_name')}
+                                            onChange={this.handleChangeFor('lastName')}
                                             className={this.props.classes.inputs}
                                         />
                                     </ListItem>
@@ -193,7 +193,7 @@ class ContactPage extends Component {
                                                 width: '50%'
                                             }}
                                             label="LinkedIn"
-                                            onChange={this.handleChangeFor('linkedin_url')}
+                                            onChange={this.handleChangeFor('linkedinUrl')}
                                             className={this.props.classes.inputs}
                                         />
                                     </ListItem>

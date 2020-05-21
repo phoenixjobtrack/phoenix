@@ -45,7 +45,7 @@ Job.init(
       defaultValue: false,
     },
   },
-  { sequelize, tableName: 'job' },
+  { sequelize, tableName: 'jobs' },
 )
 
 module.exports = { Job }

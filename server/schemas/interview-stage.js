@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize')
 const { sequelize } = require('./sequelize')
 const Model = Sequelize.Model
-class Task extends Model {}
-Task.init(
+class InterviewStages extends Model {}
+InterviewStages.init(
   {
     id: {
       type: Sequelize.DataTypes.INTEGER({ length: 10 }),
@@ -15,7 +15,7 @@ Task.init(
       allowNull: false,
     },
   },
-  { sequelize, tableName: 'tasks' },
+  { sequelize, tableName: 'interview_stages' },
 )
 
-module.exports = { Task }
+module.exports = { InterviewStages }
