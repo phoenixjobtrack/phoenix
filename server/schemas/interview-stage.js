@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize')
 const { sequelize } = require('./sequelize')
 const Model = Sequelize.Model
-class InterviewStages extends Model {}
-InterviewStages.init(
+class InterviewStage extends Model {}
+InterviewStage.init(
   {
     id: {
       type: Sequelize.DataTypes.INTEGER({ length: 10 }),
@@ -18,4 +18,4 @@ InterviewStages.init(
   { sequelize, tableName: 'interview_stages' },
 )
 
-module.exports = { InterviewStages }
+module.exports = { InterviewStage }
