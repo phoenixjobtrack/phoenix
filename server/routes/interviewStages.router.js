@@ -1,14 +1,16 @@
-const express = require('express');
-const router = express.Router();
-const { InterviewStage } = require('../schemas/interview-stage')
+const express = require('express')
+const router = express.Router()
+const { InterviewStage } = require('../schemas')
 
 router.get('/', (req, res) => {
-    InterviewStage.findAll().then(() => {
-        res.send(result);
-    }).catch((error) => {
-        console.log(error);
-        res.send(error);
-    });
+  InterviewStage.findAll()
+    .then((result) => {
+      res.send(result)
+    })
+    .catch((error) => {
+      console.log(error)
+      res.send(error)
+    })
 })
 
-module.exports = router;
+module.exports = router

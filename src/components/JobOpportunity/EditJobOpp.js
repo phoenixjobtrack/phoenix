@@ -54,7 +54,7 @@ class EditJobOpp extends Component {
 
     componentDidMount = () => {
         console.log('EditJobOpp componentDidMount');
-        
+
         //fetch current job data, store in redux
         this.props.dispatch({ type: 'FETCH_CURRENT_JOB', payload: this.props.match.params.id })
 
@@ -67,7 +67,7 @@ class EditJobOpp extends Component {
         //fetch requirements assessment for selected job and store in redux
         this.props.dispatch({ type: 'FETCH_JOB_REQUIREMENTS', payload: this.props.match.params.id })
     }
-    
+
     componentWillUnmount() {
         this.props.dispatch({ type: 'CLEAR_CURRENT_JOB' })
     }
@@ -146,7 +146,7 @@ class EditJobOpp extends Component {
                                             />
                                         </ListItem>
                                     </List>
-                                </Grid >
+                                </Grid>
                             </Grid>
                             <Grid container item xs={6}>
                                 <Grid item xs={12}>

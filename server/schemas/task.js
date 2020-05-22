@@ -42,7 +42,7 @@ Task.init(
       defaultValue: false,
     },
   },
-  { sequelize, tableName: 'tasks' },
+  { sequelize, tableName: 'tasks', underscored: true },
 )
 
 module.exports = { Task }

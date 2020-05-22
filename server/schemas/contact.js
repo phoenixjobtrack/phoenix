@@ -51,7 +51,7 @@ Contact.init(
       defaultValue: false,
     },
   },
-  { sequelize, tableName: 'contacts' },
+  { sequelize, tableName: 'contacts', underscored: true },
 )
 
 module.exports = { Contact }

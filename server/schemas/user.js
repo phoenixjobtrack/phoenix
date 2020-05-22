@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const {sequelize} = require('./sequelize');
+const { sequelize } = require('./sequelize')
 const Model = Sequelize.Model
 class User extends Model {}
 User.init(
@@ -31,9 +31,9 @@ User.init(
     disabled: {
       type: Sequelize.DataTypes.BOOLEAN,
       defaultValue: false,
-    }
+    },
   },
-  { sequelize, tableName: 'users' },
+  { sequelize, tableName: 'users', underscored: true },
 )
 
-module.exports = { User };
+module.exports = { User }

@@ -16,7 +16,7 @@ function* addNewRequirement(action) {
 function* addRequirements(action) {
     try {
         yield action.payload.requirements.map(requirement=>{
-            axios.post(`${apiUrl}api/requirements`, {requirement: requirement})
+            axios.post(`${apiUrl}/api/requirements`, {requirement: requirement})
         })
     } catch (error) {
         console.log('error in addRequirements saga', error);

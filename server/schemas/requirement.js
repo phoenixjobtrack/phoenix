@@ -12,7 +12,7 @@ Requirement.init(
     },
     requirement: {
       type: Sequelize.DataTypes.STRING(255),
-      allowNull: false
+      allowNull: false,
     },
     userId: {
       type: Sequelize.DataTypes.INTEGER({ length: 10 }),
@@ -23,7 +23,7 @@ Requirement.init(
       defaultValue: false,
     },
   },
-  { sequelize, tableName: 'requirements' },
+  { sequelize, tableName: 'requirements', underscored: true },
 )
 
 module.exports = { Requirement }

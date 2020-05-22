@@ -1,18 +1,14 @@
 const Sequelize = require('sequelize')
 const { sequelize } = require('./sequelize')
 const Model = Sequelize.Model
-class JobRequirment extends Model {}
-JobRequirment.init(
+class JobRequirement extends Model {}
+JobRequirement.init(
   {
     id: {
       type: Sequelize.DataTypes.INTEGER({ length: 10 }),
       primaryKey: true,
       unique: true,
       autoIncrement: true,
-    },
-    jobId: {
-      type: Sequelize.DataTypes.INTEGER({ length: 10 }),
-      field: 'job_id',
     },
     requirementOffer: {
       type: Sequelize.DataTypes.STRING(255),
@@ -22,7 +18,7 @@ JobRequirment.init(
       type: Sequelize.DataTypes.BOOLEAN,
     },
   },
-  { sequelize, tableName: 'jobs_requirment' },
+  { sequelize, tableName: 'jobs_requirements', underscored: true },
 )
 
-module.exports = { JobRequirment }
+module.exports = { JobRequirement }

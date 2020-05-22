@@ -3,7 +3,7 @@ const router = express.Router()
 const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware')
-const { Contact } = require('../schemas/contact')
+const { Contact } = require('../schemas')
 
 router.get('/', rejectUnauthenticated, (req, res) => {
   Contact.findAll({
@@ -60,8 +60,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     phone,
     notes,
   })
-    .then(() => {
-      res.sendStatus(201)
+    .then((contact) => {
+      res.status(201).send(contact);
     })
     .catch((error) => {
       console.log(error)
@@ -99,8 +99,8 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
       },
     },
   )
-    .then(() => {
-      res.sendStatus(200)
+    .then((contact) => {
+      res.status(200).send(contact);
     })
     .catch((error) => {
       console.log(error)

@@ -15,7 +15,7 @@ InterviewStage.init(
       allowNull: false,
     },
   },
-  { sequelize, tableName: 'interview_stages' },
+  { sequelize, tableName: 'interview_stages', underscored: true },
 )
 
 module.exports = { InterviewStage }
