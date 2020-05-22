@@ -30,10 +30,6 @@ Task.init(
       type: Sequelize.DataTypes.BOOLEAN,
       field: 'contact_id',
     },
-    jobId: {
-      type: Sequelize.DataTypes.INTEGER({ length: 10 }),
-      field: 'job_id',
-    },
     note: {
       type: Sequelize.DataTypes.STRING(255),
     },

@@ -1,3 +1,4 @@
+const { sequelize, Sequelize } = require('./sequelize')
 const { Contact } = require('./contact')
 const { InterviewStage } = require('./interview-stage')
 const { JobRequirement } = require('./job-requirement')
@@ -13,6 +14,12 @@ Requirement.belongsToMany(Job, {
   foreignKey: 'requirementId',
 })
 
+Job.hasMany(Stage)
+Stage.hasOne(Job)
+
+Job.hasMany(Task)
+Task.hasOne(Job)
+
 module.exports = {
   Contact,
   InterviewStage,
@@ -22,4 +29,6 @@ module.exports = {
   Stage,
   Task,
   User,
+  sequelize,
+  Sequelize,
 }

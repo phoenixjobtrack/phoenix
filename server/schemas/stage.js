@@ -10,10 +10,6 @@ Stage.init(
       unique: true,
       autoIncrement: true,
     },
-    jobId: {
-      type: Sequelize.DataTypes.INTEGER({ length: 10 }),
-      field: 'job_id',
-    },
     stage: {
       type: Sequelize.DataTypes.STRING(255),
     },
