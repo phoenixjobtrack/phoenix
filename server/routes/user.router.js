@@ -3,7 +3,6 @@ const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware')
 const encryptLib = require('../modules/encryption')
-const pool = require('../modules/pool')
 const userStrategy = require('../strategies/user.strategy')
 const { User } = require('../schemas/user')
 
@@ -43,27 +42,24 @@ router.post('/register', (req, res, next) => {
 })
 
 router.put('/:id', (req, res) => {
-  const updatedProfile = req.body
-
-  const queryText = `UPDATE "users"
-  SET "first_name" = $1,
-  "last_name" = $2,
-  "email" = $3
-  WHERE id=$4;`
-
-  const queryValues = [
-    updatedProfile.first_name,
-    updatedProfile.last_name,
-    updatedProfile.email,
-    req.params.id,
-  ]
-
-  pool
-    .query(queryText, queryValues)
-    .then(() => {
-      res.sendStatus(200)
+  const { first_name: firstName, last_name: lastName, email } = req.body
+  User.update(
+    {
+      firstName,
+      lastName,
+      email,
+    },
+    {
+      where: {
+        userId: req.user.id,
+      },
+    },
+  )
+    .then((user) => {
+      res.send(user)
     })
-    .catch((err) => {
+    .catch((error) => {
+      console.log(error)
       res.sendStatus(500)
     })
 })
