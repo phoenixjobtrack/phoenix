@@ -95,8 +95,8 @@ class EditJobOpp extends Component {
                                                     marginBottom: 10
                                                 }}
                                                 label="Company"
-                                                value={this.props.currentJob.company_name}
-                                                onChange={this.handleJobChange('company_name')}
+                                                value={this.props.currentJob.companyName}
+                                                onChange={this.handleJobChange('companyName')}
                                             />
                                         </ListItem>
                                         <ListItem>
@@ -123,8 +123,8 @@ class EditJobOpp extends Component {
                                                     marginBottom: 10
                                                 }}
                                                 label="Posting Link"
-                                                value={this.props.currentJob.posting_url}
-                                                onChange={this.handleJobChange('posting_url')}
+                                                value={this.props.currentJob.postingUrl}
+                                                onChange={this.handleJobChange('postingUrl')}
                                             />
                                         </ListItem>
                                         <ListItem>
@@ -212,8 +212,8 @@ class EditJobOpp extends Component {
                                                     marginBottom: 10
                                                 }}
                                                 label="Notes"
-                                                value={this.props.currentJob.job_notes}
-                                                onChange={this.handleJobChange('job_notes')}
+                                                value={this.props.currentJob.jobNotes}
+                                                onChange={this.handleJobChange('jobNotes')}
                                                 multiline
                                             />
                                         </ListItem>

@@ -46,7 +46,7 @@ class JobOpportunity extends Component {
     }
 
     handleCloseJob = () => {
-        this.props.dispatch({ type: 'CLOSE_JOB', payload: this.props.job.job_id })
+        this.props.dispatch({ type: 'CLOSE_JOB', payload: this.props.job.jobId })
     }
     componentWillUnmount() {
         this.props.dispatch({ type: 'CLEAR_CURRENT_JOB' })
@@ -94,7 +94,7 @@ class JobOpportunity extends Component {
                                                     marginBottom: 10
                                                 }}
                                                 label="Company"
-                                                onChange={this.handleJobChange('company_name')}
+                                                onChange={this.handleJobChange('companyName')}
                                             />
                                         </ListItem>
                                         <ListItem>
@@ -120,7 +120,7 @@ class JobOpportunity extends Component {
                                                     marginBottom: 10
                                                 }}
                                                 label="Posting Link"
-                                                onChange={this.handleJobChange('posting_url')}
+                                                onChange={this.handleJobChange('postingUrl')}
                                             />
                                         </ListItem>
                                         <ListItem>
@@ -141,7 +141,7 @@ class JobOpportunity extends Component {
                                             />
                                         </ListItem>
                                     </List>
-                                </Grid >
+                                </Grid>
                             </Grid>
                             <Grid container item xs={6}>
                                 <Grid item xs={12}>
@@ -208,7 +208,7 @@ class JobOpportunity extends Component {
                                                     marginBottom: 10
                                                 }}
                                                 label="Notes"
-                                                onChange={this.handleJobChange('job_notes')}
+                                                onChange={this.handleJobChange('jobNotes')}
                                                 multiline
                                             />
                                         </ListItem>

@@ -16,7 +16,7 @@ class RequirementItem extends Component {
             type: 'UPDATE_REDUX_REQUIREMENT',
             payload: {
                 key: this.props.i,
-                requirement_id: this.props.requirement.id,
+                requirementId: this.props.requirement.id,
                 prop: propertyName,
                 value: event.target.value
             }
@@ -28,10 +28,10 @@ class RequirementItem extends Component {
         let requirementOfferValue
         let requirementMetValue
 
-        //jobs_requirements item only exists after edit so only preload data for existing entries
+        //jobsRequirements item only exists after edit so only preload data for existing entries
         if (this.props.currentRequirements[this.props.i]) {
-            requirementOfferValue = this.props.currentRequirements[this.props.i].requirement_offer
-            requirementMetValue = this.props.currentRequirements[this.props.i].requirement_met
+            requirementOfferValue = this.props.currentRequirements[this.props.i].requirementOffer
+            requirementMetValue = this.props.currentRequirements[this.props.i].requirementMet
         }
 
         return (
@@ -41,7 +41,7 @@ class RequirementItem extends Component {
                         <Typography variant="h6">
                             {this.props.requirement.requirement}
                         </Typography>
-                        
+
                     </ListItem>
                     <List>
                         <ListItem>
@@ -51,7 +51,7 @@ class RequirementItem extends Component {
                             <TextField
                                 style={{ width: 400 }}
                                 multiline
-                                onChange={this.handleRequireChange('requirement_offer')}
+                                onChange={this.handleRequireChange('requirementOffer')}
                                 inputProps={{
                                     'aria-label': 'Description',
                                 }}
@@ -67,7 +67,7 @@ class RequirementItem extends Component {
                             <Select
                                 style={{ minWidth: '100%' }}
                                 value={requirementMetValue}
-                                onChange={this.handleRequireChange('requirement_met')}
+                                onChange={this.handleRequireChange('requirementMet')}
                                 variant="outlined"
                             >
                                 <MenuItem value={"" || null}>Select</MenuItem>

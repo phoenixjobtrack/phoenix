@@ -9,32 +9,22 @@ const Op = Sequelize.Op
 
 //-----GET for job pipeline table-------//
 router.get('/', rejectUnauthenticated, (req, res) => {
-  const stagesRelation = {
-    model: Stage,
-    attributes: ['id', 'stage', 'data', 'note'],
-    where: {
-      date: {
-        [Op.gte]: Sequelize.fn('NOW'),
-      },
-    },
-    limit: 1,
-  }
-
   Job.findAll({
-    attributes: ['id', 'companyName', 'position', 'deactivated'],
+    attributes: ['id', 'companyName', 'position', 'closed'],
     where: {
-      deactivated: false,
+      closed: false,
       userId: req.user.id,
     },
     include: [
       {
-        as: 'currentStage',
-        ...stagesRelation,
-      },
-      {
-        as: 'nextStage',
-        offset: 1,
-        ...stagesRelation,
+        model: Stage,
+        attributes: ['id', 'stage', 'data', 'note'],
+        where: {
+          date: {
+            [Op.gte]: Sequelize.fn('NOW'),
+          },
+        },
+        limit: 2,
       },
     ],
   })
@@ -154,7 +144,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
 router.put('/deactivate/:id', rejectUnauthenticated, (req, res) => {
   Job.update(
     {
-      deactivated: true,
+      closed: true,
     },
     {
       where: {
@@ -202,30 +192,24 @@ router.post('/stages', rejectUnauthenticated, (req, res) => {
 })
 
 router.post('/stages/new', rejectUnauthenticated, (req, res) => {
-  res
-    .status(410)
-    .send({
-      message:
-        'This endpoint has been removed. Please switch to the main POST endpoint for this resource type',
-    })
+  res.status(410).send({
+    message:
+      'This endpoint has been removed. Please switch to the main POST endpoint for this resource type',
+  })
 })
 
 router.post('/tasks/new', rejectUnauthenticated, (req, res) => {
-  res
-    .status(410)
-    .send({
-      message:
-        'This endpoint has been removed. Please switch to the main POST endpoint for this resource type',
-    })
+  res.status(410).send({
+    message:
+      'This endpoint has been removed. Please switch to the main POST endpoint for this resource type',
+  })
 })
 
 router.post('/requirements', rejectUnauthenticated, (req, res) => {
-  res
-    .status(410)
-    .send({
-      message:
-        'This endpoint has been removed. Please switch to the main POST endpoint for this resource type',
-    })
+  res.status(410).send({
+    message:
+      'This endpoint has been removed. Please switch to the main POST endpoint for this resource type',
+  })
 })
 
 router.delete('/tasks/:id', rejectUnauthenticated, (req, res) => {

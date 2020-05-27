@@ -28,7 +28,7 @@ class NewTable extends Component {
         this.props.dispatch({type: 'DEACTIVATE_JOB', payload: id})
     }
     componentDidMount() {
-        
+
     }
 
     render() {
@@ -50,8 +50,8 @@ class NewTable extends Component {
                     <tbody>
                          {this.props.reduxState.jobs.map(job => {
                             return (
-                                <tr key={job.user_id}>
-                                    <td >{job.company_name}</td>
+                                <tr key={job.userId}>
+                                    <td >{job.companyName}</td>
                                     <td>{job.position}</td>
                                     <td>{job.currentStage}</td>
                                     <td>{job.currentStageDate && moment(job.currentStageDate).format('MM-DD-YYYY')}</td>
@@ -59,18 +59,18 @@ class NewTable extends Component {
                                     <td>{job.nextstage}</td>
                                     <td>
                                         <Tooltip title="View more and edit">
-                                            <IconButton color="primary" onClick={() => { this.openJob(job.job_id) }}>
+                                            <IconButton color="primary" onClick={() => { this.openJob(job.jobId) }}>
                                                 <OpenInNewIcon aria-label="view more and edit" />
                                             </IconButton>
                                         </Tooltip>
                                     </td>
                                     <td>
                                         <Tooltip title="Remove job">
-                                            <IconButton onClick={() => { this.handleDelete(job.job_id) }}>
+                                            <IconButton onClick={() => { this.handleDelete(job.jobId) }}>
                                                 <DeleteIcon color="error"/>
                                             </IconButton>
                                         </Tooltip>
-                                    </td> 
+                                    </td>
                                 </tr>
                             )
                         })}

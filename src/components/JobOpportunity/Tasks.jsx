@@ -17,8 +17,8 @@ class Tasks extends Component {
             payload: {
                 key: this.taskCounter,
                 task: {
-                    task_name: '',
-                    due_date: '',
+                    taskName: '',
+                    dueDate: '',
                     note: ''
                 }
             }
@@ -35,7 +35,7 @@ class Tasks extends Component {
                 <Typography variant='h5' paragraph="true" align="left">Tasks</Typography>
                 <List>
                 {Object.entries(this.props.reduxState.currentTasks).map((task, index) => {
-                    return (   
+                    return (
                         <TaskItem task={task} i={task[0]} handleForceUpdate={this.handleForceUpdate}/>
                     )
                 })}
@@ -48,7 +48,7 @@ class Tasks extends Component {
                             </Tooltip>
                         </ListItemIcon>
                 </ListItem>
-                
+
                 </List>
             </div>
         )
@@ -57,7 +57,7 @@ class Tasks extends Component {
 
 const mapStateToProps = (reduxState) => ({
     reduxState,
-    
+
 
 });
 

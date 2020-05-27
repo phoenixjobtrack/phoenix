@@ -16,7 +16,7 @@ import TasksTomorrow from '../TasksTomorrow/TasksTomorrow';
 import { makeStyles } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/core/styles';
 
-// ----- MATERIAL UI CORE ----- // 
+// ----- MATERIAL UI CORE ----- //
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
@@ -61,17 +61,17 @@ class Tasks extends Component {
     }
 
     state = {
-        task_name: '',
-        due_date: null,
-        contact_id: null,
-        job_id: null,
+        taskName: '',
+        dueDate: null,
+        contactId: null,
+        jobId: null,
         demoMode: false,
         complete: false
     };
 
     // Click Handlers For Add Task
     handleClickAddTask = (event) => {
-        if (this.state.task_name == '' || this.state.due_date == null) {
+        if (this.state.taskName == '' || this.state.dueDate == null) {
             alert("Please Fill In a Task & Due Date");
         }
         else {
@@ -83,7 +83,7 @@ class Tasks extends Component {
     handleDateSelect = (event) => {
         this.setState({
             ...this.state,
-            due_date: event.target.value,
+            dueDate: event.target.value,
         })
     }; // end handleDateSelect
 
@@ -91,16 +91,16 @@ class Tasks extends Component {
     handleTaskChange = (event) => {
         this.setState({
             ...this.state,
-            task_name: event.target.value,
+            taskName: event.target.value,
         })
     }; // end handleTaskChange
 
     clearInputs = () => {
         this.setState({
-            task_name: '',
-            due_date: 'mm/dd/yyyy',
-            contact_id: null,
-            job_id: null,
+            taskName: '',
+            dueDate: 'mm/dd/yyyy',
+            contactId: null,
+            jobId: null,
         })
     }
 
@@ -119,7 +119,7 @@ class Tasks extends Component {
                             <Toolbar className={this.props.classes.root}>
                                 <TextField
                                     style={{ minWidth: 400 }}
-                                    value={this.state.task_name}
+                                    value={this.state.taskName}
                                     id="add-new-task"
                                     label="Add New Task"
                                     margin="normal"
@@ -133,7 +133,7 @@ class Tasks extends Component {
                                     style={{width: 600, paddingRight: 5}}
                                 />
                                 <TextField
-                                    value={this.state.due_date}
+                                    value={this.state.dueDate}
                                     id="date"
                                     InputLabelProps={{
                                         shrink: true,
@@ -152,28 +152,28 @@ class Tasks extends Component {
                                         onClick={() => this.handleClickAddTask()}
                                         size="medium"
                                         type="submit"
-                                        variant="outlined"                                
+                                        variant="outlined"
                                     ><AddIcon />
                                     </IconButton>
                                 </Tooltip>
 
-                            </Toolbar >
+                            </Toolbar>
                         </Paper>
                     </span>
 
                     {/* // ----- TASK DISPLAYS ----- // */}
                     <OverdueTasks />
                     <TasksOverdue />
-                   
+
                     <TodayTasks />
                     <TasksLineItems />
-                 
+
                     <TomorrowTasks />
                     <TasksTomorrow />
-                    
+
                     <FutureTasks />
                     <TasksFuture />
-                  
+
                     <HistoryTasks />
                     <TasksHistory />
             </div>

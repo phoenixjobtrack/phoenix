@@ -77,10 +77,10 @@ class DashboardPage extends Component {
                 </div>
                 <div className="todayText">
                   {this.props.dayTask.map((tasks, i) => {
-                    if (tasks.due_date === taskDay) {
+                    if (tasks.dueDate === taskDay) {
                       return (
                         <ul>
-                          <li>{tasks.task_name}</li>
+                          <li>{tasks.taskName}</li>
                         </ul>
                       )
                     }
@@ -91,10 +91,10 @@ class DashboardPage extends Component {
                 </div>
                 <div className="overdueText">
                   {this.props.dayTask.map((tasks, i) => {
-                    if (tasks.due_date < taskDay && !tasks.complete) {
+                    if (tasks.dueDate < taskDay && !tasks.complete) {
                       return (
                         <ul>
-                          <li className="overdueLabel">{tasks.task_name}</li>
+                          <li className="overdueLabel">{tasks.taskName}</li>
                         </ul>
                       )
                     }
@@ -107,7 +107,7 @@ class DashboardPage extends Component {
             <Paper >
               <div className="logoBox">
                 <img className="logo" src="/images/logo3.png" alt="phoenix logo" />
-                
+
               </div>
               <Box><h2 className="boxIJALabel">
                 Important Job Attributes

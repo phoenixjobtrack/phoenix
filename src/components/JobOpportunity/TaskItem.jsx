@@ -12,9 +12,9 @@ class TaskItem extends Component {
     state = {
         task: {
             jobId: this.props.reduxState.jobStages.length,
-            task_name: this.props.task.task_name,
+            taskName: this.props.task.taskName,
             note: this.props.task.note,
-            due_date: this.props.task.due_date
+            dueDate: this.props.task.dueDate
         },
     }
     handleRemove = () => {
@@ -45,7 +45,7 @@ class TaskItem extends Component {
                                 color="secondary" />
                         </IconButton>
                     </Tooltip>
-                </ListItemIcon> 
+                </ListItemIcon>
                 <List>
                     <ListItem>
                         <InputLabel>Task</InputLabel>
@@ -53,8 +53,8 @@ class TaskItem extends Component {
                     <ListItem>
                         <TextField
                             style={{ minWidth: 230 }}
-                            value={this.props.reduxState.currentTasks[this.props.i].task_name}
-                            onChange={this.handleTaskChange('task_name')}
+                            value={this.props.reduxState.currentTasks[this.props.i].taskName}
+                            onChange={this.handleTaskChange('taskName')}
                             inputProps={{
                                 'aria-label': 'Task Name',
                             }}
@@ -70,8 +70,8 @@ class TaskItem extends Component {
                             style={{ width: '100%' }}
                             id="date"
                             type="date"
-                            value={moment(this.props.reduxState.currentTasks[this.props.i].due_date).format('YYYY-MM-DD')}
-                            onChange={this.handleTaskChange('due_date')}
+                            value={moment(this.props.reduxState.currentTasks[this.props.i].dueDate).format('YYYY-MM-DD')}
+                            onChange={this.handleTaskChange('dueDate')}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -94,7 +94,7 @@ class TaskItem extends Component {
                     </ListItem>
                 </List>
             </ListItem>
-        
+
         )
     }
 }

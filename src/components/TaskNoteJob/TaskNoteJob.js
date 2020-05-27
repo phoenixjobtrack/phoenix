@@ -20,9 +20,9 @@ class TaskNoteContact extends Component {
     render() {
         let jobChip;
 
-        if (this.props.job_id !== null) {
+        if (this.props.jobId !== null) {
             this.props.reduxState.jobs.map((job, i) => {
-                if (job.id == this.props.job_id) {
+                if (job.id == this.props.jobId) {
                     jobChip =
                         <div className="taskNoteJob">
                             <Tooltip title="Job">
@@ -33,7 +33,7 @@ class TaskNoteContact extends Component {
                                             <WorkIcon />
                                         </Avatar>
                                     }
-                                label={job.company_name}
+                                label={job.companyName}
                                     variant="outlined"
                                 />
                             </Tooltip>

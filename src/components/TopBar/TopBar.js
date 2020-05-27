@@ -1,5 +1,5 @@
 // ========== REACT ========== //
-// This componenet is not visible on the DOM.  
+// This componenet is not visible on the DOM.
 // It is hidden by the SideMenu component, which contains its own TopBar
 
 import React from 'react';
@@ -19,7 +19,7 @@ import { ThemeProvider } from '@material-ui/styles';
 // ========== MATERIAL UI ICONS ========== //
 
 const theme = createMuiTheme({
-    
+
 });
 
 const useStyles = makeStyles(theme => ({
@@ -43,7 +43,7 @@ function TopBar(props) {
                 <AppBar position="static">
                     <Toolbar>
                         <Typography variant="h1" className={classes.title}>
-                            Welcome {props.user.first_name}
+                            Welcome {props.user.firstName}
                         </Typography>
                     </Toolbar>
                 </AppBar>

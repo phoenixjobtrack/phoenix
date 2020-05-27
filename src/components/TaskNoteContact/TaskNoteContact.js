@@ -15,9 +15,9 @@ class TaskNoteContact extends Component {
 
             let contactChip;
 
-            if (this.props.contact_id !== null) {
+            if (this.props.contactId !== null) {
             this.props.reduxState.contacts.map((contact, i) => {
-                if (contact.id == this.props.contact_id) {
+                if (contact.id == this.props.contactId) {
                     contactChip=
                         <div className="taskNoteContact">
                             <Tooltip title="Contact">

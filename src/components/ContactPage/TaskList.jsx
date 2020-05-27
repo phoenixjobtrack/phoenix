@@ -10,7 +10,7 @@ class TaskList extends Component {
     componentDidMount(){
         this.props.dispatch({ type: 'FETCH_TASKS_BY_DATE' })
     }
-    
+
     render(){
 
         //load tasks associated with contact
@@ -18,19 +18,19 @@ class TaskList extends Component {
         let completedTasks = []
         let today = new Date()
         let dueDate = ''
-        
+
         this.props.reduxState.tasksByDate.map((task, i)=>{
-            if(task.contact_id==this.props.match.params.id){
+            if(task.contactId==this.props.match.params.id){
                 //put a line in here to compare current date to due date
-                dueDate = new Date(task.due_date)
+                dueDate = new Date(task.dueDate)
                 if (!task.complete){
                     upcomingTasks.push(
                         <div key={i}>
                             <ListItem >
-                                <Typography variant="body1" >{task.task_name}</Typography>
+                                <Typography variant="body1" >{task.taskName}</Typography>
                             </ListItem>
-                            <ListItem>   
-                                <Typography variant="caption">  Due:  {moment(task.due_date).format('MM-DD-YYYY')}</Typography>                          
+                            <ListItem>
+                                <Typography variant="caption">  Due:  {moment(task.dueDate).format('MM-DD-YYYY')}</Typography>
                             </ListItem>
                             <Divider/>
                         </div>)
@@ -39,10 +39,10 @@ class TaskList extends Component {
                     completedTasks.push(
                         <div key={i}>
                             <ListItem >
-                                <Typography variant="body1" >{task.task_name}</Typography>
+                                <Typography variant="body1" >{task.taskName}</Typography>
                             </ListItem>
                             <ListItem>
-                                <Typography variant="caption">  Due:  {moment(task.due_date).format('MM-DD-YYYY')}</Typography>
+                                <Typography variant="caption">  Due:  {moment(task.dueDate).format('MM-DD-YYYY')}</Typography>
                             </ListItem>
                             <Divider />
                         </div>)
@@ -51,19 +51,19 @@ class TaskList extends Component {
                     completedTasks.push(
                         <div key={i}>
                             <ListItem >
-                                <Typography variant="body1" >{task.task_name}</Typography>
+                                <Typography variant="body1" >{task.taskName}</Typography>
                             </ListItem>
                             <ListItem>
-                                <Typography variant="caption">  Due:  {moment(task.due_date).format('MM-DD-YYYY')}</Typography>
+                                <Typography variant="caption">  Due:  {moment(task.dueDate).format('MM-DD-YYYY')}</Typography>
                             </ListItem>
                             <Divider />
                         </div>)
                 }
             }
         })
-        
+
         return(
-         
+
             <Grid container spacing={3}>
                 <Grid item xs={6}>
                     <Typography variant="h6">Upcoming Tasks</Typography>
@@ -77,7 +77,7 @@ class TaskList extends Component {
                         {completedTasks}
                     </List>
                 </Grid>
-            </Grid> 
+            </Grid>
         )
     }
 }
