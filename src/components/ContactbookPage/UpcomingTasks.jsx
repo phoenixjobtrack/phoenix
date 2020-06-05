@@ -15,7 +15,6 @@ class UpcomingTasks extends Component {
 
         //load tasks associated with contact
         let upcomingTasks = []
-        let today = new Date()
         let dueDate = ''
 
         this.props.reduxState.tasksByDate.map((task, i) => {
@@ -39,11 +38,9 @@ class UpcomingTasks extends Component {
         })
 
         return (
-            <>
-                <List>
-                    {upcomingTasks}
-                </List>
-            </>
+            <List>
+                {upcomingTasks}
+            </List>
         )
     }
 }

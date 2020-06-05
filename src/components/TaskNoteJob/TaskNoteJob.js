@@ -11,10 +11,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 // ----- MATERIAL UI ICONS ----- //
 import WorkIcon from '@material-ui/icons/Work';
 
-
-// ----- STYLES ----- //
-import swal from 'sweetalert';
-
 class TaskNoteContact extends Component {
 
     render() {

@@ -13,10 +13,8 @@ import SavedRequirements from './SavedRequirements';
 import swal from 'sweetalert';
 
 // ----- MATERIAL UI CORE ----- //
-import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card'
 import IconButton from '@material-ui/core/IconButton';
-import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 import Grid from '@material-ui/core/Grid';
 
@@ -174,9 +172,9 @@ class ProfileRequirements extends Component {
                                             <CheckIcon />
                                         </IconButton>
                                     </Tooltip>
-                                   
+
                                 </h2>
-            
+
                                 {this.props.require.map((userReq, i) => {
                                     return (
                                         <div>

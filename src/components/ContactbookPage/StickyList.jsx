@@ -5,8 +5,7 @@ import { withRouter } from 'react-router-dom'
 //Material-UI stuff
 import ContactCard from './ContactCard'
 import { makeStyles } from '@material-ui/core/styles';
-import {Button, ListItem, Fab, Tooltip, InputLabel, MenuItem, Input, Select, Grid} from '@material-ui/core'
-import IconButton from '@material-ui/core/IconButton';
+import {ListItem, Fab, Tooltip, InputLabel, MenuItem, Input, Select} from '@material-ui/core'
 import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
