@@ -1,5 +1,4 @@
 const express = require('express')
-const pool = require('../modules/pool')
 const router = express.Router()
 const {
   rejectUnauthenticated,
@@ -18,13 +17,14 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     include: [
       {
         model: Stage,
-        attributes: ['id', 'stage', 'data', 'note'],
+        attributes: ['id', 'stage', 'date', 'note'],
         where: {
           date: {
             [Op.gte]: Sequelize.fn('NOW'),
           },
         },
         limit: 2,
+        order: [['date', 'ASC']],
       },
     ],
   })
@@ -72,9 +72,9 @@ router.get('/tasks', rejectUnauthenticated, (req, res) => {
 router.post('/', rejectUnauthenticated, (req, res) => {
   const {
     position,
-    company_name: companyName,
+    companyName,
     notes,
-    posting_url: postingUrl,
+    postingUrl,
     deadline,
     compensation,
     benefits,
@@ -104,14 +104,14 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 router.put('/', rejectUnauthenticated, (req, res) => {
   const {
     position,
-    company_name: companyName,
+    companyName,
     notes,
-    posting_url: postingUrl,
+    postingUrl,
     deadline,
     compensation,
     benefits,
     travel,
-    job_id: jobId,
+    id,
   } = req.body
 
   Job.update(
@@ -127,7 +127,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     },
     {
       where: {
-        id: jobId,
+        id,
         userId: req.user.id,
       },
     },
@@ -161,19 +161,25 @@ router.put('/deactivate/:id', rejectUnauthenticated, (req, res) => {
     })
 })
 
-router.delete('/stages/:id', rejectUnauthenticated, (req, res) => {
-  Job.destroy({
+router.delete('/stages/:jobId', rejectUnauthenticated, (req, res) => {
+  Stage.destroy({
     where: {
-      id: req.params.id,
-      userId: req.user.id,
+      jobId: req.params.jobId,
     },
   })
+    .then(() => {
+      res.sendStatus(204)
+    })
+    .catch((error) => {
+      console.log(error)
+      res.sendStatus(500)
+    })
 })
 
 router.post('/stages', rejectUnauthenticated, (req, res) => {
   // req.body is an array, numbered key followed up actual stage object, so look at req.body.stage[1]
   const {
-    job_id: jobId,
+    jobId,
     stage: [, { stage, note, date }],
   } = req.body
   Stage.create({
@@ -213,16 +219,7 @@ router.post('/requirements', rejectUnauthenticated, (req, res) => {
 })
 
 router.delete('/tasks/:id', rejectUnauthenticated, (req, res) => {
-  let query = `DELETE FROM "tasks" WHERE job_id=$1`
-  pool
-    .query(query, [req.params.id])
-    .then((response) => {
-      res.sendStatus(200)
-    })
-    .catch((err) => {
-      res.sendStatus(500)
-    })
-  Job.destroy({
+  Task.destroy({
     where: {
       jobId: req.params.id,
     },
@@ -239,7 +236,7 @@ router.delete('/tasks/:id', rejectUnauthenticated, (req, res) => {
 router.post('/tasks', (req, res) => {
   // req.body is an array, numbered key followed up actual stage object, so look at req.body.task[1]
   const {
-    task: [, { task_name: taskName, due_date: dueDate, job_id: jobId, note }],
+    task: [, { taskName, dueDate, jobId, note }],
   } = req.body
   Task.create({
     taskName,
@@ -257,14 +254,7 @@ router.post('/tasks', (req, res) => {
 })
 
 router.put('/requirements', (req, res) => {
-  const [
-    ,
-    {
-      requirement_offer: requirementOffer,
-      requirement_met: requirementMet,
-      id,
-    },
-  ] = req.body
+  const [, { requirementOffer, requirementMet, id }] = req.body
   JobRequirement.update(
     {
       requirementOffer,

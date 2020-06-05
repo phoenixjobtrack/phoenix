@@ -23,9 +23,6 @@ router.post('/register', (req, res, next) => {
   const email = req.body.email
   const password = encryptLib.encryptPassword(req.body.password)
 
-  const queryText =
-    'INSERT INTO "users" (first_name, last_name, email, password) VALUES ($1, $2, $3, $4) RETURNING id'
-
   User.create({
     firstName,
     lastName,
@@ -42,7 +39,7 @@ router.post('/register', (req, res, next) => {
 })
 
 router.put('/:id', (req, res) => {
-  const { first_name: firstName, last_name: lastName, email } = req.body
+  const { firstName, lastName, email } = req.body
   User.update(
     {
       firstName,

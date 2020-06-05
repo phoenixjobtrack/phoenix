@@ -48,7 +48,8 @@ class NewTable extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                         {this.props.reduxState.jobs.map(job => {
+                        {this.props.reduxState.jobs.map(job => {
+                            console.log(job)
                             return (
                                 <tr key={job.userId}>
                                     <td >{job.companyName}</td>
@@ -59,14 +60,14 @@ class NewTable extends Component {
                                     <td>{job.nextstage}</td>
                                     <td>
                                         <Tooltip title="View more and edit">
-                                            <IconButton color="primary" onClick={() => { this.openJob(job.jobId) }}>
+                                            <IconButton color="primary" onClick={() => { this.openJob(job.id) }}>
                                                 <OpenInNewIcon aria-label="view more and edit" />
                                             </IconButton>
                                         </Tooltip>
                                     </td>
                                     <td>
                                         <Tooltip title="Remove job">
-                                            <IconButton onClick={() => { this.handleDelete(job.jobId) }}>
+                                            <IconButton onClick={() => { this.handleDelete(job.id) }}>
                                                 <DeleteIcon color="error"/>
                                             </IconButton>
                                         </Tooltip>

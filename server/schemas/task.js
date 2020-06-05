@@ -37,6 +37,10 @@ Task.init(
       type: Sequelize.DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    jobId: {
+      type: Sequelize.DataTypes.INTEGER({ length: 10 }),
+      field: 'job_id',
+    },
   },
   { sequelize, tableName: 'tasks', underscored: true },
 )

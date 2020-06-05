@@ -40,11 +40,11 @@ router.get('/date', rejectUnauthenticated, (req, res) => {
 
 router.post('/', rejectUnauthenticated, (req, res) => {
   const {
-    task_name: taskName,
-    due_date: dueDate,
+    taskName,
+    dueDate,
     note,
-    contact_id: contactId,
-    job_id: jobId,
+    contactId,
+    jobId,
     complete,
   } = req.body
   Task.create({
@@ -67,11 +67,11 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 router.put('/:id', rejectUnauthenticated, (req, res) => {
   const {
-    task_name: taskName,
-    due_date: dueDate,
+    taskName,
+    dueDate,
     note,
-    contact_id: contactId,
-    job_id: jobId,
+    contactId,
+    jobId,
     complete,
   } = req.body
   Task.update(

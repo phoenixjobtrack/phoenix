@@ -19,6 +19,10 @@ Stage.init(
     date: {
       type: Sequelize.DataTypes.DATE,
     },
+    jobId: {
+      type: Sequelize.DataTypes.INTEGER({ length: 10 }),
+      field: 'job_id',
+    },
   },
   { sequelize, tableName: 'stages', underscored: true },
 )

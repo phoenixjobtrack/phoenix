@@ -83,7 +83,7 @@ function* fetchCurrentJob(action) {
   let currentJob
 
   allJobs.data.map((job) => {
-    if (job.jobId == action.payload) {
+    if (job.id == action.payload) {
       currentJob = job
     }
   })
@@ -116,22 +116,22 @@ function* saveJobUpdates(action) {
     //send job data
     yield axios.put(`${apiUrl}/api/jobs`, action.payload.job)
     //delete stages associated with job before adding all from redux
-    yield axios.delete(`${apiUrl}/api/jobs/stages/${action.payload.job.jobId}`)
+    yield axios.delete(`${apiUrl}/api/jobs/stages/${action.payload.job.id}`)
     //send stage data
     yield Object.entries(action.payload.stages).map((stage) => {
       axios.post(`${apiUrl}/api/jobs/stages`, {
         stage: stage,
-        jobId: action.payload.job.jobId,
+        jobId: action.payload.job.id,
       })
     })
     //delete tasks associated with job before adding all from redux
-    yield axios.delete(`${apiUrl}api/jobs/tasks/${action.payload.job.jobId}`)
+    yield axios.delete(`${apiUrl}api/jobs/tasks/${action.payload.job.id}`)
     // send task data
     yield Object.entries(action.payload.tasks).map((task) => {
       if (task.dueDate) {
         axios.post(`${apiUrl}/api/jobs/tasks`, {
           task: task,
-          jobId: action.payload.job.jobId,
+          jobId: action.payload.job.id,
         })
       }
     })

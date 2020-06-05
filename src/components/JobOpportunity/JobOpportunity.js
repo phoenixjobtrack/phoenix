@@ -46,7 +46,7 @@ class JobOpportunity extends Component {
     }
 
     handleCloseJob = () => {
-        this.props.dispatch({ type: 'CLOSE_JOB', payload: this.props.job.jobId })
+        this.props.dispatch({ type: 'CLOSE_JOB', payload: this.props.job.id })
     }
     componentWillUnmount() {
         this.props.dispatch({ type: 'CLEAR_CURRENT_JOB' })

@@ -39,10 +39,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // POST route
 router.post('/', rejectUnauthenticated, (req, res) => {
   const {
-    requirement_offer: requirementOffer,
-    requirement_id: requirementId,
-    requirement_met: requirementMet,
-    job_id: jobId,
+    requirementOffer,
+    requirementId,
+    requirementMet,
+    jobId,
   } = req.body
 
   JobRequirement.create({
