@@ -78,7 +78,7 @@ class JobOpportunity extends Component {
 
                 {/* Employment Information */}
                 <div className="jobOppForm">
-                    <Typography variant='h5' paragraph="true" align="left">Job Info</Typography>
+                    <Typography variant='h5' paragraph={true} align="left">Job Info</Typography>
                     <div className="oppGrid1">
                         <Grid container>
                             <Grid container item xs={6}>

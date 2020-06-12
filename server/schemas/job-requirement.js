@@ -17,6 +17,10 @@ JobRequirement.init(
     requirementMet: {
       type: Sequelize.DataTypes.BOOLEAN,
     },
+    jobId: {
+      type: Sequelize.DataTypes.INTEGER({ length: 10 }),
+      field: 'job_id',
+    },
   },
   { sequelize, tableName: 'jobs_requirements', underscored: true },
 )

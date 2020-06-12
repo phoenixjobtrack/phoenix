@@ -20,11 +20,16 @@ Requirement.hasMany(JobRequirement, {
   targetKey: 'requirementId',
 })
 
-Job.hasMany(Stage, { foreignKey: 'id', targetKey: 'jobId' })
-Stage.hasOne(Job, { foreignKey: 'id', targetKey: 'jobId' })
+JobRequirement.belongsTo(Requirement, {
+  foreignKey: 'requirementId',
+  targetKey: 'id',
+})
 
-Job.hasMany(Task, { foreignKey: 'id', targetKey: 'jobId' })
-Task.hasOne(Job, { foreignKey: 'id', targetKey: 'jobId' })
+Job.hasMany(Stage, { foreignKey: 'jobId', targetKey: 'id' })
+Stage.belongsTo(Job, { foreignKey: 'jobId', targetKey: 'id' })
+
+Job.hasMany(Task, { foreignKey: 'jobId', targetKey: 'id' })
+Task.belongsTo(Job, { foreignKey: 'jobId', targetKey: 'id' })
 
 module.exports = {
   Contact,

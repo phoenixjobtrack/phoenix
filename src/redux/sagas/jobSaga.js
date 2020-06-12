@@ -48,13 +48,15 @@ function* fetchJobTasks(action) {
 
 function* addJob(action) {
   try {
-    //create job with job data
-    yield axios.post(`${apiUrl}/api/jobs`, action.payload.job)
+    const { data: job } = yield axios.post(
+      `${apiUrl}/api/jobs`,
+      action.payload.job,
+    )
     //create stages for new job
     yield Object.values(action.payload.stages).map((stage) => {
       //filter out blank stages
       if (stage.stage) {
-        axios.post(`${apiUrl}/api/jobs/stages/new`, stage)
+        axios.post(`${apiUrl}/api/jobs/stages`, { jobId: job.id, ...stage })
       }
     })
 
@@ -62,12 +64,15 @@ function* addJob(action) {
     yield Object.values(action.payload.tasks).map((task) => {
       //filter out blank tasks
       if (task.dueDate) {
-        axios.post(`${apiUrl}/api/jobs/tasks/new`, task)
+        axios.post(`${apiUrl}/api/jobs/tasks`, { ...task, jobId: job.id })
       }
     })
     //create new requirements assessment for new job
     yield Object.values(action.payload.requirements).map((requirement) => {
-      axios.post(`${apiUrl}/api/job_requirements`, requirement)
+      axios.post(`${apiUrl}/api/job_requirements`, {
+        ...requirement,
+        jobId: job.id,
+      })
     })
     yield put({ type: 'FETCH_JOBS' })
     yield put({ type: 'CLEAR_CURRENT_JOB' })
@@ -79,9 +84,8 @@ function* addJob(action) {
 }
 
 function* fetchCurrentJob(action) {
-  let allJobs = yield axios.get(`${apiUrl}/api/jobs/stages`)
+  let allJobs = yield axios.get(`${apiUrl}/api/jobs`)
   let currentJob
-
   allJobs.data.map((job) => {
     if (job.id == action.payload) {
       currentJob = job
@@ -138,7 +142,10 @@ function* saveJobUpdates(action) {
     // //delete requirements assessments associated with job before adding all from redux
     //send requirement assessment data
     yield Object.entries(action.payload.requirements).map((requirement) => {
-      axios.put(`${apiUrl}/api/jobs/requirements`, requirement)
+      axios.put(`${apiUrl}/api/jobs/requirements`, {
+        jobId: action.payload.job.id,
+        ...requirement,
+      })
     })
     yield put({ type: 'CLEAR_CURRENT_JOB' })
   } catch (err) {

@@ -38,14 +38,20 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 })
 
 router.get('/stages', rejectUnauthenticated, (req, res) => {
-  Job.findAll({
-    where: {
-      userId: req.user.id,
-    },
-    include: [Stage],
+  Stage.findAll({
+    include: [
+      {
+        model: Job,
+        attributes: [],
+        where: {
+          userId: req.user.id,
+          closed: false,
+        },
+      },
+    ],
   })
-    .then((job) => {
-      res.send(job)
+    .then((stages) => {
+      res.send(stages)
     })
     .catch((error) => {
       console.log(error)
@@ -54,14 +60,20 @@ router.get('/stages', rejectUnauthenticated, (req, res) => {
 })
 
 router.get('/tasks', rejectUnauthenticated, (req, res) => {
-  Job.findAll({
-    where: {
-      userId: req.user.id,
-    },
-    include: [Task],
+  Task.findAll({
+    include: [
+      {
+        model: Job,
+        attributes: [],
+        where: {
+          userId: req.user.id,
+          closed: false,
+        },
+      },
+    ],
   })
-    .then((job) => {
-      res.send(job)
+    .then((tasks) => {
+      res.send(tasks)
     })
     .catch((error) => {
       console.log(error)
@@ -177,11 +189,7 @@ router.delete('/stages/:jobId', rejectUnauthenticated, (req, res) => {
 })
 
 router.post('/stages', rejectUnauthenticated, (req, res) => {
-  // req.body is an array, numbered key followed up actual stage object, so look at req.body.stage[1]
-  const {
-    jobId,
-    stage: [, { stage, note, date }],
-  } = req.body
+  const { jobId, stage, note, date } = req.body
   Stage.create({
     stage,
     note,
@@ -234,10 +242,7 @@ router.delete('/tasks/:id', rejectUnauthenticated, (req, res) => {
 })
 
 router.post('/tasks', (req, res) => {
-  // req.body is an array, numbered key followed up actual stage object, so look at req.body.task[1]
-  const {
-    task: [, { taskName, dueDate, jobId, note }],
-  } = req.body
+  const { taskName, dueDate, jobId, note } = req.body
   Task.create({
     taskName,
     dueDate,

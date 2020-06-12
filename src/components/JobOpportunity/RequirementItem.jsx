@@ -26,23 +26,24 @@ class RequirementItem extends Component {
     render() {
         let reqValueOut
         let requirementOfferValue
-        let requirementMetValue
-
+        let requirementMetValue = '';
         //jobsRequirements item only exists after edit so only preload data for existing entries
         if (this.props.currentRequirements[this.props.i]) {
             requirementOfferValue = this.props.currentRequirements[this.props.i].requirementOffer
-            requirementMetValue = this.props.currentRequirements[this.props.i].requirementMet
+            requirementMetValue = this.props.currentRequirements[this.props.i].requirementMet || ''
         }
 
         return (
-            <div >
+            <div>
                 <ListItem>
-                    <ListItem style={{ maxWidth: 200 }}>
-                        <Typography variant="h6">
-                            {this.props.requirement.requirement}
-                        </Typography>
+                    <List style={{ maxWidth: 200 }}>
+                        <ListItem>
+                            <Typography variant="h6">
+                                {this.props.requirement.requirement}
+                            </Typography>
+                        </ListItem>
 
-                    </ListItem>
+                    </List>
                     <List>
                         <ListItem>
                             <InputLabel>Offer Details</InputLabel>

@@ -32,8 +32,8 @@ const currentTasksReducer = (
         ...taskObject,
         [i]: {
           taskName: job.taskName,
-          dueDate: job.task_dueDate,
-          note: job.task_note,
+          dueDate: job.dueDate,
+          note: job.note,
         },
       }
     })

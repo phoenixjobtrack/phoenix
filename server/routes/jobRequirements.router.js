@@ -9,21 +9,21 @@ const { JobRequirement, Requirement } = require('../schemas')
 
 // // GET route
 router.get('/', rejectUnauthenticated, (req, res) => {
-  Requirement.findAll({
-    attributes: ['requirement', 'userId'],
-    where: {
-      userId: req.user.id,
-    },
+  JobRequirement.findAll({
+    attributes: [
+      'id',
+      'jobId',
+      'requirementId',
+      'requirementOffer',
+      'requirementMet',
+    ],
     include: [
       {
-        model: JobRequirement,
-        attributes: [
-          'id',
-          'jobId',
-          'requirementId',
-          'requirementOffer',
-          'requirementMet',
-        ],
+        model: Requirement,
+        attributes: ['requirement', 'userId'],
+        where: {
+          userId: req.user.id,
+        },
       },
     ],
   })
@@ -38,12 +38,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 // POST route
 router.post('/', rejectUnauthenticated, (req, res) => {
-  const {
-    requirementOffer,
-    requirementId,
-    requirementMet,
-    jobId,
-  } = req.body
+  const { requirementOffer, requirementId, requirementMet, jobId } = req.body
 
   JobRequirement.create({
     requirementOffer,
