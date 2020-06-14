@@ -9,13 +9,13 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((id, done) => {
   User.findOne({
+    attributes: ['id', 'firstName', 'lastName', 'email', 'disabled'],
     where: {
       id,
     },
   })
     .then((user) => {
       if (user) {
-        delete user.password
         done(null, user)
       } else {
         done(null, null)
@@ -38,18 +38,20 @@ passport.use(
       User.findOne({
         where: {
           email,
-        }
-      }).then(user => {
-        if (user && encryptLib.comparePassword(password, user.password)) {
-          delete user.password;
-          done(null, user)
-        } else {
-          done(null, null)
-        }
-      }).catch(error => {
-        console.log(error);
-        done(error, null);
+        },
       })
+        .then((user) => {
+          if (user && encryptLib.comparePassword(password, user.password)) {
+            delete user.password
+            done(null, { ...user, password: '' })
+          } else {
+            done(null, null)
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+          done(error, null)
+        })
     },
   ),
 )
