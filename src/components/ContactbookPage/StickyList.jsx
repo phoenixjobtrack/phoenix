@@ -146,7 +146,7 @@ function PinnedSubheaderList(props) {
             <div className={classes.search}>
                 {alphabet.map(letter => (
                     <>
-                        <a className={classes.letter} onClick={() => { scrollToLetter(letter) }}>{letter}</a>
+                        <a key={letter} className={classes.letter} onClick={() => { scrollToLetter(letter) }}>{letter}</a>
                     </>
                 ))}
             </div>
@@ -172,7 +172,7 @@ function PinnedSubheaderList(props) {
                                 let firstLetter = word[0]
                                 if (firstLetter.toLowerCase() === sectionId) {
                                     return (
-                                        <ListItem className={classes.contactCard}><ContactCard contact={contact} /> </ListItem>
+                                        <ListItem key={contact.id} className={classes.contactCard}><ContactCard contact={contact} /> </ListItem>
                                     )
                                 }
                             })}

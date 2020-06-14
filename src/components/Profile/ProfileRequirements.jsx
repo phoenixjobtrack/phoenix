@@ -136,9 +136,9 @@ class ProfileRequirements extends Component {
                                 </h2>
                                 <div className="profileRequireBox">
                                 {
-                                    this.props.require.map((user, i) => {
+                                    this.props.require.map((requirement, i) => {
                                         return (
-                                            <p>{user.requirement}</p>
+                                            <p key={requirement.id}>{requirement.requirement}</p>
                                         )
                                     })
                                 }
@@ -175,13 +175,13 @@ class ProfileRequirements extends Component {
 
                                 </h2>
 
-                                {this.props.require.map((userReq, i) => {
+                                {this.props.require.map((requirement, i) => {
                                     return (
-                                        <div>
+                                        <div key={requirement.id}>
                                             <SavedRequirements
-                                                key={userReq.id}
+                                                key={requirement.id}
                                                 id={i}
-                                                userReq={userReq}
+                                                userReq={requirement}
                                             />
                                         </div>
                                     )
@@ -202,7 +202,7 @@ class ProfileRequirements extends Component {
                     <Grid item xs={2}>
                     </Grid>
                     </Grid>
-                </div >
+                </div>
         }
 
         return (

@@ -43,7 +43,7 @@ passport.use(
         .then((user) => {
           if (user && encryptLib.comparePassword(password, user.password)) {
             delete user.password
-            done(null, { ...user, password: '' })
+            done(null, user)
           } else {
             done(null, null)
           }
