@@ -9,7 +9,6 @@ const Op = Sequelize.Op
 //-----GET for job pipeline table-------//
 router.get('/', rejectUnauthenticated, (req, res) => {
   Job.findAll({
-    attributes: ['id', 'companyName', 'position', 'closed'],
     where: {
       closed: false,
       userId: req.user.id,
@@ -258,8 +257,23 @@ router.post('/tasks', (req, res) => {
     })
 })
 
-router.put('/requirements', (req, res) => {
-  const [, { requirementOffer, requirementMet, id }] = req.body
+router.put('/requirements', async (req, res) => {
+  const { requirementOffer, requirementMet, id } = req.body
+  const job = await JobRequirement.findOne({
+    attributes: [id],
+    where: {
+      id,
+    },
+    include: [
+      {
+        model: Job,
+        where: {
+          userId: req.user.id,
+        },
+      },
+    ],
+  })
+  if (!job) return res.sendStatus(403)
   JobRequirement.update(
     {
       requirementOffer,
@@ -268,9 +282,15 @@ router.put('/requirements', (req, res) => {
     {
       where: {
         id,
-        userId: req.user.id,
       },
     },
   )
+    .then((jobRequirement) => {
+      res.send(jobRequirement)
+    })
+    .catch((error) => {
+      console.error(error)
+      res.sendStatus(error)
+    })
 })
 module.exports = router

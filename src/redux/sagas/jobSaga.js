@@ -124,24 +124,24 @@ function* saveJobUpdates(action) {
     //send stage data
     yield Object.entries(action.payload.stages).map((stage) => {
       axios.post(`${apiUrl}/api/jobs/stages`, {
-        stage: stage,
+        ...stage[1],
         jobId: action.payload.job.id,
       })
     })
     //delete tasks associated with job before adding all from redux
     yield axios.delete(`${apiUrl}api/jobs/tasks/${action.payload.job.id}`)
     // send task data
-    yield Object.entries(action.payload.tasks).map((task) => {
+    yield Object.entries(action.payload.tasks).map(([, task]) => {
       if (task.dueDate) {
         axios.post(`${apiUrl}/api/jobs/tasks`, {
-          task: task,
+          ...task,
           jobId: action.payload.job.id,
         })
       }
     })
     // //delete requirements assessments associated with job before adding all from redux
     //send requirement assessment data
-    yield Object.entries(action.payload.requirements).map((requirement) => {
+    yield Object.entries(action.payload.requirements).map(([, requirement]) => {
       axios.put(`${apiUrl}/api/jobs/requirements`, {
         jobId: action.payload.job.id,
         ...requirement,

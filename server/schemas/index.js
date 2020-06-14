@@ -24,6 +24,10 @@ JobRequirement.belongsTo(Requirement, {
   foreignKey: 'requirementId',
   targetKey: 'id',
 })
+JobRequirement.belongsTo(Job, {
+  foreignKey: 'jobId',
+  targetKey: 'id',
+})
 
 Job.hasMany(Stage, { foreignKey: 'jobId', targetKey: 'id' })
 Stage.belongsTo(Job, { foreignKey: 'jobId', targetKey: 'id' })
