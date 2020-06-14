@@ -47,6 +47,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     cell,
     phone,
     notes,
+    email,
   } = req.body
 
   Contact.create({
@@ -59,6 +60,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     cell,
     phone,
     notes,
+    email
   })
     .then((contact) => {
       res.status(201).send(contact);
@@ -79,6 +81,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     cell,
     phone,
     notes,
+    email,
   } = req.body
 
   Contact.update(
@@ -91,6 +94,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
       cell,
       phone,
       notes,
+      email,
     },
     {
       where: {
