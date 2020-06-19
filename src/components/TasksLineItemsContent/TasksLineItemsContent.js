@@ -102,8 +102,8 @@ class TasksLineItemsContent extends Component {
     }; // end saveTask
 
     // Click Listeners For Icons on Line Items
-    handleClickCheckBox(id) {
-        this.props.dispatch({ type: 'CHECK_TASK_BOX', payload: id })
+    handleClickCheckBox(id, isComplete) {
+        this.props.dispatch({ type: 'CHECK_TASK_BOX', payload: { id, isComplete } })
     }; // end handleClickCheckBox
 
     handleClickRemove(id) {
@@ -122,7 +122,7 @@ class TasksLineItemsContent extends Component {
                         />
                         <Tooltip title="Mark Complete">
                             <IconButton
-                                onClick={() => this.handleClickCheckBox(this.props.id)}
+                                onClick={() => this.handleClickCheckBox(this.props.id, !this.props.complete)}
                                 size="small"
                                 color="primary"
                             >

@@ -29,7 +29,7 @@ class TasksTomorrow extends Component {
         userTasks = this.props.reduxState.tasks.map(({ id, taskName, dueDate, complete, contactId, jobId, disabled, note }) => {
             if (taskTomorrow < dueDate) {
               return (
-                <div style={{ marginLeft: 20, paddingBottom: 3 }}>
+                <div key={id} style={{ marginLeft: 20, paddingBottom: 3 }}>
                   <TasksLineItemsContent
                     id={id}
                     taskName={taskName}

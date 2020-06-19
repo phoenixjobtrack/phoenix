@@ -32,7 +32,7 @@ class TasksOverdue extends Component {
       }) => {
         if (taskDay > dueDate && complete == false) {
           return (
-            <div style={{ marginLeft: 20, paddingBottom: 3 }}>
+            <div key={id} style={{ marginLeft: 20, paddingBottom: 3 }}>
               <TasksLineItemsContent
                 id={id}
                 taskName={taskName}

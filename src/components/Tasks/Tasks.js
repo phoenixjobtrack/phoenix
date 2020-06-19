@@ -69,7 +69,7 @@ class Tasks extends Component {
 
   state = {
     taskName: '',
-    dueDate: null,
+    dueDate: new Date(),
     contactId: null,
     jobId: null,
     demoMode: false,
@@ -104,7 +104,7 @@ class Tasks extends Component {
   clearInputs = () => {
     this.setState({
       taskName: '',
-      dueDate: 'mm/dd/yyyy',
+      dueDate: new Date(),
       contactId: null,
       jobId: null,
     })
@@ -122,7 +122,7 @@ class Tasks extends Component {
             style={{ paddingBottom: 10, marginBottom: 20 }}
             variant='outlined'
           >
-            <Toolbar className={this.props.classes.root}>
+            <Toolbar className={this.props.classes && this.props.classes.root}>
               <TextField
                 style={{ minWidth: 400 }}
                 value={this.state.taskName}

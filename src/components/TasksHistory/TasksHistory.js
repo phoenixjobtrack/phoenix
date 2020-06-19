@@ -26,7 +26,7 @@ class TasksHistory extends Component {
 
             if (taskDay > dueDate && complete == true) {
                 return (
-                    <div style={{marginLeft: 20, paddingBottom: 3}}>
+                    <div key={id} style={{marginLeft: 20, paddingBottom: 3}}>
                         <TasksLineItemsContent
                             id={id}
                             taskName={taskName}

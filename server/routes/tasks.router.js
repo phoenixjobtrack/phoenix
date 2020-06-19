@@ -4,13 +4,29 @@ const router = express.Router()
 const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware')
-const { Task } = require('../schemas')
+const { Job, Task } = require('../schemas')
+const { Op } = require('sequelize')
+const Sequelize = require('sequelize')
 
 router.get('/', rejectUnauthenticated, (req, res) => {
   Task.findAll({
     where: {
-      userId: req.user.id,
+      [Op.or]: {
+        jobUserId: Sequelize.where(Sequelize.col('Job.user_id'), {
+          [Op.eq]: req.user.id,
+        }),
+        userId: req.user.id,
+      },
     },
+    include: [
+      {
+        required: false,
+        model: Job,
+        where: {
+          userId: req.user.id,
+        },
+      },
+    ],
     order: [['id', 'DESC']],
   })
     .then((tasks) => {
@@ -39,14 +55,7 @@ router.get('/date', rejectUnauthenticated, (req, res) => {
 })
 
 router.post('/', rejectUnauthenticated, (req, res) => {
-  const {
-    taskName,
-    dueDate,
-    note,
-    contactId,
-    jobId,
-    complete,
-  } = req.body
+  const { taskName, dueDate, note, contactId, jobId, complete } = req.body
   Task.create({
     taskName,
     dueDate,
@@ -65,15 +74,32 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     })
 })
 
-router.put('/:id', rejectUnauthenticated, (req, res) => {
-  const {
-    taskName,
-    dueDate,
-    note,
-    contactId,
-    jobId,
-    complete,
-  } = req.body
+router.put('/:id', rejectUnauthenticated, async (req, res) => {
+  const task = await Task.findOne({
+    attributes: ['id'],
+    where: {
+      id: req.params.id,
+      [Op.or]: {
+        jobUserId: Sequelize.where(Sequelize.col('Job.user_id'), {
+          [Op.eq]: req.user.id,
+        }),
+        userId: req.user.id,
+      },
+    },
+    include: [
+      {
+        required: false,
+        model: Job,
+        where: {
+          userId: req.user.id,
+        },
+      },
+    ],
+  })
+
+  if (!task) return res.sendStatus(403)
+
+  const { taskName, dueDate, note, contactId, jobId, complete } = req.body
   Task.update(
     {
       taskName,
@@ -85,7 +111,6 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     },
     {
       where: {
-        userID: req.user.id,
         id: req.params.id,
       },
     },

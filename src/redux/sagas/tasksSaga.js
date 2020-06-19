@@ -75,7 +75,7 @@ function* removeTask(action) {
 // Toggles the "complete" column boolean in the "tasks" table in the database at id of selected task
 function* toggleTaskCheck(action) {
   try {
-    yield axios.put(`${apiUrl}/api/tasks/${action.payload}`, action.payload)
+    yield axios.put(`${apiUrl}/api/tasks/${action.payload.id}`, { complete: action.payload.isComplete })
     yield put({ type: 'FETCH_TASKS' })
   } catch (error) {
     console.log('error in toggleTaskCheck saga', error)
