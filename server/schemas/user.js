@@ -1,7 +1,15 @@
 const Sequelize = require('sequelize')
 const { sequelize } = require('./sequelize')
 const Model = Sequelize.Model
-class User extends Model {}
+class User extends Model {
+  static get statuses() {
+    return {
+      DISABLED: 'DISABLED',
+      ACTIVE: 'ACTIVE',
+      UNVERIFIED: 'UNVERIFIED',
+    }
+  }
+}
 User.init(
   {
     id: {
@@ -32,6 +40,13 @@ User.init(
       type: Sequelize.DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    // status: {
+    //   type: Sequelize.DataTypes.STRING,
+    //   defaultValue: false,
+    //   validate: {
+    //     isIn: Object.keys(User.statuses),
+    //   },
+    // },
   },
   { sequelize, tableName: 'users', underscored: true },
 )

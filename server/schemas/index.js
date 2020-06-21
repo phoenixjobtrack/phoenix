@@ -6,6 +6,7 @@ const { Job } = require('./job')
 const { Requirement } = require('./requirement')
 const { Stage } = require('./stage')
 const { Task } = require('./task')
+const { Token } = require('./token')
 const { User } = require('./user')
 
 Job.belongsToMany(Requirement, { through: JobRequirement, foreignKey: 'jobId' })
@@ -35,6 +36,9 @@ Stage.belongsTo(Job, { foreignKey: 'jobId', targetKey: 'id' })
 Job.hasMany(Task, { foreignKey: 'jobId', targetKey: 'id' })
 Task.belongsTo(Job, { foreignKey: 'jobId', targetKey: 'id' })
 
+User.hasMany(Token, { foreignKey: 'userId', targetKey: 'id' })
+Token.belongsTo(User, { foreignKey: 'userId', targetKey: 'id' })
+
 module.exports = {
   Contact,
   InterviewStage,
@@ -43,6 +47,7 @@ module.exports = {
   Requirement,
   Stage,
   Task,
+  Token,
   User,
   sequelize,
   Sequelize,

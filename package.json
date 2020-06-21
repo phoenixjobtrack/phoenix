@@ -6,6 +6,7 @@
   "dependencies": {
     "@material-ui/core": "^4.1.2",
     "@material-ui/icons": "^4.2.1",
+    "@sendgrid/mail": "^7.2.0",
     "array-move": "^2.1.0",
     "axios": "^0.18.0",
     "bcrypt": "^3.0.6",
@@ -16,6 +17,7 @@
     "material-table": "^1.40.1",
     "material-ui-popup-state": "^1.4.0",
     "moment": "^2.24.0",
+    "nodemailer": "^6.4.10",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pg": "^7.18.2",
@@ -37,7 +39,8 @@
     "supertest": "^4.0.2",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^8.13.1",
-    "typeface-roboto": "0.0.54"
+    "typeface-roboto": "0.0.54",
+    "uuid": "^8.1.0"
   },
   "scripts": {
     "start": "node server/server.js",

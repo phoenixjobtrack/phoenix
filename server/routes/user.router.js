@@ -4,7 +4,9 @@ const {
 } = require('../modules/authentication-middleware')
 const encryptLib = require('../modules/encryption')
 const userStrategy = require('../strategies/user.strategy')
-const { User } = require('../schemas/user')
+const { Token, User } = require('../schemas')
+const { v4: uuidv4 } = require('uuid')
+const { emailer } = require('../modules/emailer')
 
 const router = express.Router()
 
@@ -60,6 +62,48 @@ router.put('/:id', (req, res) => {
       res.sendStatus(500)
     })
 })
+
+router.get('/forgotten-password', (req, res) => {
+  const { email } = req.query
+
+  User.findOne({ where: { email } })
+    .then((user) => {
+      console.log(user)
+      if (!user) return res.status(404).send({ message: 'user not found' })
+      return Token.create({
+        userId: user.id,
+        token: uuidv4(),
+        scope: Token.scopes.FORGOTTEN_PASSWORD,
+      })
+    })
+    .then((token) => {
+      const mailOptions = {
+        to: email,
+        subject: 'Reset Pheonix Password',
+        text: `
+        A new password has been requested for ${email}.
+        To reset your password use the following link: ${process.env.CLIENT_URL}/forgotten-password/${token.token}
+        `,
+        html: `
+        <p>A new password has been requested for ${email}.</p>
+        <p>To reset your password click <a href="${process.env.CLIENT_URL}/forgotten-password/${token.token}">here</a></p>
+        <p>or use the following link: ${process.env.CLIENT_URL}/forgotten-password/${token.token}</p>
+        `,
+      }
+      return emailer
+        .sendMail(mailOptions)
+        .then(() => {
+          res.sendStatus(200)
+        })
+        .catch((error) => {
+          console.error(error)
+          console.error(error.response.body.errors)
+          res.sendStatus(500)
+        })
+    })
+})
+
+// router.post('/forgotten-password', (req, ))
 
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route
