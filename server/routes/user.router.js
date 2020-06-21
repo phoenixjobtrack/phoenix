@@ -103,6 +103,28 @@ router.get('/forgotten-password', (req, res) => {
     })
 })
 
+router.post('/forgotten-password/:userToken', async (req, res) => {
+  const { userToken } = req.params
+  try {
+    const token = await Token.findOne({
+      where: {
+        token: userToken,
+        usedAt: null,
+      },
+    })
+    if (!token) return res.sendStatus(404)
+    if (token.scope !== Token.scopes.FORGOTTEN_PASSWORD)
+      return res.sendStatus(401)
+    const password = encryptLib.encryptPassword(req.body.password)
+    await User.update({ password }, { where: { id: token.userId } })
+    await Token.update({ usedAt: new Date() }, { where: { id: token.id } })
+    res.sendStatus(200)
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+})
+
 // router.post('/forgotten-password', (req, ))
 
 // Handles login form authenticate/login POST
