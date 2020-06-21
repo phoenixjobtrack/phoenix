@@ -31,13 +31,62 @@ router.post('/register', (req, res, next) => {
     email,
     password,
   })
+    .then(async (user) => {
+      console.log(Token.scopes.VERIFY_USER)
+      const token = await Token.create({
+        userId: user.id,
+        token: uuidv4(),
+        scope: Token.scopes.VERIFY_USER,
+      })
+      const mailOptions = {
+        to: email,
+        subject: 'Confirm Pheonix Account',
+        text: `
+        Welcome to Pheonix.
+        Before you can begin using the app you need to confirm your account by visiting on the following link: ${process.env.CLIENT_URL}/confirm/${token.token}
+        `,
+        html: `
+        <p>Welcome to Pheonix.</p>
+        <p>Before you can begin using the app you need to confirm your account by clicking <a href="${process.env.CLIENT_URL}/confirm/${token.token}">here</a></p>
+        <p>or use the visiting link: ${process.env.CLIENT_URL}/confirm/${token.token}</p>
+        `,
+      }
+      return emailer.sendMail(mailOptions).catch((error) => {
+        console.error(error.response.body.errors)
+        throw new Error('Error sending email')
+      })
+    })
     .then(() => {
       res.sendStatus(201)
     })
     .catch((err) => {
       console.log(err)
+      console.log(err.errors[0])
       res.sendStatus(500)
     })
+})
+
+router.put('/confirm/:userToken', async (req, res) => {
+  const { userToken } = req.params
+  try {
+    const token = await Token.findOne({
+      where: {
+        token: userToken,
+        usedAt: null,
+      },
+    })
+    if (!token) return res.sendStatus(404)
+    if (token.scope !== Token.scopes.VERIFY_USER) return res.sendStatus(401)
+    await User.update(
+      { status: User.statuses.ACTIVE },
+      { where: { id: token.userId } },
+    )
+    await Token.update({ usedAt: new Date() }, { where: { id: token.id } })
+    res.sendStatus(200)
+  } catch (error) {
+    console.error(error)
+    res.sendStatus(500)
+  }
 })
 
 router.put('/:id', (req, res) => {
@@ -93,7 +142,7 @@ router.get('/forgotten-password', (req, res) => {
       return emailer
         .sendMail(mailOptions)
         .then(() => {
-          res.sendStatus(200)
+          res.sendStatus(201)
         })
         .catch((error) => {
           console.error(error)
@@ -120,8 +169,8 @@ router.post('/forgotten-password/:userToken', async (req, res) => {
     await Token.update({ usedAt: new Date() }, { where: { id: token.id } })
     res.sendStatus(200)
   } catch (error) {
-    console.error(error);
-    res.sendStatus(500);
+    console.error(error)
+    res.sendStatus(500)
   }
 })
 

@@ -32,7 +32,9 @@ Token.init(
     scope: {
       type: Sequelize.DataTypes.STRING,
       validate: {
-        isIn: Object.keys(Token.scopes),
+        isValidScope(value) {
+          if (!Token.scopes[value]) throw new Error(`Invalid scope: ${value}`)
+        }
       },
     },
   },

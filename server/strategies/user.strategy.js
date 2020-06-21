@@ -9,7 +9,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((id, done) => {
   User.findOne({
-    attributes: ['id', 'firstName', 'lastName', 'email', 'disabled'],
+    attributes: ['id', 'firstName', 'lastName', 'email', 'status'],
     where: {
       id,
     },
@@ -38,6 +38,7 @@ passport.use(
       User.findOne({
         where: {
           email,
+          status: User.statuses.ACTIVE,
         },
       })
         .then((user) => {

@@ -36,17 +36,14 @@ User.init(
         max: 45,
       },
     },
-    disabled: {
-      type: Sequelize.DataTypes.BOOLEAN,
-      defaultValue: false,
+    status: {
+      type: Sequelize.DataTypes.STRING,
+      validate: {
+        isValidStatus(value) {
+          if (!User.statuses[value]) throw new Error(`Invalid status: ${value}`)
+        },
+      },
     },
-    // status: {
-    //   type: Sequelize.DataTypes.STRING,
-    //   defaultValue: false,
-    //   validate: {
-    //     isIn: Object.keys(User.statuses),
-    //   },
-    // },
   },
   { sequelize, tableName: 'users', underscored: true },
 )
