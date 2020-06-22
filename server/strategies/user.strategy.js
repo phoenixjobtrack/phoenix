@@ -38,7 +38,7 @@ passport.use(
       User.findOne({
         where: {
           email,
-          status: User.statuses.ACTIVE,
+          // status: User.statuses.ACTIVE,
         },
       })
         .then((user) => {
