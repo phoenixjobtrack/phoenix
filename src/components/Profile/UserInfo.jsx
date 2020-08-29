@@ -23,8 +23,8 @@ class UserInfo extends Component {
     state = {
         profileInfo: {
             id: '',
-            first_name: '',
-            last_name: '',
+            firstName: '',
+            lastName: '',
             email: '',
         },
         requireList: {},
@@ -35,15 +35,15 @@ class UserInfo extends Component {
     handleEdit = (event) => {
         event.preventDefault();
         let id = this.props.profile.id;
-        let first_name = this.props.profile.first_name;
-        let last_name = this.props.profile.last_name;
+        let firstName = this.props.profile.firstName;
+        let lastName = this.props.profile.lastName;
         let email = this.props.profile.email;
         this.setState({
             ...this.state,
             profileInfo: {
                 id: id,
-                first_name: first_name,
-                last_name: last_name,
+                firstName: firstName,
+                lastName: lastName,
                 email: email,
             },
             editMode: !this.state.editMode
@@ -101,8 +101,8 @@ class UserInfo extends Component {
                                         </IconButton>
                                     </Tooltip>
                                 </h2>
-                                <p>First Name: {this.props.profile.first_name}</p>
-                                <p>Last Name: {this.props.profile.last_name}</p>
+                                <p>First Name: {this.props.profile.firstName}</p>
+                                <p>Last Name: {this.props.profile.lastName}</p>
                                 <p>E-mail: {this.props.profile.email}</p>
                             </Card>
                         </Grid>
@@ -125,20 +125,20 @@ class UserInfo extends Component {
                                         <TextField
                                             id="standard-dense"
                                             label="First Name"
-                                            value={this.state.profileInfo.first_name}
+                                            value={this.state.profileInfo.firstName}
                                             className="profileInput"
                                             margin="dense"
-                                            onChange={this.handleProfileChange('first_name')}
+                                            onChange={this.handleProfileChange('firstName')}
                                             variant="outlined"
                                         />
                                         <br />
                                         <TextField
                                             id="standard-dense"
                                             label="Last Name"
-                                            value={this.state.profileInfo.last_name}
+                                            value={this.state.profileInfo.lastName}
                                             className="profileInput"
                                             margin="dense"
-                                            onChange={this.handleProfileChange('last_name')}
+                                            onChange={this.handleProfileChange('lastName')}
                                             variant="outlined"
                                         />
                                         <br />

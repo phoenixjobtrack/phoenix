@@ -9,11 +9,11 @@ CREATE TABLE "users" (
     "last_name" VARCHAR (255) NOT NULL,
     "email" VARCHAR (255) NOT NULL,
     "password" VARCHAR (255) NOT NULL,
-    "disabled" BOOLEAN DEFAULT 'false'
+    "status" VARCHAR(255) DEFAULT 'UNVERIFIED'
 );
 
-INSERT INTO "users" ("first_name", "last_name", "email", "password") 
-VALUES 
+INSERT INTO "users" ("first_name", "last_name", "email", "password")
+VALUES
 ('Anna', 'Employee', 'anna.employee@gmail.com', '0000');
 
 CREATE TABLE "jobs" (
@@ -31,10 +31,10 @@ CREATE TABLE "jobs" (
 );
 
 INSERT INTO "jobs" ("user_id", "position", "company_name", "notes", "posting_url", "deadline", "compensation", "benefits", "travel", "closed")
-VALUES 
-('1', 'Sales Manager', 'Target', 'Karen used to work in sales at Target', 
-'www.target.com/salesjob/andgibberishtolookofficial', '07/12/2019', '85K', 'health/dental', 'Atlanta Conference every Sept', 'false'), 
-('1', 'Sales Lead', 'Best Buy', 'I am over qualified for this job so I need to negotiate the salary', 
+VALUES
+('1', 'Sales Manager', 'Target', 'Karen used to work in sales at Target',
+'www.target.com/salesjob/andgibberishtolookofficial', '07/12/2019', '85K', 'health/dental', 'Atlanta Conference every Sept', 'false'),
+('1', 'Sales Lead', 'Best Buy', 'I am over qualified for this job so I need to negotiate the salary',
 'www.bestbuy.com/saleslead/andgibberishtolookofficial', '07/18/2019', '62K and annual bonus', 'health/dental', 'none', 'false');
 
 CREATE TABLE "contacts" (
@@ -52,10 +52,10 @@ CREATE TABLE "contacts" (
     "disabled" BOOLEAN DEFAULT 'false'
 );
 
-INSERT INTO "contacts" ("user_id", "first_name", "last_name", "company", "position", "email", "linkedin_url", 
+INSERT INTO "contacts" ("user_id", "first_name", "last_name", "company", "position", "email", "linkedin_url",
 "cell", "phone", "notes", "disabled")
-VALUES 
-('1', 'Karen', 'Wickleberg', 'Orbit', 'Sales Lead', 'Karen.Wickleberg@gmail.com', 
+VALUES
+('1', 'Karen', 'Wickleberg', 'Orbit', 'Sales Lead', 'Karen.Wickleberg@gmail.com',
 'www.linkedin.com/in/Karen-wickleberg/', '952-555-0555', '612-555-0555', 'Karen worked at Target', 'false');
 
 CREATE TABLE "stages" (
@@ -67,7 +67,7 @@ CREATE TABLE "stages" (
 );
 
 INSERT INTO "stages" ("job_id", "stage", "note", "date")
-VALUES 
+VALUES
 ('1', 'Hiring Manager Interview', 'Talk to Karen for advice', '7/13/2019'),
 ('2', 'Phone Screening', 'Review the position information on their website', '7/13/2019');
 
@@ -79,7 +79,7 @@ CREATE TABLE "requirements" (
 );
 
 INSERT INTO "requirements" ("requirement", "user_id", "disabled")
-VALUES 
+VALUES
 ('70k salary', '1', 'false');
 
 CREATE TABLE "jobs_requirements" (
@@ -108,7 +108,7 @@ CREATE TABLE "tasks" (
 );
 
 INSERT INTO "tasks" ("user_id", "task_name", "due_date", "complete", "contact_id", "job_id", "disabled")
-VALUES 
+VALUES
 ('1', 'Call Karen', '7/10/2019', 'false', '1', '1', 'false');
 
 CREATE TABLE "interview_stages" (
@@ -116,10 +116,18 @@ CREATE TABLE "interview_stages" (
     "stage" VARCHAR (100) NOT NULL
 );
 
-INSERT INTO "interview_stages" ("stage") 
-VALUES 
-('Job Identified'), ('Applied'), ('Phone Screening'), ('Informational Interview'), ('Networking Meeting'), 
-('Testing'), ('Video Conference'), ('Presentation'), ('Hiring Manager Interview'), ('Hiring MGR - Phone Screen'), 
-('Director Interview'), ('Director - Phone Screen'), ('VP Interview'), ('VP - Phone Screen'), ('Await Decision'), 
+INSERT INTO "interview_stages" ("stage")
+VALUES
+('Job Identified'), ('Applied'), ('Phone Screening'), ('Informational Interview'), ('Networking Meeting'),
+('Testing'), ('Video Conference'), ('Presentation'), ('Hiring Manager Interview'), ('Hiring MGR - Phone Screen'),
+('Director Interview'), ('Director - Phone Screen'), ('VP Interview'), ('VP - Phone Screen'), ('Await Decision'),
 ('Peer Interview'), ('C-Level interview');
 
+CREATE TABLE "tokens" (
+    "id" SERIAL PRIMARY KEY,
+    "user_id" INTEGER REFERENCES "users" ON DELETE CASCADE,
+    "token" uuid,
+    "used_at" DATE,
+    "scope" VARCHAR (255),
+    "created_at" DATE DEFAULT now()
+);

@@ -22,27 +22,27 @@ class TasksHistory extends Component {
         let taskDay = mm + '/' + dd + '/' + yyyy;
 
 
-        userTasks = this.props.reduxState.tasks.map(({ id, task_name, due_date, complete, contact_id, job_id, disabled, note }) => {
+        userTasks = this.props.reduxState.tasks.map(({ id, taskName, dueDate, complete, contactId, jobId, disabled, note }) => {
 
-            if (taskDay > due_date && complete == true) {
+            if (taskDay > dueDate && complete == true) {
                 return (
-                    <div style={{marginLeft: 20, paddingBottom: 3}}>
+                    <div key={id} style={{marginLeft: 20, paddingBottom: 3}}>
                         <TasksLineItemsContent
                             id={id}
-                            task_name={task_name}
-                            due_date={due_date}
+                            taskName={taskName}
+                            dueDate={dueDate}
                             complete={complete}
-                            contact_id={contact_id}
-                            job_id={job_id}
+                            contactId={contactId}
+                            jobId={jobId}
                             disabled={disabled}
                         />
                         <TasksNotes
                             id={id}
-                            task_name={task_name}
-                            due_date={due_date}
+                            taskName={taskName}
+                            dueDate={dueDate}
                             complete={complete}
-                            contact_id={contact_id}
-                            job_id={job_id}
+                            contactId={contactId}
+                            jobId={jobId}
                             disabled={disabled}
                             note={note}
                         />

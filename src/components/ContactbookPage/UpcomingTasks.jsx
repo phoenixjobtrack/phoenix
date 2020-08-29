@@ -15,21 +15,20 @@ class UpcomingTasks extends Component {
 
         //load tasks associated with contact
         let upcomingTasks = []
-        let today = new Date()
         let dueDate = ''
 
         this.props.reduxState.tasksByDate.map((task, i) => {
-            if (task.contact_id == this.props.contactId) {
+            if (task.contactId == this.props.contactId) {
                 //put a line in here to compare current date to due date
-                dueDate = new Date(task.due_date)
+                dueDate = new Date(task.dueDate)
                 if (!task.complete) {
                     upcomingTasks.push(
                         <div key={i}>
                             <ListItem >
-                                <Typography variant="body1" >{task.task_name}</Typography>
+                                <Typography variant="body1" >{task.taskName}</Typography>
                             </ListItem>
                             <ListItem>
-                                <Typography variant="caption">  Date:  {moment(task.due_date).format('MM-DD-YYYY')}</Typography>
+                                <Typography variant="caption">  Date:  {moment(task.dueDate).format('MM-DD-YYYY')}</Typography>
                             </ListItem>
                             <Divider />
                         </div>
@@ -39,11 +38,9 @@ class UpcomingTasks extends Component {
         })
 
         return (
-            <>
-                <List>
-                    {upcomingTasks}
-                </List>                
-            </>
+            <List>
+                {upcomingTasks}
+            </List>
         )
     }
 }

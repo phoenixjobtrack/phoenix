@@ -13,10 +13,10 @@ class AddTask extends Component {
     state = {
         today: '',
         newTask: {
-            task_name: '',
-            due_date: '',
+            taskName: '',
+            dueDate: '',
             note: '',
-            contact_id: '',
+            contactId: '',
             complete: false
         }
     }
@@ -39,16 +39,16 @@ class AddTask extends Component {
         })
     }
 
-    // save task inputs to local state 
+    // save task inputs to local state
     handleChangeFor = key => event =>{
-        //if user adds task with past date, auto set as complete - 
+        //if user adds task with past date, auto set as complete -
             //this is how they can record history of interactions with a contact
-        if (key ==='due_date'&& event.target.value<this.state.today){
+        if (key ==='dueDate'&& event.target.value<this.state.today){
             this.setState({
                 ...this.state,
                 newTask: {
                     ...this.state.newTask,
-                    contact_id: this.props.reduxState.currentContact.id,
+                    contactId: this.props.reduxState.currentContact.id,
                     complete: true,
                     [key]: event.target.value,
                 }
@@ -59,7 +59,7 @@ class AddTask extends Component {
                 ...this.state,
                 newTask: {
                     ...this.state.newTask,
-                    contact_id: this.props.reduxState.currentContact.id,
+                    contactId: this.props.reduxState.currentContact.id,
                     [key]: event.target.value,
                 }
             })
@@ -73,10 +73,10 @@ class AddTask extends Component {
         this.setState({
             ...this.state,
             newTask: {
-                task_name: '',
-                due_date: '',
+                taskName: '',
+                dueDate: '',
                 note: '',
-                contact_id: ''
+                contactId: ''
             }
         })
     }
@@ -97,19 +97,19 @@ class AddTask extends Component {
                                 marginRight: '20px%',
                                 width: '100%'
                             }}
-                            value={this.state.newTask.task_name}
+                            value={this.state.newTask.taskName}
                             id="task"
                             label="Task"
-                            onChange={this.handleChangeFor('task_name')}
+                            onChange={this.handleChangeFor('taskName')}
                         />
                     </Grid>
                     <Grid item xs={3}>
                         <TextField
                             id="date"
                             label="Date (required)"
-                            onChange={this.handleChangeFor('due_date')}
+                            onChange={this.handleChangeFor('dueDate')}
                             type="date"
-                            value={this.state.newTask.due_date}
+                            value={this.state.newTask.dueDate}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -132,9 +132,9 @@ class AddTask extends Component {
                                 <AddIcon />
                             </IconButton>
                         </Tooltip>
-                        
-                    </Grid>  
-                </Grid>   
+
+                    </Grid>
+                </Grid>
             </form>
             </>
         )

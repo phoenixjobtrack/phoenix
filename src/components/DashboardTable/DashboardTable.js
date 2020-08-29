@@ -37,7 +37,7 @@ render(){
           {this.props.reduxState.jobs.map(job => {
             return (
               <tr key={job.id}>
-                <td >{job.company_name}</td>
+                <td >{job.companyName}</td>
                 <td>{job.position}</td>
                 <td>{job.currentStage}</td>
                 <td>{job.currentStageDate && moment(job.currentStageDate).format('MM-DD-YYYY')}</td>

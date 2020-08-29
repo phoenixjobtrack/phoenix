@@ -17,13 +17,13 @@ class Profile extends Component {
 
     componentDidMount () {
         this.props.dispatch({ type: 'FETCH_REQUIREMENTS' })
-        
+
     }
 
     state = {
         profileInfo: {
-            first_name: '',
-            last_name: '',
+            firstName: '',
+            lastName: '',
             email: '',
         },
         requireList: {},
@@ -95,12 +95,12 @@ class Profile extends Component {
     }
 
     render() {
-        
+
         return (
             <div>
                 <h2><Box>Profile</Box></h2>
                 <div className="profileBox">
-                    <img className="logo" src="/images/logo3.png" alt="phoenix logo" /> 
+                    <img className="logo" src="/images/logo3.png" alt="phoenix logo" />
                 </div>
                 <ProfileRequirements />
                 <UserInfo />

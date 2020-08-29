@@ -62,10 +62,10 @@ function ContactCard(props) {
             <CardHeader
                 avatar={
                     <Avatar aria-label="Contact" className={classes.avatar}>
-                        {contact.first_name[0]}{contact.last_name[0]}
+                        {contact.firstName[0]}{contact.lastName[0]}
                     </Avatar>
                 }
-                title={`${contact.first_name} ${contact.last_name}`}
+                title={`${contact.firstName} ${contact.lastName}`}
                 subheader={contact.company}
                 action={
                     <Tooltip title="View and edit contact">
@@ -113,8 +113,8 @@ function ContactCard(props) {
                     <Grid item sm={6}>
                         <Typography >
                             Tasks:
-                            <UpcomingTasks contactId={contact.id} />
                         </Typography>
+                        <UpcomingTasks contactId={contact.id} />
                     </Grid>
                 </Grid>
             </CardContent>
@@ -136,11 +136,7 @@ function ContactCard(props) {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                    <Typography paragraph>
-                        {/* insert task history here */}
-                        <CompletedTasks contactId={contact.id} />
-                    </Typography>
-
+                    <CompletedTasks contactId={contact.id} />
                 </CardContent>
             </Collapse>
         </Card>

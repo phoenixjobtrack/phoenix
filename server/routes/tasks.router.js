@@ -1,104 +1,143 @@
 // ========== TASKS ROUTER ========== //
-const express = require('express');
-const pool = require('../modules/pool');
-const router = express.Router();
-const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const express = require('express')
+const router = express.Router()
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware')
+const { Job, Task } = require('../schemas')
+const { Op } = require('sequelize')
+const Sequelize = require('sequelize')
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-    let query = `SELECT "id", 
-    "user_id",
-    "task_name",
-    to_char("due_date", 'MM/DD/YYYY') AS "due_date", 
-    "complete",
-    "contact_id",
-    "job_id",
-    "note",
-    "disabled" FROM "tasks" WHERE "user_id"=$1
-    ORDER BY "id" DESC;`;
-    pool.query(query, [req.user.id])
-        .then((result) => {
-            res.send(result.rows);
-        })
-        .catch((error) => {
-            res.sendStatus(500)
-        })
-}); // End router.get/api/tasks/:id
+  Task.findAll({
+    where: {
+      [Op.or]: {
+        jobUserId: Sequelize.where(Sequelize.col('Job.user_id'), {
+          [Op.eq]: req.user.id,
+        }),
+        userId: req.user.id,
+      },
+    },
+    include: [
+      {
+        required: false,
+        model: Job,
+        where: {
+          userId: req.user.id,
+        },
+      },
+    ],
+    order: [['id', 'DESC']],
+  })
+    .then((tasks) => {
+      res.send(tasks)
+    })
+    .catch((error) => {
+      console.log(error)
+      res.sendStatus(500)
+    })
+})
 
 router.get('/date', rejectUnauthenticated, (req, res) => {
-    let query = `SELECT "id", 
-    "user_id",
-    "task_name",
-    to_char("due_date", 'MM/DD/YYYY') AS "due_date", 
-    "complete",
-    "contact_id",
-    "job_id",
-    "note",
-    "disabled" FROM "tasks" WHERE "user_id"=$1
-    ORDER BY "due_date";`;
-    pool.query(query, [req.user.id])
-        .then((result) => {
-            res.send(result.rows);
-        })
-        .catch((error) => {
-            res.sendStatus(500)
-        })
-}); // End router.get/api/tasks/:id
+  Task.findAll({
+    where: {
+      userId: req.user.id,
+    },
+    order: [['dueDate']],
+  })
+    .then((tasks) => {
+      res.send(tasks)
+    })
+    .catch((error) => {
+      console.log(error)
+      res.sendStatus(500)
+    })
+})
 
 router.post('/', rejectUnauthenticated, (req, res) => {
-    const queryText = `INSERT INTO "tasks" (user_id, task_name, due_date, note, contact_id, job_id, complete) VALUES ($1, $2, $3, $4, $5, $6, $7);`;
-    pool.query(queryText, [req.user.id, req.body.task_name, req.body.due_date, req.body.note, req.body.contact_id, req.body.job_id, req.body.complete])
-        .then(response => {
-            res.sendStatus(201)
-        })
-        .catch(err => {
-            res.sendStatus(500)
-        })
-}); // End router.post/api/tasks/:id
+  const { taskName, dueDate, note, contactId, jobId, complete } = req.body
+  Task.create({
+    taskName,
+    dueDate,
+    note,
+    contactId,
+    jobId,
+    complete,
+    userId: req.user.id,
+  })
+    .then((task) => {
+      res.status(201).send(task)
+    })
+    .catch((error) => {
+      console.log(error)
+      res.sendStatus(500)
+    })
+})
 
-router.put('/:id', rejectUnauthenticated, (req, res) => {
-    const queryText = `UPDATE "tasks" SET "complete" =NOT "complete" WHERE "id"=$1;`;
-    pool.query(queryText, [req.params.id])
-        .then(response => {
-            res.sendStatus(200)
-        })
-        .catch(err => {
-            res.sendStatus(500)
-        })
-}); // End router.put/api/tasks/:id
+router.put('/:id', rejectUnauthenticated, async (req, res) => {
+  const task = await Task.findOne({
+    attributes: ['id'],
+    where: {
+      id: req.params.id,
+      [Op.or]: {
+        jobUserId: Sequelize.where(Sequelize.col('Job.user_id'), {
+          [Op.eq]: req.user.id,
+        }),
+        userId: req.user.id,
+      },
+    },
+    include: [
+      {
+        required: false,
+        model: Job,
+        where: {
+          userId: req.user.id,
+        },
+      },
+    ],
+  })
 
-// Adds Note To Task in Task View
-router.put('/note/:note/:id', rejectUnauthenticated, (req, res) => {
-    const queryText = `UPDATE "tasks" SET "note"=$1 WHERE "tasks"."id"=$2;`;
-    pool.query(queryText, [req.params.note, req.params.id])
-        .then(response => {
-            res.sendStatus(200)
-        })
-        .catch(err => {
-            res.sendStatus(500)
-        })
-}); // End router.put/api/tasks/note
+  if (!task) return res.sendStatus(403)
 
-router.put('/update/:task_name/:id/:due_date', rejectUnauthenticated, (req, res) => {    
-    const queryText = `UPDATE "tasks" SET "task_name" = $1, "due_date" = $2 WHERE "id" = $3;`;
-    pool.query(queryText, [req.body.task_name, req.body.date, req.params.id])
-        .then(response => {
-            res.sendStatus(200)
-        })
-        .catch(err => {
-            res.sendStatus(500)
-        })
-
-}); // End router.put/api/tasks/update/:id
+  const { taskName, dueDate, note, contactId, jobId, complete } = req.body
+  Task.update(
+    {
+      taskName,
+      dueDate,
+      note,
+      contactId,
+      jobId,
+      complete,
+    },
+    {
+      where: {
+        id: req.params.id,
+      },
+    },
+  )
+    .then((task) => {
+      res.status(200).send(task)
+    })
+    .catch((error) => {
+      console.log(error)
+      res.sendStatus(500)
+    })
+})
 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
-    const queryText = `DELETE FROM "tasks" WHERE "id"=$1`;
-    pool.query(queryText, [req.params.id])
-        .then(() => {
-            res.sendStatus(200);
-        })
-        .catch((err) => {
-            res.sendStatus(500)
-        })
-}); // End router.delete/api/tasks/:id
+  Task.destroy({
+    where: {
+      id: req.params.id,
+      userId: req.user.id,
+    },
+  })
+    .then(() => {
+      req.sendStatus(204)
+    })
+    .catch((error) => {
+      console.log(error)
+      res.sendStatus(500)
+    })
+})
 
-module.exports = router;
+module.exports = router

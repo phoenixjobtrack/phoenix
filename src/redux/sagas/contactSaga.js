@@ -1,12 +1,13 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
+import { apiUrl } from './apiUrl';
 
 
 function* fetchContacts(action) {
     try {
-        let allContacts = yield axios.get('/api/contact')
+        let allContacts = yield axios.get(`${apiUrl}/api/contact`)
         yield put({type: 'STORE_CONTACTS', payload: allContacts.data})
-        
+
     } catch (error) {
         console.log('error in fetchContacts saga', error);
     }
@@ -15,7 +16,7 @@ function* fetchContacts(action) {
 //retrieve info for selected contact
 function* fetchCurrentContact(action) {
     try {
-        let currentContact = yield axios.get(`/api/contact/current/${action.payload}`)
+        let currentContact = yield axios.get(`${apiUrl}/api/contact/current/${action.payload}`)
         yield put({type: 'STORE_CURRENT_CONTACT', payload: currentContact.data})
     }
     catch(err){
@@ -25,7 +26,7 @@ function* fetchCurrentContact(action) {
 
 function* submitContact(action){
     try{
-        yield axios.post('/api/contact', action.payload)
+        yield axios.post(`${apiUrl}/api/contact`, action.payload)
     } catch(err) {
         console.log('error in submitContact saga', err)
     }
@@ -33,7 +34,7 @@ function* submitContact(action){
 
 function* updateContact(action){
     try{
-        let url = `/api/contact/${action.payload.id}`
+        let url = `${apiUrl}/api/contact/${action.payload.id}`
         yield axios.put(url, action.payload)
     }
     catch(err){

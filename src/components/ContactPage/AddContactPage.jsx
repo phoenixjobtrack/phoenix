@@ -12,7 +12,7 @@ import PhoneIcon from '@material-ui/icons/Phone'
 import CellIcon from '@material-ui/icons/PhoneAndroid'
 import NotesIcon from '@material-ui/icons/Notes'
 import PersonIcon from '@material-ui/icons/Person'
-import { List, ListItem, ListItemIcon, Card, CardContent, Typography, Button, TextField, Grid, withStyles, Box } from '@material-ui/core'
+import { List, ListItem, ListItemIcon, Card, CardContent, Typography, Button, TextField, Grid, withStyles } from '@material-ui/core'
 
 
 const styles = theme => ({
@@ -58,12 +58,12 @@ class ContactPage extends Component {
 
     state = {
         contact: {
-            first_name: '',
-            last_name: '',
+            firstName: '',
+            lastName: '',
             company: '',
             position: '',
             email: '',
-            linkedin_url: '',
+            linkedinUrl: '',
             phone: '',
             cell: '',
             notes: ''
@@ -128,7 +128,7 @@ class ContactPage extends Component {
                                                 width: '50%'
                                             }}
                                             label="First Name"
-                                            onChange={this.handleChangeFor('first_name')}
+                                            onChange={this.handleChangeFor('firstName')}
                                             className={this.props.classes.inputs}
                                         />
                                         <ListItemIcon></ListItemIcon>
@@ -137,7 +137,7 @@ class ContactPage extends Component {
                                                 width: '50%'
                                             }}
                                             label="Last Name"
-                                            onChange={this.handleChangeFor('last_name')}
+                                            onChange={this.handleChangeFor('lastName')}
                                             className={this.props.classes.inputs}
                                         />
                                     </ListItem>
@@ -193,7 +193,7 @@ class ContactPage extends Component {
                                                 width: '50%'
                                             }}
                                             label="LinkedIn"
-                                            onChange={this.handleChangeFor('linkedin_url')}
+                                            onChange={this.handleChangeFor('linkedinUrl')}
                                             className={this.props.classes.inputs}
                                         />
                                     </ListItem>

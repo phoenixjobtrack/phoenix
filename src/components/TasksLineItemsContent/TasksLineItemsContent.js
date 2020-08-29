@@ -64,34 +64,34 @@ class TasksLineItemsContent extends Component {
     }; // End removeAlert
 
     // Edit and Update a Task Name & Date
-    editTask = (id, task_name, due_date) => {
-        // let task_name = task_name;
+    editTask = (id, taskName, dueDate) => {
+        // let taskName = taskName;
         this.setState({
             taskIsEditable: true,
             editableTaskId: id,
-            task_name: task_name,
-            due_date: due_date,
+            taskName: taskName,
+            dueDate: dueDate,
         });
     }; // end editTask
 
     handleChangeDate = (event) => {
         let newDate = event.target.value;
         this.setState({
-            due_date: newDate,
+            dueDate: newDate,
         })
     }; // end handleChange
 
     handleChangeText = (event) => {
         this.setState({
-            task_name: event.target.value,
+            taskName: event.target.value,
 
         })
     }; // end handleChange
 
     postTask = (id) => {
-        let task = this.state.task_name;
-        let date = this.state.due_date;
-        this.props.dispatch({ type: 'UPDATE_TASK', payload: { task_name: task, id: this.state.editableTaskId, date: date } })
+        let task = this.state.taskName;
+        let date = this.state.dueDate;
+        this.props.dispatch({ type: 'UPDATE_TASK', payload: { taskName: task, id: this.state.editableTaskId, date: date } })
     }
 
     saveTask = () => {
@@ -102,8 +102,8 @@ class TasksLineItemsContent extends Component {
     }; // end saveTask
 
     // Click Listeners For Icons on Line Items
-    handleClickCheckBox(id) {
-        this.props.dispatch({ type: 'CHECK_TASK_BOX', payload: id })
+    handleClickCheckBox(id, isComplete) {
+        this.props.dispatch({ type: 'CHECK_TASK_BOX', payload: { id, isComplete } })
     }; // end handleClickCheckBox
 
     handleClickRemove(id) {
@@ -117,12 +117,12 @@ class TasksLineItemsContent extends Component {
                     <ListItem>
                         <TasksMoreDropdown
                             id={this.props.id}
-                            task_name={this.props.task_name}
-                            
+                            taskName={this.props.taskName}
+
                         />
                         <Tooltip title="Mark Complete">
                             <IconButton
-                                onClick={() => this.handleClickCheckBox(this.props.id)}
+                                onClick={() => this.handleClickCheckBox(this.props.id, !this.props.complete)}
                                 size="small"
                                 color="primary"
                             >
@@ -135,15 +135,15 @@ class TasksLineItemsContent extends Component {
                             {this.state.taskIsEditable ?
                                 <><ListItemText
                                 ><TextField
-                                        placeholder={this.props.task_name}
-                                        value={this.state.task_name}
+                                        placeholder={this.props.taskName}
+                                        value={this.state.taskName}
                                         onChange={this.handleChangeText}
                                         variant="outlined"
                                     />
                                     <TextField
                                         type="date"
-                                        placeholder={this.props.due_date}
-                                        defaultValue={this.state.due_date}
+                                        placeholder={this.props.dueDate}
+                                        defaultValue={this.state.dueDate}
                                         onChange={this.handleChangeDate}
                                         format={'YYYY-MM-DD'}
                                         formatDate={(date) => moment(new Date()).format('YYYY-MM-DD')}
@@ -159,15 +159,15 @@ class TasksLineItemsContent extends Component {
                                 <><ListItemText>
                                     {this.props.complete ?
                                         <span className="taskNameTextComplete">
-                                            {this.props.task_name}
+                                            {this.props.taskName}
                                         </span> :
                                         <span className="taskNameTextIncomplete">
-                                            {this.props.task_name}
+                                            {this.props.taskName}
                                         </span>
                                     }
                                     <Tooltip title="Edit Task">
                                         <IconButton
-                                            onClick={() => this.editTask(this.props.id, this.props.task_name, this.props.due_date)}
+                                            onClick={() => this.editTask(this.props.id, this.props.taskName, this.props.dueDate)}
                                             color="secondary"
                                         >
                                             <EditIcon />
@@ -179,17 +179,17 @@ class TasksLineItemsContent extends Component {
                         <ListItemText className="dueDate">
                             {this.props.complete ?
                                 <span className="taskNameTextComplete">
-                                    {this.props.due_date}
+                                    {this.props.dueDate}
                                 </span> :
                                 <span className="taskNameTextIncomplete">
-                                    {this.props.due_date}
+                                    {this.props.dueDate}
                                 </span>
                             }
                         </ListItemText>
                         {/* See component: TaskNoteContact */}
-                        <TaskNoteContact contact_id={this.props.contact_id} />
+                        <TaskNoteContact contactId={this.props.contactId} />
                         {/* See component: TaskNoteJob */}
-                        <TaskNoteJob job_id={this.props.job_id} />
+                        <TaskNoteJob jobId={this.props.jobId} />
                         <Tooltip title="Delete">
                             <IconButton
                                 onClick={() => this.removeAlert(this.props.id)}
@@ -200,7 +200,7 @@ class TasksLineItemsContent extends Component {
                             </IconButton>
                         </Tooltip>
                     </ListItem>
-                </ Toolbar>
+                </Toolbar>
             </Paper>
         ) // End Return
     } // End Render

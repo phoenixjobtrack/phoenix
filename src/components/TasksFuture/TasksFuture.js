@@ -11,7 +11,6 @@ import List from '@material-ui/core/List';
 class TasksTomorrow extends Component {
 
     render() {
-
         let userTasks;
 
         // Dates
@@ -27,31 +26,31 @@ class TasksTomorrow extends Component {
         let zzzz = tomorrow.getFullYear();
         let taskTomorrow = nn + '/' + ee + '/' + zzzz;
 
-        userTasks = this.props.reduxState.tasks.map(({ id, task_name, due_date, complete, contact_id, job_id, disabled, note }) => {
-            if (taskTomorrow < due_date) {
-                return (
-                    <div style={{marginLeft: 20, paddingBottom: 3}}>
-                        <TasksLineItemsContent
-                            id={id}
-                            task_name={task_name}
-                            due_date={due_date}
-                            complete={complete}
-                            contact_id={contact_id}
-                            job_id={job_id}
-                            disabled={disabled}
-                        />
-                        <TasksNotes
-                            id={id}
-                            task_name={task_name}
-                            due_date={due_date}
-                            complete={complete}
-                            contact_id={contact_id}
-                            job_id={job_id}
-                            disabled={disabled}
-                            note={note}
-                        />
-                    </div>
-                ) // End Return
+        userTasks = this.props.reduxState.tasks.map(({ id, taskName, dueDate, complete, contactId, jobId, disabled, note }) => {
+            if (taskTomorrow < dueDate) {
+              return (
+                <div key={id} style={{ marginLeft: 20, paddingBottom: 3 }}>
+                  <TasksLineItemsContent
+                    id={id}
+                    taskName={taskName}
+                    dueDate={dueDate}
+                    complete={complete}
+                    contactId={contactId}
+                    jobId={jobId}
+                    disabled={disabled}
+                  />
+                  <TasksNotes
+                    id={id}
+                    taskName={taskName}
+                    dueDate={dueDate}
+                    complete={complete}
+                    contactId={contactId}
+                    jobId={jobId}
+                    disabled={disabled}
+                    note={note}
+                  />
+                </div>
+              ) // End Return
             }// End If Statement
         }) // End userTasks
         return (

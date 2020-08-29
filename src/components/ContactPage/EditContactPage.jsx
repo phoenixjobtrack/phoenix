@@ -49,8 +49,8 @@ const styles = theme => ({
         top: 150,
         right: 50
     }
-    
-    
+
+
 
 });
 
@@ -96,38 +96,38 @@ class ContactPage extends Component {
 
     render() {
         let currentContact = this.props.reduxState.currentContact
-        let avatar 
+        let avatar
 
         //define avatar depending on which text fields are filled
-        if (currentContact.first_name && currentContact.last_name){
-            avatar = 
+        if (currentContact.firstName && currentContact.lastName){
+            avatar =
                 <Avatar aria-label="Contact" className={this.props.classes.avatar}>
-                    {currentContact.first_name[0]}{currentContact.last_name[0]}
+                    {currentContact.firstName[0]}{currentContact.lastName[0]}
                 </Avatar>
         }
-        else if (currentContact.first_name && !currentContact.last_name) {
-            avatar = 
+        else if (currentContact.firstName && !currentContact.lastName) {
+            avatar =
                 <Avatar aria-label="Contact" className={this.props.classes.avatar}>
-                    {currentContact.first_name[0]}
+                    {currentContact.firstName[0]}
                 </Avatar>
         }
-        else if (!currentContact.first_name && currentContact.last_name) {
-            avatar = 
+        else if (!currentContact.firstName && currentContact.lastName) {
+            avatar =
                 <Avatar aria-label="Contact" className={this.props.classes.avatar}>
-                    {currentContact.last_name[0]}
+                    {currentContact.lastName[0]}
                 </Avatar>
         }
-        else 
-            avatar = 
+        else
+            avatar =
                 <Avatar aria-label="Contact" className={this.props.classes.avatar}>
-                    
+
                 </Avatar>
-        
+
         return (
                 <Card className={this.props.classes.card}>
                     <CardHeader
                         avatar={avatar}
-                        title={`${currentContact.first_name} ${currentContact.last_name}`}
+                        title={`${currentContact.firstName} ${currentContact.lastName}`}
                         subheader={currentContact.company}
                     />
                     <CardContent>
@@ -146,15 +146,15 @@ class ContactPage extends Component {
                                             <TextField
                                                 className={this.props.classes.contactInput}
                                                 label="First Name"
-                                                value={currentContact.first_name}
-                                                onChange={this.handleChangeFor('first_name')}
+                                                value={currentContact.firstName}
+                                                onChange={this.handleChangeFor('firstName')}
                                             />
                                             <ListItemIcon></ListItemIcon>
                                             <TextField
                                                 className={this.props.classes.contactInput}
                                                 label="Last Name"
-                                                value={currentContact.last_name}
-                                                onChange={this.handleChangeFor('last_name')}
+                                                value={currentContact.lastName}
+                                                onChange={this.handleChangeFor('lastName')}
                                             />
                                         </ListItem>
                                         <ListItem>
@@ -186,23 +186,23 @@ class ContactPage extends Component {
                                                 onChange={this.handleChangeFor('email')}
                                             />
                                             <ListItemIcon>
-                                                <svg 
-                                                    xmlns="http://www.w3.org/2000/svg" 
-                                                    width="24" 
-                                                    height="24" 
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="24"
+                                                    height="24"
                                                     viewBox="0 0 24 24"
                                                 >
-                                                    <path 
-                                                        fill="#2196f3" 
-                                                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" 
+                                                    <path
+                                                        fill="#2196f3"
+                                                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
                                                     />
                                                 </svg>
                                             </ListItemIcon>
                                             <TextField
                                                 className={this.props.classes.contactInput}
                                                 label="LinkedIn"
-                                                value={currentContact.linkedin_url}
-                                                onChange={this.handleChangeFor('linkedin_url')}
+                                                value={currentContact.linkedinUrl}
+                                                onChange={this.handleChangeFor('linkedinUrl')}
                                             />
                                         </ListItem>
                                         <ListItem>
@@ -253,13 +253,13 @@ class ContactPage extends Component {
                                                 value={currentContact.notes}
                                                 onChange={this.handleChangeFor('notes')}
                                             />
-                                        </ListItem> 
+                                        </ListItem>
                                     </List>
                                 </form >
                                 <Divider className={this.props.classes.division}/>
                             </Grid>
                             <Grid container item xs={12}>
-                            
+
                                 <Grid item xs={7}>
                                     <AddTask />
                                 </Grid>

@@ -1,16 +1,16 @@
-const express = require('express');
-const pool = require('../modules/pool');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
+const { InterviewStage } = require('../schemas')
 
 router.get('/', (req, res) => {
-    let query = `SELECT * FROM "interview_stages";`;
-    pool.query(query)
-        .then((result) => {
-            res.send(result.rows);
-        })
-        .catch((error) => {
-            res.sendStatus(500)
-        })
+  InterviewStage.findAll()
+    .then((result) => {
+      res.send(result)
+    })
+    .catch((error) => {
+      console.log(error)
+      res.send(error)
+    })
 })
 
-module.exports = router;
+module.exports = router
